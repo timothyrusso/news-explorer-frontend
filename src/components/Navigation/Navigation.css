@@ -1,0 +1,13 @@
+.navigation {
+  max-width: 100%;
+  border-bottom: 1px solid blue;
+  min-height: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation__wrapper {
+  max-width: 267px;
+  min-height: 48px;
+  border: 1px solid blue;
+}
