@@ -1,0 +1,29 @@
+.header {
+  background-image: url(../../images/header_background.png);
+  width: 100%;
+  min-height: 576px;
+}
+
+.header__title {
+  margin: 0 auto;
+  padding: 160px 0 32px;
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 1.07;
+  color: #fff;
+  max-width: 608px;
+}
+
+.header__subtitle {
+  margin: 0 auto;
+  padding-bottom: 88px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #fff;
+  max-width: 608px;
+}

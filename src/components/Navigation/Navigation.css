@@ -1,18 +1,19 @@
 .navigation {
   max-width: 1440px;
   width: 100%;
-  border-bottom: 1px solid blue;
+  border-bottom: 2px solid rgba(196, 196, 196, 0.01);
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   min-height: 80px;
   display: flex;
   justify-content: space-between;
   padding: 0 104px;
   position: fixed;
   box-sizing: border-box;
+  color: #fff;
 }
 
 .navigation__wrapper {
   min-height: 48px;
-  border: 1px solid blue;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,17 +31,19 @@
   font-size: 16px;
   line-height: 1.5;
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 
 .navigation__link:focus {
-  border-bottom: 3 px solid #000;
+  border-bottom: 3 px solid #fff;
 }
 
 .navigation__button {
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 100px;
   background-color: transparent;
   padding: 12px 25px;
   min-width: 176px;
+  color: #fff;
+  margin-left: 34px;
 }
