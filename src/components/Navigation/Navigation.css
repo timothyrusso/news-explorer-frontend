@@ -1,13 +1,46 @@
 .navigation {
-  max-width: 100%;
+  max-width: 1440px;
+  width: 100%;
   border-bottom: 1px solid blue;
   min-height: 80px;
   display: flex;
   justify-content: space-between;
+  padding: 0 104px;
+  position: fixed;
+  box-sizing: border-box;
 }
 
 .navigation__wrapper {
-  max-width: 267px;
   min-height: 48px;
   border: 1px solid blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  min-height: 24px;
+  max-width: 200px;
+}
+
+.navigation__link {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-decoration: none;
+  color: #000;
+}
+
+.navigation__link:focus {
+  border-bottom: 3 px solid #000;
+}
+
+.navigation__button {
+  border: 1px solid #000;
+  border-radius: 100px;
+  background-color: transparent;
+  padding: 12px 25px;
+  min-width: 176px;
 }
