@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import './Popup.css';
 
 const Popup = ({ isOpen, name, onClose, infoTooltip, children }) => {
   // here is `useEffect` for the `Escape` listener
