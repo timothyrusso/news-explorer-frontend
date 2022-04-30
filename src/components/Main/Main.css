@@ -1,0 +1,43 @@
+.main {
+  width: 100%;
+  min-height: 624px;
+}
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 216px 80px 104px;
+}
+
+.about__image {
+  max-width: 464px;
+  border-radius: 1000px;
+}
+
+.about__wrapper {
+  max-width: 600px;
+}
+
+.about__title {
+  margin: 0;
+  padding: 51px 0 24px;
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.15;
+}
+
+.about__description {
+  margin: 0;
+  padding-bottom: 25px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33;
+}
+
+.about__description:last-child {
+  padding-bottom: 0;
+}
