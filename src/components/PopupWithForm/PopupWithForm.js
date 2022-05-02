@@ -1,5 +1,5 @@
-import Popup from "./Popup";
-import Form from "./Form";
+import Popup from "../Popup/Popup";
+import Form from "../Form/Form";
 import './PopupWithForm.css';
 
 const PopupWithForm = ({ name, title, isOpen, onClose, buttonText, onSubmit, loadingText, isLoading, formValidity, onFormUpdate, children }) => {

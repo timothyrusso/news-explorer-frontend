@@ -2,15 +2,17 @@
   display: block;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 14px;
-  line-height: 1;
+  line-height: 17px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   max-width: 358px;
   width: 100%;
   margin: 0 auto 29.74px;
   padding: 0 0 9px;
+  color: #000;
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 552px) {
@@ -23,7 +25,7 @@
 .popup__input_type_error {
   color: rgba(255, 0, 0, 1);
   margin: 0;
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -40,4 +42,20 @@
   .popup__input_type_error {
     left: 22px;
   }
+}
+
+.popup__input-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #2F71E5;
+  margin: 0 0 9px 36px;
+  display: block;
+}
+
+input:focus {
+  color: #000;
+  opacity: 1;
 }
