@@ -1,8 +1,9 @@
 import Popup from "../Popup/Popup";
 import Form from "../Form/Form";
 import './PopupWithForm.css';
+import FormRedirect from "../FormRedirect/FormRedirect";
 
-const PopupWithForm = ({ name, title, isOpen, onClose, buttonText, onSubmit, loadingText, isLoading, formValidity, onFormUpdate, children }) => {
+const PopupWithForm = ({ name, title, isOpen, onClose, onSwitch, popupRedirectText, buttonText, onSubmit, loadingText, isLoading, formValidity, onFormUpdate, children }) => {
 
   return (
     <Popup isOpen={isOpen} name={name} onClose={onClose}>
@@ -10,6 +11,7 @@ const PopupWithForm = ({ name, title, isOpen, onClose, buttonText, onSubmit, loa
         <h2 className="popup__title">{title}</h2>
         {children}
         <button type="submit" className={`submit-button popup__button ${!formValidity ? "submit-button_disabled" : ""}`} disabled={!formValidity} >{isLoading ? loadingText : buttonText}</button>
+        <FormRedirect onSwitch={onSwitch} popupRedirectText={popupRedirectText} />
       </Form>
     </Popup>
   )
