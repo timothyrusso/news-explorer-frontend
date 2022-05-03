@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SigninPopup from '../SigninPopup/SigninPopup';
+import SignupPopup from '../SignupPopup/SignupPopup';
 import { useState } from "react";
 
 const App = () => {
@@ -18,6 +19,8 @@ const App = () => {
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false)
+    setIsSignupPopupOpen(false)
+    setPopupRedirectText("Sign up")
   }
 
   const startLoading = () => {
@@ -43,11 +46,11 @@ const App = () => {
     if (isSigninPopupOpen) {
       setIsSigninPopupOpen(false)
       setIsSignupPopupOpen(true)
-      setPopupRedirectText("Sign up")
+      setPopupRedirectText("Sign in")
     } else if (isSignupPopupOpen) {
       setIsSignupPopupOpen(false)
       setIsSigninPopupOpen(true)
-      setPopupRedirectText("Sign in")
+      setPopupRedirectText("Sign up")
     }
   }
 
@@ -79,6 +82,7 @@ const App = () => {
       <Main />
       <Footer />
       <SigninPopup isOpen={isSigninPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
+      <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
     </div>
   );
 }
