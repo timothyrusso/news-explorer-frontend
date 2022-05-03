@@ -33,6 +33,9 @@
   text-decoration: none;
   color: #fff;
 }
+.navigation__link_type_saved {
+  margin-left: 70px;
+}
 
 .navigation__link:focus {
   border-bottom: 3 px solid #fff;
@@ -46,4 +49,21 @@
   min-width: 176px;
   color: #fff;
   margin-left: 34px;
+}
+
+.navigation__button_type_logout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: none;
+  margin-left: 64px;
+}
+
+.navigation__logout-icon {
+  max-width: 24px;
+  margin-left: 15px;
+}
+
+.navigation__disabled {
+  display: none;
 }
