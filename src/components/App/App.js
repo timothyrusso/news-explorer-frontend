@@ -14,7 +14,7 @@ const App = () => {
   const [formValidity, setFormValidity] = useState(true)
   const [errorMessage, setErrorMessage] = useState({})
   const [status, setStatus] = useState("");
-  const [popupRedirectText, setPopupRedirectText] = useState("");
+  const [popupRedirectText, setPopupRedirectText] = useState("Sign up");
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false)
