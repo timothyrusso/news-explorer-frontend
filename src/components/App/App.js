@@ -7,6 +7,7 @@ import SigninPopup from '../SigninPopup/SigninPopup';
 import SignupPopup from '../SignupPopup/SignupPopup';
 import { useState } from "react";
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import Preloader from '../Preloader/Preloader';
 
 const App = () => {
 
@@ -18,7 +19,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState({})
   const [status, setStatus] = useState("");
   const [popupRedirectText, setPopupRedirectText] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false)
@@ -84,6 +85,7 @@ const App = () => {
     <div className="content">
       <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} />
       <Header />
+      <Preloader />
       <Main />
       <Footer />
       <SigninPopup isOpen={isSigninPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />

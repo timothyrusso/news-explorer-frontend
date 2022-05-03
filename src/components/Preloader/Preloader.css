@@ -1,0 +1,44 @@
+.preloader {
+  margin: 0;
+  width: 100%;
+  min-height: 282px;
+  background-color: #F5F6F7;
+  display: flex;
+  flex-direction: column;
+}
+
+.circle-preloader {
+  display: block;
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgb(113, 113, 113);
+  border-bottom-color: rgb(130, 126, 126);
+  border-left-color: rgb(167, 165, 165);
+  border-top-color: rgb(229, 228, 228);
+  border-radius: 50%;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 80px auto 24px;
+
+  animation: spin .55s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.preloader__text {
+  text-align: center;
+  margin: 0;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #B6BCBF;
+}
