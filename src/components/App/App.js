@@ -11,7 +11,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { cards } from '../../utils/testCards';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 
@@ -26,7 +26,10 @@ const App = () => {
   const [status, setStatus] = useState("");
   const [popupRedirectText, setPopupRedirectText] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
-  const [blackNavigator, setBlackNavigator] = useState(true);
+  const [blackNavigator, setBlackNavigator] = useState(false);
+
+  const location = useLocation();
+  const history = useNavigate();
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false)
@@ -55,7 +58,7 @@ const App = () => {
     setIsSigninPopupOpen(true)
   }
 
-  const handleSwitchPopup = () => {
+  const handleSwitchPopup = () => { // da sistemare e rendere più elegante
     if (isSigninPopupOpen) {
       setIsSigninPopupOpen(false)
       setIsSignupPopupOpen(true)
@@ -65,6 +68,22 @@ const App = () => {
       setIsSigninPopupOpen(true)
       setPopupRedirectText("Sign up")
     }
+  }
+
+  const switchColor = () => {
+    switch (location.pathname) {
+      case "/":
+        setBlackNavigator(false);
+        return
+      case "/saved-news":
+        setBlackNavigator(true);
+        return
+    }
+  }
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+    history('/');
   }
 
   // const handleRegisterSubmit = (password, email) => {
@@ -90,7 +109,7 @@ const App = () => {
 
   return (
     <div className="content">
-      <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} navigatorColor={blackNavigator} />
+      <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} switchColor={switchColor} blackNavigator={blackNavigator} handleLogout={handleLogout} />
       <Routes>
         <Route
           exact path="/"
@@ -112,6 +131,7 @@ const App = () => {
             <SavedNews cards={cards} />
           </>
         } />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </div>
