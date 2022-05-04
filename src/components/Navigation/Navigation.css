@@ -48,10 +48,16 @@
   border-radius: 100px;
   background-color: transparent;
   padding: 12px 25px;
-  max-width: 220px;
+  min-width: 176px;
   min-height: 48px;
   color: #fff;
   margin-left: 34px;
+  cursor: pointer;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
 }
 
 .navigation__button_type_logout {
@@ -59,9 +65,7 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 64px;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
+  max-width: 260px;
 }
 
 .navigation__logout-icon {

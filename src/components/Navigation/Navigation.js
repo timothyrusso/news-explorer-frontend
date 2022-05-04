@@ -18,7 +18,7 @@ const Navigation = ({ onSigninPopupClick, loggedIn, switchColor, blackNavigator,
         <Link to={'/'} className='navigation__link' style={textColor} onClick={switchColor()}>Home</Link>
         <Link to={'/saved-news'} className={`navigation__link navigation__link_type_saved ${!loggedIn ? "navigation__disabled" : ""}`} style={textColor} onClick={switchColor()}>Saved articles</Link>
         <button aria-label="signin" type="button" className={`navigation__button ${loggedIn ? "navigation__disabled" : ""}`} onClick={onSigninPopupClick} style={buttonColor}>Sign in</button>
-        <button aria-label="signout" type="button" className={`navigation__button navigation__button_type_logout ${!loggedIn ? "navigation__disabled" : ""}`} onClick={handleLogout} style={buttonColor}>Tidgfdgfdgfdgdfmothy<img src={blackNavigator ? blackLogout : logout} alt='' className='navigation__logout-icon'></img></button>
+        <button aria-label="signout" type="button" className={`navigation__button navigation__button_type_logout ${!loggedIn ? "navigation__disabled" : ""}`} onClick={handleLogout} style={buttonColor}>TimothyTimothyffffff<img src={blackNavigator ? blackLogout : logout} alt='' className='navigation__logout-icon'></img></button>
       </div>
     </div>
   );
