@@ -22,7 +22,24 @@
   grid-template-columns: repeat( auto-fit, minmax(282px, 1fr));
   gap: 16px;
   list-style-type: none;
-  padding: 0 0 67px;
+  padding: 0;
+}
+
+.show-more-button {
+  border: none;
+  background-color: #fff;
+  max-width: 288px;
+  width: 100%;
+  min-height: 64px;
+  border-radius: 80px;
+  display: block;
+  margin: 64px auto 80px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  color: #1A1B22;
 }
 
 @media screen and (max-width: 880px) {

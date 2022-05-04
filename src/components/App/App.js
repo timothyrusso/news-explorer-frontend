@@ -11,6 +11,9 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { cards } from '../../utils/testCards';
+import { Route, Routes } from 'react-router-dom';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNews from '../SavedNews/SavedNews';
 
 const App = () => {
 
@@ -23,6 +26,7 @@ const App = () => {
   const [status, setStatus] = useState("");
   const [popupRedirectText, setPopupRedirectText] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
+  const [blackNavigator, setBlackNavigator] = useState(true);
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false)
@@ -86,15 +90,30 @@ const App = () => {
 
   return (
     <div className="content">
-      <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} />
-      <Header />
-      {/* <NewsCardList cards={cards} /> */}
-      <NothingFound />
-      <Main />
+      <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} navigatorColor={blackNavigator} />
+      <Routes>
+        <Route
+          exact path="/"
+          element={
+            <>
+              <Header />
+              <NewsCardList cards={cards} />
+              <NothingFound />
+              <Preloader />
+              <Main />
+              <SigninPopup isOpen={isSigninPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
+              <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
+              <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} openSignin={handleSigninPopupClick} />
+            </>
+          } />
+        <Route path="/saved-news" element={
+          <>
+            <SavedNewsHeader />
+            <SavedNews cards={cards} />
+          </>
+        } />
+      </Routes>
       <Footer />
-      <SigninPopup isOpen={isSigninPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
-      <SignupPopup isOpen={isSignupPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
-      <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} openSignin={handleSigninPopupClick} />
     </div>
   );
 }
