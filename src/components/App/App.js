@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import SigninPopup from '../SigninPopup/SigninPopup';
 import SignupPopup from '../SignupPopup/SignupPopup';
+import NothingFound from '../NothingFound/NothingFound';
 import { useState } from "react";
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
@@ -87,7 +88,8 @@ const App = () => {
     <div className="content">
       <Navigation onSigninPopupClick={handleSigninPopupClick} loggedIn={loggedIn} />
       <Header />
-      <NewsCardList cards={cards} />
+      {/* <NewsCardList cards={cards} /> */}
+      <NothingFound />
       <Main />
       <Footer />
       <SigninPopup isOpen={isSigninPopupOpen} onClose={closeAllPopups} onSwitch={handleSwitchPopup} popupRedirectText={popupRedirectText} isLoading={isLoading} startLoading={startLoading} formValidity={formValidity} onFormUpdate={onFormUpdate} errorMessage={errorMessage} onInputUpdate={checkValidity} />
