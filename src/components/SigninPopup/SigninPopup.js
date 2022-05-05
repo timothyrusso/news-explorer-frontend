@@ -33,8 +33,8 @@ const SigninPopup = ({ isOpen, onClose, onSwitch, popupRedirectText, isLoading, 
   return (
     <>
       <PopupWithForm name="signin" title="Sign in" isOpen={isOpen} onClose={onClose} onSwitch={onSwitch} popupRedirectText={popupRedirectText} buttonText={"Sign in"} loadingText={"Saving.."} isLoading={isLoading} onSubmit={handleSubmit} formValidity={formValidity} onFormUpdate={onFormUpdate}>
-        <Input type={"email"} idName={"email-input"} name={"email"} fieldName={"field_email"} placeholder={"Enter email"} value={email} onChange={handleEmailChange} errorMessage={errorMessage} labelText={"Email"} />
-        <Input type={"password"} idName={"password-input"} name={"password"} fieldName={"field_password"} placeholder={"Enter password"} minLength={"8"} maxLength={"20"} value={password} onChange={handlePasswordChange} errorMessage={errorMessage} labelText={"Password"} />
+        <Input type={"email"} idName={"email-signin-input"} name={"email"} fieldName={"field_email"} placeholder={"Enter email"} value={email} onChange={handleEmailChange} errorMessage={errorMessage} labelText={"Email"} />
+        <Input type={"password"} idName={"password-signin-input"} name={"password"} fieldName={"field_password"} placeholder={"Enter password"} minLength={"8"} maxLength={"20"} value={password} onChange={handlePasswordChange} errorMessage={errorMessage} labelText={"Password"} />
       </PopupWithForm>
     </>
   )

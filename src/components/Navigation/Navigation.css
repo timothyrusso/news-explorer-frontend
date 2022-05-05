@@ -11,6 +11,14 @@
   position: fixed;
   box-sizing: border-box;
   color: #fff;
+  z-index: 1;
+}
+
+.navigation_type_scroll {
+  background: rgba(47, 113, 229, 0.6);
+  backdrop-filter: blur(3px);
+  border-bottom: none;
+  box-shadow: none;
 }
 
 .navigation__wrapper {
