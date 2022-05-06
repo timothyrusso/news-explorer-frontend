@@ -22,6 +22,32 @@
   cursor: pointer;
 }
 
+.card__signin {
+  display: none;
+  position: absolute;
+  top: 18px;
+  left: 177px;
+  max-width: 182px;
+  min-height: 40px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000;
+  text-align: center;
+  padding: 0 20px;
+  margin: 0;
+  align-items: center;
+}
+
+.card__favourite:hover+.card__signin {
+  display: flex;
+}
+
 .card__image {
   min-height: 272px;
   background-size: cover;
