@@ -1,16 +1,31 @@
 import "./NewsCard.css";
+import { Route, Routes } from "react-router-dom";
 
-const NewsCard = ({ card }) => {
+const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
+  const saveCard = () => {
+    // TBD in the next stage
+  };
+
   return (
     <li className="card">
-      <button
-        aria-label="Favourite"
-        type="button"
-        className="card__favourite"
-      ></button>
-      <button aria-label="signin" type="button" className="card__signin">
-        Sign in to save articles
-      </button>
+      <Routes>
+        <Route
+          exact path="/"
+          element={
+            <button
+              aria-label="Favourite"
+              type="button"
+              className="card__favourite"
+              onClick={!loggedIn ? onSigninPopupClick : saveCard}
+            ></button>
+          }
+        />
+      </Routes>
+      {!loggedIn && (
+        <button aria-label="signin" type="button" className="card__signin">
+          Sign in to save articles
+        </button>
+      )}
       <div
         className="card__image"
         style={{ backgroundImage: `url(${card.link})` }}

@@ -128,7 +128,11 @@ const App = () => {
           element={
             <>
               <Header />
-              <NewsCardList cards={cards} />
+              <NewsCardList
+                cards={cards}
+                onSigninPopupClick={handleSigninPopupClick}
+                loggedIn={loggedIn}
+              />
               <NothingFound />
               <Preloader />
               <Main />

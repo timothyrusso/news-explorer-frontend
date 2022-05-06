@@ -22,6 +22,10 @@
   cursor: pointer;
 }
 
+.card__favourite:hover {
+  background-image: url(../../images/bookmark-black.svg);
+}
+
 .card__signin {
   display: none;
   position: absolute;
