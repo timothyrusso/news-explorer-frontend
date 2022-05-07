@@ -9,7 +9,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
   return (
     <li className="card">
       <Routes>
-      <Route
+        <Route
           exact
           path="/"
           element={
@@ -32,7 +32,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
           path="/saved-news"
           element={
             <>
-            <div className="card__keyword">Keyword</div>
+              <div className="card__keyword">Keyword</div>
               <button
                 aria-label="Delete"
                 type="button"
