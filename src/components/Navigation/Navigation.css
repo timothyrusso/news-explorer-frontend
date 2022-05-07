@@ -16,7 +16,7 @@
 
 .navigation_type_scroll {
   background: rgba(47, 113, 229, 0.6);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(8px);
   border-bottom: none;
   box-shadow: none;
 }
