@@ -9,23 +9,39 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
   return (
     <li className="card">
       <Routes>
-        <Route
-          exact path="/"
+      <Route
+          exact
+          path="/"
           element={
-            <button
-              aria-label="Favourite"
-              type="button"
-              className="card__favourite"
-              onClick={!loggedIn ? onSigninPopupClick : saveCard}
-            ></button>
+            <>
+              <button
+                aria-label="Favourite"
+                type="button"
+                className="card__favourite"
+                onClick={!loggedIn ? onSigninPopupClick : saveCard}
+              ></button>
+              {!loggedIn && (
+                <dialog className="card__tooltip">
+                  Sign in to save articles
+                </dialog>
+              )}
+            </>
+          }
+        />
+        <Route
+          path="/saved-news"
+          element={
+            <>
+              <button
+                aria-label="Delete"
+                type="button"
+                className="card__delete"
+              ></button>
+              <dialog className="card__tooltip">Remove from saved</dialog>
+            </>
           }
         />
       </Routes>
-      {!loggedIn && (
-        <button aria-label="signin" type="button" className="card__signin">
-          Sign in to save articles
-        </button>
-      )}
       <div
         className="card__image"
         style={{ backgroundImage: `url(${card.link})` }}
