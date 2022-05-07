@@ -32,6 +32,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
           path="/saved-news"
           element={
             <>
+            <div className="card__keyword">Keyword</div>
               <button
                 aria-label="Delete"
                 type="button"
