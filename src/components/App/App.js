@@ -20,6 +20,7 @@ import {
 } from "react-router-dom";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNews from "../SavedNews/SavedNews";
+import { getNewsInfo } from "../../utils/api";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -81,6 +82,12 @@ const App = () => {
     history("/");
   };
 
+  const handleSearchSubmit = (data) => {
+    getNewsInfo({ search: data.search }).then((data) => {
+      console.log(data);
+    });
+  };
+
   useEffect(() => {
     switch (location.pathname) {
       case "/":
@@ -127,7 +134,7 @@ const App = () => {
           path="/"
           element={
             <>
-              <Header />
+              <Header onSearchFormSubmit={handleSearchSubmit} />
               <NewsCardList
                 cards={cards}
                 onSigninPopupClick={handleSigninPopupClick}

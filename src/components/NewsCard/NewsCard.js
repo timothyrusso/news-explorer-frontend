@@ -10,6 +10,20 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
     <li className="card">
       <Routes>
         <Route
+          path="/saved-news"
+          element={
+            <>
+              <div className="card__keyword">Keyword</div>
+              <button
+                aria-label="Delete"
+                type="button"
+                className="card__delete"
+              ></button>
+              <dialog className="card__tooltip">Remove from saved</dialog>
+            </>
+          }
+        />
+        <Route
           exact
           path="/"
           element={
@@ -25,20 +39,6 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
                   Sign in to save articles
                 </dialog>
               )}
-            </>
-          }
-        />
-        <Route
-          path="/saved-news"
-          element={
-            <>
-              <div className="card__keyword">Keyword</div>
-              <button
-                aria-label="Delete"
-                type="button"
-                className="card__delete"
-              ></button>
-              <dialog className="card__tooltip">Remove from saved</dialog>
             </>
           }
         />
