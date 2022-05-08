@@ -2,6 +2,8 @@ import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
 const NewsCardList = ({ cards, onSigninPopupClick, loggedIn }) => {
+
+  console.log(cards)
   return (
     <div className="news-card-list">
       <h2 className="news-card-list__title">Search results</h2>

@@ -33,6 +33,7 @@ const App = () => {
   const [popupRedirectText, setPopupRedirectText] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
   const [blackNavigator, setBlackNavigator] = useState(false);
+  const [newsArticles, setNewsArticles] = useState({});
 
   const location = useLocation();
   const history = useNavigate();
@@ -84,9 +85,11 @@ const App = () => {
 
   const handleSearchSubmit = (data) => {
     getNewsInfo({ search: data.search }).then((data) => {
-      console.log(data);
+      setNewsArticles(data.articles);
     });
   };
+
+  console.log(newsArticles);
 
   useEffect(() => {
     switch (location.pathname) {
