@@ -1,8 +1,6 @@
 import {
   apiKey,
   BASE_URL,
-  currentDate,
-  beforeCurrentDate,
   pageSize,
 } from "./constants";
 
@@ -21,7 +19,6 @@ Status code: ${res.status}`
 
 export const getNewsInfo = ({ search }) => {
   return fetch(
-    // `${BASE_URL}?q=${search}&from=${beforeCurrentDate}&to${currentDate}&pageSize=${pageSize}&apiKey=${apiKey}`,
     `${BASE_URL}?q=${search}&pageSize=${pageSize}&apiKey=${apiKey}`,
     {
       method: "GET",
