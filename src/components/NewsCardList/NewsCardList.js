@@ -1,16 +1,20 @@
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
-const NewsCardList = ({ cards, onSigninPopupClick, loggedIn }) => {
+const NewsCardList = ({
+  cards,
+  onSigninPopupClick,
+  loggedIn,
+  newsArticles,
+}) => {
 
-  console.log(cards)
   return (
     <div className="news-card-list">
       <h2 className="news-card-list__title">Search results</h2>
       <ul className="search-result-grid">
-        {cards.map((card) => (
+        {newsArticles.map((card) => (
           <NewsCard
-            key={card._id}
+            key={card.url}
             card={card}
             onSigninPopupClick={onSigninPopupClick}
             loggedIn={loggedIn}

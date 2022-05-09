@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./SearchForm.css";
 
-const SearchForm = ({ onSearchFormSubmit }) => {
+const SearchForm = ({ onSearchFormSubmit, startLoading }) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearchInputChange = (evt) => {
@@ -9,6 +9,7 @@ const SearchForm = ({ onSearchFormSubmit }) => {
   };
 
   const handleSubmit = (evt) => {
+    startLoading();
     evt.preventDefault();
     onSearchFormSubmit({ search: searchInput });
   };

@@ -34,6 +34,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
+  const [showNews, setShowNews] = useState(false);
 
   const [newsArticles, setNewsArticles] = useState({});
 
@@ -86,9 +87,11 @@ const App = () => {
   };
 
   const handleSearchSubmit = (data) => {
-    getNewsInfo({ search: data.search }).then((data) => {
-      setNewsArticles(data.articles);
-    });
+    getNewsInfo({ search: data.search })
+      .then((data) => {
+        setNewsArticles(data.articles);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   console.log(newsArticles);
@@ -141,14 +144,17 @@ const App = () => {
           path="/"
           element={
             <>
-              <Header onSearchFormSubmit={handleSearchSubmit} />
-              <NewsCardList
-                cards={cards}
-                onSigninPopupClick={handleSigninPopupClick}
-                loggedIn={loggedIn}
-              />
+              <Header onSearchFormSubmit={handleSearchSubmit} startLoading={startLoading} />
+              {showNews && (
+                <NewsCardList
+                  cards={cards}
+                  onSigninPopupClick={handleSigninPopupClick}
+                  loggedIn={loggedIn}
+                  newsArticles={newsArticles}
+                />
+              )}
               <NothingFound />
-              <Preloader />
+              {isLoading && <Preloader />}
               <Main />
               <SigninPopup
                 isOpen={isSigninPopupOpen}
