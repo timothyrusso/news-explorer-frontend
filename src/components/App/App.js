@@ -35,6 +35,7 @@ const App = () => {
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   const [newsArticles, setNewsArticles] = useState({});
 
@@ -91,10 +92,11 @@ const App = () => {
       .then((data) => {
         setNewsArticles(data.articles);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        setShowNews(true);
+      });
   };
-
-  console.log(newsArticles);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -144,7 +146,10 @@ const App = () => {
           path="/"
           element={
             <>
-              <Header onSearchFormSubmit={handleSearchSubmit} startLoading={startLoading} />
+              <Header
+                onSearchFormSubmit={handleSearchSubmit}
+                startLoading={startLoading}
+              />
               {showNews && (
                 <NewsCardList
                   cards={cards}
@@ -153,7 +158,7 @@ const App = () => {
                   newsArticles={newsArticles}
                 />
               )}
-              <NothingFound />
+              {noResults && <NothingFound />}
               {isLoading && <Preloader />}
               <Main />
               <SigninPopup
