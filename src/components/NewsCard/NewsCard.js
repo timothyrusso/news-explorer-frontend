@@ -1,48 +1,36 @@
 import "./NewsCard.css";
-import { Route, Routes } from "react-router-dom";
 
-const NewsCard = ({ card, onSigninPopupClick, loggedIn }) => {
+const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
   const saveCard = () => {
     // TBD in the next stage
   };
 
   return (
     <li className="card">
-      <Routes>
-        <Route
-          path="/saved-news"
-          element={
-            <>
-              <div className="card__keyword">Keyword</div>
-              <button
-                aria-label="Delete"
-                type="button"
-                className="card__delete"
-              ></button>
-              <dialog className="card__tooltip">Remove from saved</dialog>
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <button
-                aria-label="Favourite"
-                type="button"
-                className="card__favourite"
-                onClick={!loggedIn ? onSigninPopupClick : saveCard}
-              ></button>
-              {!loggedIn && (
-                <dialog className="card__tooltip">
-                  Sign in to save articles
-                </dialog>
-              )}
-            </>
-          }
-        />
-      </Routes>
+      {savedCard &&
+        <>
+          <div className="card__keyword">Keyword</div>
+          <button
+            aria-label="Delete"
+            type="button"
+            className="card__delete"
+          ></button>
+          <dialog className="card__tooltip">Remove from saved</dialog>
+        </>
+      }
+      {!savedCard &&
+        <>
+          <button
+            aria-label="Favourite"
+            type="button"
+            className="card__favourite"
+            onClick={!loggedIn ? onSigninPopupClick : saveCard}
+          ></button>
+          {!loggedIn && (
+            <dialog className="card__tooltip">Sign in to save articles</dialog>
+          )}
+        </>
+      }
       <div
         className="card__image"
         style={{ backgroundImage: `url(${card.link})` }}

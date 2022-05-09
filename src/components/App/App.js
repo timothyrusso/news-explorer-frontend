@@ -33,6 +33,8 @@ const App = () => {
   const [popupRedirectText, setPopupRedirectText] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
   const [blackNavigator, setBlackNavigator] = useState(false);
+  const [savedCard, setSavedCard] = useState(false);
+
   const [newsArticles, setNewsArticles] = useState({});
 
   const location = useLocation();
@@ -95,12 +97,14 @@ const App = () => {
     switch (location.pathname) {
       case "/":
         setBlackNavigator(false);
+        setSavedCard(false);
         return;
       case "/saved-news":
         setBlackNavigator(true);
+        setSavedCard(true);
         return;
     }
-  }, [location, setBlackNavigator]);
+  }, [location, setBlackNavigator, setSavedCard]);
 
   // const handleRegisterSubmit = (password, email) => {
   //   register(password, email)
@@ -183,7 +187,7 @@ const App = () => {
           element={
             <>
               <SavedNewsHeader />
-              <SavedNews cards={cards} />
+              <SavedNews cards={cards} savedCard={savedCard} />
             </>
           }
         />
