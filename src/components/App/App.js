@@ -90,24 +90,13 @@ const App = () => {
     history("/");
   };
 
-  const handleSearchSubmit = (data) => {
-    setSearch(data.search);
-    getNewsInfo({ search: data.search }, page)
-      .then((data) => {
-        setTotalResults(data.totalResults);
-        setNewsArticles([...newsArticles, ...data.articles]);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setShowNews(true);
-      });
-  };
-
   const showMoreResults = () => {
     setPage(page + 1);
-    console.log(page);
-    handleSearchSubmit({ search }, page);
   };
+
+  const activateSearch = (data) => {
+    setSearch(data.search)
+  }
 
   useEffect(() => {
     switch (location.pathname) {
@@ -122,26 +111,17 @@ const App = () => {
     }
   }, [location, setBlackNavigator, setSavedCard]);
 
-  // const handleRegisterSubmit = (password, email) => {
-  //   register(password, email)
-  //     .then((res) => {
-  //       if (res.data._id) {
-  //         console.log('res OK');
-  //         setStatus("success");
-  //         history('/signin');
-  //       } else {
-  //         console.log('Something went wrong.');
-  //         setStatus("failed");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setStatus("failed");
-  //     })
-  //     .finally(() => {
-  //       setTooltipOpen(true);
-  //     })
-  // }
+  useEffect((search) => {
+    getNewsInfo({ search: search }, page)
+      .then((data) => {
+        setTotalResults(data.totalResults);
+        setNewsArticles([...newsArticles, ...data.articles]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setShowNews(true);
+      });
+  }, [setSearch, page]);
 
   return (
     <div className="content">
@@ -158,8 +138,8 @@ const App = () => {
           element={
             <>
               <Header
-                onSearchFormSubmit={handleSearchSubmit}
                 startLoading={startLoading}
+                activateSearch={activateSearch}
               />
               {showNews && (
                 <NewsCardList
