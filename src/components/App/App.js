@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import SignupPopup from "../SignupPopup/SignupPopup";
 import NothingFound from "../NothingFound/NothingFound";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Preloader from "../Preloader/Preloader";
 import NewsCardList from "../NewsCardList/NewsCardList";
@@ -38,12 +38,14 @@ const App = () => {
   const [noResults, setNoResults] = useState(false);
   const [totalResults, setTotalResults] = useState(1);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const [newsArticles, setNewsArticles] = useState([]); // lista
 
   const location = useLocation();
   const history = useNavigate();
+
+  const isInitialMount = useRef(true);
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
@@ -95,8 +97,10 @@ const App = () => {
   };
 
   const activateSearch = (data) => {
-    setSearch(data.search)
-  }
+    console.log(data);
+    setSearch(data.search);
+    console.log(search);
+  };
 
   useEffect(() => {
     switch (location.pathname) {
@@ -111,17 +115,23 @@ const App = () => {
     }
   }, [location, setBlackNavigator, setSavedCard]);
 
-  useEffect((search) => {
-    getNewsInfo({ search: search }, page)
-      .then((data) => {
-        setTotalResults(data.totalResults);
-        setNewsArticles([...newsArticles, ...data.articles]);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setShowNews(true);
-      });
-  }, [setSearch, page]);
+  useEffect(
+    (search) => {
+      {
+        search &&
+          getNewsInfo({ search: search }, page)
+            .then((data) => {
+              setTotalResults(data.totalResults);
+              setNewsArticles([...newsArticles, ...data.articles]);
+            })
+            .finally(() => {
+              setIsLoading(false);
+              setShowNews(true);
+            });
+      }
+    },
+    [search, page]
+  );
 
   return (
     <div className="content">
