@@ -36,8 +36,11 @@ const App = () => {
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [noResults, setNoResults] = useState(false);
+  const [totalResults, setTotalResults] = useState(1);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
-  const [newsArticles, setNewsArticles] = useState({});
+  const [newsArticles, setNewsArticles] = useState([]); // lista
 
   const location = useLocation();
   const history = useNavigate();
@@ -88,14 +91,22 @@ const App = () => {
   };
 
   const handleSearchSubmit = (data) => {
-    getNewsInfo({ search: data.search })
+    setSearch(data.search);
+    getNewsInfo({ search: data.search }, page)
       .then((data) => {
-        setNewsArticles(data.articles);
+        setTotalResults(data.totalResults);
+        setNewsArticles([...newsArticles, ...data.articles]);
       })
       .finally(() => {
         setIsLoading(false);
         setShowNews(true);
       });
+  };
+
+  const showMoreResults = () => {
+    setPage(page + 1);
+    console.log(page);
+    handleSearchSubmit({ search }, page);
   };
 
   useEffect(() => {
@@ -156,6 +167,7 @@ const App = () => {
                   onSigninPopupClick={handleSigninPopupClick}
                   loggedIn={loggedIn}
                   newsArticles={newsArticles}
+                  showMoreResults={showMoreResults}
                 />
               )}
               {noResults && <NothingFound />}

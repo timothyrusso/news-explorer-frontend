@@ -2,11 +2,12 @@ import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
 const NewsCardList = ({
-  cards,
   onSigninPopupClick,
   loggedIn,
   newsArticles,
+  showMoreResults,
 }) => {
+
 
   return (
     <div className="news-card-list">
@@ -21,7 +22,12 @@ const NewsCardList = ({
           />
         ))}
       </ul>
-      <button aria-label="ShowMore" type="button" className="show-more-button">
+      <button
+        aria-label="ShowMore"
+        type="button"
+        className="show-more-button"
+        onClick={showMoreResults}
+      >
         Show more
       </button>
     </div>

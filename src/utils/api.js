@@ -17,9 +17,9 @@ Status code: ${res.status}`
   }
 };
 
-export const getNewsInfo = ({ search }) => {
+export const getNewsInfo = ({ search }, page) => {
   return fetch(
-    `${BASE_URL}?q=${search}&pageSize=${pageSize}&apiKey=${apiKey}`,
+    `${BASE_URL}?q=${search}&sortBy=publishedAt&language=en&pageSize=${pageSize}&page=${page}&apiKey=${apiKey}`,
     {
       method: "GET",
       headers: {
