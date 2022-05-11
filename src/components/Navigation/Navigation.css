@@ -41,10 +41,17 @@
   line-height: 1.5;
   text-decoration: none;
   color: #fff;
+  padding: 30px 10px 26px;
+}
+
+.navigation__link:focus {
+  border-bottom: 3px solid #fff;
+  padding-bottom: 23px;
 }
 
 .navigation__link_type_saved {
-  margin-left: 70px;
+  margin-left: 34px;
+  padding: 30px 32px 26px;
 }
 
 .navigation__link:focus {
@@ -72,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-left: 64px;
+  margin-left: 32px;
   max-width: 260px;
 }
 

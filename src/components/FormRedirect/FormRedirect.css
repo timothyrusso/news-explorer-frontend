@@ -19,3 +19,7 @@
   color: #2F71E5;
   padding: 0;
 }
+
+.form-redirect_type_link:hover {
+  cursor: pointer;
+}

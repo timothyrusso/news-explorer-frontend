@@ -51,7 +51,7 @@ const Navigation = ({
           className={`navigation__link navigation__link_type_saved ${
             !loggedIn ? "navigation__disabled" : ""
           }`}
-          style={textColor}
+          style={buttonColor}
         >
           Saved articles
         </Link>
