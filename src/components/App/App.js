@@ -38,7 +38,7 @@ const App = () => {
   const [noResults, setNoResults] = useState(false);
   const [totalResults, setTotalResults] = useState(1);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const [newsArticles, setNewsArticles] = useState([]); // lista
 
@@ -117,18 +117,15 @@ const App = () => {
 
   useEffect(
     (search) => {
-      {
-        search &&
-          getNewsInfo({ search: search }, page)
-            .then((data) => {
-              setTotalResults(data.totalResults);
-              setNewsArticles([...newsArticles, ...data.articles]);
-            })
-            .finally(() => {
-              setIsLoading(false);
-              setShowNews(true);
-            });
-      }
+      getNewsInfo({ search: search }, page)
+        .then((data) => {
+          setTotalResults(data.totalResults);
+          setNewsArticles([...newsArticles, ...data.articles]);
+        })
+        .finally(() => {
+          setIsLoading(false);
+          setShowNews(true);
+        });
     },
     [search, page]
   );
