@@ -57,6 +57,11 @@ const App = () => {
     setIsLoading(true);
   };
 
+  const startLoadingNews = () => {
+    setShowNews(false);
+    setIsLoading(true);
+  };
+
   const onFormUpdate = (data) => {
     data ? setFormValidity(true) : setFormValidity(false);
   };
@@ -113,7 +118,7 @@ const App = () => {
     getNewsInfo({ search: data.search }, page)
       .then((data) => {
         setTotalResults(data.totalResults);
-        setNewsArticles([...newsArticles, ...data.articles]);
+        setNewsArticles(data.articles);
       })
       .finally(() => {
         setIsLoading(false);
@@ -154,7 +159,7 @@ const App = () => {
           element={
             <>
               <Header
-                startLoading={startLoading}
+                startLoadingNews={startLoadingNews}
                 activateSearch={activateSearch}
               />
               {showNews && (
