@@ -30,9 +30,22 @@
   font-size: 18px;
   line-height: 1.33;
   padding: 0 24px;
+  transition: all linear 0.3s;
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .footer__icon {
   max-width: 24px;
   padding-left: 24px;
+  transition: all linear 0.3s;
+}
+
+.footer__icon:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }

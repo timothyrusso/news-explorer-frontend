@@ -92,14 +92,34 @@ const App = () => {
     history("/");
   };
 
-  const showMoreResults = () => {
+  const setNewPage = () => {
     setPage(page + 1);
+    showMoreResults();
+  };
+
+  const showMoreResults = () => {
+    getNewsInfo({ search }, page)
+      .then((data) => {
+        setTotalResults(data.totalResults);
+        setNewsArticles([...newsArticles, ...data.articles]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setShowNews(true);
+      });
   };
 
   const activateSearch = (data) => {
-    console.log(data);
-    setSearch(data.search);
-    console.log(search);
+    getNewsInfo({ search: data.search }, page)
+      .then((data) => {
+        setTotalResults(data.totalResults);
+        setNewsArticles([...newsArticles, ...data.articles]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setShowNews(true);
+        setSearch(data.search);
+      });
   };
 
   useEffect(() => {
@@ -114,21 +134,6 @@ const App = () => {
         return;
     }
   }, [location, setBlackNavigator, setSavedCard]);
-
-  useEffect(
-    (search) => {
-      getNewsInfo({ search: search }, page)
-        .then((data) => {
-          setTotalResults(data.totalResults);
-          setNewsArticles([...newsArticles, ...data.articles]);
-        })
-        .finally(() => {
-          setIsLoading(false);
-          setShowNews(true);
-        });
-    },
-    [search, page]
-  );
 
   return (
     <div className="content">
@@ -155,6 +160,7 @@ const App = () => {
                   loggedIn={loggedIn}
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
+                  setNewPage={setNewPage}
                 />
               )}
               {noResults && <NothingFound />}

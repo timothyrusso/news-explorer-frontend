@@ -6,6 +6,7 @@ const NewsCardList = ({
   loggedIn,
   newsArticles,
   showMoreResults,
+  setNewPage
 }) => {
 
 
@@ -26,7 +27,7 @@ const NewsCardList = ({
         aria-label="ShowMore"
         type="button"
         className="show-more-button"
-        onClick={showMoreResults}
+        onClick={setNewPage}
       >
         Show more
       </button>
