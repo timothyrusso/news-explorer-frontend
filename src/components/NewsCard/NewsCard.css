@@ -177,3 +177,28 @@
   bottom: 24px;
   left: 24px;
 }
+
+@media screen and (max-width: 768px) {
+  .card {
+    max-width: 224px;
+  }
+
+  .card__image {
+    min-height: 150px;
+    background-position: center center;
+  }
+
+  .card__content {
+    min-height: 270px;
+    padding: 16px;
+  }
+
+  .card__title {
+    font-size: 22px;
+    line-height: 1.09;
+  }
+
+  .card__text {
+    -webkit-line-clamp: 4;
+  }
+}

@@ -21,7 +21,7 @@
   max-width: 1232px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 16px;
   list-style-type: none;
   padding: 0;
@@ -50,6 +50,12 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .search-result-grid {
+    max-width: 768px;
+  }
+}
+
 @media screen and (max-width: 880px) {
   .search-result-grid {
     padding: 0 19px 50px;
@@ -58,6 +64,6 @@
 
 @media screen and (max-width: 320px) {
   .search-result-grid {
-    grid-template-columns: repeat( auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }

@@ -41,3 +41,33 @@
 .about__description:last-child {
   padding-bottom: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+    min-height: 354px;
+  }
+
+  .about {
+    padding: 40px 40px 61px;
+  }
+
+  .about__image {
+    max-width: 232px;
+    margin-top: 21px;
+    box-sizing: border-box;
+  }
+
+  .about__wrapper {
+    max-width: 424px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 1.33;
+    padding: 0 0 16px;
+  }
+
+  .about__description {
+
+  }
+}
