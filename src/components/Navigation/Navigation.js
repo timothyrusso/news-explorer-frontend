@@ -58,7 +58,7 @@ const Navigation = ({
         <button
           aria-label="signin"
           type="button"
-          className={`navigation__button ${
+          className={`navigation__button navigation__button_type_signin ${
             loggedIn ? "navigation__disabled" : ""
           }`}
           onClick={onSigninPopupClick}
