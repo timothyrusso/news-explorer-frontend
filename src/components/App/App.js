@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import SignupPopup from "../SignupPopup/SignupPopup";
 import NothingFound from "../NothingFound/NothingFound";
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Preloader from "../Preloader/Preloader";
 import NewsCardList from "../NewsCardList/NewsCardList";
@@ -44,8 +44,6 @@ const App = () => {
 
   const location = useLocation();
   const history = useNavigate();
-
-  const isInitialMount = useRef(true);
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
@@ -103,7 +101,7 @@ const App = () => {
   };
 
   const showMoreResults = () => {
-    getNewsInfo({ search }, page)
+    getNewsInfo({ search }, page + 1)
       .then((data) => {
         setTotalResults(data.totalResults);
         setNewsArticles([...newsArticles, ...data.articles]);
