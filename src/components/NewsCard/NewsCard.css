@@ -20,6 +20,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
+  transition: all linear 0.3s;
 }
 
 .card__favourite:hover {
@@ -40,6 +41,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
+  transition: all linear 0.3s;
 }
 
 .card__delete:hover {
@@ -47,7 +49,7 @@
 }
 
 .card__tooltip {
-  display: none;
+  display: flex;
   position: absolute;
   top: 18px;
   left: 177px;
@@ -66,14 +68,22 @@
   padding: 0 20px;
   margin: 0;
   align-items: center;
+  transition: all linear .1s;
+  visibility: hidden;
+}
+
+.card__tooltip_type_delete {
+  left: 192px;
 }
 
 .card__favourite:hover+.card__tooltip {
-  display: flex;
+  visibility: visible;
+  transition-delay: .1s;
 }
 
 .card__delete:hover+.card__tooltip {
-  display: flex;
+  visibility: visible;
+  transition-delay: .1s;
 }
 
 .card__keyword {

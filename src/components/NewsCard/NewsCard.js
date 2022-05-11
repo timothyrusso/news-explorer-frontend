@@ -31,7 +31,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
             type="button"
             className="card__delete"
           ></button>
-          <dialog className="card__tooltip">Remove from saved</dialog>
+          <dialog className="card__tooltip card__tooltip_type_delete">Remove from saved</dialog>
         </>
       )}
       {!savedCard && (

@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import SignupPopup from "../SignupPopup/SignupPopup";
 import NothingFound from "../NothingFound/NothingFound";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Preloader from "../Preloader/Preloader";
 import NewsCardList from "../NewsCardList/NewsCardList";
@@ -134,6 +134,10 @@ const App = () => {
         return;
     }
   }, [location, setBlackNavigator, setSavedCard]);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="content">

@@ -16,11 +16,22 @@ const Footer = () => {
         <Link to={"/"} className="footer__link">
           Home
         </Link>
-        <a href="https://timothyrusso.tech/" target="_blank" className="footer__link">
+        <a
+          href="https://timothyrusso.tech/"
+          target="_blank"
+          className="footer__link"
+        >
           Visit my Portfolio
         </a>
-        <img src={githubIcon} className="footer__icon"></img>
-        <img src={linkedinIcon} className="footer__icon"></img>
+        <a href="https://github.com/timothyrusso" target="_blank">
+          <img src={githubIcon} className="footer__icon"></img>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
+          target="_blank"
+        >
+          <img src={linkedinIcon} className="footer__icon"></img>
+        </a>
       </div>
     </footer>
   );
