@@ -35,3 +35,22 @@
   color: #1A1B22;
   margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .saved-news-header {
+    min-height: 270px;
+    padding: 90px 0 32px 40px;
+  }
+
+  .saved-news-header__intro {
+    font-size: 14px;
+    line-height: 1.71;
+  }
+
+  .saved-news-header__title {
+    font-size: 30px;
+    line-height: 1.13;
+    margin: 16px 0;
+    max-width: 336px;
+  }
+}

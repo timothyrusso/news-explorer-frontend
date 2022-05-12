@@ -1,5 +1,4 @@
 .news-card-list {
-  min-height: 974px;
   width: 100%;
   background-color: #F5F6F7;
   display: flex;
@@ -53,12 +52,20 @@
 @media screen and (max-width: 768px) {
   .search-result-grid {
     max-width: 768px;
+    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    gap: 8px;
   }
-}
 
-@media screen and (max-width: 880px) {
-  .search-result-grid {
-    padding: 0 19px 50px;
+  .news-card-list__title {
+    font-size: 30px;
+    line-height: 1.13;
+    padding: 40px 40px 32px;
+  }
+
+  .show-more-button {
+    margin: 32px auto 40px;
+    max-width: 240px;
+    min-height: 56px;
   }
 }
 

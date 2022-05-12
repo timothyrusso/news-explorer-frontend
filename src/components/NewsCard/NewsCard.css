@@ -201,4 +201,8 @@
   .card__text {
     -webkit-line-clamp: 4;
   }
+
+  .card__tooltip {
+    display: none;
+  }
 }
