@@ -160,7 +160,7 @@ const App = () => {
                 startLoadingNews={startLoadingNews}
                 activateSearch={activateSearch}
               />
-              {showNews && (
+              {showNews && newsArticles === null && (
                 <NewsCardList
                   cards={cards}
                   onSigninPopupClick={handleSigninPopupClick}
@@ -170,7 +170,7 @@ const App = () => {
                   setNewPage={setNewPage}
                 />
               )}
-              {noResults && <NothingFound />}
+              {!totalResults && <NothingFound />}
               {isLoading && <Preloader />}
               <Main />
               <SigninPopup

@@ -5,7 +5,6 @@ const NewsCardList = ({
   onSigninPopupClick,
   loggedIn,
   newsArticles,
-  showMoreResults,
   setNewPage,
 }) => {
   const getRandomInt = () => {
