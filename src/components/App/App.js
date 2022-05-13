@@ -160,7 +160,7 @@ const App = () => {
                 startLoadingNews={startLoadingNews}
                 activateSearch={activateSearch}
               />
-              {showNews && newsArticles === null && (
+              {showNews && newsArticles.length !== 0 && (
                 <NewsCardList
                   cards={cards}
                   onSigninPopupClick={handleSigninPopupClick}

@@ -98,6 +98,10 @@
   display: none;
 }
 
+.burgher-button {
+  display: none;
+}
+
 @media screen and (max-width: 930px) {
   .navigation {
     padding: 0 40px;
@@ -127,5 +131,30 @@
 
   .navigation__link_type_saved {
     margin-left: 16px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .burgher-button {
+    display: block;
+  }
+
+  .navigation__wrapper {
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    background-color: #1A1B22;
+    width: 100%;
+    left: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .navigation__link {
+    margin: 0;
+  }
+
+  .navigation__button {
+    margin: 0;
   }
 }

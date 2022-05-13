@@ -24,7 +24,7 @@ export const cards = [
     source: 'National parks traveler',
   },
   {
-    _id: 2,
+    _id: 4,
     urlToImage: 'https://www.planetware.com/wpimages/2021/02/italy-best-lakes-lake-como.jpg',
     date: 'November 4, 2020',
     title: 'Nature makes you better',
@@ -32,7 +32,7 @@ export const cards = [
     source: 'national geographic',
   },
   {
-    _id: 3,
+    _id: 5,
     urlToImage: 'https://static.posters.cz/image/750/poster/beach-sunset-i102003.jpg',
     date: 'November 4, 2020',
     title: 'Grand Teton Renews Historic Crest Trail',
