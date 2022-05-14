@@ -1,4 +1,17 @@
 .navigation {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  max-width: 1440px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: all;
+  backdrop-filter: blur(2px);
+}
+
+.navigation__container {
   max-width: 1440px;
   width: 100%;
   border-bottom: 1px solid rgba(196, 196, 196, 0.09);
@@ -11,17 +24,17 @@
   position: fixed;
   box-sizing: border-box;
   color: #fff;
-  z-index: 1;
+  z-index: 3;
 }
 
-.navigation_type_scroll {
+.navigation__container_type_scroll {
   background: rgba(47, 113, 229, 0.6);
   backdrop-filter: blur(8px);
   border-bottom: none;
   box-shadow: none;
 }
 
-.navigation__wrapper {
+.navigation__links-wrapper {
   min-height: 48px;
   display: flex;
   justify-content: space-between;
@@ -103,7 +116,7 @@
 }
 
 @media screen and (max-width: 930px) {
-  .navigation {
+  .navigation__container {
     padding: 0 40px;
     min-height: 66px;
   }
@@ -139,7 +152,7 @@
     display: block;
   }
 
-  .navigation__wrapper {
+  .navigation__links-wrapper {
     flex-direction: column;
     position: absolute;
     top: 65px;
