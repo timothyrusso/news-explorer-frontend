@@ -19,7 +19,7 @@ const Footer = () => {
         <a
           href="https://timothyrusso.tech/"
           target="_blank"
-          className="footer__link"
+          className="footer__link footer__link_type_mobile"
         >
           Visit my Portfolio
         </a>
@@ -30,7 +30,7 @@ const Footer = () => {
           href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
           target="_blank"
         >
-          <img src={linkedinIcon} className="footer__icon"></img>
+          <img src={linkedinIcon} className="footer__icon footer__icon_type_mobile"></img>
         </a>
       </div>
     </footer>
