@@ -63,3 +63,19 @@ textarea:focus, input:focus {
     margin-left: -160px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form__input {
+    max-width: 288px;
+    margin-bottom: 16px;
+  }
+
+  .search-form__button {
+    max-width: 288px;
+    margin-left: 0;
+  }
+}
