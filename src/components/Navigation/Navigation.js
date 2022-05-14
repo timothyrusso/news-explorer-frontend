@@ -52,7 +52,9 @@ const Navigation = ({
   return (
     <div className={toggleMenu && screenWidth < 600 ? "navigation" : ""}>
       <div
-        className={`navigation__container ${navbarColor ? "navigation__container_type_scroll" : ""}`}
+        className={`navigation__container ${
+          navbarColor ? "navigation__container_type_scroll" : ""
+        }`}
         style={
           toggleMenu && screenWidth < 600 ? { backgroundColor: "#1A1B22" } : {}
         }
@@ -103,9 +105,12 @@ const Navigation = ({
             </button>
           </div>
         )}
-        <button onClick={toggleNav} className="burgher-button">
-          BTN
-        </button>
+        <button
+          onClick={toggleNav}
+          className={`burgher-button ${
+            toggleMenu && "burgher-button_type_open"
+          }`}
+        ></button>
       </div>
     </div>
   );

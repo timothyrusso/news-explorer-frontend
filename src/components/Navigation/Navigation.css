@@ -113,6 +113,16 @@
 
 .burgher-button {
   display: none;
+  background-image: url(../../images/burgher.svg);
+  border: none;
+  max-width: 24px;
+  width: 100%;
+  min-height: 24px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.burgher-button_type_open {
+  background-image: url(../../images/close-burgher.svg);
 }
 
 @media screen and (max-width: 930px) {
@@ -169,5 +179,12 @@
 
   .navigation__button {
     margin: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navigation__container {
+    padding: 0 16px;
+    min-height: 56px;
   }
 }
