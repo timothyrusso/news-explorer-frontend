@@ -185,7 +185,7 @@
   }
 
   .card__content {
-    min-height: 270px;
+    height: 270px;
     padding: 16px;
   }
 
@@ -200,5 +200,20 @@
 
   .card__tooltip {
     display: none;
+  }
+
+  .card__source {
+    bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__image {
+    min-height: 196px;
+    background-position: center center;
+  }
+
+  .card__title {
+    margin: 10px 0 14px;
   }
 }
