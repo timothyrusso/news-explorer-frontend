@@ -204,10 +204,15 @@
 
   .card__source {
     bottom: 16px;
+    left: 16px;
   }
 }
 
 @media screen and (max-width: 320px) {
+  .card {
+    height: 440px;
+  }
+
   .card__image {
     min-height: 196px;
     background-position: center center;
