@@ -73,22 +73,25 @@
   .footer__wrapper {
     order: 1;
     /* position: relative; */
-    margin: 20px 16px 0;
+    margin: 20px 0 38px;
     width: 100%;
-    padding: 0;
+    padding: 0 16px;
     display: grid;
     grid-template-areas:
-      'top github'
-      'bottom bottom';
-    gap: 15px 60px;
+      'top github github'
+      'bottom bottom bottom';
+    gap: 15px 80px;
+    box-sizing: border-box;
   }
 
   .footer__copyright {
     order: 2;
+    padding: 0 16px 22px;
   }
 
   .footer__link {
     grid-area: top;
+    padding-left: 0;
   }
 
   .footer__link_type_mobile {
@@ -99,6 +102,7 @@
 
   .footer__icon {
     grid-area: github;
+    padding-left: 0;
   }
 /*
   .footer__icon_type_mobile {
