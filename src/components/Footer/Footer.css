@@ -72,14 +72,13 @@
 
   .footer__wrapper {
     order: 1;
-    /* position: relative; */
     margin: 20px 0 38px;
     width: 100%;
     padding: 0 16px;
     display: grid;
     grid-template-areas:
-      'top github github'
-      'bottom bottom bottom';
+      'top icons'
+      'bottom bottom';
     gap: 15px 80px;
     box-sizing: border-box;
   }
@@ -95,18 +94,17 @@
   }
 
   .footer__link_type_mobile {
-    /* position: absolute;
-    top: 40px; */
     grid-area: bottom;
   }
 
-  .footer__icon {
-    grid-area: github;
-    padding-left: 0;
+  .footer__icon-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    grid-area: icons;
   }
-/*
-  .footer__icon_type_mobile {
-    grid-area: linkedin;
-  } */
+
+  .footer__icon {
+    padding-left: 24px;
+  }
 
 }

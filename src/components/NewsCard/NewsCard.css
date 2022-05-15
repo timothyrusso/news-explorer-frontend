@@ -101,10 +101,14 @@
   line-height: 1.71;
   color: #000;
   text-align: center;
-  padding: 0 20px;
+  padding: 7.5px 20px 0;
   margin: 0;
   align-items: center;
-  display: flex;
+  max-width: 130px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .card__image {
@@ -205,6 +209,10 @@
   .card__source {
     bottom: 16px;
     left: 16px;
+  }
+
+  .card__keyword {
+    max-width: 100px;
   }
 }
 

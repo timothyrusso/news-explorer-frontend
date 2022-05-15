@@ -23,15 +23,20 @@ const Footer = () => {
         >
           Visit my Portfolio
         </a>
-        <a href="https://github.com/timothyrusso" target="_blank">
-          <img src={githubIcon} className="footer__icon"></img>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
-          target="_blank"
-        >
-          <img src={linkedinIcon} className="footer__icon footer__icon_type_mobile"></img>
-        </a>
+        <div className="footer__icon-wrapper">
+          <a href="https://github.com/timothyrusso" target="_blank">
+            <img src={githubIcon} className="footer__icon"></img>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
+            target="_blank"
+          >
+            <img
+              src={linkedinIcon}
+              className="footer__icon footer__icon_type_mobile"
+            ></img>
+          </a>
+        </div>
       </div>
     </footer>
   );

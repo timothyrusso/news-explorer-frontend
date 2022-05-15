@@ -19,10 +19,12 @@ const Navigation = ({
 
   const location = useLocation();
 
-  let textColor = blackNavigator && !toggleMenu ? { color: "black" } : { color: "white" };
-  let buttonColor = blackNavigator && !toggleMenu
-    ? { color: "black", borderColor: "black" }
-    : { color: "white", borderColor: "white" };
+  let textColor =
+    blackNavigator && !toggleMenu ? { color: "black" } : { color: "white" };
+  let buttonColor =
+    blackNavigator && !toggleMenu
+      ? { color: "black", borderColor: "black" }
+      : { color: "white", borderColor: "white" };
 
   //navbar scroll changeBackground function
   const changeBackground = () => {
@@ -74,7 +76,10 @@ const Navigation = ({
         }
       >
         <Link to={"/"} className="logo">
-          <img src={blackNavigator && !toggleMenu ? blackLogo : logo} alt=""></img>
+          <img
+            src={blackNavigator && !toggleMenu ? blackLogo : logo}
+            alt=""
+          ></img>
         </Link>
         {(toggleMenu || screenWidth > 600) && (
           <div className="navigation__links-wrapper">

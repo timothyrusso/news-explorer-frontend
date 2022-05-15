@@ -10,3 +10,9 @@
     padding: 32px 0;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .saved-news {
+    padding: 24px 0 13px;
+  }
+}
