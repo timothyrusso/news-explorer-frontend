@@ -33,7 +33,7 @@ const Footer = () => {
           >
             <img
               src={linkedinIcon}
-              className="footer__icon footer__icon_type_mobile"
+              className="footer__icon"
             ></img>
           </a>
         </div>
