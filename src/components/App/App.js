@@ -39,6 +39,7 @@ const App = () => {
   const [totalResults, setTotalResults] = useState(1);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   const [newsArticles, setNewsArticles] = useState([]); // lista
 
@@ -100,6 +101,10 @@ const App = () => {
     showMoreResults();
   };
 
+  const toggleNav = () => {
+    setToggleMenu(!toggleMenu);
+  };
+
   const showMoreResults = () => {
     getNewsInfo({ search }, page + 1)
       .then((data) => {
@@ -130,13 +135,15 @@ const App = () => {
       case "/":
         setBlackNavigator(false);
         setSavedCard(false);
+        setToggleMenu(false);
         return;
       case "/saved-news":
         setBlackNavigator(true);
         setSavedCard(true);
+        setToggleMenu(false);
         return;
     }
-  }, [location, setBlackNavigator, setSavedCard]);
+  }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -149,6 +156,8 @@ const App = () => {
         loggedIn={loggedIn}
         blackNavigator={blackNavigator}
         handleLogout={handleLogout}
+        toggleMenu={toggleMenu}
+        toggleNav={toggleNav}
       />
       <Routes>
         <Route

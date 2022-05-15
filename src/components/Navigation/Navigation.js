@@ -12,19 +12,20 @@ const Navigation = ({
   loggedIn,
   blackNavigator,
   handleLogout,
+  toggleMenu,
+  toggleNav,
 }) => {
   const [navbarColor, setNavbarColor] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const location = useLocation();
 
-  let textColor =
-    blackNavigator && !toggleMenu ? { color: "black" } : { color: "white" };
-  let buttonColor =
-    blackNavigator && !toggleMenu
-      ? { color: "black", borderColor: "black" }
-      : { color: "white", borderColor: "white" };
+  const colorRuleDefiner =
+    (blackNavigator && !toggleMenu) || (screenWidth > 700 && blackNavigator);
+
+  const buttonColor = colorRuleDefiner
+    ? { color: "black", borderColor: "black" }
+    : { color: "white", borderColor: "white" };
 
   //navbar scroll changeBackground function
   const changeBackground = () => {
@@ -33,10 +34,6 @@ const Navigation = ({
     } else {
       setNavbarColor(false);
     }
-  };
-
-  const toggleNav = () => {
-    setToggleMenu(!toggleMenu);
   };
 
   useEffect(() => {
@@ -54,44 +51,42 @@ const Navigation = ({
     return () => window.removeEventListener("resize", changeWidth);
   }, []);
 
-  useEffect(() => {
-    switch (location.pathname) {
-      case "/":
-        setToggleMenu(false);
-        return;
-      case "/saved-news":
-        setToggleMenu(false);
-        return;
-    }
-  }, [location, setToggleMenu]);
-
   return (
-    <div className={toggleMenu && screenWidth < 600 ? "navigation" : ""}>
+    <div className={toggleMenu && screenWidth < 700 ? "navigation" : ""}>
       <div
         className={`navigation__container ${
           navbarColor ? "navigation__container_type_scroll" : ""
         }`}
         style={
-          toggleMenu && screenWidth < 600 ? { backgroundColor: "#1A1B22" } : {}
+          toggleMenu && screenWidth < 700 ? { backgroundColor: "#1A1B22" } : {}
         }
       >
         <Link to={"/"} className="logo">
-          <img
-            src={blackNavigator && !toggleMenu ? blackLogo : logo}
-            alt=""
-          ></img>
+          <img src={colorRuleDefiner ? blackLogo : logo} alt=""></img>
         </Link>
-        {(toggleMenu || screenWidth > 600) && (
+        {(toggleMenu || screenWidth > 700) && (
           <div className="navigation__links-wrapper">
-            <Link to={"/"} className="navigation__link" style={textColor}>
+            <Link
+              to={"/"}
+              className={`navigation__link               ${
+                location.pathname === "/" ? "navigation__link_type_focus" : ""
+              }`}
+              style={buttonColor}
+            >
               Home
             </Link>
             <Link
               to={"/saved-news"}
               className={`navigation__link navigation__link_type_saved ${
                 !loggedIn ? "navigation__disabled" : ""
-              }`}
-              style={textColor}
+              }
+              ${
+                location.pathname === "/saved-news"
+                  ? "navigation__link_type_focus"
+                  : ""
+              }
+              `}
+              style={buttonColor}
             >
               Saved articles
             </Link>
