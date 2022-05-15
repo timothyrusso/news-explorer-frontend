@@ -1,6 +1,7 @@
 import "./Navigation.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import logo from "../../images/NewsExplorer.svg";
 import logout from "../../images/logout.svg";
 import blackLogo from "../../images/NewsExplorerlogo-black.svg";
@@ -16,8 +17,10 @@ const Navigation = ({
   const [toggleMenu, setToggleMenu] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  let textColor = blackNavigator ? { color: "black" } : { color: "white" };
-  let buttonColor = blackNavigator
+  const location = useLocation();
+
+  let textColor = blackNavigator && !toggleMenu ? { color: "black" } : { color: "white" };
+  let buttonColor = blackNavigator && !toggleMenu
     ? { color: "black", borderColor: "black" }
     : { color: "white", borderColor: "white" };
 
@@ -49,6 +52,17 @@ const Navigation = ({
     return () => window.removeEventListener("resize", changeWidth);
   }, []);
 
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/":
+        setToggleMenu(false);
+        return;
+      case "/saved-news":
+        setToggleMenu(false);
+        return;
+    }
+  }, [location, setToggleMenu]);
+
   return (
     <div className={toggleMenu && screenWidth < 600 ? "navigation" : ""}>
       <div
@@ -60,7 +74,7 @@ const Navigation = ({
         }
       >
         <Link to={"/"} className="logo">
-          <img src={blackNavigator ? blackLogo : logo} alt=""></img>
+          <img src={blackNavigator && !toggleMenu ? blackLogo : logo} alt=""></img>
         </Link>
         {(toggleMenu || screenWidth > 600) && (
           <div className="navigation__links-wrapper">
@@ -72,7 +86,7 @@ const Navigation = ({
               className={`navigation__link navigation__link_type_saved ${
                 !loggedIn ? "navigation__disabled" : ""
               }`}
-              style={buttonColor}
+              style={textColor}
             >
               Saved articles
             </Link>
@@ -98,7 +112,7 @@ const Navigation = ({
             >
               TimothyTimothyffffff
               <img
-                src={blackNavigator ? blackLogout : logout}
+                src={blackNavigator && !toggleMenu ? blackLogout : logout}
                 alt=""
                 className="navigation__logout-icon"
               ></img>
@@ -107,8 +121,12 @@ const Navigation = ({
         )}
         <button
           onClick={toggleNav}
-          className={`burgher-button ${
-            toggleMenu && "burgher-button_type_open"
+          className={`burgher-button
+          ${blackNavigator && !toggleMenu && "burgher-button_type_black"}
+          ${
+            toggleMenu
+              ? "burgher-button_type_open"
+              : "burgher-button_type_white"
           }`}
         ></button>
       </div>
