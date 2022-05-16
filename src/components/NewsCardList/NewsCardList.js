@@ -6,6 +6,7 @@ const NewsCardList = ({
   loggedIn,
   newsArticles,
   setNewPage,
+  showMoreLogic,
 }) => {
   const getRandomInt = () => {
     return Math.floor(Math.random() * 1000);
@@ -24,14 +25,16 @@ const NewsCardList = ({
           />
         ))}
       </ul>
-      <button
-        aria-label="ShowMore"
-        type="button"
-        className="show-more-button"
-        onClick={setNewPage}
-      >
-        Show more
-      </button>
+      {showMoreLogic && (
+        <button
+          aria-label="ShowMore"
+          type="button"
+          className="show-more-button"
+          onClick={setNewPage}
+        >
+          Show more
+        </button>
+      )}
     </div>
   );
 };

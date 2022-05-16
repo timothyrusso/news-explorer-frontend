@@ -23,7 +23,7 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 16px;
   list-style-type: none;
-  padding: 0;
+  padding: 0 0 64px;
 }
 
 .show-more-button {
@@ -34,7 +34,7 @@
   min-height: 64px;
   border-radius: 80px;
   display: block;
-  margin: 64px auto 80px;
+  margin: 0 auto 80px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -69,6 +69,7 @@
     max-width: 768px;
     grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
     gap: 8px;
+    padding-bottom: 32px;
   }
 
   .news-card-list__title {
@@ -78,7 +79,7 @@
   }
 
   .show-more-button {
-    margin: 32px auto 40px;
+    margin: 0 auto 40px;
     max-width: 240px;
     min-height: 56px;
   }
@@ -95,10 +96,11 @@
   .search-result-grid {
     max-width: 320px;
     grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    padding-bottom: 16px;
   }
 
   .show-more-button {
-    margin: 16px auto 24px;
+    margin: 0 auto 24px;
     max-width: 288px;
   }
 

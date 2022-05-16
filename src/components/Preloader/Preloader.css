@@ -7,36 +7,11 @@
   flex-direction: column;
 }
 
-/* .circle-preloader {
-  display: block;
-  width: 74px;
-  height: 74px;
-  border: 1px solid rgb(113, 113, 113);
-  border-bottom-color: rgb(130, 126, 126);
-  border-left-color: rgb(167, 165, 165);
-  border-top-color: rgb(229, 228, 228);
-  border-radius: 50%;
-
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 80px auto 24px;
-
-  animation: spin .55s infinite linear;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-} */
-
 .circle-preloader,
 .circle-preloader:after {
   border-radius: 50%;
-  width: 10em;
-  height: 10em;
+  width: 8em;
+  height: 8em;
 }
 
 .circle-preloader {

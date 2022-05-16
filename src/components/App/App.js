@@ -46,6 +46,9 @@ const App = () => {
   const location = useLocation();
   const history = useNavigate();
 
+  const resultsPerPage = 3;
+  const showMoreLogic = page * resultsPerPage < totalResults;
+
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
@@ -177,9 +180,10 @@ const App = () => {
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
                   setNewPage={setNewPage}
+                  showMoreLogic={showMoreLogic}
                 />
               )}
-              {!totalResults && <NothingFound />}
+              {!totalResults && !isLoading && <NothingFound />}
               {isLoading && <Preloader />}
               <Main />
               <SigninPopup
