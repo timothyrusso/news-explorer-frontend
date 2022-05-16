@@ -50,14 +50,17 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
           )}
         </>
       )}
-      <div
-        className="card__image"
-        style={{
-          backgroundImage: `url(${
-            card.urlToImage != null ? card.urlToImage : alternativeBackground
-          })`,
-        }}
-      ></div>
+      <a href={card.url} target="_blank">
+        <div
+          className="card__image"
+          style={{
+            backgroundImage: `url(${
+              card.urlToImage != null ? card.urlToImage : alternativeBackground
+            })`,
+          }}
+          href={card.url}
+        ></div>
+      </a>
       <div className="card__content">
         <time className="card__date">{data}</time>
         <h3 className="card__title">{card.title}</h3>
