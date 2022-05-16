@@ -182,7 +182,7 @@
   left: 24px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .card__image {
     min-height: 150px;
     background-position: center center;

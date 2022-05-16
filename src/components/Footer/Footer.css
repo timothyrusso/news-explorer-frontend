@@ -50,7 +50,7 @@
   opacity: 0.7;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 910px) {
   .footer__copyright {
     padding-left: 40px;
   }
@@ -64,13 +64,14 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 740px) {
   .footer {
     flex-direction: column;
     min-height: 176px;
   }
 
   .footer__wrapper {
+    max-width: 400px;
     order: 1;
     margin: 20px 0 38px;
     width: 100%;

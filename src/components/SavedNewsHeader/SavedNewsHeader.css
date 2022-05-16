@@ -59,10 +59,10 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
   .saved-news-header {
     min-height: 302px;
-    padding: 64px 0 32px 16px;
+    padding: 64px 16px 32px 16px;
   }
 
   .saved-news-header__intro {

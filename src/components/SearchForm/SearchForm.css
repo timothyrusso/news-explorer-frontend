@@ -64,7 +64,7 @@ textarea:focus, input:focus {
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
   .search-form {
     flex-direction: column;
   }
