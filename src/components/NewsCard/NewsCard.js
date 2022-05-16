@@ -1,4 +1,5 @@
 import "./NewsCard.css";
+import alternativeBackground from "../../images/header_background.png";
 
 const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
   const saveCard = () => {
@@ -31,7 +32,9 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
             type="button"
             className="card__delete"
           ></button>
-          <dialog className="card__tooltip card__tooltip_type_delete">Remove from saved</dialog>
+          <dialog className="card__tooltip card__tooltip_type_delete">
+            Remove from saved
+          </dialog>
         </>
       )}
       {!savedCard && (
@@ -49,7 +52,11 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
       )}
       <div
         className="card__image"
-        style={{ backgroundImage: `url(${card.urlToImage})` }}
+        style={{
+          backgroundImage: `url(${
+            card.urlToImage != null ? card.urlToImage : alternativeBackground
+          })`,
+        }}
       ></div>
       <div className="card__content">
         <time className="card__date">{data}</time>
