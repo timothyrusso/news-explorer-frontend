@@ -15,7 +15,7 @@
   margin: 0;
   text-align: center;
   padding-bottom: 16px;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 26px;
@@ -27,7 +27,7 @@
   box-sizing: border-box;
   margin: 0 auto;
   max-width: 356px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;

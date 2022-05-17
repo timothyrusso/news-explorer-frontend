@@ -6,7 +6,7 @@
 }
 
 .news-card-list__title {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', Arial, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -35,7 +35,7 @@
   border-radius: 80px;
   display: block;
   margin: 0 auto 80px;
-  font-family: 'Roboto';
+  font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;

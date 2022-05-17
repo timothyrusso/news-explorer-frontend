@@ -13,7 +13,7 @@ const NewsCardList = ({
   };
 
   return (
-    <div className="news-card-list">
+    <section className="news-card-list">
       <h2 className="news-card-list__title">Search results</h2>
       <ul className="search-result-grid">
         {newsArticles.map((card) => (
@@ -35,7 +35,7 @@ const NewsCardList = ({
           Show more
         </button>
       )}
-    </div>
+    </section>
   );
 };
 

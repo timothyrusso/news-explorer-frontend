@@ -53,7 +53,7 @@ const Navigation = ({
 
   return (
     <div className={toggleMenu && screenWidth < 700 ? "navigation" : ""}>
-      <div
+      <nav
         className={`navigation__container ${
           navbarColor ? "navigation__container_type_scroll" : ""
         }`}
@@ -62,7 +62,10 @@ const Navigation = ({
         }
       >
         <Link to={"/"} className="logo">
-          <img src={colorRuleDefiner ? blackLogo : logo} alt=""></img>
+          <img
+            src={colorRuleDefiner ? blackLogo : logo}
+            alt="NewsExplorer logo"
+          ></img>
         </Link>
         {(toggleMenu || screenWidth > 700) && (
           <div className="navigation__links-wrapper">
@@ -110,10 +113,10 @@ const Navigation = ({
               onClick={handleLogout}
               style={buttonColor}
             >
-              TimothyTimothyffffff
+              Timothy Russo
               <img
                 src={blackNavigator && !toggleMenu ? blackLogout : logout}
-                alt=""
+                alt="Logout logo"
                 className="navigation__logout-icon"
               ></img>
             </button>
@@ -129,7 +132,7 @@ const Navigation = ({
               : "burgher-button_type_white"
           }`}
         ></button>
-      </div>
+      </nav>
     </div>
   );
 };

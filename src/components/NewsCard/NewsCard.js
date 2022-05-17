@@ -10,7 +10,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
     var date = new Date(timeStr);
     var day = date.getDate();
     var year = date.getFullYear();
-    var month = date.getMonth();
+    var month = date.getMonth() + 1;
 
     date.setMonth(month - 1);
     const monthName = date.toLocaleString("default", { month: "long" });
@@ -50,7 +50,7 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
           )}
         </>
       )}
-      <a href={card.url} target="_blank">
+      <a href={card.url} target="_blank" rel="noreferrer">
         <div
           className="card__image"
           style={{
@@ -63,9 +63,30 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
       </a>
       <div className="card__content">
         <time className="card__date">{data}</time>
-        <h3 className="card__title">{card.title}</h3>
-        <p className="card__text">{card.content}</p>
-        <p className="card__source">{card.source.name}</p>
+        <a
+          href={card.url}
+          target="_blank"
+          rel="noreferrer"
+          className="card__link-wrapper"
+        >
+          <h3 className="card__title">{card.title}</h3>
+        </a>
+        <a
+          href={card.url}
+          target="_blank"
+          rel="noreferrer"
+          className="card__link-wrapper"
+        >
+          <p className="card__text">{card.content}</p>
+        </a>
+        <a
+          href={card.url}
+          target="_blank"
+          rel="noreferrer"
+          className="card__link-wrapper"
+        >
+          <p className="card__source">{card.source.name}</p>
+        </a>
       </div>
     </li>
   );

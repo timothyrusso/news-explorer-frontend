@@ -19,21 +19,32 @@ const Footer = () => {
         <a
           href="https://timothyrusso.tech/"
           target="_blank"
+          rel="noreferrer"
           className="footer__link footer__link_type_mobile"
         >
           Visit my Portfolio
         </a>
         <div className="footer__icon-wrapper">
-          <a href="https://github.com/timothyrusso" target="_blank">
-            <img src={githubIcon} className="footer__icon"></img>
+          <a
+            href="https://github.com/timothyrusso"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={githubIcon}
+              className="footer__icon"
+              alt="GitHub logo"
+            ></img>
           </a>
           <a
             href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
             target="_blank"
+            rel="noreferrer"
           >
             <img
               src={linkedinIcon}
               className="footer__icon"
+              alt="LinkedIn Logo"
             ></img>
           </a>
         </div>
