@@ -11,14 +11,6 @@
   padding: 34px 0 22px;
 }
 
-@media screen and (max-width: 552px) {
-  .popup__title {
-    max-width: 238px;
-    font-size: 18px;
-    padding: 25px 0 75px;
-  }
-}
-
 .submit-button {
   display: block;
   width: 100%;
@@ -43,14 +35,6 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 552px) {
-  .submit-button {
-    max-width: 238px;
-    font-size: 14px;
-    margin: 45px auto 25px;
-  }
-}
-
 .submit-button_disabled {
   background-color: rgba(0, 0, 0, 0);
   color: rgba(0, 0, 0, 1);
@@ -58,4 +42,34 @@
   border: 1px solid rgba(0, 0, 0, 1);
   cursor: default;
   pointer-events: none;
+}
+
+@media screen and (max-width: 552px) {
+  .popup__title {
+    max-width: 238px;
+    font-size: 18px;
+    padding: 25px 0 75px;
+  }
+
+  .submit-button {
+    max-width: 238px;
+    font-size: 14px;
+    margin: 45px auto 25px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+  .popup__title {
+    font-size: 24px;
+    line-height: 28px;
+    padding: 16px 0 18px 17px;
+    margin: 0;
+  }
+
+  .submit-button {
+    max-width: 288px;
+    font-size: 18px;
+    margin: 22px auto 16px;
+  }
 }

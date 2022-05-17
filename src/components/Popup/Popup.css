@@ -1,12 +1,20 @@
 .popup {
-  position: fixed;  /* Stay in place */
-  z-index: 1;  /* Sit on top */
-  left: 0;  /* Location of the box */
-  top: 0;  /* Location of the box */
-  width: 100%;  /* Full width */
-  height: 100%;  /* Full height */
-  background-color: rgb(0, 0, 0);  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.5);  /* Black w/ opacity */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  /* Location of the box */
+  top: 0;
+  /* Location of the box */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Black w/ opacity */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,12 +38,6 @@
   max-width: 430px;
   border-radius: 10px;
   position: relative;
-}
-
-@media screen and (max-width: 552px) {
-  .popup__container {
-    max-width: 282px;
-  }
 }
 
 .close-button {
@@ -62,17 +64,36 @@
 }
 
 @media screen and (max-width: 552px) {
+  .popup__container {
+    max-width: 282px;
+  }
+
   .close-button {
     max-width: 26px;
     min-height: 26px;
     top: -50px;
     right: 5px;
   }
+
+  .close-button_type_info {
+    top: -55px;
+    right: 130px;
+  }
 }
 
-@media screen and (max-width: 552px) {
-  .close-button_type_info {
-      top: -55px;
-      right: 130px;
+@media screen and (max-width: 320px) {
+  .popup__container {
+    max-width: 320px;
+    width: 100%;
+    min-height: 512px;
+    align-self: flex-end;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .close-button {
+    max-width: 24px;
+    min-height: 24px;
+    top: -50px;
+    right: 16px;
   }
 }
