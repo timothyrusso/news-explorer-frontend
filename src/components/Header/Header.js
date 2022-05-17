@@ -9,7 +9,10 @@ const Header = ({ startLoadingNews, activateSearch }) => {
         Find the latest news on any topic and save them in your personal
         account.
       </p>
-      <SearchForm startLoadingNews={startLoadingNews} activateSearch={activateSearch}/>
+      <SearchForm
+        startLoadingNews={startLoadingNews}
+        activateSearch={activateSearch}
+      />
     </header>
   );
 };

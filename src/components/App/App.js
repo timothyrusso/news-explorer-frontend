@@ -29,19 +29,16 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
-  const [status, setStatus] = useState("");
   const [popupRedirectText, setPopupRedirectText] = useState("");
   const [loggedIn, setLoggedIn] = useState(true);
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
-  const [noResults, setNoResults] = useState(false);
   const [totalResults, setTotalResults] = useState(1);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [toggleMenu, setToggleMenu] = useState(false);
-
-  const [newsArticles, setNewsArticles] = useState([]); // lista
+  const [newsArticles, setNewsArticles] = useState([]);
 
   const location = useLocation();
   const history = useNavigate();
