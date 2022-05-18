@@ -117,6 +117,7 @@ const App = () => {
     localStorage.removeItem("news");
     setNext(3);
     setServerError(false);
+
     getNewsInfo({ search: data.search })
       .then((data) => {
         localStorage.setItem("news", JSON.stringify(data.articles));
@@ -146,6 +147,8 @@ const App = () => {
         setBlackNavigator(true);
         setSavedCard(true);
         setToggleMenu(false);
+        return;
+      default:
         return;
     }
   }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
