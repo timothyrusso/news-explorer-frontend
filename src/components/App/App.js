@@ -180,7 +180,7 @@ const App = () => {
                   showMoreLogic={showMoreLogic}
                 />
               )}
-              {newsArticles.length === 0 && !isLoading && <NothingFound />}
+              {newsArticles.length === 0 && !isLoading && showNews && <NothingFound />}
               {isLoading && <Preloader />}
               <Main />
               <SigninPopup

@@ -22,7 +22,7 @@ const Footer = () => {
           rel="noreferrer"
           className="footer__link footer__link_type_mobile"
         >
-          Visit my Portfolio
+          Portfolio
         </a>
         <div className="footer__icon-wrapper">
           <a

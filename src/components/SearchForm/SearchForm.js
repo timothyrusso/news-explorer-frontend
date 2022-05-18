@@ -3,25 +3,34 @@ import "./SearchForm.css";
 
 const SearchForm = ({ startLoadingNews, activateSearch }) => {
   const [searchInput, setSearchInput] = useState("");
+  const [placeholder, setPlaceholder] = useState(false);
 
   const handleSearchInputChange = (evt) => {
     setSearchInput(evt.target.value);
   };
 
   const handleSubmit = (evt) => {
-    startLoadingNews();
-    evt.preventDefault();
-    activateSearch({ search: searchInput });
+    if (searchInput) {
+      startLoadingNews();
+      evt.preventDefault();
+      activateSearch({ search: searchInput });
+      setPlaceholder(false);
+    } else {
+      evt.preventDefault();
+      setPlaceholder(true);
+    }
   };
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        className="search-form__input"
+        className={`search-form__input ${
+          placeholder ? "search-form__input_type_error" : ""
+        }`}
         id="search-input"
         name="search"
-        placeholder="Enter topic"
+        placeholder={!placeholder ? "Enter topic" : "Please enter a keyword"}
         value={searchInput}
         onChange={handleSearchInputChange}
       ></input>
