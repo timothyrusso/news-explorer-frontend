@@ -34,17 +34,18 @@ const App = () => {
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
-  const [totalResults, setTotalResults] = useState(1);
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
   const [toggleMenu, setToggleMenu] = useState(false);
   const [newsArticles, setNewsArticles] = useState([]);
+  const [newsObject, setNewsObject] = useState([]);
+  const [next, setNext] = useState(3);
 
   const location = useLocation();
   const history = useNavigate();
 
-  const resultsPerPage = 3;
-  const showMoreLogic = page * resultsPerPage < totalResults;
+  const showMoreButtonLogic = next < newsObject.length;
+  const newsPerPage = 3;
+  let arrayForHoldingNews = [];
+  const startpoint = 0;
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
@@ -79,7 +80,6 @@ const App = () => {
   };
 
   const handleSwitchPopup = () => {
-    // da sistemare e rendere più elegante
     if (isSigninPopupOpen) {
       setIsSigninPopupOpen(false);
       setIsSignupPopupOpen(true);
@@ -96,37 +96,35 @@ const App = () => {
     history("/");
   };
 
-  const setNewPage = () => {
-    setPage(page + 1);
-    showMoreResults();
-  };
-
   const toggleNav = () => {
     setToggleMenu(!toggleMenu);
   };
 
   const showMoreResults = () => {
-    getNewsInfo({ search }, page + 1)
-      .then((data) => {
-        setTotalResults(data.totalResults);
-        setNewsArticles([...newsArticles, ...data.articles]);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setShowNews(true);
-      });
+    loopArticlesWithSlice(next, next + newsPerPage);
+    setNext(next + newsPerPage);
   };
 
-  const activateSearch = (data) => {
-    getNewsInfo({ search: data.search }, page)
+  const loopArticlesWithSlice = (start, end) => {
+    const slicedNews = newsObject.slice(start, end);
+    arrayForHoldingNews = [...newsArticles, ...slicedNews];
+    setNewsArticles(arrayForHoldingNews);
+  };
+
+  const activateSearch = (data, start = startpoint, end = newsPerPage) => {
+    localStorage.removeItem("news");
+    setNext(3);
+    getNewsInfo({ search: data.search })
       .then((data) => {
-        setTotalResults(data.totalResults);
-        setNewsArticles(data.articles);
+        localStorage.setItem("news", JSON.stringify(data.articles));
+        setNewsArticles(
+          JSON.parse(localStorage.getItem("news")).slice(start, end)
+        );
+        setNewsObject(JSON.parse(localStorage.getItem("news")));
       })
       .finally(() => {
         setIsLoading(false);
         setShowNews(true);
-        setSearch(data.search);
       });
   };
 
@@ -176,11 +174,12 @@ const App = () => {
                   loggedIn={loggedIn}
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
-                  setNewPage={setNewPage}
-                  showMoreLogic={showMoreLogic}
+                  showMoreButtonLogic={showMoreButtonLogic}
                 />
               )}
-              {newsArticles.length === 0 && !isLoading && showNews && <NothingFound />}
+              {newsArticles.length === 0 && !isLoading && showNews && (
+                <NothingFound />
+              )}
               {isLoading && <Preloader />}
               <Main />
               <SigninPopup
