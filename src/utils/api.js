@@ -1,8 +1,4 @@
-import {
-  apiKey,
-  BASE_URL,
-  pageSize,
-} from "./constants";
+import { apiKey, BASE_URL, pageSize } from "./constants";
 
 const checkResponse = (res) => {
   if (res.ok) {

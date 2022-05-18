@@ -1,4 +1,6 @@
 import "./App.css";
+import nothingFoundIcom from "../../images/not-found.svg";
+import warningIcon from "../../images/warning.png";
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -21,6 +23,7 @@ import {
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNews from "../SavedNews/SavedNews";
 import { getNewsInfo } from "../../utils/api";
+import { newsPerPage, startpoint } from "../../utils/constants";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -38,14 +41,13 @@ const App = () => {
   const [newsArticles, setNewsArticles] = useState([]);
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
+  const [serverError, setServerError] = useState(false);
 
   const location = useLocation();
   const history = useNavigate();
 
   const showMoreButtonLogic = next < newsObject.length;
-  const newsPerPage = 3;
   let arrayForHoldingNews = [];
-  const startpoint = 0;
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
@@ -114,6 +116,7 @@ const App = () => {
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
     localStorage.removeItem("news");
     setNext(3);
+    setServerError(false);
     getNewsInfo({ search: data.search })
       .then((data) => {
         localStorage.setItem("news", JSON.stringify(data.articles));
@@ -121,6 +124,10 @@ const App = () => {
           JSON.parse(localStorage.getItem("news")).slice(start, end)
         );
         setNewsObject(JSON.parse(localStorage.getItem("news")));
+      })
+      .catch((err) => {
+        console.log(err);
+        setServerError(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -177,8 +184,24 @@ const App = () => {
                   showMoreButtonLogic={showMoreButtonLogic}
                 />
               )}
-              {newsArticles.length === 0 && !isLoading && showNews && (
-                <NothingFound />
+              {newsArticles.length === 0 &&
+                !isLoading &&
+                showNews &&
+                !serverError && (
+                  <NothingFound
+                    title={"Nothing found"}
+                    text={"Sorry, but nothing matched your search terms."}
+                    nothingFoundIcom={nothingFoundIcom}
+                  />
+                )}
+              {serverError && (
+                <NothingFound
+                  title={"Server error"}
+                  text={
+                    "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later."
+                  }
+                  nothingFoundIcom={warningIcon}
+                />
               )}
               {isLoading && <Preloader />}
               <Main />

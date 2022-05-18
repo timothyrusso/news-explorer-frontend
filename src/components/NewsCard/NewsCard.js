@@ -1,9 +1,13 @@
 import "./NewsCard.css";
 import alternativeBackground from "../../images/header_background.png";
+import { useState } from "react";
 
 const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
+  const [bookmarked, setBookmarked] = useState(false);
+
   const saveCard = () => {
     // TBD in the next stage
+    setBookmarked(!bookmarked);
   };
 
   const convertDate = (timeStr) => {
@@ -42,7 +46,9 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
           <button
             aria-label="Favourite"
             type="button"
-            className="card__favourite"
+            className={`card__favourite ${
+              bookmarked ? "card__favourite_active" : ""
+            }`}
             onClick={!loggedIn ? onSigninPopupClick : saveCard}
           ></button>
           {!loggedIn && (

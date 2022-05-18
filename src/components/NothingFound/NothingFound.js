@@ -1,7 +1,6 @@
 import "./NothingFound.css";
-import nothingFoundIcom from "../../images/not-found.svg";
 
-const NothingFound = () => {
+const NothingFound = ({ title, text, nothingFoundIcom }) => {
   return (
     <div className="nothing-found">
       <img
@@ -9,10 +8,8 @@ const NothingFound = () => {
         alt="Nothing found icon"
         className="nothing-found__icon"
       ></img>
-      <h2 className="nothing-found__title">Nothing found</h2>
-      <p className="nothing-found__text">
-        Sorry, but nothing matched your search terms.
-      </p>
+      <h2 className="nothing-found__title">{title}</h2>
+      <p className="nothing-found__text">{text}</p>
     </div>
   );
 };
