@@ -13,12 +13,15 @@ const Main = () => {
         <div className="about__wrapper">
           <h2 className="about__title">About the author</h2>
           <p className="about__description">
-            This block describes the project author. Here you should indicate
-            your name, what you do, and which development technologies you know.
+            Hey there, I'm Timothy. I'm a motivated and passionate aspiring
+            software engineer with a background in eCommerce, QA, Application
+            Delivery Management, Project Management and Trade Marketing. I have
+            a bachelor's degree in Economics and Business Management.
           </p>
           <p className="about__description">
-            You can also talk about your experience with Practicum, what you
-            learned there, and how you can help potential customers.
+            I’m a curious person, I love to code and I like to experiment with
+            new technologies. Now coding is my passion and my new professional
+            career focus.
           </p>
         </div>
       </section>

@@ -22,6 +22,7 @@ import {
 } from "react-router-dom";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNews from "../SavedNews/SavedNews";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getNewsInfo } from "../../utils/api";
 import { newsPerPage, startpoint } from "../../utils/constants";
 
@@ -243,10 +244,12 @@ const App = () => {
         <Route
           path="/saved-news"
           element={
-            <>
-              <SavedNewsHeader />
-              <SavedNews cards={cards} savedCard={savedCard} />
-            </>
+            <ProtectedRoute loggedIn={loggedIn} path={"/"}>
+              <>
+                <SavedNewsHeader />
+                <SavedNews cards={cards} savedCard={savedCard} />
+              </>
+            </ProtectedRoute>
           }
         />
         <Route path="*" element={<Navigate to="/" replace />} />
