@@ -87,8 +87,13 @@
 
 @media screen and (max-width: 790px) {
   .search-result-grid {
-    max-width: 600px;
-    gap: 10px;
+    margin: 0 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .search-result-grid {
+    margin: 0 20px;
   }
 }
 
@@ -97,6 +102,7 @@
     max-width: 320px;
     grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
     padding-bottom: 16px;
+    margin: 0 auto;
   }
 
   .show-more-button {
@@ -112,5 +118,13 @@
 @media screen and (max-width: 345px) {
   .search-result-grid {
     margin: 0 16px;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .search-result-grid {
+    margin: 0 10px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }

@@ -12,7 +12,7 @@ const Footer = () => {
       <p className="footer__copyright">
         © {year} NewsExplorer - Powered by News API
       </p>
-      <div className="footer__wrapper">
+      <nav className="footer__wrapper">
         <Link to={"/"} className="footer__link">
           Home
         </Link>
@@ -24,7 +24,7 @@ const Footer = () => {
         >
           Portfolio
         </a>
-        <div className="footer__icon-wrapper">
+        <ul className="footer__icon-wrapper">
           <a
             href="https://github.com/timothyrusso"
             target="_blank"
@@ -47,8 +47,8 @@ const Footer = () => {
               alt="LinkedIn Logo"
             ></img>
           </a>
-        </div>
-      </div>
+        </ul>
+      </nav>
     </footer>
   );
 };

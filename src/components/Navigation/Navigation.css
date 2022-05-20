@@ -1,4 +1,4 @@
-.navigation {
+.navigation_type_mobile {
   position: fixed;
   z-index: 1;
   top: 0;
@@ -11,7 +11,7 @@
   backdrop-filter: blur(2px);
 }
 
-.navigation__container {
+.navigation__bar {
   max-width: 1440px;
   width: 100%;
   border-bottom: 1.4px solid rgba(236, 236, 236, 0.248);
@@ -26,7 +26,7 @@
   z-index: 3;
 }
 
-.navigation__container_type_scroll {
+.navigation__bar_type_scroll {
   background: rgba(47, 113, 229, 0.6);
   backdrop-filter: blur(8px);
 }
@@ -36,6 +36,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0;
 }
 
 .logo {
@@ -57,7 +58,6 @@
 }
 
 .navigation__link_type_saved {
-  margin-left: 34px;
   padding: 30px 32px 26px;
 }
 
@@ -126,7 +126,7 @@
 }
 
 @media screen and (max-width: 930px) {
-  .navigation__container {
+  .navigation__bar {
     padding: 0 40px;
     min-height: 66px;
   }
@@ -172,7 +172,7 @@
     border-bottom-right-radius: 20px;
   }
 
-  .navigation__container {
+  .navigation__bar {
     padding: 0 16px;
     min-height: 56px;
   }

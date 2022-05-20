@@ -52,10 +52,14 @@ const Navigation = ({
   }, []);
 
   return (
-    <div className={toggleMenu && screenWidth < 700 ? "navigation" : ""}>
+    <section
+      className={`navigation ${
+        toggleMenu && screenWidth < 700 ? "navigation_type_mobile" : ""
+      }`}
+    >
       <nav
-        className={`navigation__container ${
-          navbarColor ? "navigation__container_type_scroll" : ""
+        className={`navigation__bar ${
+          navbarColor ? "navigation__bar_type_scroll" : ""
         }`}
         style={
           toggleMenu && screenWidth < 700 ? { backgroundColor: "#1A1B22" } : {}
@@ -68,7 +72,7 @@ const Navigation = ({
           ></img>
         </Link>
         {(toggleMenu || screenWidth > 700) && (
-          <div className="navigation__links-wrapper">
+          <ul className="navigation__links-wrapper">
             <Link
               to={"/"}
               className={`navigation__link               ${
@@ -120,7 +124,7 @@ const Navigation = ({
                 className="navigation__logout-icon"
               ></img>
             </button>
-          </div>
+          </ul>
         )}
         <button
           onClick={toggleNav}
@@ -133,7 +137,7 @@ const Navigation = ({
           }`}
         ></button>
       </nav>
-    </div>
+    </section>
   );
 };
 

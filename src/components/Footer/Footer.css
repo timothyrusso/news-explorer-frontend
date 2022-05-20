@@ -32,6 +32,7 @@
   padding: 0 24px;
   transition: all linear 0.3s;
   text-decoration: none;
+  align-self: center;
 }
 
 .footer__link:hover {
