@@ -1,0 +1,25 @@
+.form-redirect {
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 16px 0 28px;
+}
+
+.form-redirect_type_link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  background-color: #fff;
+  color: #2F71E5;
+  padding: 0;
+}
+
+.form-redirect_type_link:hover {
+  cursor: pointer;
+}

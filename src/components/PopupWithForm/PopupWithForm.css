@@ -1,0 +1,75 @@
+.popup__title {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000;
+  max-width: 358px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 34px 0 22px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  max-width: 358px;
+  min-height: 64px;
+  border: none;
+  background-color: #2F71E5;
+  color: #fff;
+  margin: 39px auto 0;
+  border-radius: 100px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  transition: opacity 0.2s linear;
+}
+
+.submit-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.submit-button_disabled {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(0, 0, 0, 1);
+  opacity: 0.2;
+  border: 1px solid rgba(0, 0, 0, 1);
+  cursor: default;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 552px) {
+  .popup__title {
+    max-width: 238px;
+    font-size: 18px;
+    padding: 25px 0 75px;
+  }
+
+  .submit-button {
+    max-width: 238px;
+    font-size: 14px;
+    margin: 45px auto 25px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+  .popup__title {
+    font-size: 24px;
+    line-height: 28px;
+    padding: 16px 0 18px 17px;
+    margin: 0;
+  }
+
+  .submit-button {
+    max-width: 288px;
+    font-size: 18px;
+    margin: 22px auto 16px;
+  }
+}
