@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* ubuntu@newsexplorer-timothyrusso.students.nomoreparties.site:/home/ubuntu/frontend"
+    "deploy": "npm run build && scp -r -i /Users/timothyrusso/desktop/main.pem ./build/* ubuntu@newsexplorer-timothyrusso.students.nomoreparties.sbs:/home/ubuntu/frontend"
   },
   "eslintConfig": {
     "extends": [
