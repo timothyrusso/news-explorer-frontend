@@ -25,6 +25,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getNewsInfo } from "../../utils/api";
 import { newsPerPage, startpoint } from "../../utils/constants";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -43,6 +44,7 @@ const App = () => {
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   const location = useLocation();
   const history = useNavigate();
@@ -159,103 +161,105 @@ const App = () => {
   }, [location]);
 
   return (
-    <div className="content">
-      <Navigation
-        onSigninPopupClick={handleSigninPopupClick}
-        loggedIn={loggedIn}
-        blackNavigator={blackNavigator}
-        handleLogout={handleLogout}
-        toggleMenu={toggleMenu}
-        toggleNav={toggleNav}
-      />
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <Header
-                startLoadingNews={startLoadingNews}
-                activateSearch={activateSearch}
-              />
-              {showNews && newsArticles.length !== 0 && (
-                <NewsCardList
-                  cards={cards}
-                  onSigninPopupClick={handleSigninPopupClick}
-                  loggedIn={loggedIn}
-                  newsArticles={newsArticles}
-                  showMoreResults={showMoreResults}
-                  showMoreButtonLogic={showMoreButtonLogic}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="content">
+        <Navigation
+          onSigninPopupClick={handleSigninPopupClick}
+          loggedIn={loggedIn}
+          blackNavigator={blackNavigator}
+          handleLogout={handleLogout}
+          toggleMenu={toggleMenu}
+          toggleNav={toggleNav}
+        />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <>
+                <Header
+                  startLoadingNews={startLoadingNews}
+                  activateSearch={activateSearch}
                 />
-              )}
-              {newsArticles.length === 0 &&
-                !isLoading &&
-                showNews &&
-                !serverError && (
-                  <NothingFound
-                    title={"Nothing found"}
-                    text={"Sorry, but nothing matched your search terms."}
-                    nothingFoundIcom={nothingFoundIcom}
+                {showNews && newsArticles.length !== 0 && (
+                  <NewsCardList
+                    cards={cards}
+                    onSigninPopupClick={handleSigninPopupClick}
+                    loggedIn={loggedIn}
+                    newsArticles={newsArticles}
+                    showMoreResults={showMoreResults}
+                    showMoreButtonLogic={showMoreButtonLogic}
                   />
                 )}
-              {serverError && (
-                <NothingFound
-                  title={"Server error"}
-                  text={
-                    "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later."
-                  }
-                  nothingFoundIcom={warningIcon}
+                {newsArticles.length === 0 &&
+                  !isLoading &&
+                  showNews &&
+                  !serverError && (
+                    <NothingFound
+                      title={"Nothing found"}
+                      text={"Sorry, but nothing matched your search terms."}
+                      nothingFoundIcom={nothingFoundIcom}
+                    />
+                  )}
+                {serverError && (
+                  <NothingFound
+                    title={"Server error"}
+                    text={
+                      "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later."
+                    }
+                    nothingFoundIcom={warningIcon}
+                  />
+                )}
+                {isLoading && <Preloader />}
+                <Main />
+                <SigninPopup
+                  isOpen={isSigninPopupOpen}
+                  onClose={closeAllPopups}
+                  onSwitch={handleSwitchPopup}
+                  popupRedirectText={popupRedirectText}
+                  isLoading={isLoading}
+                  startLoading={startLoading}
+                  formValidity={formValidity}
+                  onFormUpdate={onFormUpdate}
+                  errorMessage={errorMessage}
+                  onInputUpdate={checkValidity}
                 />
-              )}
-              {isLoading && <Preloader />}
-              <Main />
-              <SigninPopup
-                isOpen={isSigninPopupOpen}
-                onClose={closeAllPopups}
-                onSwitch={handleSwitchPopup}
-                popupRedirectText={popupRedirectText}
-                isLoading={isLoading}
-                startLoading={startLoading}
-                formValidity={formValidity}
-                onFormUpdate={onFormUpdate}
-                errorMessage={errorMessage}
-                onInputUpdate={checkValidity}
-              />
-              <SignupPopup
-                isOpen={isSignupPopupOpen}
-                onClose={closeAllPopups}
-                onSwitch={handleSwitchPopup}
-                popupRedirectText={popupRedirectText}
-                isLoading={isLoading}
-                startLoading={startLoading}
-                formValidity={formValidity}
-                onFormUpdate={onFormUpdate}
-                errorMessage={errorMessage}
-                onInputUpdate={checkValidity}
-              />
-              <InfoTooltip
-                isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups}
-                openSignin={handleSigninPopupClick}
-              />
-            </>
-          }
-        />
-        <Route
-          path="/saved-news"
-          element={
-            <ProtectedRoute loggedIn={loggedIn} path={"/"}>
-              <>
-                <SavedNewsHeader />
-                <SavedNews cards={cards} savedCard={savedCard} />
+                <SignupPopup
+                  isOpen={isSignupPopupOpen}
+                  onClose={closeAllPopups}
+                  onSwitch={handleSwitchPopup}
+                  popupRedirectText={popupRedirectText}
+                  isLoading={isLoading}
+                  startLoading={startLoading}
+                  formValidity={formValidity}
+                  onFormUpdate={onFormUpdate}
+                  errorMessage={errorMessage}
+                  onInputUpdate={checkValidity}
+                />
+                <InfoTooltip
+                  isOpen={isInfoTooltipOpen}
+                  onClose={closeAllPopups}
+                  openSignin={handleSigninPopupClick}
+                />
               </>
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      <Footer />
-    </div>
+            }
+          />
+          <Route
+            path="/saved-news"
+            element={
+              <ProtectedRoute loggedIn={loggedIn} path={"/"}>
+                <>
+                  <SavedNewsHeader />
+                  <SavedNews cards={cards} savedCard={savedCard} />
+                </>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 
