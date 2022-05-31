@@ -13,6 +13,7 @@ const SignupPopup = ({
   onFormUpdate,
   onInputUpdate,
   errorMessage,
+  handleRegisterSubmit,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

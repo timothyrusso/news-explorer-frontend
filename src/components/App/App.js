@@ -26,6 +26,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getNewsInfo } from "../../utils/api";
 import { newsPerPage, startpoint } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { register } from "../../utils/MainApi";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -45,6 +46,7 @@ const App = () => {
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const location = useLocation();
   const history = useNavigate();
@@ -136,6 +138,23 @@ const App = () => {
       .finally(() => {
         setIsLoading(false);
         setShowNews(true);
+      });
+  };
+
+  const handleRegisterSubmit = (email, password, name) => {
+    register(email, password, name)
+      .then((res) => {
+        if (res.data._id) {
+          console.log("res OK");
+        } else {
+          console.log("Something went wrong.");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setTooltipOpen(true);
       });
   };
 
@@ -235,6 +254,7 @@ const App = () => {
                   onFormUpdate={onFormUpdate}
                   errorMessage={errorMessage}
                   onInputUpdate={checkValidity}
+                  handleRegisterSubmit={handleRegisterSubmit}
                 />
                 <InfoTooltip
                   isOpen={isInfoTooltipOpen}
