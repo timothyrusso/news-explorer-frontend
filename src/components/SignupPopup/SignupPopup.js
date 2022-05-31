@@ -38,7 +38,7 @@ const SignupPopup = ({
     startLoadingText();
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
-
+    handleRegisterSubmit(email, password, username)
   };
 
   React.useEffect(() => {
