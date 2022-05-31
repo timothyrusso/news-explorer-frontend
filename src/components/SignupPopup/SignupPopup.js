@@ -39,7 +39,6 @@ const SignupPopup = ({
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
 
-    // Add the inputs in the next stage
   };
 
   React.useEffect(() => {
