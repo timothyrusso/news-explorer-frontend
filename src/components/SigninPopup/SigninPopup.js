@@ -7,12 +7,13 @@ const SigninPopup = ({
   onClose,
   onSwitch,
   popupRedirectText,
-  isLoading,
-  startLoading,
+  isLoadingText,
+  startLoadingText,
   formValidity,
   onFormUpdate,
   onInputUpdate,
   errorMessage,
+  handleLoginSubmit,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,11 +29,9 @@ const SigninPopup = ({
   };
 
   const handleSubmit = (evt) => {
-    startLoading();
-    // Prevent the browser from navigating to the form address
+    startLoadingText();
     evt.preventDefault();
-
-    // Add the inputs in the next stage
+    handleLoginSubmit(password, email);
   };
 
   React.useEffect(() => {
@@ -50,8 +49,8 @@ const SigninPopup = ({
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
         buttonText={"Sign in"}
-        loadingText={"Saving.."}
-        isLoading={isLoading}
+        loadingText={"Loading.."}
+        isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
         onFormUpdate={onFormUpdate}

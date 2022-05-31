@@ -13,7 +13,7 @@ const PopupWithForm = ({
   buttonText,
   onSubmit,
   loadingText,
-  isLoading,
+  isLoadingText,
   formValidity,
   onFormUpdate,
   children,
@@ -34,7 +34,7 @@ const PopupWithForm = ({
           }`}
           disabled={!formValidity}
         >
-          {isLoading ? loadingText : buttonText}
+          {isLoadingText ? loadingText : buttonText}
         </button>
         <FormRedirect
           onSwitch={onSwitch}

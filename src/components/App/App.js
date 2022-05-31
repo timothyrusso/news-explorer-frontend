@@ -26,13 +26,14 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getNewsInfo } from "../../utils/api";
 import { newsPerPage, startpoint } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { register } from "../../utils/MainApi";
+import { register, authorize } from "../../utils/MainApi";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingText, setIsLoadingText] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState("");
@@ -60,8 +61,8 @@ const App = () => {
     setIsInfoTooltipOpen(false);
   };
 
-  const startLoading = () => {
-    setIsLoading(true);
+  const startLoadingText = () => {
+    setIsLoadingText(true);
   };
 
   const startLoadingNews = () => {
@@ -158,6 +159,23 @@ const App = () => {
       });
   };
 
+  const handleLoginSubmit = (password, email) => {
+    if (!password || !email) {
+      console.log("Email or password are not correct");
+      return;
+    }
+    authorize(password, email)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true);
+          closeAllPopups(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     switch (location.pathname) {
       case "/":
@@ -236,20 +254,21 @@ const App = () => {
                   onClose={closeAllPopups}
                   onSwitch={handleSwitchPopup}
                   popupRedirectText={popupRedirectText}
-                  isLoading={isLoading}
-                  startLoading={startLoading}
+                  isLoadingText={isLoadingText}
+                  startLoadingText={startLoadingText}
                   formValidity={formValidity}
                   onFormUpdate={onFormUpdate}
                   errorMessage={errorMessage}
                   onInputUpdate={checkValidity}
+                  handleLoginSubmit={handleLoginSubmit}
                 />
                 <SignupPopup
                   isOpen={isSignupPopupOpen}
                   onClose={closeAllPopups}
                   onSwitch={handleSwitchPopup}
                   popupRedirectText={popupRedirectText}
-                  isLoading={isLoading}
-                  startLoading={startLoading}
+                  isLoadingText={isLoadingText}
+                  startLoadingText={startLoadingText}
                   formValidity={formValidity}
                   onFormUpdate={onFormUpdate}
                   errorMessage={errorMessage}

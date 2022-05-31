@@ -7,8 +7,8 @@ const SignupPopup = ({
   onClose,
   onSwitch,
   popupRedirectText,
-  isLoading,
-  startLoading,
+  isLoadingText,
+  startLoadingText,
   formValidity,
   onFormUpdate,
   onInputUpdate,
@@ -35,7 +35,7 @@ const SignupPopup = ({
   };
 
   const handleSubmit = (evt) => {
-    startLoading();
+    startLoadingText();
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
 
@@ -58,7 +58,7 @@ const SignupPopup = ({
         popupRedirectText={popupRedirectText}
         buttonText={"Sign up"}
         loadingText={"Saving.."}
-        isLoading={isLoading}
+        isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
         onFormUpdate={onFormUpdate}
