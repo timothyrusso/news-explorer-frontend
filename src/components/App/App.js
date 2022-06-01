@@ -37,7 +37,7 @@ const App = () => {
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState("");
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
@@ -47,7 +47,6 @@ const App = () => {
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const location = useLocation();
   const history = useNavigate();
@@ -149,13 +148,15 @@ const App = () => {
           console.log("res OK");
         } else {
           console.log("Something went wrong.");
+          setIsLoadingText(false);
         }
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        setTooltipOpen(true);
+        closeAllPopups(true);
+        setIsInfoTooltipOpen(true);
       });
   };
 

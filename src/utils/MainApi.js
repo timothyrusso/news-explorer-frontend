@@ -1,3 +1,10 @@
+import {
+  RESOURCE_CREATED,
+  CONFLICT,
+  BAD_REQUEST,
+  INTERNAL_SERVER_ERROR,
+} from "./constants";
+
 export const BASE_URL =
   "https://api.newsexplorer-timothyrusso.students.nomoreparties.sbs";
 
@@ -22,11 +29,20 @@ export const register = (email, password, name) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password, name }),
-  })
-    .then(checkResponse)
-    .then((res) => {
-      return res;
-    });
+  }).then((res) => {
+    if (res.status === RESOURCE_CREATED) {
+      return res.json();
+    }
+    if (res.status === CONFLICT) {
+      throw new Error("This email is not available");
+    }
+    if (res.status === BAD_REQUEST) {
+      throw new Error("Some of the fields are invalid");
+    }
+    if (res.status === INTERNAL_SERVER_ERROR) {
+      throw new Error("Sorry, something went wrong during the request");
+    }
+  });
 };
 
 export const authorize = (password, email) => {
