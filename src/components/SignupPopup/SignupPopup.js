@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../Input/Input";
+import PopupServerError from '../PopupServerError/PopupServerError';
 
 const SignupPopup = ({
   isOpen,
@@ -14,6 +15,7 @@ const SignupPopup = ({
   onInputUpdate,
   errorMessage,
   handleRegisterSubmit,
+  popupServerError,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,6 +102,7 @@ const SignupPopup = ({
           errorMessage={errorMessage}
           labelText={"Username"}
         />
+        <PopupServerError popupServerError={popupServerError} />
       </PopupWithForm>
     </>
   );

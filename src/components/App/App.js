@@ -47,6 +47,7 @@ const App = () => {
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [popupServerError, setPopupServerError] = useState("");
 
   const location = useLocation();
   const history = useNavigate();
@@ -146,18 +147,18 @@ const App = () => {
       .then((res) => {
         if (res.data._id) {
           console.log("res OK");
+          closeAllPopups(true);
+          setIsInfoTooltipOpen(true);
         } else {
           console.log("Something went wrong.");
           setIsLoadingText(false);
         }
       })
       .catch((err) => {
+        setPopupServerError(err.message);
+        setIsLoadingText(false);
         console.log(err);
       })
-      .finally(() => {
-        closeAllPopups(true);
-        setIsInfoTooltipOpen(true);
-      });
   };
 
   const handleLoginSubmit = (password, email) => {
@@ -275,6 +276,7 @@ const App = () => {
                   errorMessage={errorMessage}
                   onInputUpdate={checkValidity}
                   handleRegisterSubmit={handleRegisterSubmit}
+                  popupServerError={popupServerError}
                 />
                 <InfoTooltip
                   isOpen={isInfoTooltipOpen}
