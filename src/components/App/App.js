@@ -53,7 +53,7 @@ const App = () => {
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [popupServerError, setPopupServerError] = useState("");
-  const [cards, setCards] = useState({});
+  const [cards, setCards] = useState([]);
 
   const location = useLocation();
   const history = useNavigate();
@@ -342,7 +342,7 @@ const App = () => {
             element={
               <ProtectedRoute loggedIn={loggedIn} path={"/"}>
                 <>
-                  <SavedNewsHeader />
+                  <SavedNewsHeader cards={cards} />
                   <SavedNews cards={cards} savedCard={savedCard} />
                 </>
               </ProtectedRoute>
