@@ -3,6 +3,8 @@ import {
   CONFLICT,
   BAD_REQUEST,
   INTERNAL_SERVER_ERROR,
+  REQUEST_SUCCEDED,
+  UNAUTHORIZED,
 } from "./constants";
 
 export const BASE_URL =
@@ -19,6 +21,15 @@ Status code: ${res.status}`
   } else {
     return Promise.reject(`Error: ${res.status}`);
   }
+};
+
+export const getProfileInfo = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
 };
 
 export const register = (email, password, name) => {
@@ -54,7 +65,20 @@ export const authorize = (password, email) => {
     },
     body: JSON.stringify({ password, email }),
   })
-    .then(checkResponse)
+    .then((res) => {
+      if (res.status === REQUEST_SUCCEDED) {
+        return res.json();
+      }
+      if (res.status === UNAUTHORIZED) {
+        throw new Error("Email or password are incorrect");
+      }
+      if (res.status === BAD_REQUEST) {
+        throw new Error("Some of the fields are invalid");
+      }
+      if (res.status === INTERNAL_SERVER_ERROR) {
+        throw new Error("Sorry, something went wrong during the request");
+      }
+    })
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);

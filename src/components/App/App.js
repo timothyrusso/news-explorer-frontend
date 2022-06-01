@@ -12,7 +12,6 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Preloader from "../Preloader/Preloader";
 import NewsCardList from "../NewsCardList/NewsCardList";
-import { cards } from "../../utils/testCards";
 import {
   Route,
   Routes,
@@ -26,7 +25,13 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getNewsInfo } from "../../utils/api";
 import { newsPerPage, startpoint } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { register, authorize } from "../../utils/MainApi";
+import {
+  register,
+  authorize,
+  checkToken,
+  getProfileInfo,
+  getArticles,
+} from "../../utils/MainApi";
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -48,6 +53,7 @@ const App = () => {
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [popupServerError, setPopupServerError] = useState("");
+  const [cards, setCards] = useState({});
 
   const location = useLocation();
   const history = useNavigate();
@@ -59,6 +65,7 @@ const App = () => {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
     setIsInfoTooltipOpen(false);
+    setPopupServerError("");
   };
 
   const startLoadingText = () => {
@@ -102,6 +109,8 @@ const App = () => {
   const handleLogout = () => {
     setLoggedIn(false);
     history("/");
+    localStorage.removeItem('jwt');
+    setCurrentUser({});
   };
 
   const toggleNav = () => {
@@ -158,7 +167,7 @@ const App = () => {
         setPopupServerError(err.message);
         setIsLoadingText(false);
         console.log(err);
-      })
+      });
   };
 
   const handleLoginSubmit = (password, email) => {
@@ -171,11 +180,29 @@ const App = () => {
         if (data.token) {
           setLoggedIn(true);
           closeAllPopups(true);
+          setIsLoadingText(false);
         }
       })
       .catch((err) => {
+        setPopupServerError(err.message);
+        setIsLoadingText(false);
         console.log(err);
       });
+  };
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+          } else {
+            localStorage.removeItem("jwt");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   useEffect(() => {
@@ -194,6 +221,30 @@ const App = () => {
         return;
     }
   }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt && loggedIn) {
+      getProfileInfo()
+        .then((info) => {
+          setCurrentUser(info.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      getArticles()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -222,7 +273,6 @@ const App = () => {
                 />
                 {showNews && newsArticles.length !== 0 && (
                   <NewsCardList
-                    cards={cards}
                     onSigninPopupClick={handleSigninPopupClick}
                     loggedIn={loggedIn}
                     newsArticles={newsArticles}
@@ -263,6 +313,7 @@ const App = () => {
                   errorMessage={errorMessage}
                   onInputUpdate={checkValidity}
                   handleLoginSubmit={handleLoginSubmit}
+                  popupServerError={popupServerError}
                 />
                 <SignupPopup
                   isOpen={isSignupPopupOpen}
