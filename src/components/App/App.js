@@ -31,6 +31,8 @@ import {
   checkToken,
   getProfileInfo,
   getArticles,
+  saveArticles,
+  deleteArticles,
 } from "../../utils/MainApi";
 
 const App = () => {
@@ -54,6 +56,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [popupServerError, setPopupServerError] = useState("");
   const [cards, setCards] = useState([]);
+  const [keyword, setKeyword] = useState("");
 
   const location = useLocation();
   const history = useNavigate();
@@ -109,7 +112,7 @@ const App = () => {
   const handleLogout = () => {
     setLoggedIn(false);
     history("/");
-    localStorage.removeItem('jwt');
+    localStorage.removeItem("jwt");
     setCurrentUser({});
   };
 
@@ -132,6 +135,7 @@ const App = () => {
     localStorage.removeItem("news");
     setNext(3);
     setServerError(false);
+    setKeyword(data.search);
 
     getNewsInfo({ search: data.search })
       .then((data) => {
@@ -202,6 +206,37 @@ const App = () => {
           }
         })
         .catch((err) => console.log(err));
+    }
+  };
+
+  const handleSaveArticle = (article) => {
+    const isSaved = cards.find((data) => data.link === article.url);
+    console.log(isSaved);
+    console.log(article);
+    if (!isSaved) {
+      saveArticles({
+        keyword,
+        title: article.title,
+        text: article.content,
+        date: article.publishedAt,
+        source: article.source.name,
+        link: article.url,
+        image: article.urlToImage,
+      })
+        .then((newArticle) => {
+          setCards([newArticle, ...cards]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      deleteArticles({ articleId: article._id })
+        .then(() => {
+          setCards((state) => state.filter((item) => item._id !== article._id));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -278,6 +313,7 @@ const App = () => {
                     newsArticles={newsArticles}
                     showMoreResults={showMoreResults}
                     showMoreButtonLogic={showMoreButtonLogic}
+                    handleSaveArticle={handleSaveArticle}
                   />
                 )}
                 {newsArticles.length === 0 &&
