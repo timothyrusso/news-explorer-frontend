@@ -210,33 +210,39 @@ const App = () => {
   };
 
   const handleSaveArticle = (article) => {
-    const isSaved = cards.find((data) => data.link === article.url);
-    console.log(isSaved);
-    console.log(article);
-    if (!isSaved) {
-      saveArticles({
-        keyword,
-        title: article.title,
-        text: article.content,
-        date: article.publishedAt,
-        source: article.source.name,
-        link: article.url,
-        image: article.urlToImage,
+    saveArticles({
+      keyword,
+      title: article.title,
+      text: article.content,
+      date: article.publishedAt,
+      source: article.source.name,
+      link: article.url,
+      image: article.urlToImage,
+    })
+      .then((newArticle) => {
+        setCards([newArticle, ...cards]);
       })
-        .then((newArticle) => {
-          setCards([newArticle, ...cards]);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteArticles = (article) => {
+    deleteArticles({ articleId: article._id })
+      .then(() => {
+        setCards((state) => state.filter((item) => item._id !== article._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleBookmarkClick = (article) => {
+    const savedCard = cards.find((data) => data.link === article.url);
+    if (!savedCard) {
+      handleSaveArticle(article);
     } else {
-      deleteArticles({ articleId: article._id })
-        .then(() => {
-          setCards((state) => state.filter((item) => item._id !== article._id));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      handleDeleteArticles(savedCard);
     }
   };
 
@@ -313,7 +319,7 @@ const App = () => {
                     newsArticles={newsArticles}
                     showMoreResults={showMoreResults}
                     showMoreButtonLogic={showMoreButtonLogic}
-                    handleSaveArticle={handleSaveArticle}
+                    handleBookmarkClick={handleBookmarkClick}
                   />
                 )}
                 {newsArticles.length === 0 &&
@@ -379,7 +385,7 @@ const App = () => {
               <ProtectedRoute loggedIn={loggedIn} path={"/"}>
                 <>
                   <SavedNewsHeader cards={cards} />
-                  <SavedNews cards={cards} savedCard={savedCard} />
+                  <SavedNews cards={cards} savedCard={savedCard} handleDeleteArticles={handleDeleteArticles} />
                 </>
               </ProtectedRoute>
             }

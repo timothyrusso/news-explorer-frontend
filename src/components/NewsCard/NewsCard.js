@@ -7,13 +7,18 @@ const NewsCard = ({
   onSigninPopupClick,
   loggedIn,
   savedCard,
-  handleSaveArticle,
+  handleBookmarkClick,
+  handleDeleteArticles,
 }) => {
   const [bookmarked, setBookmarked] = useState(false);
 
   const saveCard = () => {
     setBookmarked(!bookmarked);
-    handleSaveArticle(card);
+    handleBookmarkClick(card);
+  };
+
+  const deleteCard = () => {
+    handleDeleteArticles(card);
   };
 
   const convertDate = (timeStr) => {
@@ -32,7 +37,7 @@ const NewsCard = ({
 
   const data = convertDate(!savedCard ? card.publishedAt : card.date);
 
-  const backgroundUrl = !savedCard ? card.urlToImage : card.image
+  const backgroundUrl = !savedCard ? card.urlToImage : card.image;
 
   return (
     <li className="card">
@@ -43,6 +48,7 @@ const NewsCard = ({
             aria-label="Delete"
             type="button"
             className="card__delete"
+            onClick={deleteCard}
           ></button>
           <dialog className="card__tooltip card__tooltip_type_delete">
             Remove from saved
@@ -64,7 +70,11 @@ const NewsCard = ({
           )}
         </>
       )}
-      <a href={!savedCard ? card.url : card.link} target="_blank" rel="noreferrer">
+      <a
+        href={!savedCard ? card.url : card.link}
+        target="_blank"
+        rel="noreferrer"
+      >
         <div
           className="card__image"
           style={{
@@ -99,7 +109,9 @@ const NewsCard = ({
           rel="noreferrer"
           className="card__link-wrapper"
         >
-          <p className="card__source">{!savedCard ? card.source.name : card.source}</p>
+          <p className="card__source">
+            {!savedCard ? card.source.name : card.source}
+          </p>
         </a>
       </div>
     </li>
