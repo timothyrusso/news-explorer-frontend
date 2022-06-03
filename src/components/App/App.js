@@ -57,6 +57,7 @@ const App = () => {
   const [popupServerError, setPopupServerError] = useState("");
   const [cards, setCards] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [keywordsList, setKeywordsList] = useState([]);
 
   const location = useLocation();
   const history = useNavigate();
@@ -251,6 +252,28 @@ const App = () => {
     return savedArticle;
   };
 
+  const checkKeywords = () => {
+    const keywords = cards.map((x) => x.keyword);
+    const count = {};
+
+    for (let index = 0; index < keywords.length; index++) {
+      const element = keywords[index];
+
+      if (count[element]) {
+        count[element] += 1;
+      } else {
+        count[element] = 1;
+      }
+    }
+
+    const keywordsOrdered = Object.entries(count)
+      .sort((a, b) => b[1] - a[1])
+      .map((element) => element[0]);
+    setKeywordsList(keywordsOrdered);
+  };
+
+console.log(keywordsList)
+
   useEffect(() => {
     switch (location.pathname) {
       case "/":
@@ -291,6 +314,10 @@ const App = () => {
   useEffect(() => {
     handleTokenCheck();
   }, []);
+
+  useEffect(() => {
+    checkKeywords();
+  }, [cards]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -390,7 +417,7 @@ const App = () => {
             element={
               <ProtectedRoute loggedIn={loggedIn} path={"/"}>
                 <>
-                  <SavedNewsHeader cards={cards} />
+                  <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
                   <SavedNews
                     cards={cards}
                     savedCard={savedCard}
