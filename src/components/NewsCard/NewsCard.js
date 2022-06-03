@@ -1,6 +1,6 @@
 import "./NewsCard.css";
 import alternativeBackground from "../../images/header_background.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NewsCard = ({
   card,
@@ -9,11 +9,11 @@ const NewsCard = ({
   savedCard,
   handleBookmarkClick,
   handleDeleteArticles,
+  checkSavedArticle,
 }) => {
-  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const saveCard = () => {
-    setBookmarked(!bookmarked);
     handleBookmarkClick(card);
   };
 
@@ -39,6 +39,14 @@ const NewsCard = ({
 
   const backgroundUrl = !savedCard ? card.urlToImage : card.image;
 
+  useEffect(() => {
+    if (checkSavedArticle(card)) {
+      setBookmarkStatus(true);
+    } else {
+      setBookmarkStatus(false);
+    }
+  }, [loggedIn, card, checkSavedArticle]);
+
   return (
     <li className="card">
       {savedCard && (
@@ -61,7 +69,7 @@ const NewsCard = ({
             aria-label="Favourite"
             type="button"
             className={`card__favourite ${
-              bookmarked ? "card__favourite_active" : ""
+              bookmarkStatus ? "card__favourite_active" : ""
             }`}
             onClick={!loggedIn ? onSigninPopupClick : saveCard}
           ></button>

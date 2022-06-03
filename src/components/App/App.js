@@ -114,6 +114,7 @@ const App = () => {
     history("/");
     localStorage.removeItem("jwt");
     setCurrentUser({});
+    setCards([]);
   };
 
   const toggleNav = () => {
@@ -209,7 +210,7 @@ const App = () => {
     }
   };
 
-  const handleSaveArticle = (article) => {
+  const handleSaveArticles = (article) => {
     saveArticles({
       keyword,
       title: article.title,
@@ -238,12 +239,16 @@ const App = () => {
   };
 
   const handleBookmarkClick = (article) => {
-    const savedCard = cards.find((data) => data.link === article.url);
-    if (!savedCard) {
-      handleSaveArticle(article);
+    if (!checkSavedArticle(article)) {
+      handleSaveArticles(article);
     } else {
-      handleDeleteArticles(savedCard);
+      handleDeleteArticles(checkSavedArticle(article));
     }
+  };
+
+  const checkSavedArticle = (article) => {
+    const savedArticle = cards.find((data) => data.link === article.url);
+    return savedArticle;
   };
 
   useEffect(() => {
@@ -320,6 +325,7 @@ const App = () => {
                     showMoreResults={showMoreResults}
                     showMoreButtonLogic={showMoreButtonLogic}
                     handleBookmarkClick={handleBookmarkClick}
+                    checkSavedArticle={checkSavedArticle}
                   />
                 )}
                 {newsArticles.length === 0 &&
@@ -385,7 +391,12 @@ const App = () => {
               <ProtectedRoute loggedIn={loggedIn} path={"/"}>
                 <>
                   <SavedNewsHeader cards={cards} />
-                  <SavedNews cards={cards} savedCard={savedCard} handleDeleteArticles={handleDeleteArticles} />
+                  <SavedNews
+                    cards={cards}
+                    savedCard={savedCard}
+                    handleDeleteArticles={handleDeleteArticles}
+                    checkSavedArticle={checkSavedArticle}
+                  />
                 </>
               </ProtectedRoute>
             }

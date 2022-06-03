@@ -123,6 +123,7 @@
   white-space: nowrap;
   overflow: hidden;
   box-sizing: border-box;
+  text-transform: capitalize;
 }
 
 .card__image {
