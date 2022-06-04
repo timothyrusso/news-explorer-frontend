@@ -272,7 +272,9 @@ const App = () => {
     setKeywordsList(keywordsOrdered);
   };
 
-console.log(keywordsList)
+  const openPopupIfNotLoggedin = () => {
+    !loggedIn && handleSigninPopupClick();
+  };
 
   useEffect(() => {
     switch (location.pathname) {
@@ -285,10 +287,11 @@ console.log(keywordsList)
         setBlackNavigator(true);
         setSavedCard(true);
         setToggleMenu(false);
+        openPopupIfNotLoggedin();
         return;
       default:
         return;
-    }
+    } // eslint-disable-next-line
   }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
 
   useEffect(() => {
@@ -316,7 +319,7 @@ console.log(keywordsList)
   }, []);
 
   useEffect(() => {
-    checkKeywords();
+    checkKeywords(); // eslint-disable-next-line
   }, [cards]);
 
   useLayoutEffect(() => {
