@@ -17,8 +17,10 @@ const SavedNewsHeader = ({ cards, keywordsList }) => {
           <span className="saved-news-header__keywords-bold">
             {keywordsList.length >= 1 && keywordsList[0]}
             {keywordsList.length >= 2 && `, ${keywordsList[1]}`}
-            {keywordsList.length >= 3 &&
-              `, and ${keywordsList.length - 2} other.`}
+            {keywordsList.length === 3 &&
+              `, and ${keywordsList[2]}`}
+            {keywordsList.length > 3 &&
+              `, and ${keywordsList.length - 2} other`}
           </span>
         </p>
       )}

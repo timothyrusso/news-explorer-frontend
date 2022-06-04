@@ -3,7 +3,7 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../Input/Input";
 import PopupServerError from '../PopupServerError/PopupServerError';
 
-const SigninPopup = ({
+const Login = ({
   isOpen,
   onClose,
   onSwitch,
@@ -88,4 +88,4 @@ const SigninPopup = ({
   );
 };
 
-export default SigninPopup;
+export default Login;

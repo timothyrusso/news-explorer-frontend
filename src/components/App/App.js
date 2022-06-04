@@ -5,8 +5,8 @@ import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import SigninPopup from "../SigninPopup/SigninPopup";
-import SignupPopup from "../SignupPopup/SignupPopup";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 import NothingFound from "../NothingFound/NothingFound";
 import { useState, useEffect, useLayoutEffect } from "react";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
@@ -381,7 +381,7 @@ const App = () => {
                 )}
                 {isLoading && <Preloader />}
                 <Main />
-                <SigninPopup
+                <Login
                   isOpen={isSigninPopupOpen}
                   onClose={closeAllPopups}
                   onSwitch={handleSwitchPopup}
@@ -395,7 +395,7 @@ const App = () => {
                   handleLoginSubmit={handleLoginSubmit}
                   popupServerError={popupServerError}
                 />
-                <SignupPopup
+                <Register
                   isOpen={isSignupPopupOpen}
                   onClose={closeAllPopups}
                   onSwitch={handleSwitchPopup}

@@ -3,7 +3,7 @@ import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../Input/Input";
 import PopupServerError from '../PopupServerError/PopupServerError';
 
-const SignupPopup = ({
+const Register = ({
   isOpen,
   onClose,
   onSwitch,
@@ -108,4 +108,4 @@ const SignupPopup = ({
   );
 };
 
-export default SignupPopup;
+export default Register;
