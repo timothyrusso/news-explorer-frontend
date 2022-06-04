@@ -62,6 +62,8 @@ const App = () => {
   const location = useLocation();
   const history = useNavigate();
 
+  const jwt = localStorage.getItem("jwt");
+
   const showMoreButtonLogic = next < newsObject.length;
   let arrayForHoldingNews = [];
 
@@ -273,7 +275,7 @@ const App = () => {
   };
 
   const openPopupIfNotLoggedin = () => {
-    !loggedIn && handleSigninPopupClick();
+    !jwt && handleSigninPopupClick();
   };
 
   useEffect(() => {
@@ -418,7 +420,7 @@ const App = () => {
           <Route
             path="/saved-news"
             element={
-              <ProtectedRoute loggedIn={loggedIn} path={"/"}>
+              <ProtectedRoute loggedIn={jwt} path={"/"}>
                 <>
                   <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
                   <SavedNews
