@@ -58,6 +58,7 @@ const App = () => {
   const [cards, setCards] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [keywordsList, setKeywordsList] = useState([]);
+  const [cardToSave, setCardToSave] = useState({})
 
   const location = useLocation();
   const history = useNavigate();
@@ -66,6 +67,10 @@ const App = () => {
 
   const showMoreButtonLogic = next < newsObject.length;
   let arrayForHoldingNews = [];
+
+  const setTheCard = (card) => {
+    setCardToSave(card)
+  }
 
   const closeAllPopups = () => {
     setIsSigninPopupOpen(false);
@@ -190,6 +195,10 @@ const App = () => {
           closeAllPopups(true);
           setIsLoadingText(false);
         }
+      })
+      .then(() => {
+        console.log(cardToSave)
+        handleBookmarkClick(cardToSave)
       })
       .catch((err) => {
         setPopupServerError(err.message);
@@ -358,6 +367,7 @@ const App = () => {
                     showMoreButtonLogic={showMoreButtonLogic}
                     handleBookmarkClick={handleBookmarkClick}
                     checkSavedArticle={checkSavedArticle}
+                    setTheCard={setTheCard}
                   />
                 )}
                 {newsArticles.length === 0 &&
@@ -428,6 +438,7 @@ const App = () => {
                     savedCard={savedCard}
                     handleDeleteArticles={handleDeleteArticles}
                     checkSavedArticle={checkSavedArticle}
+                    setTheCard={setTheCard}
                   />
                 </>
               </ProtectedRoute>

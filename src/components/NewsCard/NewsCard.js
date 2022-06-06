@@ -10,6 +10,7 @@ const NewsCard = ({
   handleBookmarkClick,
   handleDeleteArticles,
   checkSavedArticle,
+  setTheCard,
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
   const [cardToSave, setCardToSave] = useState({});
@@ -24,6 +25,7 @@ const NewsCard = ({
 
   const handleCardSaveUnauthorizedUser = () => {
     setCardToSave(card);
+    setTheCard(card)
     onSigninPopupClick();
   };
 
