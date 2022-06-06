@@ -12,6 +12,7 @@ const NewsCard = ({
   checkSavedArticle,
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
+  const [cardToSave, setCardToSave] = useState({});
 
   const saveCard = () => {
     handleBookmarkClick(card);
@@ -20,6 +21,13 @@ const NewsCard = ({
   const deleteCard = () => {
     handleDeleteArticles(card);
   };
+
+  const handleCardSaveUnauthorizedUser = () => {
+    setCardToSave(card);
+    onSigninPopupClick();
+  };
+
+  // console.log(cardToSave)
 
   const convertDate = (timeStr) => {
     var date = new Date(timeStr);
@@ -47,6 +55,14 @@ const NewsCard = ({
     }
   }, [loggedIn, card, checkSavedArticle]);
 
+  useEffect(() => {
+    if (loggedIn && cardToSave !== {}) {
+      // handleBookmarkClick(cardToSave);
+      // setCardToSave({});
+      // console.log(cardToSave)
+    }
+  }, [cardToSave]);
+
   return (
     <li className="card">
       {savedCard && (
@@ -71,7 +87,7 @@ const NewsCard = ({
             className={`card__favourite ${
               bookmarkStatus ? "card__favourite_active" : ""
             }`}
-            onClick={!loggedIn ? onSigninPopupClick : saveCard}
+            onClick={!loggedIn ? handleCardSaveUnauthorizedUser : saveCard}
           ></button>
           {!loggedIn && (
             <dialog className="card__tooltip">Sign in to save articles</dialog>
