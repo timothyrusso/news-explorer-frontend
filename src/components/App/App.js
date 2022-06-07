@@ -58,6 +58,7 @@ const App = () => {
   const [cards, setCards] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [keywordsList, setKeywordsList] = useState([]);
+  const [cardToSave, setCardToSave] = useState([]);
 
   const location = useLocation();
   const history = useNavigate();
@@ -191,10 +192,18 @@ const App = () => {
           setIsLoadingText(false);
         }
       })
+      .then(() => {
+        if (cardToSave.length !== 0) {
+          handleBookmarkClick(cardToSave);
+        }
+      })
       .catch((err) => {
         setPopupServerError(err.message);
         setIsLoadingText(false);
         console.log(err);
+      })
+      .finally(() => {
+        setCardToSave([]);
       });
   };
 
@@ -247,6 +256,10 @@ const App = () => {
     } else {
       handleDeleteArticles(checkSavedArticle(article));
     }
+  };
+
+  const saveUnauthorizedUserCard = (card) => {
+    setCardToSave(card);
   };
 
   const checkSavedArticle = (article) => {
@@ -358,6 +371,7 @@ const App = () => {
                     showMoreButtonLogic={showMoreButtonLogic}
                     handleBookmarkClick={handleBookmarkClick}
                     checkSavedArticle={checkSavedArticle}
+                    saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                   />
                 )}
                 {newsArticles.length === 0 &&
@@ -428,6 +442,7 @@ const App = () => {
                     savedCard={savedCard}
                     handleDeleteArticles={handleDeleteArticles}
                     checkSavedArticle={checkSavedArticle}
+                    saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                   />
                 </>
               </ProtectedRoute>

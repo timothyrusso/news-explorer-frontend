@@ -10,9 +10,9 @@ const NewsCard = ({
   handleBookmarkClick,
   handleDeleteArticles,
   checkSavedArticle,
+  saveUnauthorizedUserCard,
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
-  const [cardToSave, setCardToSave] = useState({});
 
   const saveCard = () => {
     handleBookmarkClick(card);
@@ -23,11 +23,9 @@ const NewsCard = ({
   };
 
   const handleCardSaveUnauthorizedUser = () => {
-    setCardToSave(card);
+    saveUnauthorizedUserCard(card);
     onSigninPopupClick();
   };
-
-  // console.log(cardToSave)
 
   const convertDate = (timeStr) => {
     var date = new Date(timeStr);
@@ -54,14 +52,6 @@ const NewsCard = ({
       setBookmarkStatus(false);
     }
   }, [loggedIn, card, checkSavedArticle]);
-
-  useEffect(() => {
-    if (loggedIn && cardToSave !== {}) {
-      // handleBookmarkClick(cardToSave);
-      // setCardToSave({});
-      // console.log(cardToSave)
-    }
-  }, [cardToSave]);
 
   return (
     <li className="card">

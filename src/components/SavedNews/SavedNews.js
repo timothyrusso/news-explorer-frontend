@@ -6,6 +6,7 @@ const SavedNews = ({
   savedCard,
   handleDeleteArticles,
   checkSavedArticle,
+  saveUnauthorizedUserCard,
 }) => {
   return (
     <section className="saved-news">
@@ -17,6 +18,7 @@ const SavedNews = ({
             savedCard={savedCard}
             handleDeleteArticles={handleDeleteArticles}
             checkSavedArticle={checkSavedArticle}
+            saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />
         ))}
       </ul>
