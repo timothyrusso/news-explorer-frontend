@@ -169,13 +169,14 @@ const App = () => {
           setIsInfoTooltipOpen(true);
         } else {
           console.log("Something went wrong.");
-          setIsLoadingText(false);
         }
       })
       .catch((err) => {
         setPopupServerError(err.message);
-        setIsLoadingText(false);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoadingText(false);
       });
   };
 
