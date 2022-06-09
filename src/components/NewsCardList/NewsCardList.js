@@ -7,6 +7,9 @@ const NewsCardList = ({
   newsArticles,
   showMoreResults,
   showMoreButtonLogic,
+  handleBookmarkClick,
+  checkSavedArticle,
+  saveUnauthorizedUserCard,
 }) => {
   const getRandomInt = () => {
     return Math.floor(Math.random() * 1000);
@@ -22,6 +25,9 @@ const NewsCardList = ({
             card={card}
             onSigninPopupClick={onSigninPopupClick}
             loggedIn={loggedIn}
+            handleBookmarkClick={handleBookmarkClick}
+            checkSavedArticle={checkSavedArticle}
+            saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />
         ))}
       </ul>

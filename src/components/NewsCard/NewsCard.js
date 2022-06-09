@@ -1,13 +1,30 @@
 import "./NewsCard.css";
 import alternativeBackground from "../../images/header_background.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
-  const [bookmarked, setBookmarked] = useState(false);
+const NewsCard = ({
+  card,
+  onSigninPopupClick,
+  loggedIn,
+  savedCard,
+  handleBookmarkClick,
+  handleDeleteArticles,
+  checkSavedArticle,
+  saveUnauthorizedUserCard,
+}) => {
+  const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const saveCard = () => {
-    // TBD in the next stage
-    setBookmarked(!bookmarked);
+    handleBookmarkClick(card);
+  };
+
+  const deleteCard = () => {
+    handleDeleteArticles(card);
+  };
+
+  const handleCardSaveUnauthorizedUser = () => {
+    saveUnauthorizedUserCard(card);
+    onSigninPopupClick();
   };
 
   const convertDate = (timeStr) => {
@@ -24,17 +41,28 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
     return dateStr;
   };
 
-  const data = convertDate(card.publishedAt);
+  const data = convertDate(!savedCard ? card.publishedAt : card.date);
+
+  const backgroundUrl = !savedCard ? card.urlToImage : card.image;
+
+  useEffect(() => {
+    if (checkSavedArticle(card)) {
+      setBookmarkStatus(true);
+    } else {
+      setBookmarkStatus(false);
+    }
+  }, [loggedIn, card, checkSavedArticle]);
 
   return (
     <li className="card">
       {savedCard && (
         <>
-          <div className="card__keyword">Keyword</div>
+          <div className="card__keyword">{card.keyword}</div>
           <button
             aria-label="Delete"
             type="button"
             className="card__delete"
+            onClick={deleteCard}
           ></button>
           <dialog className="card__tooltip card__tooltip_type_delete">
             Remove from saved
@@ -47,30 +75,34 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
             aria-label="Favourite"
             type="button"
             className={`card__favourite ${
-              bookmarked ? "card__favourite_active" : ""
+              bookmarkStatus ? "card__favourite_active" : ""
             }`}
-            onClick={!loggedIn ? onSigninPopupClick : saveCard}
+            onClick={!loggedIn ? handleCardSaveUnauthorizedUser : saveCard}
           ></button>
           {!loggedIn && (
             <dialog className="card__tooltip">Sign in to save articles</dialog>
           )}
         </>
       )}
-      <a href={card.url} target="_blank" rel="noreferrer">
+      <a
+        href={!savedCard ? card.url : card.link}
+        target="_blank"
+        rel="noreferrer"
+      >
         <div
           className="card__image"
           style={{
             backgroundImage: `url(${
-              card.urlToImage != null ? card.urlToImage : alternativeBackground
+              backgroundUrl != null ? backgroundUrl : alternativeBackground
             })`,
           }}
-          href={card.url}
+          href={!savedCard ? card.url : card.link}
         ></div>
       </a>
       <div className="card__content">
         <time className="card__date">{data}</time>
         <a
-          href={card.url}
+          href={!savedCard ? card.url : card.link}
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
@@ -78,20 +110,22 @@ const NewsCard = ({ card, onSigninPopupClick, loggedIn, savedCard }) => {
           <h3 className="card__title">{card.title}</h3>
         </a>
         <a
-          href={card.url}
+          href={!savedCard ? card.url : card.link}
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
         >
-          <p className="card__text">{card.content}</p>
+          <p className="card__text">{!savedCard ? card.content : card.text}</p>
         </a>
         <a
-          href={card.url}
+          href={!savedCard ? card.url : card.link}
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
         >
-          <p className="card__source">{card.source.name}</p>
+          <p className="card__source">
+            {!savedCard ? card.source.name : card.source}
+          </p>
         </a>
       </div>
     </li>

@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import Input from "../Input/Input";
+import PopupServerError from '../PopupServerError/PopupServerError';
 
-const SignupPopup = ({
+const Login = ({
   isOpen,
   onClose,
   onSwitch,
   popupRedirectText,
-  isLoading,
-  startLoading,
+  isLoadingText,
+  startLoadingText,
   formValidity,
   onFormUpdate,
   onInputUpdate,
   errorMessage,
+  handleLoginSubmit,
+  popupServerError,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
 
   const handleEmailChange = (evt) => {
     onInputUpdate(evt);
@@ -28,44 +30,37 @@ const SignupPopup = ({
     setPassword(evt.target.value);
   };
 
-  const handleUsernameChange = (evt) => {
-    onInputUpdate(evt);
-    setUsername(evt.target.value);
-  };
-
   const handleSubmit = (evt) => {
-    startLoading();
-    // Prevent the browser from navigating to the form address
+    startLoadingText();
     evt.preventDefault();
-
-    // Add the inputs in the next stage
+    handleLoginSubmit(password, email);
   };
 
   React.useEffect(() => {
     setEmail("");
     setPassword("");
-    setUsername("");
   }, [isOpen]);
 
   return (
     <>
       <PopupWithForm
-        name="signup"
-        title="Sign up"
+        name="signin"
+        title="Sign in"
         isOpen={isOpen}
         onClose={onClose}
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
-        buttonText={"Sign up"}
-        loadingText={"Saving.."}
-        isLoading={isLoading}
+        buttonText={"Sign in"}
+        loadingText={"Loading.."}
+        isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
         onFormUpdate={onFormUpdate}
+        popupServerError={popupServerError}
       >
         <Input
           type={"email"}
-          idName={"email-input"}
+          idName={"email-signin-input"}
           name={"email"}
           fieldName={"field_email"}
           placeholder={"Enter email"}
@@ -76,7 +71,7 @@ const SignupPopup = ({
         />
         <Input
           type={"password"}
-          idName={"password-input"}
+          idName={"password-signin-input"}
           name={"password"}
           fieldName={"field_password"}
           placeholder={"Enter password"}
@@ -87,22 +82,10 @@ const SignupPopup = ({
           errorMessage={errorMessage}
           labelText={"Password"}
         />
-        <Input
-          type={"text"}
-          idName={"username-input"}
-          name={"username"}
-          fieldName={"field_username"}
-          placeholder={"Enter your username"}
-          minLength={"2"}
-          maxLength={"20"}
-          value={username}
-          onChange={handleUsernameChange}
-          errorMessage={errorMessage}
-          labelText={"Username"}
-        />
+        <PopupServerError popupServerError={popupServerError} />
       </PopupWithForm>
     </>
   );
 };
 
-export default SignupPopup;
+export default Login;

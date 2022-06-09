@@ -1,11 +1,12 @@
 import "./Navigation.css";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "../../images/NewsExplorer.svg";
 import logout from "../../images/logout.svg";
 import blackLogo from "../../images/NewsExplorerlogo-black.svg";
 import blackLogout from "../../images/logout-black.svg";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Navigation = ({
   onSigninPopupClick,
@@ -17,6 +18,8 @@ const Navigation = ({
 }) => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const currentUser = useContext(CurrentUserContext);
 
   const location = useLocation();
 
@@ -117,7 +120,7 @@ const Navigation = ({
               onClick={handleLogout}
               style={buttonColor}
             >
-              Timothy Russo
+              {currentUser.name}
               <img
                 src={blackNavigator && !toggleMenu ? blackLogout : logout}
                 alt="Logout logo"
