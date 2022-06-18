@@ -27,3 +27,15 @@ This application contains hover effects, links and transitions effects. Main fun
 ## Backend repository
 
 Link: https://github.com/timothyrusso/news-explorer-backend
+
+## Project architecture
+
+[Architecture](https://raw.githubusercontent.com/timothyrusso/news-explorer-frontend/main/src/images/architecture.png)
+
+## Project preview
+
+[Preview1](https://raw.githubusercontent.com/timothyrusso/news-explorer-frontend/main/src/images/preview1.png)
+
+[Preview2](https://raw.githubusercontent.com/timothyrusso/news-explorer-frontend/main/src/images/preview2.png)
+
+[Preview3](https://raw.githubusercontent.com/timothyrusso/news-explorer-frontend/main/src/images/preview3.png)
