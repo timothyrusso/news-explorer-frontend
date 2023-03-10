@@ -17,7 +17,7 @@ const Footer = () => {
           Home
         </Link>
         <a
-          href="https://timothyrusso.tech/"
+          href="https://timothyrusso.dev/"
           target="_blank"
           rel="noreferrer"
           className="footer__link footer__link_type_mobile"

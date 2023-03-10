@@ -13,14 +13,14 @@ const Main = () => {
         <div className="about__wrapper">
           <h2 className="about__title">About the author</h2>
           <p className="about__description">
-            Hey there, I'm Timothy. I'm a motivated and passionate aspiring
-            software engineer with a background in eCommerce, QA, Application
+            Hey there, I'm Timothy. I'm a motivated and passionate 
+            software engineer with a background in eCommerce, Quality Assurance, Application
             Delivery Management, Project Management and Trade Marketing. I have
-            a bachelor's degree in Economics and Business Management.
+            a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called Practicum.
           </p>
           <p className="about__description">
             I’m a curious person, I love to code and I like to experiment with
-            new technologies. Now coding is my passion and my new professional
+            new technologies. Now coding is my passion and my professional
             career focus.
           </p>
         </div>
