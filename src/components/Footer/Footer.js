@@ -1,7 +1,7 @@
-import "./Footer.css";
-import linkedinIcon from "../../images/linkedin_icon.png";
-import githubIcon from "../../images/github.svg";
-import { Link } from "react-router-dom";
+import './Footer.css';
+import linkedinIcon from '../../images/linkedin_icon.png';
+import githubIcon from '../../images/github.svg';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const date = new Date();
@@ -10,10 +10,13 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p className="footer__copyright">
-        © {year} NewsExplorer - Powered by News API
+        © {year} NewsExplorer - Powered by{' '}
+        <a href="https://newsapi.org/" target="_blank" rel="noreferrer">
+          News API
+        </a>
       </p>
       <nav className="footer__wrapper">
-        <Link to={"/"} className="footer__link">
+        <Link to={'/'} className="footer__link">
           Home
         </Link>
         <a
