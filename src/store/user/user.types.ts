@@ -1,3 +1,5 @@
-const enum USER_ACTION_TYPES {}
+const enum USER_ACTION_TYPES {
+  UPDATE_USER = 'UPDATE_USER',
+}
 
 export default USER_ACTION_TYPES;
