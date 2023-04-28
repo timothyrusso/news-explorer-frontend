@@ -15,7 +15,7 @@ const reducer = (state = initialState, action: UserActionTypes) => {
     case 'UPDATE_USER':
       return {
         ...state,
-        users: action.payload,
+        user: action.payload,
       };
     default:
       return state;

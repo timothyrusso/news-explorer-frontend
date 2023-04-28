@@ -1,30 +1,30 @@
-import "./App.css";
-import nothingFoundIcom from "../../images/not-found.svg";
-import warningIcon from "../../images/warning.png";
-import Navigation from "../Navigation/Navigation";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import NothingFound from "../NothingFound/NothingFound";
-import { useState, useEffect, useLayoutEffect } from "react";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import Preloader from "../Preloader/Preloader";
-import NewsCardList from "../NewsCardList/NewsCardList";
+import './App.css';
+import nothingFoundIcom from '../../images/not-found.svg';
+import warningIcon from '../../images/warning.png';
+import Navigation from '../Navigation/Navigation';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import NothingFound from '../NothingFound/NothingFound';
+import { useState, useEffect, useLayoutEffect } from 'react';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import Preloader from '../Preloader/Preloader';
+import NewsCardList from '../NewsCardList/NewsCardList';
 import {
   Route,
   Routes,
   useLocation,
   Navigate,
   useNavigate,
-} from "react-router-dom";
-import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
-import SavedNews from "../SavedNews/SavedNews";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { getNewsInfo } from "../../utils/api";
-import { newsPerPage, startpoint } from "../../utils/constants";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+} from 'react-router-dom';
+import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
+import SavedNews from '../SavedNews/SavedNews';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { getNewsInfo } from '../../utils/api';
+import { newsPerPage, startpoint } from '../../utils/constants';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {
   register,
   authorize,
@@ -33,7 +33,8 @@ import {
   getArticles,
   saveArticles,
   deleteArticles,
-} from "../../utils/MainApi";
+} from '../../utils/MainApi';
+import { useDispatch, useSelector } from 'react-redux';
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -43,7 +44,7 @@ const App = () => {
   const [isLoadingText, setIsLoadingText] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
-  const [popupRedirectText, setPopupRedirectText] = useState("");
+  const [popupRedirectText, setPopupRedirectText] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
@@ -54,16 +55,19 @@ const App = () => {
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [popupServerError, setPopupServerError] = useState("");
+  const [popupServerError, setPopupServerError] = useState('');
   const [cards, setCards] = useState([]);
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const [keywordsList, setKeywordsList] = useState([]);
   const [cardToSave, setCardToSave] = useState([]);
 
   const location = useLocation();
   const history = useNavigate();
+  const dispatch = useDispatch();
+  const reduxUSer = useSelector((state) => state);
+  console.log(reduxUSer);
 
-  const jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem('jwt');
 
   const showMoreButtonLogic = next < newsObject.length;
   let arrayForHoldingNews = [];
@@ -72,7 +76,7 @@ const App = () => {
     setIsSigninPopupOpen(false);
     setIsSignupPopupOpen(false);
     setIsInfoTooltipOpen(false);
-    setPopupServerError("");
+    setPopupServerError('');
   };
 
   const startLoadingText = () => {
@@ -97,7 +101,7 @@ const App = () => {
     setFormValidity(true);
     setErrorMessage({});
     closeAllPopups();
-    setPopupRedirectText("Sign up");
+    setPopupRedirectText('Sign up');
     setIsSigninPopupOpen(true);
   };
 
@@ -105,19 +109,20 @@ const App = () => {
     if (isSigninPopupOpen) {
       setIsSigninPopupOpen(false);
       setIsSignupPopupOpen(true);
-      setPopupRedirectText("Sign in");
+      setPopupRedirectText('Sign in');
     } else if (isSignupPopupOpen) {
       setIsSignupPopupOpen(false);
       setIsSigninPopupOpen(true);
-      setPopupRedirectText("Sign up");
+      setPopupRedirectText('Sign up');
     }
   };
 
   const handleLogout = () => {
     setLoggedIn(false);
-    history("/");
-    localStorage.removeItem("jwt");
+    history('/');
+    localStorage.removeItem('jwt');
     setCurrentUser({});
+    dispatch({ type: 'UPDATE_USER', payload: {} });
     setCards([]);
   };
 
@@ -137,18 +142,18 @@ const App = () => {
   };
 
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
-    localStorage.removeItem("news");
+    localStorage.removeItem('news');
     setNext(3);
     setServerError(false);
     setKeyword(data.search);
 
     getNewsInfo({ search: data.search })
       .then((data) => {
-        localStorage.setItem("news", JSON.stringify(data.articles));
+        localStorage.setItem('news', JSON.stringify(data.articles));
         setNewsArticles(
-          JSON.parse(localStorage.getItem("news")).slice(start, end)
+          JSON.parse(localStorage.getItem('news')).slice(start, end)
         );
-        setNewsObject(JSON.parse(localStorage.getItem("news")));
+        setNewsObject(JSON.parse(localStorage.getItem('news')));
       })
       .catch((err) => {
         console.log(err);
@@ -164,11 +169,11 @@ const App = () => {
     register(email, password, name)
       .then((res) => {
         if (res.data._id) {
-          console.log("res OK");
+          console.log('res OK');
           closeAllPopups(true);
           setIsInfoTooltipOpen(true);
         } else {
-          console.log("Something went wrong.");
+          console.log('Something went wrong.');
         }
       })
       .catch((err) => {
@@ -182,7 +187,7 @@ const App = () => {
 
   const handleLoginSubmit = (password, email) => {
     if (!password || !email) {
-      console.log("Email or password are not correct");
+      console.log('Email or password are not correct');
       return;
     }
     authorize(password, email)
@@ -209,14 +214,14 @@ const App = () => {
   };
 
   const handleTokenCheck = () => {
-    if (localStorage.getItem("jwt")) {
-      const jwt = localStorage.getItem("jwt");
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
       checkToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
           } else {
-            localStorage.removeItem("jwt");
+            localStorage.removeItem('jwt');
           }
         })
         .catch((err) => console.log(err));
@@ -294,12 +299,12 @@ const App = () => {
 
   useEffect(() => {
     switch (location.pathname) {
-      case "/":
+      case '/':
         setBlackNavigator(false);
         setSavedCard(false);
         setToggleMenu(false);
         return;
-      case "/saved-news":
+      case '/saved-news':
         setBlackNavigator(true);
         setSavedCard(true);
         setToggleMenu(false);
@@ -311,11 +316,12 @@ const App = () => {
   }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem('jwt');
     if (jwt && loggedIn) {
       getProfileInfo()
         .then((info) => {
           setCurrentUser(info.data);
+          dispatch({ type: 'UPDATE_USER', payload: info.data });
         })
         .catch((err) => {
           console.log(err);
@@ -380,16 +386,16 @@ const App = () => {
                   showNews &&
                   !serverError && (
                     <NothingFound
-                      title={"Nothing found"}
-                      text={"Sorry, but nothing matched your search terms."}
+                      title={'Nothing found'}
+                      text={'Sorry, but nothing matched your search terms.'}
                       nothingFoundIcom={nothingFoundIcom}
                     />
                   )}
                 {serverError && (
                   <NothingFound
-                    title={"Server error"}
+                    title={'Server error'}
                     text={
-                      "Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later."
+                      'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.'
                     }
                     nothingFoundIcom={warningIcon}
                   />
@@ -435,7 +441,7 @@ const App = () => {
           <Route
             path="/saved-news"
             element={
-              <ProtectedRoute loggedIn={jwt} path={"/"}>
+              <ProtectedRoute loggedIn={jwt} path={'/'}>
                 <>
                   <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
                   <SavedNews
