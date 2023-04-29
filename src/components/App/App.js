@@ -24,7 +24,6 @@ import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getNewsInfo } from '../../utils/api';
 import { newsPerPage, startpoint } from '../../utils/constants';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import {
   register,
   authorize,
@@ -34,7 +33,7 @@ import {
   saveArticles,
   deleteArticles,
 } from '../../utils/MainApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -54,7 +53,6 @@ const App = () => {
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
   const [popupServerError, setPopupServerError] = useState('');
   const [cards, setCards] = useState([]);
   const [keyword, setKeyword] = useState('');
@@ -64,8 +62,6 @@ const App = () => {
   const location = useLocation();
   const history = useNavigate();
   const dispatch = useDispatch();
-  const reduxUSer = useSelector((state) => state);
-  console.log(reduxUSer);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -121,7 +117,6 @@ const App = () => {
     setLoggedIn(false);
     history('/');
     localStorage.removeItem('jwt');
-    setCurrentUser({});
     dispatch({ type: 'UPDATE_USER', payload: {} });
     setCards([]);
   };
@@ -320,7 +315,6 @@ const App = () => {
     if (jwt && loggedIn) {
       getProfileInfo()
         .then((info) => {
-          setCurrentUser(info.data);
           dispatch({ type: 'UPDATE_USER', payload: info.data });
         })
         .catch((err) => {
@@ -349,117 +343,115 @@ const App = () => {
   }, [location]);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="content">
-        <Navigation
-          onSigninPopupClick={handleSigninPopupClick}
-          loggedIn={loggedIn}
-          blackNavigator={blackNavigator}
-          handleLogout={handleLogout}
-          toggleMenu={toggleMenu}
-          toggleNav={toggleNav}
-        />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <Header
-                  startLoadingNews={startLoadingNews}
-                  activateSearch={activateSearch}
+    <div className="content">
+      <Navigation
+        onSigninPopupClick={handleSigninPopupClick}
+        loggedIn={loggedIn}
+        blackNavigator={blackNavigator}
+        handleLogout={handleLogout}
+        toggleMenu={toggleMenu}
+        toggleNav={toggleNav}
+      />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Header
+                startLoadingNews={startLoadingNews}
+                activateSearch={activateSearch}
+              />
+              {showNews && newsArticles.length !== 0 && (
+                <NewsCardList
+                  onSigninPopupClick={handleSigninPopupClick}
+                  loggedIn={loggedIn}
+                  newsArticles={newsArticles}
+                  showMoreResults={showMoreResults}
+                  showMoreButtonLogic={showMoreButtonLogic}
+                  handleBookmarkClick={handleBookmarkClick}
+                  checkSavedArticle={checkSavedArticle}
+                  saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
-                {showNews && newsArticles.length !== 0 && (
-                  <NewsCardList
-                    onSigninPopupClick={handleSigninPopupClick}
-                    loggedIn={loggedIn}
-                    newsArticles={newsArticles}
-                    showMoreResults={showMoreResults}
-                    showMoreButtonLogic={showMoreButtonLogic}
-                    handleBookmarkClick={handleBookmarkClick}
-                    checkSavedArticle={checkSavedArticle}
-                    saveUnauthorizedUserCard={saveUnauthorizedUserCard}
-                  />
-                )}
-                {newsArticles.length === 0 &&
-                  !isLoading &&
-                  showNews &&
-                  !serverError && (
-                    <NothingFound
-                      title={'Nothing found'}
-                      text={'Sorry, but nothing matched your search terms.'}
-                      nothingFoundIcom={nothingFoundIcom}
-                    />
-                  )}
-                {serverError && (
+              )}
+              {newsArticles.length === 0 &&
+                !isLoading &&
+                showNews &&
+                !serverError && (
                   <NothingFound
-                    title={'Server error'}
-                    text={
-                      'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.'
-                    }
-                    nothingFoundIcom={warningIcon}
+                    title={'Nothing found'}
+                    text={'Sorry, but nothing matched your search terms.'}
+                    nothingFoundIcom={nothingFoundIcom}
                   />
                 )}
-                {isLoading && <Preloader />}
-                <Main />
-                <Login
-                  isOpen={isSigninPopupOpen}
-                  onClose={closeAllPopups}
-                  onSwitch={handleSwitchPopup}
-                  popupRedirectText={popupRedirectText}
-                  isLoadingText={isLoadingText}
-                  startLoadingText={startLoadingText}
-                  formValidity={formValidity}
-                  onFormUpdate={onFormUpdate}
-                  errorMessage={errorMessage}
-                  onInputUpdate={checkValidity}
-                  handleLoginSubmit={handleLoginSubmit}
-                  popupServerError={popupServerError}
+              {serverError && (
+                <NothingFound
+                  title={'Server error'}
+                  text={
+                    'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.'
+                  }
+                  nothingFoundIcom={warningIcon}
                 />
-                <Register
-                  isOpen={isSignupPopupOpen}
-                  onClose={closeAllPopups}
-                  onSwitch={handleSwitchPopup}
-                  popupRedirectText={popupRedirectText}
-                  isLoadingText={isLoadingText}
-                  startLoadingText={startLoadingText}
-                  formValidity={formValidity}
-                  onFormUpdate={onFormUpdate}
-                  errorMessage={errorMessage}
-                  onInputUpdate={checkValidity}
-                  handleRegisterSubmit={handleRegisterSubmit}
-                  popupServerError={popupServerError}
-                />
-                <InfoTooltip
-                  isOpen={isInfoTooltipOpen}
-                  onClose={closeAllPopups}
-                  openSignin={handleSigninPopupClick}
+              )}
+              {isLoading && <Preloader />}
+              <Main />
+              <Login
+                isOpen={isSigninPopupOpen}
+                onClose={closeAllPopups}
+                onSwitch={handleSwitchPopup}
+                popupRedirectText={popupRedirectText}
+                isLoadingText={isLoadingText}
+                startLoadingText={startLoadingText}
+                formValidity={formValidity}
+                onFormUpdate={onFormUpdate}
+                errorMessage={errorMessage}
+                onInputUpdate={checkValidity}
+                handleLoginSubmit={handleLoginSubmit}
+                popupServerError={popupServerError}
+              />
+              <Register
+                isOpen={isSignupPopupOpen}
+                onClose={closeAllPopups}
+                onSwitch={handleSwitchPopup}
+                popupRedirectText={popupRedirectText}
+                isLoadingText={isLoadingText}
+                startLoadingText={startLoadingText}
+                formValidity={formValidity}
+                onFormUpdate={onFormUpdate}
+                errorMessage={errorMessage}
+                onInputUpdate={checkValidity}
+                handleRegisterSubmit={handleRegisterSubmit}
+                popupServerError={popupServerError}
+              />
+              <InfoTooltip
+                isOpen={isInfoTooltipOpen}
+                onClose={closeAllPopups}
+                openSignin={handleSigninPopupClick}
+              />
+            </>
+          }
+        />
+        <Route
+          path="/saved-news"
+          element={
+            <ProtectedRoute loggedIn={jwt} path={'/'}>
+              <>
+                <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
+                <SavedNews
+                  cards={cards}
+                  savedCard={savedCard}
+                  handleDeleteArticles={handleDeleteArticles}
+                  checkSavedArticle={checkSavedArticle}
+                  saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
               </>
-            }
-          />
-          <Route
-            path="/saved-news"
-            element={
-              <ProtectedRoute loggedIn={jwt} path={'/'}>
-                <>
-                  <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
-                  <SavedNews
-                    cards={cards}
-                    savedCard={savedCard}
-                    handleDeleteArticles={handleDeleteArticles}
-                    checkSavedArticle={checkSavedArticle}
-                    saveUnauthorizedUserCard={saveUnauthorizedUserCard}
-                  />
-                </>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
-      </div>
-    </CurrentUserContext.Provider>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 };
 
