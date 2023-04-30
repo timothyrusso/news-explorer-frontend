@@ -1,27 +1,6 @@
 import { legacy_createStore as createStore } from 'redux';
-import { User } from '../types/generic-types';
-import { UserActionTypes } from './user/user.actions';
+import { rootReducer } from './root-reducer';
 
-export type RootState = {
-  user: User | {};
-};
-
-const initialState: RootState = {
-  user: {},
-};
-
-const reducer = (state = initialState, action: UserActionTypes) => {
-  switch (action.type) {
-    case 'UPDATE_USER':
-      return {
-        ...state,
-        user: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 export default store;

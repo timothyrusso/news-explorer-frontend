@@ -1,5 +1,5 @@
-import { UPDATE_USER } from './user.types';
-import { User } from '../../types/generic-types';
+import { UPDATE_USER } from './user.action.types';
+import { User } from './user.type';
 
 type UpdateUserAction = {
   type: typeof UPDATE_USER;

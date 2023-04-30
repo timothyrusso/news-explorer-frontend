@@ -2,7 +2,7 @@ import './SavedNewsHeader.css';
 import { useSelector } from 'react-redux';
 
 const SavedNewsHeader = ({ cards, keywordsList }) => {
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
     <header className="saved-news-header">

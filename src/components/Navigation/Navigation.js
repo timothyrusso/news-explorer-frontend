@@ -19,7 +19,7 @@ const Navigation = ({
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const currentUser = useSelector((state) => state.user);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const location = useLocation();
 
