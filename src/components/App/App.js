@@ -49,12 +49,12 @@ const App = () => {
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [newsArticles, setNewsArticles] = useState([]);
+  const [newsArticles, setNewsArticles] = useState([]); // Articles from the API
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [popupServerError, setPopupServerError] = useState('');
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([]); // Saved articles from the user
   const [keyword, setKeyword] = useState('');
   const [keywordsList, setKeywordsList] = useState([]);
   const [cardToSave, setCardToSave] = useState([]);
