@@ -34,6 +34,10 @@ import {
   deleteArticles,
 } from '../../utils/MainApi';
 import { useDispatch } from 'react-redux';
+import {
+  loginUserAction,
+  logoutUserAction,
+} from '../../store/user/user.actions';
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -117,7 +121,7 @@ const App = () => {
     setLoggedIn(false);
     history('/');
     localStorage.removeItem('jwt');
-    dispatch({ type: 'UPDATE_USER', payload: {} });
+    dispatch(logoutUserAction({}));
     setCards([]);
   };
 
@@ -315,7 +319,7 @@ const App = () => {
     if (jwt && loggedIn) {
       getProfileInfo()
         .then((info) => {
-          dispatch({ type: 'UPDATE_USER', payload: info.data });
+          dispatch(loginUserAction(info.data));
         })
         .catch((err) => {
           console.log(err);

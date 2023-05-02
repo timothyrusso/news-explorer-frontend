@@ -1,14 +1,24 @@
-import { UPDATE_USER } from './user.action.types';
+import { LOGIN_USER, LOGOUT_USER } from './user.action.types';
 import { User } from './user.type';
 
-type UpdateUserAction = {
-  type: typeof UPDATE_USER;
+type LoginUserAction = {
+  type: typeof LOGIN_USER;
   payload: User;
 };
 
-export type UserActionTypes = UpdateUserAction;
+type LogoutUserAction = {
+  type: typeof LOGOUT_USER;
+  payload: {};
+};
 
-export const updateUserAction = (updatedUser: User): UpdateUserAction => ({
-  type: UPDATE_USER,
+export type UserActionTypes = LoginUserAction | LogoutUserAction;
+
+export const loginUserAction = (updatedUser: User): LoginUserAction => ({
+  type: LOGIN_USER,
+  payload: updatedUser,
+});
+
+export const logoutUserAction = (updatedUser: {}): LogoutUserAction => ({
+  type: LOGOUT_USER,
   payload: updatedUser,
 });
