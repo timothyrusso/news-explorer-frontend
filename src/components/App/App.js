@@ -38,6 +38,10 @@ import {
   loginUserAction,
   logoutUserAction,
 } from '../../store/user/user.actions';
+import {
+  fetchArticlesAction,
+  setShowMoreArticlesAction,
+} from '../../store/article/article.actions';
 
 const App = () => {
   const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
@@ -138,6 +142,7 @@ const App = () => {
     const slicedNews = newsObject.slice(start, end);
     arrayForHoldingNews = [...newsArticles, ...slicedNews];
     setNewsArticles(arrayForHoldingNews);
+    dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
   };
 
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
@@ -151,6 +156,11 @@ const App = () => {
         localStorage.setItem('news', JSON.stringify(data.articles));
         setNewsArticles(
           JSON.parse(localStorage.getItem('news')).slice(start, end)
+        );
+        dispatch(
+          fetchArticlesAction(
+            JSON.parse(localStorage.getItem('news')).slice(start, end)
+          )
         );
         setNewsObject(JSON.parse(localStorage.getItem('news')));
       })
