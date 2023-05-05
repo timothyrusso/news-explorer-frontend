@@ -33,7 +33,7 @@ import {
   saveArticles,
   deleteArticles,
 } from '../../utils/MainApi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
   logoutUserAction,
@@ -57,7 +57,6 @@ const App = () => {
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [newsArticles, setNewsArticles] = useState([]); // Articles from the API
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
@@ -70,6 +69,7 @@ const App = () => {
   const location = useLocation();
   const history = useNavigate();
   const dispatch = useDispatch();
+  const newsArticles = useSelector((state) => state.article.articles);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -141,7 +141,6 @@ const App = () => {
   const loopArticlesWithSlice = (start, end) => {
     const slicedNews = newsObject.slice(start, end);
     arrayForHoldingNews = [...newsArticles, ...slicedNews];
-    setNewsArticles(arrayForHoldingNews);
     dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
   };
 
@@ -154,9 +153,6 @@ const App = () => {
     getNewsInfo({ search: data.search })
       .then((data) => {
         localStorage.setItem('news', JSON.stringify(data.articles));
-        setNewsArticles(
-          JSON.parse(localStorage.getItem('news')).slice(start, end)
-        );
         dispatch(
           fetchArticlesAction(
             JSON.parse(localStorage.getItem('news')).slice(start, end)
