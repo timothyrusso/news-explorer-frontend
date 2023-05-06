@@ -7,7 +7,7 @@ export type Data = {
   search: string;
 };
 
-export type UseNewsApiProps = {
+export type UseActivateSearchProps = {
   data: Data;
   setNewsObject: (newsObject: Article[]) => void;
   setServerError: (error: boolean) => void;
@@ -15,9 +15,11 @@ export type UseNewsApiProps = {
   setIsLoading: (isLoading: boolean) => void;
   start: number;
   end: number;
+  setNext: (next: number) => void;
+  setKeyword: (keyword: string) => void;
 };
 
-export const useNewsApi = ({
+export const useActivateSearch = ({
   data,
   setNewsObject,
   setServerError,
@@ -25,8 +27,15 @@ export const useNewsApi = ({
   setIsLoading,
   start,
   end,
-}: UseNewsApiProps) => {
+  setNext,
+  setKeyword,
+}: UseActivateSearchProps) => {
   const dispatch = useDispatch();
+
+  localStorage.removeItem('news');
+  setNext(3);
+  setServerError(false);
+  setKeyword(data.search);
 
   getNewsInfo({ search: data.search })
     .then((data) => {
