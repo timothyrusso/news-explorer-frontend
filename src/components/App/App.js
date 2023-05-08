@@ -42,9 +42,12 @@ import {
   fetchArticlesAction,
   setShowMoreArticlesAction,
 } from '../../store/article/article.actions';
+import {
+  setIsSigninPopupOpenAction,
+  setIsSigninPopupClosedAction,
+} from '../../store/toggles/toggles.actions';
 
 const App = () => {
-  const [isSigninPopupOpen, setIsSigninPopupOpen] = useState(false);
   const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +73,9 @@ const App = () => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const newsArticles = useSelector((state) => state.article.articles);
+  const isSigninPopupOpen = useSelector(
+    (state) => state.toggles.isSigninPopupOpen
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -77,7 +83,7 @@ const App = () => {
   let arrayForHoldingNews = [];
 
   const closeAllPopups = () => {
-    setIsSigninPopupOpen(false);
+    dispatch(setIsSigninPopupClosedAction());
     setIsSignupPopupOpen(false);
     setIsInfoTooltipOpen(false);
     setPopupServerError('');
@@ -106,17 +112,17 @@ const App = () => {
     setErrorMessage({});
     closeAllPopups();
     setPopupRedirectText('Sign up');
-    setIsSigninPopupOpen(true);
+    dispatch(setIsSigninPopupOpenAction());
   };
 
   const handleSwitchPopup = () => {
     if (isSigninPopupOpen) {
-      setIsSigninPopupOpen(false);
+      dispatch(setIsSigninPopupClosedAction());
       setIsSignupPopupOpen(true);
       setPopupRedirectText('Sign in');
     } else if (isSignupPopupOpen) {
       setIsSignupPopupOpen(false);
-      setIsSigninPopupOpen(true);
+      dispatch(setIsSigninPopupOpenAction());
       setPopupRedirectText('Sign up');
     }
   };
