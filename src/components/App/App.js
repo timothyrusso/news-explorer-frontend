@@ -47,10 +47,11 @@ import {
   setIsSigninPopupClosedAction,
   setIsSignupPopupOpenAction,
   setIsSignupPopupClosedAction,
+  setInfoTooltipOpenAction,
+  setInfoTooltipClosedAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingText, setIsLoadingText] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
@@ -80,6 +81,9 @@ const App = () => {
   const isSignupPopupOpen = useSelector(
     (state) => state.toggles.isSignupPopupOpen
   );
+  const isInfoTooltipOpen = useSelector(
+    (state) => state.toggles.isInfoTooltipOpen
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -89,7 +93,7 @@ const App = () => {
   const closeAllPopups = () => {
     dispatch(setIsSigninPopupClosedAction());
     dispatch(setIsSignupPopupClosedAction());
-    setIsInfoTooltipOpen(false);
+    dispatch(setInfoTooltipClosedAction());
     setPopupServerError('');
   };
 
@@ -186,7 +190,7 @@ const App = () => {
         if (res.data._id) {
           console.log('res OK');
           closeAllPopups(true);
-          setIsInfoTooltipOpen(true);
+          dispatch(setInfoTooltipOpenAction());
         } else {
           console.log('Something went wrong.');
         }

@@ -1,6 +1,7 @@
 import {
   SIGNIN_POPUP_ACTION_TYPES,
   SIGNUP_POPUP_ACTION_TYPES,
+  INFO_TOOLTIP_ACTION_TYPES,
 } from './toggles.action.types';
 
 type SetIsSigninPopupOpenAction = {
@@ -23,11 +24,23 @@ type SetIsSignupPopupClosedAction = {
   payload: boolean;
 };
 
+type SetInfoTooltipOpenAction = {
+  type: typeof INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_OPEN;
+  payload: boolean;
+};
+
+type SetInfoTooltipClosedAction = {
+  type: typeof INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_CLOSED;
+  payload: boolean;
+};
+
 export type TogglesActionTypes =
   | SetIsSigninPopupOpenAction
   | SetIsSigninPopupClosedAction
   | SetIsSignupPopupOpenAction
-  | SetIsSignupPopupClosedAction;
+  | SetIsSignupPopupClosedAction
+  | SetInfoTooltipOpenAction
+  | SetInfoTooltipClosedAction;
 
 export const setIsSigninPopupOpenAction = (
   status: boolean
@@ -54,5 +67,19 @@ export const setIsSignupPopupClosedAction = (
   status: boolean
 ): SetIsSignupPopupClosedAction => ({
   type: SIGNUP_POPUP_ACTION_TYPES.SET_SIGNUP_POPUP_CLOSED,
+  payload: false,
+});
+
+export const setInfoTooltipOpenAction = (
+  status: boolean
+): SetInfoTooltipOpenAction => ({
+  type: INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_OPEN,
+  payload: true,
+});
+
+export const setInfoTooltipClosedAction = (
+  status: boolean
+): SetInfoTooltipClosedAction => ({
+  type: INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_CLOSED,
   payload: false,
 });
