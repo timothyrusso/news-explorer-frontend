@@ -45,10 +45,11 @@ import {
 import {
   setIsSigninPopupOpenAction,
   setIsSigninPopupClosedAction,
+  setIsSignupPopupOpenAction,
+  setIsSignupPopupClosedAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
-  const [isSignupPopupOpen, setIsSignupPopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingText, setIsLoadingText] = useState(false);
@@ -76,6 +77,9 @@ const App = () => {
   const isSigninPopupOpen = useSelector(
     (state) => state.toggles.isSigninPopupOpen
   );
+  const isSignupPopupOpen = useSelector(
+    (state) => state.toggles.isSignupPopupOpen
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -84,7 +88,7 @@ const App = () => {
 
   const closeAllPopups = () => {
     dispatch(setIsSigninPopupClosedAction());
-    setIsSignupPopupOpen(false);
+    dispatch(setIsSignupPopupClosedAction());
     setIsInfoTooltipOpen(false);
     setPopupServerError('');
   };
@@ -118,10 +122,10 @@ const App = () => {
   const handleSwitchPopup = () => {
     if (isSigninPopupOpen) {
       dispatch(setIsSigninPopupClosedAction());
-      setIsSignupPopupOpen(true);
+      dispatch(setIsSignupPopupOpenAction());
       setPopupRedirectText('Sign in');
     } else if (isSignupPopupOpen) {
-      setIsSignupPopupOpen(false);
+      dispatch(setIsSignupPopupClosedAction());
       dispatch(setIsSigninPopupOpenAction());
       setPopupRedirectText('Sign up');
     }
