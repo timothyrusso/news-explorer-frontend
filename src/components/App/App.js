@@ -55,13 +55,14 @@ import {
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
   setIsLoggedinFalseAction,
+  setIsBlackNavbarTrueAction,
+  setIsBlackNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState('');
-  const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -90,7 +91,7 @@ const App = () => {
   const isLoading = useSelector((state) => state.toggles.isLoading);
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
-  console.log(isLoggedIn);
+  const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -326,12 +327,12 @@ const App = () => {
   useEffect(() => {
     switch (location.pathname) {
       case '/':
-        setBlackNavigator(false);
+        dispatch(setIsBlackNavbarFalseAction());
         setSavedCard(false);
         setToggleMenu(false);
         return;
       case '/saved-news':
-        setBlackNavigator(true);
+        dispatch(setIsBlackNavbarTrueAction());
         setSavedCard(true);
         setToggleMenu(false);
         openPopupIfNotLoggedin();
@@ -339,7 +340,7 @@ const App = () => {
       default:
         return;
     } // eslint-disable-next-line
-  }, [location, setBlackNavigator, setSavedCard, setToggleMenu]);
+  }, [location, setSavedCard, setToggleMenu, dispatch]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -359,7 +360,7 @@ const App = () => {
           console.log(err);
         });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, dispatch]);
 
   useEffect(() => {
     handleTokenCheck();
@@ -378,7 +379,7 @@ const App = () => {
       <Navigation
         onSigninPopupClick={handleSigninPopupClick}
         loggedIn={isLoggedIn}
-        blackNavigator={blackNavigator}
+        isBlackNavbar={isBlackNavbar}
         handleLogout={handleLogout}
         toggleMenu={toggleMenu}
         toggleNav={toggleNav}

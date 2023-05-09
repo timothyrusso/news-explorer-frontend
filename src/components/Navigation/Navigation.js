@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const Navigation = ({
   onSigninPopupClick,
   loggedIn,
-  blackNavigator,
+  isBlackNavbar,
   handleLogout,
   toggleMenu,
   toggleNav,
@@ -24,7 +24,7 @@ const Navigation = ({
   const location = useLocation();
 
   const colorRuleDefiner =
-    (blackNavigator && !toggleMenu) || (screenWidth > 700 && blackNavigator);
+    (isBlackNavbar && !toggleMenu) || (screenWidth > 700 && isBlackNavbar);
 
   const buttonColor = colorRuleDefiner
     ? { color: 'black', borderColor: 'black' }
@@ -122,7 +122,7 @@ const Navigation = ({
             >
               {currentUser.name}
               <img
-                src={blackNavigator && !toggleMenu ? blackLogout : logout}
+                src={isBlackNavbar && !toggleMenu ? blackLogout : logout}
                 alt="Logout logo"
                 className="navigation__logout-icon"
               ></img>
@@ -132,7 +132,7 @@ const Navigation = ({
         <button
           onClick={toggleNav}
           className={`burgher-button
-          ${blackNavigator && !toggleMenu && 'burgher-button_type_black'}
+          ${isBlackNavbar && !toggleMenu && 'burgher-button_type_black'}
           ${
             toggleMenu
               ? 'burgher-button_type_open'

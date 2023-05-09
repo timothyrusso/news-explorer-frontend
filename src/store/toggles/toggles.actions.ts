@@ -5,6 +5,7 @@ import {
   ISLOADING_ACTION_TYPES,
   ISLOADING_TEXT_ACTION_TYPES,
   ISLOGGEDIN_ACTION_TYPES,
+  ISBLACK_NAVBAR_ACTION_TYPES,
 } from './toggles.action.types';
 
 type SetIsSigninPopupOpenAction = {
@@ -67,6 +68,16 @@ type SetIsLoggedinFalseAction = {
   payload: boolean;
 };
 
+type SetIsBlackNavbarTrueAction = {
+  type: typeof ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_TRUE;
+  payload: boolean;
+};
+
+type SetIsBlackNavbarFalseAction = {
+  type: typeof ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_FALSE;
+  payload: boolean;
+};
+
 export type TogglesActionTypes =
   | SetIsSigninPopupOpenAction
   | SetIsSigninPopupClosedAction
@@ -79,7 +90,9 @@ export type TogglesActionTypes =
   | SetIsLoadingTextTrueAction
   | SetIsLoadingTextFalseAction
   | SetIsLoggedinTrueAction
-  | SetIsLoggedinFalseAction;
+  | SetIsLoggedinFalseAction
+  | SetIsBlackNavbarTrueAction
+  | SetIsBlackNavbarFalseAction;
 
 export const setIsSigninPopupOpenAction = (
   status: boolean
@@ -162,5 +175,19 @@ export const setIsLoggedinFalseAction = (
   status: boolean
 ): SetIsLoggedinFalseAction => ({
   type: ISLOGGEDIN_ACTION_TYPES.SET_ISLOGGEDIN_FALSE,
+  payload: false,
+});
+
+export const setIsBlackNavbarTrueAction = (
+  status: boolean
+): SetIsBlackNavbarTrueAction => ({
+  type: ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_TRUE,
+  payload: true,
+});
+
+export const setIsBlackNavbarFalseAction = (
+  status: boolean
+): SetIsBlackNavbarFalseAction => ({
+  type: ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_FALSE,
   payload: false,
 });
