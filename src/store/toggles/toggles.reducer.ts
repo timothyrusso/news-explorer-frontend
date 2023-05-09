@@ -4,6 +4,7 @@ import {
   SIGNUP_POPUP_ACTION_TYPES,
   INFO_TOOLTIP_ACTION_TYPES,
   ISLOADING_ACTION_TYPES,
+  ISLOADING_TEXT_ACTION_TYPES,
 } from './toggles.action.types';
 
 export type togglesState = {
@@ -11,6 +12,7 @@ export type togglesState = {
   isSignupPopupOpen: boolean;
   isInfoTooltipOpen: boolean;
   isLoading: boolean;
+  isLoadingText: boolean;
 };
 
 const INITIAL_STATE: togglesState = {
@@ -18,6 +20,7 @@ const INITIAL_STATE: togglesState = {
   isSignupPopupOpen: false,
   isInfoTooltipOpen: false,
   isLoading: false,
+  isLoadingText: false,
 };
 
 export const togglesReducer = (
@@ -64,6 +67,16 @@ export const togglesReducer = (
       return {
         ...state,
         isLoading: action.payload,
+      };
+    case ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_TRUE:
+      return {
+        ...state,
+        isLoadingText: action.payload,
+      };
+    case ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_FALSE:
+      return {
+        ...state,
+        isLoadingText: action.payload,
       };
     default:
       return state;

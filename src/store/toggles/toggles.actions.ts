@@ -3,6 +3,7 @@ import {
   SIGNUP_POPUP_ACTION_TYPES,
   INFO_TOOLTIP_ACTION_TYPES,
   ISLOADING_ACTION_TYPES,
+  ISLOADING_TEXT_ACTION_TYPES,
 } from './toggles.action.types';
 
 type SetIsSigninPopupOpenAction = {
@@ -45,6 +46,16 @@ type SetIsLoadingFalseAction = {
   payload: boolean;
 };
 
+type SetIsLoadingTextTrueAction = {
+  type: typeof ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_TRUE;
+  payload: boolean;
+};
+
+type SetIsLoadingTextFalseAction = {
+  type: typeof ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_FALSE;
+  payload: boolean;
+};
+
 export type TogglesActionTypes =
   | SetIsSigninPopupOpenAction
   | SetIsSigninPopupClosedAction
@@ -53,7 +64,9 @@ export type TogglesActionTypes =
   | SetInfoTooltipOpenAction
   | SetInfoTooltipClosedAction
   | SetIsLoadingTrueAction
-  | SetIsLoadingFalseAction;
+  | SetIsLoadingFalseAction
+  | SetIsLoadingTextTrueAction
+  | SetIsLoadingTextFalseAction;
 
 export const setIsSigninPopupOpenAction = (
   status: boolean
@@ -108,5 +121,19 @@ export const setIsLoadingFalseAction = (
   status: boolean
 ): SetIsLoadingFalseAction => ({
   type: ISLOADING_ACTION_TYPES.SET_ISLOADING_FALSE,
+  payload: false,
+});
+
+export const setIsLoadingTextTrueAction = (
+  status: boolean
+): SetIsLoadingTextTrueAction => ({
+  type: ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_TRUE,
+  payload: true,
+});
+
+export const setIsLoadingTextFalseAction = (
+  status: boolean
+): SetIsLoadingTextFalseAction => ({
+  type: ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_FALSE,
   payload: false,
 });

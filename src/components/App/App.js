@@ -51,10 +51,11 @@ import {
   setInfoTooltipClosedAction,
   setIsLoadingTrueAction,
   setIsLoadingFalseAction,
+  setIsLoadingTextTrueAction,
+  setIsLoadingTextFalseAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
-  const [isLoadingText, setIsLoadingText] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState('');
@@ -86,6 +87,7 @@ const App = () => {
     (state) => state.toggles.isInfoTooltipOpen
   );
   const isLoading = useSelector((state) => state.toggles.isLoading);
+  const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -100,7 +102,7 @@ const App = () => {
   };
 
   const startLoadingText = () => {
-    setIsLoadingText(true);
+    dispatch(setIsLoadingTextTrueAction());
   };
 
   const startLoadingNews = () => {
@@ -202,7 +204,7 @@ const App = () => {
         console.log(err);
       })
       .finally(() => {
-        setIsLoadingText(false);
+        dispatch(setIsLoadingTextFalseAction());
       });
   };
 
@@ -216,7 +218,7 @@ const App = () => {
         if (data.token) {
           setLoggedIn(true);
           closeAllPopups(true);
-          setIsLoadingText(false);
+          dispatch(setIsLoadingTextFalseAction());
         }
       })
       .then(() => {
@@ -226,7 +228,7 @@ const App = () => {
       })
       .catch((err) => {
         setPopupServerError(err.message);
-        setIsLoadingText(false);
+        dispatch(setIsLoadingTextFalseAction());
         console.log(err);
       })
       .finally(() => {
