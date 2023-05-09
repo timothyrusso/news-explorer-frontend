@@ -342,7 +342,7 @@ const App = () => {
       default:
         return;
     } // eslint-disable-next-line
-  }, [location, setSavedCard, setToggleMenu, dispatch]);
+  }, [location, setSavedCard, dispatch]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
