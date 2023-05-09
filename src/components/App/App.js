@@ -63,10 +63,11 @@ import {
 import {
   setIsFormValidityTrueAction,
   setIsFormValidityFalseAction,
+  setErrorMessageAction,
+  removeErrorMessageAction,
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState('');
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
@@ -98,6 +99,7 @@ const App = () => {
   const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
   const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
   const formValidity = useSelector((state) => state.errors.formValidity);
+  const errorMessage = useSelector((state) => state.errors.errorMessage);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -128,12 +130,17 @@ const App = () => {
 
   const checkValidity = (evt) => {
     const name = evt.target.name;
-    setErrorMessage({ ...errorMessage, [name]: evt.target.validationMessage });
+    dispatch(
+      setErrorMessageAction({
+        ...errorMessage,
+        [name]: evt.target.validationMessage,
+      })
+    );
   };
 
   const handleSigninPopupClick = () => {
     dispatch(setIsFormValidityTrueAction());
-    setErrorMessage({});
+    dispatch(removeErrorMessageAction());
     closeAllPopups();
     setPopupRedirectText('Sign up');
     dispatch(setIsSigninPopupOpenAction());
