@@ -49,10 +49,11 @@ import {
   setIsSignupPopupClosedAction,
   setInfoTooltipOpenAction,
   setInfoTooltipClosedAction,
+  setIsLoadingTrueAction,
+  setIsLoadingFalseAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingText, setIsLoadingText] = useState(false);
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
@@ -84,6 +85,7 @@ const App = () => {
   const isInfoTooltipOpen = useSelector(
     (state) => state.toggles.isInfoTooltipOpen
   );
+  const isLoading = useSelector((state) => state.toggles.isLoading);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -103,7 +105,7 @@ const App = () => {
 
   const startLoadingNews = () => {
     setShowNews(false);
-    setIsLoading(true);
+    dispatch(setIsLoadingTrueAction());
   };
 
   const onFormUpdate = (data) => {
@@ -179,7 +181,7 @@ const App = () => {
         setServerError(true);
       })
       .finally(() => {
-        setIsLoading(false);
+        dispatch(setIsLoadingFalseAction());
         setShowNews(true);
       });
   };
