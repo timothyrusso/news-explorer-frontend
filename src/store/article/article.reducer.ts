@@ -1,6 +1,6 @@
 import { Article } from './article.type';
 import { ArticleActionTypes } from './article.actions';
-import { FETCH_ARTICLES, SET_SHOW_MORE_ARTICLES } from './article.action.types';
+import { ARTICLE_ACTION_TYPES } from './article.action.types';
 
 export type userState = {
   articles: Article | {};
@@ -15,12 +15,12 @@ export const articleReducer = (
   action: ArticleActionTypes
 ) => {
   switch (action.type) {
-    case FETCH_ARTICLES:
+    case ARTICLE_ACTION_TYPES.FETCH_ARTICLES:
       return {
         ...state,
         articles: action.payload,
       };
-    case SET_SHOW_MORE_ARTICLES:
+    case ARTICLE_ACTION_TYPES.SET_SHOW_MORE_ARTICLES:
       return {
         ...state,
         articles: action.payload,

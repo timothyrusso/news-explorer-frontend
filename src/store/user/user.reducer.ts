@@ -1,5 +1,6 @@
 import { User } from './user.type';
 import { UserActionTypes } from './user.actions';
+import { USER_ACTION_TYPES } from './user.action.types';
 
 export type userState = {
   currentUser: User | {};
@@ -11,12 +12,12 @@ const INITIAL_STATE: userState = {
 
 export const userReducer = (state = INITIAL_STATE, action: UserActionTypes) => {
   switch (action.type) {
-    case 'LOGIN_USER':
+    case USER_ACTION_TYPES.LOGIN_USER:
       return {
         ...state,
         currentUser: action.payload,
       };
-    case 'LOGOUT_USER':
+    case USER_ACTION_TYPES.LOGOUT_USER:
       return {
         ...state,
         currentUser: action.payload,
