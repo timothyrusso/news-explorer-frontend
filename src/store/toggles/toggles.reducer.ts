@@ -5,6 +5,7 @@ import {
   INFO_TOOLTIP_ACTION_TYPES,
   ISLOADING_ACTION_TYPES,
   ISLOADING_TEXT_ACTION_TYPES,
+  ISLOGGEDIN_ACTION_TYPES,
 } from './toggles.action.types';
 
 export type togglesState = {
@@ -13,6 +14,7 @@ export type togglesState = {
   isInfoTooltipOpen: boolean;
   isLoading: boolean;
   isLoadingText: boolean;
+  isLoggedin: boolean;
 };
 
 const INITIAL_STATE: togglesState = {
@@ -21,6 +23,7 @@ const INITIAL_STATE: togglesState = {
   isInfoTooltipOpen: false,
   isLoading: false,
   isLoadingText: false,
+  isLoggedin: false,
 };
 
 export const togglesReducer = (
@@ -77,6 +80,16 @@ export const togglesReducer = (
       return {
         ...state,
         isLoadingText: action.payload,
+      };
+    case ISLOGGEDIN_ACTION_TYPES.SET_ISLOGGEDIN_TRUE:
+      return {
+        ...state,
+        isLoggedin: action.payload,
+      };
+    case ISLOGGEDIN_ACTION_TYPES.SET_ISLOGGEDIN_FALSE:
+      return {
+        ...state,
+        isLoggedin: action.payload,
       };
     default:
       return state;

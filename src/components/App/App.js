@@ -53,13 +53,14 @@ import {
   setIsLoadingFalseAction,
   setIsLoadingTextTrueAction,
   setIsLoadingTextFalseAction,
+  setIsLoggedinTrueAction,
+  setIsLoggedinFalseAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
   const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
   const [blackNavigator, setBlackNavigator] = useState(false);
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
@@ -88,6 +89,8 @@ const App = () => {
   );
   const isLoading = useSelector((state) => state.toggles.isLoading);
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
+  const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
+  console.log(isLoggedIn);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -140,7 +143,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    setLoggedIn(false);
+    dispatch(setIsLoggedinFalseAction());
     history('/');
     localStorage.removeItem('jwt');
     dispatch(logoutUserAction({}));
@@ -216,7 +219,7 @@ const App = () => {
     authorize(password, email)
       .then((data) => {
         if (data.token) {
-          setLoggedIn(true);
+          dispatch(setIsLoggedinTrueAction());
           closeAllPopups(true);
           dispatch(setIsLoadingTextFalseAction());
         }
@@ -242,7 +245,7 @@ const App = () => {
       checkToken(jwt)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
+            dispatch(setIsLoggedinTrueAction());
           } else {
             localStorage.removeItem('jwt');
           }
@@ -340,7 +343,7 @@ const App = () => {
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
-    if (jwt && loggedIn) {
+    if (jwt && isLoggedIn) {
       getProfileInfo()
         .then((info) => {
           dispatch(loginUserAction(info.data));
@@ -356,7 +359,7 @@ const App = () => {
           console.log(err);
         });
     }
-  }, [loggedIn]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     handleTokenCheck();
@@ -374,7 +377,7 @@ const App = () => {
     <div className="content">
       <Navigation
         onSigninPopupClick={handleSigninPopupClick}
-        loggedIn={loggedIn}
+        loggedIn={isLoggedIn}
         blackNavigator={blackNavigator}
         handleLogout={handleLogout}
         toggleMenu={toggleMenu}
@@ -393,7 +396,7 @@ const App = () => {
               {showNews && newsArticles.length !== 0 && (
                 <NewsCardList
                   onSigninPopupClick={handleSigninPopupClick}
-                  loggedIn={loggedIn}
+                  loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
                   showMoreButtonLogic={showMoreButtonLogic}
