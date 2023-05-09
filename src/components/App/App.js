@@ -60,9 +60,12 @@ import {
   setIsMobileNavbarOppositeAction,
   setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
+import {
+  setIsFormValidityTrueAction,
+  setIsFormValidityFalseAction,
+} from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [formValidity, setFormValidity] = useState(true);
   const [errorMessage, setErrorMessage] = useState({});
   const [popupRedirectText, setPopupRedirectText] = useState('');
   const [savedCard, setSavedCard] = useState(false);
@@ -94,6 +97,7 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
   const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
   const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
+  const formValidity = useSelector((state) => state.errors.formValidity);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -117,7 +121,9 @@ const App = () => {
   };
 
   const onFormUpdate = (data) => {
-    data ? setFormValidity(true) : setFormValidity(false);
+    data
+      ? dispatch(setIsFormValidityTrueAction())
+      : dispatch(setIsFormValidityFalseAction());
   };
 
   const checkValidity = (evt) => {
@@ -126,7 +132,7 @@ const App = () => {
   };
 
   const handleSigninPopupClick = () => {
-    setFormValidity(true);
+    dispatch(setIsFormValidityTrueAction());
     setErrorMessage({});
     closeAllPopups();
     setPopupRedirectText('Sign up');
