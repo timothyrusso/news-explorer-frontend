@@ -6,6 +6,7 @@ import {
   ISLOADING_TEXT_ACTION_TYPES,
   ISLOGGEDIN_ACTION_TYPES,
   ISBLACK_NAVBAR_ACTION_TYPES,
+  IS_MOBILE_NAVBAR_ACTION_TYPES,
 } from './toggles.action.types';
 
 type SetIsSigninPopupOpenAction = {
@@ -78,6 +79,16 @@ type SetIsBlackNavbarFalseAction = {
   payload: boolean;
 };
 
+type SetIsMobileNavbarOppositeAction = {
+  type: typeof IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_OPPOSITE;
+  payload: boolean;
+};
+
+type SetIsMobileNavbarFalseAction = {
+  type: typeof IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_FALSE;
+  payload: boolean;
+};
+
 export type TogglesActionTypes =
   | SetIsSigninPopupOpenAction
   | SetIsSigninPopupClosedAction
@@ -92,102 +103,91 @@ export type TogglesActionTypes =
   | SetIsLoggedinTrueAction
   | SetIsLoggedinFalseAction
   | SetIsBlackNavbarTrueAction
-  | SetIsBlackNavbarFalseAction;
+  | SetIsBlackNavbarFalseAction
+  | SetIsMobileNavbarOppositeAction
+  | SetIsMobileNavbarFalseAction;
 
-export const setIsSigninPopupOpenAction = (
-  status: boolean
-): SetIsSigninPopupOpenAction => ({
+export const setIsSigninPopupOpenAction = (): SetIsSigninPopupOpenAction => ({
   type: SIGNIN_POPUP_ACTION_TYPES.SET_SIGNIN_POPUP_OPEN,
   payload: true,
 });
 
-export const setIsSigninPopupClosedAction = (
-  status: boolean
-): SetIsSigninPopupClosedAction => ({
-  type: SIGNIN_POPUP_ACTION_TYPES.SET_SIGNIN_POPUP_CLOSED,
-  payload: false,
-});
+export const setIsSigninPopupClosedAction =
+  (): SetIsSigninPopupClosedAction => ({
+    type: SIGNIN_POPUP_ACTION_TYPES.SET_SIGNIN_POPUP_CLOSED,
+    payload: false,
+  });
 
-export const setIsSignupPopupOpenAction = (
-  status: boolean
-): SetIsSignupPopupOpenAction => ({
+export const setIsSignupPopupOpenAction = (): SetIsSignupPopupOpenAction => ({
   type: SIGNUP_POPUP_ACTION_TYPES.SET_SIGNUP_POPUP_OPEN,
   payload: true,
 });
 
-export const setIsSignupPopupClosedAction = (
-  status: boolean
-): SetIsSignupPopupClosedAction => ({
-  type: SIGNUP_POPUP_ACTION_TYPES.SET_SIGNUP_POPUP_CLOSED,
-  payload: false,
-});
+export const setIsSignupPopupClosedAction =
+  (): SetIsSignupPopupClosedAction => ({
+    type: SIGNUP_POPUP_ACTION_TYPES.SET_SIGNUP_POPUP_CLOSED,
+    payload: false,
+  });
 
-export const setInfoTooltipOpenAction = (
-  status: boolean
-): SetInfoTooltipOpenAction => ({
+export const setInfoTooltipOpenAction = (): SetInfoTooltipOpenAction => ({
   type: INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_OPEN,
   payload: true,
 });
 
-export const setInfoTooltipClosedAction = (
-  status: boolean
-): SetInfoTooltipClosedAction => ({
+export const setInfoTooltipClosedAction = (): SetInfoTooltipClosedAction => ({
   type: INFO_TOOLTIP_ACTION_TYPES.SET_INFO_TOOLTIP_CLOSED,
   payload: false,
 });
 
-export const setIsLoadingTrueAction = (
-  status: boolean
-): SetIsLoadingTrueAction => ({
+export const setIsLoadingTrueAction = (): SetIsLoadingTrueAction => ({
   type: ISLOADING_ACTION_TYPES.SET_ISLOADING_TRUE,
   payload: true,
 });
 
-export const setIsLoadingFalseAction = (
-  status: boolean
-): SetIsLoadingFalseAction => ({
+export const setIsLoadingFalseAction = (): SetIsLoadingFalseAction => ({
   type: ISLOADING_ACTION_TYPES.SET_ISLOADING_FALSE,
   payload: false,
 });
 
-export const setIsLoadingTextTrueAction = (
-  status: boolean
-): SetIsLoadingTextTrueAction => ({
+export const setIsLoadingTextTrueAction = (): SetIsLoadingTextTrueAction => ({
   type: ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_TRUE,
   payload: true,
 });
 
-export const setIsLoadingTextFalseAction = (
-  status: boolean
-): SetIsLoadingTextFalseAction => ({
+export const setIsLoadingTextFalseAction = (): SetIsLoadingTextFalseAction => ({
   type: ISLOADING_TEXT_ACTION_TYPES.SET_ISLOADING_TEXT_FALSE,
   payload: false,
 });
 
-export const setIsLoggedinTrueAction = (
-  status: boolean
-): SetIsLoggedinTrueAction => ({
+export const setIsLoggedinTrueAction = (): SetIsLoggedinTrueAction => ({
   type: ISLOGGEDIN_ACTION_TYPES.SET_ISLOGGEDIN_TRUE,
   payload: true,
 });
 
-export const setIsLoggedinFalseAction = (
-  status: boolean
-): SetIsLoggedinFalseAction => ({
+export const setIsLoggedinFalseAction = (): SetIsLoggedinFalseAction => ({
   type: ISLOGGEDIN_ACTION_TYPES.SET_ISLOGGEDIN_FALSE,
   payload: false,
 });
 
-export const setIsBlackNavbarTrueAction = (
-  status: boolean
-): SetIsBlackNavbarTrueAction => ({
+export const setIsBlackNavbarTrueAction = (): SetIsBlackNavbarTrueAction => ({
   type: ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_TRUE,
   payload: true,
 });
 
-export const setIsBlackNavbarFalseAction = (
-  status: boolean
-): SetIsBlackNavbarFalseAction => ({
+export const setIsBlackNavbarFalseAction = (): SetIsBlackNavbarFalseAction => ({
   type: ISBLACK_NAVBAR_ACTION_TYPES.SET_ISBLACK_NAVBAR_FALSE,
   payload: false,
 });
+
+export const setIsMobileNavbarOppositeAction = (
+  status: boolean
+): SetIsMobileNavbarOppositeAction => ({
+  type: IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_OPPOSITE,
+  payload: status,
+});
+
+export const setIsMobileNavbarFalseAction =
+  (): SetIsMobileNavbarFalseAction => ({
+    type: IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_FALSE,
+    payload: false,
+  });

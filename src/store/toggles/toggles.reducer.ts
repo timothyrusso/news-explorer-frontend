@@ -7,6 +7,7 @@ import {
   ISLOADING_TEXT_ACTION_TYPES,
   ISLOGGEDIN_ACTION_TYPES,
   ISBLACK_NAVBAR_ACTION_TYPES,
+  IS_MOBILE_NAVBAR_ACTION_TYPES,
 } from './toggles.action.types';
 
 export type togglesState = {
@@ -17,6 +18,7 @@ export type togglesState = {
   isLoadingText: boolean;
   isLoggedin: boolean;
   isBlackNavbar: boolean;
+  isMobileNavbar: boolean;
 };
 
 const INITIAL_STATE: togglesState = {
@@ -27,6 +29,7 @@ const INITIAL_STATE: togglesState = {
   isLoadingText: false,
   isLoggedin: false,
   isBlackNavbar: false,
+  isMobileNavbar: false,
 };
 
 export const togglesReducer = (
@@ -103,6 +106,16 @@ export const togglesReducer = (
       return {
         ...state,
         isBlackNavbar: action.payload,
+      };
+    case IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_OPPOSITE:
+      return {
+        ...state,
+        isMobileNavbar: action.payload,
+      };
+    case IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_FALSE:
+      return {
+        ...state,
+        isMobileNavbar: action.payload,
       };
     default:
       return state;

@@ -57,6 +57,8 @@ import {
   setIsLoggedinFalseAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
+  setIsMobileNavbarOppositeAction,
+  setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
 
 const App = () => {
@@ -65,7 +67,6 @@ const App = () => {
   const [popupRedirectText, setPopupRedirectText] = useState('');
   const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
@@ -92,6 +93,7 @@ const App = () => {
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
   const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
+  const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -152,7 +154,7 @@ const App = () => {
   };
 
   const toggleNav = () => {
-    setToggleMenu(!toggleMenu);
+    dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
   };
 
   const showMoreResults = () => {
@@ -329,13 +331,13 @@ const App = () => {
       case '/':
         dispatch(setIsBlackNavbarFalseAction());
         setSavedCard(false);
-        setToggleMenu(false);
+        dispatch(setIsMobileNavbarFalseAction());
         return;
       case '/saved-news':
         dispatch(setIsBlackNavbarTrueAction());
         setSavedCard(true);
-        setToggleMenu(false);
         openPopupIfNotLoggedin();
+        dispatch(setIsMobileNavbarFalseAction());
         return;
       default:
         return;
@@ -381,7 +383,7 @@ const App = () => {
         loggedIn={isLoggedIn}
         isBlackNavbar={isBlackNavbar}
         handleLogout={handleLogout}
-        toggleMenu={toggleMenu}
+        toggleMenu={isMobileNavbar}
         toggleNav={toggleNav}
       />
       <Routes>
