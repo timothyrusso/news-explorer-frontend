@@ -41,6 +41,8 @@ import {
 import {
   fetchArticlesAction,
   setShowMoreArticlesAction,
+  setIsSavedArticleTrueAction,
+  setIsSavedArticleFalseAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -69,7 +71,6 @@ import {
 
 const App = () => {
   const [popupRedirectText, setPopupRedirectText] = useState('');
-  const [savedCard, setSavedCard] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
@@ -100,6 +101,7 @@ const App = () => {
   const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
   const formValidity = useSelector((state) => state.errors.formValidity);
   const errorMessage = useSelector((state) => state.errors.errorMessage);
+  const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -343,19 +345,19 @@ const App = () => {
     switch (location.pathname) {
       case '/':
         dispatch(setIsBlackNavbarFalseAction());
-        setSavedCard(false);
+        dispatch(setIsSavedArticleFalseAction());
         dispatch(setIsMobileNavbarFalseAction());
         return;
       case '/saved-news':
         dispatch(setIsBlackNavbarTrueAction());
-        setSavedCard(true);
+        dispatch(setIsSavedArticleTrueAction());
         openPopupIfNotLoggedin();
         dispatch(setIsMobileNavbarFalseAction());
         return;
       default:
         return;
     } // eslint-disable-next-line
-  }, [location, setSavedCard, dispatch]);
+  }, [location, dispatch]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -486,7 +488,7 @@ const App = () => {
                 <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
                 <SavedNews
                   cards={cards}
-                  savedCard={savedCard}
+                  isSavedArticle={isSavedArticle}
                   handleDeleteArticles={handleDeleteArticles}
                   checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}

@@ -1,9 +1,9 @@
-import "./SavedNews.css";
-import NewsCard from "../NewsCard/NewsCard";
+import './SavedNews.css';
+import NewsCard from '../NewsCard/NewsCard';
 
 const SavedNews = ({
   cards,
-  savedCard,
+  isSavedArticle,
   handleDeleteArticles,
   checkSavedArticle,
   saveUnauthorizedUserCard,
@@ -15,7 +15,7 @@ const SavedNews = ({
           <NewsCard
             key={card._id}
             card={card}
-            savedCard={savedCard}
+            isSavedArticle={isSavedArticle}
             handleDeleteArticles={handleDeleteArticles}
             checkSavedArticle={checkSavedArticle}
             saveUnauthorizedUserCard={saveUnauthorizedUserCard}
