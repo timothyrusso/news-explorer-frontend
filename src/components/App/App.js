@@ -45,6 +45,7 @@ import {
   setIsSavedArticleFalseAction,
   setShowArticleTrueAction,
   setShowArticleFalseAction,
+  fetchAllArticlesAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -74,7 +75,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [popupServerError, setPopupServerError] = useState('');
@@ -108,10 +108,11 @@ const App = () => {
   const popupRedirectText = useSelector(
     (state) => state.toggles.popupRedirectText
   );
+  const allArticles = useSelector((state) => state.article.allArticles);
 
   const jwt = localStorage.getItem('jwt');
 
-  const showMoreButtonLogic = next < newsObject.length;
+  const showMoreButtonLogic = next < allArticles.length;
   let arrayForHoldingNews = [];
 
   const closeAllPopups = () => {
@@ -184,7 +185,7 @@ const App = () => {
   };
 
   const loopArticlesWithSlice = (start, end) => {
-    const slicedNews = newsObject.slice(start, end);
+    const slicedNews = allArticles.slice(start, end);
     arrayForHoldingNews = [...newsArticles, ...slicedNews];
     dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
   };
@@ -203,7 +204,9 @@ const App = () => {
             JSON.parse(localStorage.getItem('news')).slice(start, end)
           )
         );
-        setNewsObject(JSON.parse(localStorage.getItem('news')));
+        dispatch(
+          fetchAllArticlesAction(JSON.parse(localStorage.getItem('news')))
+        );
       })
       .catch((err) => {
         console.log(err);

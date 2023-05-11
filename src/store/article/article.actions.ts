@@ -2,6 +2,7 @@ import {
   ARTICLE_ACTION_TYPES,
   ISSAVED_ARTICLE_ACTION_TYPES,
   SHOW_ARTICLE_ACTION_TYPES,
+  ALL_ARTICLES_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
 
@@ -12,6 +13,11 @@ type FetchArticleAction = {
 
 type SetShowMoreArticlesAction = {
   type: typeof ARTICLE_ACTION_TYPES.SET_SHOW_MORE_ARTICLES;
+  payload: Article[];
+};
+
+type FetchAllArticlesAction = {
+  type: typeof ALL_ARTICLES_ACTION_TYPES.FETCH_ALL_ARTICLES;
   payload: Article[];
 };
 
@@ -41,7 +47,8 @@ export type ArticleActionTypes =
   | SetIsSavedArticleTrueAction
   | SetIsSavedArticleFalseAction
   | SetShowArticleTrueAction
-  | SetShowArticleFalseAction;
+  | SetShowArticleFalseAction
+  | FetchAllArticlesAction;
 
 export const fetchArticlesAction = (
   articles: Article[]
@@ -54,6 +61,13 @@ export const setShowMoreArticlesAction = (
   articles: Article[]
 ): SetShowMoreArticlesAction => ({
   type: ARTICLE_ACTION_TYPES.SET_SHOW_MORE_ARTICLES,
+  payload: articles,
+});
+
+export const fetchAllArticlesAction = (
+  articles: Article[]
+): FetchAllArticlesAction => ({
+  type: ALL_ARTICLES_ACTION_TYPES.FETCH_ALL_ARTICLES,
   payload: articles,
 });
 

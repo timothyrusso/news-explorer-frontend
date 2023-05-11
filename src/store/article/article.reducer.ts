@@ -4,18 +4,21 @@ import {
   ARTICLE_ACTION_TYPES,
   ISSAVED_ARTICLE_ACTION_TYPES,
   SHOW_ARTICLE_ACTION_TYPES,
+  ALL_ARTICLES_ACTION_TYPES,
 } from './article.action.types';
 
 export type userState = {
   articles: Article | {};
   isSavedArticle: boolean;
   showArticles: boolean;
+  allArticles: Article[];
 };
 
 const INITIAL_STATE: userState = {
   articles: {},
   isSavedArticle: false,
   showArticles: false,
+  allArticles: [],
 };
 
 export const articleReducer = (
@@ -32,6 +35,11 @@ export const articleReducer = (
       return {
         ...state,
         articles: action.payload,
+      };
+    case ALL_ARTICLES_ACTION_TYPES.FETCH_ALL_ARTICLES:
+      return {
+        ...state,
+        allArticles: action.payload,
       };
     case ISSAVED_ARTICLE_ACTION_TYPES.SET_ISSAVED_ARTICLE_TRUE:
       return {
