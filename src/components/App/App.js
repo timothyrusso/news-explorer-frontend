@@ -46,6 +46,8 @@ import {
   setShowArticleTrueAction,
   setShowArticleFalseAction,
   fetchAllArticlesAction,
+  setNextThreeArticlesToThreeAction,
+  setNextThreeArticlesToPayloadAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -75,7 +77,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
   const [popupServerError, setPopupServerError] = useState('');
   const [cards, setCards] = useState([]); // Saved articles from the user
@@ -109,10 +110,13 @@ const App = () => {
     (state) => state.toggles.popupRedirectText
   );
   const allArticles = useSelector((state) => state.article.allArticles);
+  const nextThreeArticles = useSelector(
+    (state) => state.article.nextThreeArticles
+  );
 
   const jwt = localStorage.getItem('jwt');
 
-  const showMoreButtonLogic = next < allArticles.length;
+  const showMoreButtonLogic = nextThreeArticles < allArticles.length;
   let arrayForHoldingNews = [];
 
   const closeAllPopups = () => {
@@ -180,8 +184,10 @@ const App = () => {
   };
 
   const showMoreResults = () => {
-    loopArticlesWithSlice(next, next + newsPerPage);
-    setNext(next + newsPerPage);
+    loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
+    dispatch(
+      setNextThreeArticlesToPayloadAction(nextThreeArticles + newsPerPage)
+    );
   };
 
   const loopArticlesWithSlice = (start, end) => {
@@ -192,7 +198,7 @@ const App = () => {
 
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
     localStorage.removeItem('news');
-    setNext(3);
+    dispatch(setNextThreeArticlesToThreeAction());
     setServerError(false);
     setKeyword(data.search);
 

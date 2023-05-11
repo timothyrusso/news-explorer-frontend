@@ -3,6 +3,7 @@ import {
   ISSAVED_ARTICLE_ACTION_TYPES,
   SHOW_ARTICLE_ACTION_TYPES,
   ALL_ARTICLES_ACTION_TYPES,
+  NEXT_THREE_ARTICLES_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
 
@@ -41,6 +42,16 @@ type SetShowArticleFalseAction = {
   payload: boolean;
 };
 
+type SetNextThreeArticlesToThreeAction = {
+  type: typeof NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_THREE;
+  payload: number;
+};
+
+type SetNextThreeArticlesToPayloadAction = {
+  type: typeof NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_PAYLOAD;
+  payload: number;
+};
+
 export type ArticleActionTypes =
   | FetchArticleAction
   | SetShowMoreArticlesAction
@@ -48,7 +59,9 @@ export type ArticleActionTypes =
   | SetIsSavedArticleFalseAction
   | SetShowArticleTrueAction
   | SetShowArticleFalseAction
-  | FetchAllArticlesAction;
+  | FetchAllArticlesAction
+  | SetNextThreeArticlesToThreeAction
+  | SetNextThreeArticlesToPayloadAction;
 
 export const fetchArticlesAction = (
   articles: Article[]
@@ -90,4 +103,17 @@ export const setShowArticleTrueAction = (): SetShowArticleTrueAction => ({
 export const setShowArticleFalseAction = (): SetShowArticleFalseAction => ({
   type: SHOW_ARTICLE_ACTION_TYPES.SET_SHOW_ARTICLE_FALSE,
   payload: false,
+});
+
+export const setNextThreeArticlesToThreeAction =
+  (): SetNextThreeArticlesToThreeAction => ({
+    type: NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_THREE,
+    payload: 3,
+  });
+
+export const setNextThreeArticlesToPayloadAction = (
+  state: number
+): SetNextThreeArticlesToPayloadAction => ({
+  type: NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_PAYLOAD,
+  payload: state,
 });

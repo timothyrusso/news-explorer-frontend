@@ -5,6 +5,7 @@ import {
   ISSAVED_ARTICLE_ACTION_TYPES,
   SHOW_ARTICLE_ACTION_TYPES,
   ALL_ARTICLES_ACTION_TYPES,
+  NEXT_THREE_ARTICLES_ACTION_TYPES,
 } from './article.action.types';
 
 export type userState = {
@@ -12,6 +13,7 @@ export type userState = {
   isSavedArticle: boolean;
   showArticles: boolean;
   allArticles: Article[];
+  nextThreeArticles: number;
 };
 
 const INITIAL_STATE: userState = {
@@ -19,6 +21,7 @@ const INITIAL_STATE: userState = {
   isSavedArticle: false,
   showArticles: false,
   allArticles: [],
+  nextThreeArticles: 3,
 };
 
 export const articleReducer = (
@@ -60,6 +63,16 @@ export const articleReducer = (
       return {
         ...state,
         showArticles: action.payload,
+      };
+    case NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_THREE:
+      return {
+        ...state,
+        nextThreeArticles: action.payload,
+      };
+    case NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_PAYLOAD:
+      return {
+        ...state,
+        nextThreeArticles: action.payload,
       };
     default:
       return state;
