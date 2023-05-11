@@ -8,6 +8,7 @@ import {
   ISLOGGEDIN_ACTION_TYPES,
   ISBLACK_NAVBAR_ACTION_TYPES,
   IS_MOBILE_NAVBAR_ACTION_TYPES,
+  POPUP_REDIRECT_TEXT_ACTION_TYPES,
 } from './toggles.action.types';
 
 export type togglesState = {
@@ -19,6 +20,7 @@ export type togglesState = {
   isLoggedin: boolean;
   isBlackNavbar: boolean;
   isMobileNavbar: boolean;
+  popupRedirectText: string;
 };
 
 const INITIAL_STATE: togglesState = {
@@ -30,6 +32,7 @@ const INITIAL_STATE: togglesState = {
   isLoggedin: false,
   isBlackNavbar: false,
   isMobileNavbar: false,
+  popupRedirectText: '',
 };
 
 export const togglesReducer = (
@@ -116,6 +119,16 @@ export const togglesReducer = (
       return {
         ...state,
         isMobileNavbar: action.payload,
+      };
+    case POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNIN:
+      return {
+        ...state,
+        popupRedirectText: action.payload,
+      };
+    case POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNUP:
+      return {
+        ...state,
+        popupRedirectText: action.payload,
       };
     default:
       return state;

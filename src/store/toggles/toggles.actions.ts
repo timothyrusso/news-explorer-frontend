@@ -7,6 +7,7 @@ import {
   ISLOGGEDIN_ACTION_TYPES,
   ISBLACK_NAVBAR_ACTION_TYPES,
   IS_MOBILE_NAVBAR_ACTION_TYPES,
+  POPUP_REDIRECT_TEXT_ACTION_TYPES,
 } from './toggles.action.types';
 
 type SetIsSigninPopupOpenAction = {
@@ -89,6 +90,16 @@ type SetIsMobileNavbarFalseAction = {
   payload: boolean;
 };
 
+type SetPopupRedirectTextSigninAction = {
+  type: typeof POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNIN;
+  payload: string;
+};
+
+type SetPopupRedirectTextSignupAction = {
+  type: typeof POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNUP;
+  payload: string;
+};
+
 export type TogglesActionTypes =
   | SetIsSigninPopupOpenAction
   | SetIsSigninPopupClosedAction
@@ -105,7 +116,9 @@ export type TogglesActionTypes =
   | SetIsBlackNavbarTrueAction
   | SetIsBlackNavbarFalseAction
   | SetIsMobileNavbarOppositeAction
-  | SetIsMobileNavbarFalseAction;
+  | SetIsMobileNavbarFalseAction
+  | SetPopupRedirectTextSigninAction
+  | SetPopupRedirectTextSignupAction;
 
 export const setIsSigninPopupOpenAction = (): SetIsSigninPopupOpenAction => ({
   type: SIGNIN_POPUP_ACTION_TYPES.SET_SIGNIN_POPUP_OPEN,
@@ -191,3 +204,17 @@ export const setIsMobileNavbarFalseAction =
     type: IS_MOBILE_NAVBAR_ACTION_TYPES.SET_IS_MOBILE_NAVBAR_FALSE,
     payload: false,
   });
+
+export const setPopupRedirectTextSigninAction = (
+  status: string
+): SetPopupRedirectTextSigninAction => ({
+  type: POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNIN,
+  payload: status,
+});
+
+export const setPopupRedirectTextSignupAction = (
+  status: string
+): SetPopupRedirectTextSignupAction => ({
+  type: POPUP_REDIRECT_TEXT_ACTION_TYPES.SET_POPUP_REDIRECT_TEXT_SIGNUP,
+  payload: status,
+});

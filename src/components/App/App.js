@@ -63,6 +63,8 @@ import {
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarOppositeAction,
   setIsMobileNavbarFalseAction,
+  setPopupRedirectTextSigninAction,
+  setPopupRedirectTextSignupAction,
 } from '../../store/toggles/toggles.actions';
 import {
   setIsFormValidityTrueAction,
@@ -72,7 +74,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [popupRedirectText, setPopupRedirectText] = useState('');
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
@@ -104,6 +105,9 @@ const App = () => {
   const errorMessage = useSelector((state) => state.errors.errorMessage);
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
   const showArticles = useSelector((state) => state.article.showArticles);
+  const popupRedirectText = useSelector(
+    (state) => state.toggles.popupRedirectText
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -146,7 +150,7 @@ const App = () => {
     dispatch(setIsFormValidityTrueAction());
     dispatch(removeErrorMessageAction());
     closeAllPopups();
-    setPopupRedirectText('Sign up');
+    dispatch(setPopupRedirectTextSignupAction('Sign up'));
     dispatch(setIsSigninPopupOpenAction());
   };
 
@@ -154,11 +158,11 @@ const App = () => {
     if (isSigninPopupOpen) {
       dispatch(setIsSigninPopupClosedAction());
       dispatch(setIsSignupPopupOpenAction());
-      setPopupRedirectText('Sign in');
+      dispatch(setPopupRedirectTextSigninAction('Sign in'));
     } else if (isSignupPopupOpen) {
       dispatch(setIsSignupPopupClosedAction());
       dispatch(setIsSigninPopupOpenAction());
-      setPopupRedirectText('Sign up');
+      dispatch(setPopupRedirectTextSignupAction('Sign up'));
     }
   };
 
