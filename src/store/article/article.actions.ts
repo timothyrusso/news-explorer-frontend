@@ -1,6 +1,7 @@
 import {
   ARTICLE_ACTION_TYPES,
   ISSAVED_ARTICLE_ACTION_TYPES,
+  SHOW_ARTICLE_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
 
@@ -24,11 +25,23 @@ type SetIsSavedArticleFalseAction = {
   payload: boolean;
 };
 
+type SetShowArticleTrueAction = {
+  type: typeof SHOW_ARTICLE_ACTION_TYPES.SET_SHOW_ARTICLE_TRUE;
+  payload: boolean;
+};
+
+type SetShowArticleFalseAction = {
+  type: typeof SHOW_ARTICLE_ACTION_TYPES.SET_SHOW_ARTICLE_FALSE;
+  payload: boolean;
+};
+
 export type ArticleActionTypes =
   | FetchArticleAction
   | SetShowMoreArticlesAction
   | SetIsSavedArticleTrueAction
-  | SetIsSavedArticleFalseAction;
+  | SetIsSavedArticleFalseAction
+  | SetShowArticleTrueAction
+  | SetShowArticleFalseAction;
 
 export const fetchArticlesAction = (
   articles: Article[]
@@ -54,3 +67,13 @@ export const setIsSavedArticleFalseAction =
     type: ISSAVED_ARTICLE_ACTION_TYPES.SET_ISSAVED_ARTICLE_FALSE,
     payload: false,
   });
+
+export const setShowArticleTrueAction = (): SetShowArticleTrueAction => ({
+  type: SHOW_ARTICLE_ACTION_TYPES.SET_SHOW_ARTICLE_TRUE,
+  payload: true,
+});
+
+export const setShowArticleFalseAction = (): SetShowArticleFalseAction => ({
+  type: SHOW_ARTICLE_ACTION_TYPES.SET_SHOW_ARTICLE_FALSE,
+  payload: false,
+});

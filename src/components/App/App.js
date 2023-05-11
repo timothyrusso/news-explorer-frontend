@@ -43,6 +43,8 @@ import {
   setShowMoreArticlesAction,
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
+  setShowArticleTrueAction,
+  setShowArticleFalseAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -71,7 +73,6 @@ import {
 
 const App = () => {
   const [popupRedirectText, setPopupRedirectText] = useState('');
-  const [showNews, setShowNews] = useState(false);
   const [newsObject, setNewsObject] = useState([]);
   const [next, setNext] = useState(3);
   const [serverError, setServerError] = useState(false);
@@ -102,6 +103,7 @@ const App = () => {
   const formValidity = useSelector((state) => state.errors.formValidity);
   const errorMessage = useSelector((state) => state.errors.errorMessage);
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
+  const showArticles = useSelector((state) => state.article.showArticles);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -120,7 +122,7 @@ const App = () => {
   };
 
   const startLoadingNews = () => {
-    setShowNews(false);
+    dispatch(setShowArticleFalseAction());
     dispatch(setIsLoadingTrueAction());
   };
 
@@ -205,7 +207,7 @@ const App = () => {
       })
       .finally(() => {
         dispatch(setIsLoadingFalseAction());
-        setShowNews(true);
+        dispatch(setShowArticleTrueAction());
       });
   };
 
@@ -411,7 +413,7 @@ const App = () => {
                 startLoadingNews={startLoadingNews}
                 activateSearch={activateSearch}
               />
-              {showNews && newsArticles.length !== 0 && (
+              {showArticles && newsArticles.length !== 0 && (
                 <NewsCardList
                   onSigninPopupClick={handleSigninPopupClick}
                   loggedIn={isLoggedIn}
@@ -425,7 +427,7 @@ const App = () => {
               )}
               {newsArticles.length === 0 &&
                 !isLoading &&
-                showNews &&
+                showArticles &&
                 !serverError && (
                   <NothingFound
                     title={'Nothing found'}
