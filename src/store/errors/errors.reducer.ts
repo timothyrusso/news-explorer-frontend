@@ -3,18 +3,21 @@ import {
   FORM_VALIDITY_ACTION_TYPES,
   ERROR_MESSAGE_ACTION_TYPES,
   GENERIC_SERVER_ERROR_ACTION_TYPES,
+  POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES,
 } from './errors.action.types';
 
 export type errorsState = {
   formValidity: boolean;
   errorMessage: {};
   genericServerError: boolean;
+  popupServerErrorMessage: string;
 };
 
 const INITIAL_STATE: errorsState = {
   formValidity: true,
   errorMessage: {},
   genericServerError: false,
+  popupServerErrorMessage: '',
 };
 
 export const errorsReducer = (
@@ -51,6 +54,11 @@ export const errorsReducer = (
       return {
         ...state,
         genericServerError: action.payload,
+      };
+    case POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES.SET_POPUP_SERVER_ERROR_MESSAGE:
+      return {
+        ...state,
+        popupServerErrorMessage: action.payload,
       };
     default:
       return state;

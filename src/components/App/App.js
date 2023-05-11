@@ -76,10 +76,10 @@ import {
   removeErrorMessageAction,
   setGenericServerErrorTrueAction,
   setGenericServerErrorFalseAction,
+  setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [popupServerError, setPopupServerError] = useState('');
   const [cards, setCards] = useState([]); // Saved articles from the user
   const [keyword, setKeyword] = useState('');
   const [keywordsList, setKeywordsList] = useState([]);
@@ -117,6 +117,9 @@ const App = () => {
   const genericServerError = useSelector(
     (state) => state.errors.genericServerError
   );
+  const popupServerErrorMessage = useSelector(
+    (state) => state.errors.popupServerErrorMessage
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -127,7 +130,7 @@ const App = () => {
     dispatch(setIsSigninPopupClosedAction());
     dispatch(setIsSignupPopupClosedAction());
     dispatch(setInfoTooltipClosedAction());
-    setPopupServerError('');
+    dispatch(setPopupserverErrorMessageAction(''));
   };
 
   const startLoadingText = () => {
@@ -240,7 +243,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setPopupServerError(err.message);
+        dispatch(setPopupserverErrorMessageAction(err.message));
         console.log(err);
       })
       .finally(() => {
@@ -267,7 +270,7 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setPopupServerError(err.message);
+        dispatch(setPopupserverErrorMessageAction(err.message));
         dispatch(setIsLoadingTextFalseAction());
         console.log(err);
       })
@@ -475,7 +478,7 @@ const App = () => {
                 errorMessage={errorMessage}
                 onInputUpdate={checkValidity}
                 handleLoginSubmit={handleLoginSubmit}
-                popupServerError={popupServerError}
+                popupServerErrorMessage={popupServerErrorMessage}
               />
               <Register
                 isOpen={isSignupPopupOpen}
@@ -489,7 +492,7 @@ const App = () => {
                 errorMessage={errorMessage}
                 onInputUpdate={checkValidity}
                 handleRegisterSubmit={handleRegisterSubmit}
-                popupServerError={popupServerError}
+                popupServerErrorMessage={popupServerErrorMessage}
               />
               <InfoTooltip
                 isOpen={isInfoTooltipOpen}

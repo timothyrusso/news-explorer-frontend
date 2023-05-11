@@ -2,6 +2,7 @@ import {
   FORM_VALIDITY_ACTION_TYPES,
   ERROR_MESSAGE_ACTION_TYPES,
   GENERIC_SERVER_ERROR_ACTION_TYPES,
+  POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES,
 } from './errors.action.types';
 import { ErrorMessage } from './error.type';
 
@@ -35,13 +36,19 @@ type SetGenericServerErrorFalseAction = {
   payload: boolean;
 };
 
+type SetPopupserverErrorMessageAction = {
+  type: typeof POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES.SET_POPUP_SERVER_ERROR_MESSAGE;
+  payload: string;
+};
+
 export type ErrorsActionTypes =
   | SetIsFormValidityTrueAction
   | SetIsFormValidityFalseAction
   | SetErrorMessageAction
   | RemoveErrorMessageAction
   | SetGenericServerErrorTrueAction
-  | SetGenericServerErrorFalseAction;
+  | SetGenericServerErrorFalseAction
+  | SetPopupserverErrorMessageAction;
 
 export const setIsFormValidityTrueAction = (): SetIsFormValidityTrueAction => ({
   type: FORM_VALIDITY_ACTION_TYPES.SET_FORM_VALIDITY_TRUE,
@@ -77,3 +84,10 @@ export const setGenericServerErrorFalseAction =
     type: GENERIC_SERVER_ERROR_ACTION_TYPES.SET_GENERIC_SERVER_ERROR_FALSE,
     payload: false,
   });
+
+export const setPopupserverErrorMessageAction = (
+  errorMessage: string
+): SetPopupserverErrorMessageAction => ({
+  type: POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES.SET_POPUP_SERVER_ERROR_MESSAGE,
+  payload: errorMessage,
+});

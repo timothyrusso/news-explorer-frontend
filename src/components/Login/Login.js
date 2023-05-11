@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import Input from "../Input/Input";
+import React, { useState } from 'react';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 
 const Login = ({
@@ -15,10 +15,10 @@ const Login = ({
   onInputUpdate,
   errorMessage,
   handleLoginSubmit,
-  popupServerError,
+  popupServerErrorMessage,
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleEmailChange = (evt) => {
     onInputUpdate(evt);
@@ -37,8 +37,8 @@ const Login = ({
   };
 
   React.useEffect(() => {
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   }, [isOpen]);
 
   return (
@@ -50,39 +50,38 @@ const Login = ({
         onClose={onClose}
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
-        buttonText={"Sign in"}
-        loadingText={"Loading.."}
+        buttonText={'Sign in'}
+        loadingText={'Loading..'}
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
         onFormUpdate={onFormUpdate}
-        popupServerError={popupServerError}
       >
         <Input
-          type={"email"}
-          idName={"email-signin-input"}
-          name={"email"}
-          fieldName={"field_email"}
-          placeholder={"Enter email"}
+          type={'email'}
+          idName={'email-signin-input'}
+          name={'email'}
+          fieldName={'field_email'}
+          placeholder={'Enter email'}
           value={email}
           onChange={handleEmailChange}
           errorMessage={errorMessage}
-          labelText={"Email"}
+          labelText={'Email'}
         />
         <Input
-          type={"password"}
-          idName={"password-signin-input"}
-          name={"password"}
-          fieldName={"field_password"}
-          placeholder={"Enter password"}
-          minLength={"8"}
-          maxLength={"20"}
+          type={'password'}
+          idName={'password-signin-input'}
+          name={'password'}
+          fieldName={'field_password'}
+          placeholder={'Enter password'}
+          minLength={'8'}
+          maxLength={'20'}
           value={password}
           onChange={handlePasswordChange}
           errorMessage={errorMessage}
-          labelText={"Password"}
+          labelText={'Password'}
         />
-        <PopupServerError popupServerError={popupServerError} />
+        <PopupServerError popupServerErrorMessage={popupServerErrorMessage} />
       </PopupWithForm>
     </>
   );

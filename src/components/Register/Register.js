@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import PopupWithForm from "../PopupWithForm/PopupWithForm";
-import Input from "../Input/Input";
+import React, { useState } from 'react';
+import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 
 const Register = ({
@@ -15,11 +15,11 @@ const Register = ({
   onInputUpdate,
   errorMessage,
   handleRegisterSubmit,
-  popupServerError,
+  popupServerErrorMessage,
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   const handleEmailChange = (evt) => {
     onInputUpdate(evt);
@@ -40,13 +40,13 @@ const Register = ({
     startLoadingText();
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
-    handleRegisterSubmit(email, password, username)
+    handleRegisterSubmit(email, password, username);
   };
 
   React.useEffect(() => {
-    setEmail("");
-    setPassword("");
-    setUsername("");
+    setEmail('');
+    setPassword('');
+    setUsername('');
   }, [isOpen]);
 
   return (
@@ -58,51 +58,51 @@ const Register = ({
         onClose={onClose}
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
-        buttonText={"Sign up"}
-        loadingText={"Saving.."}
+        buttonText={'Sign up'}
+        loadingText={'Saving..'}
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
         onFormUpdate={onFormUpdate}
       >
         <Input
-          type={"email"}
-          idName={"email-input"}
-          name={"email"}
-          fieldName={"field_email"}
-          placeholder={"Enter email"}
+          type={'email'}
+          idName={'email-input'}
+          name={'email'}
+          fieldName={'field_email'}
+          placeholder={'Enter email'}
           value={email}
           onChange={handleEmailChange}
           errorMessage={errorMessage}
-          labelText={"Email"}
+          labelText={'Email'}
         />
         <Input
-          type={"password"}
-          idName={"password-input"}
-          name={"password"}
-          fieldName={"field_password"}
-          placeholder={"Enter password"}
-          minLength={"8"}
-          maxLength={"20"}
+          type={'password'}
+          idName={'password-input'}
+          name={'password'}
+          fieldName={'field_password'}
+          placeholder={'Enter password'}
+          minLength={'8'}
+          maxLength={'20'}
           value={password}
           onChange={handlePasswordChange}
           errorMessage={errorMessage}
-          labelText={"Password"}
+          labelText={'Password'}
         />
         <Input
-          type={"text"}
-          idName={"username-input"}
-          name={"username"}
-          fieldName={"field_username"}
-          placeholder={"Enter your username"}
-          minLength={"2"}
-          maxLength={"20"}
+          type={'text'}
+          idName={'username-input'}
+          name={'username'}
+          fieldName={'field_username'}
+          placeholder={'Enter your username'}
+          minLength={'2'}
+          maxLength={'20'}
           value={username}
           onChange={handleUsernameChange}
           errorMessage={errorMessage}
-          labelText={"Username"}
+          labelText={'Username'}
         />
-        <PopupServerError popupServerError={popupServerError} />
+        <PopupServerError popupServerErrorMessage={popupServerErrorMessage} />
       </PopupWithForm>
     </>
   );
