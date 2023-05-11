@@ -1,4 +1,4 @@
-import { apiKey, BASE_URL, pageSize } from "./constants";
+import { apiKey, BASE_URL, pageSize } from './constants';
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -17,10 +17,10 @@ export const getNewsInfo = ({ search }) => {
   return fetch(
     `${BASE_URL}?q=${search}&sortBy=publishedAt&language=en&pageSize=${pageSize}&apiKey=${apiKey}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
     }
   ).then(checkResponse);

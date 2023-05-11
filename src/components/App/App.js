@@ -74,10 +74,11 @@ import {
   setIsFormValidityFalseAction,
   setErrorMessageAction,
   removeErrorMessageAction,
+  setGenericServerErrorTrueAction,
+  setGenericServerErrorFalseAction,
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [serverError, setServerError] = useState(false);
   const [popupServerError, setPopupServerError] = useState('');
   const [cards, setCards] = useState([]); // Saved articles from the user
   const [keyword, setKeyword] = useState('');
@@ -112,6 +113,9 @@ const App = () => {
   const allArticles = useSelector((state) => state.article.allArticles);
   const nextThreeArticles = useSelector(
     (state) => state.article.nextThreeArticles
+  );
+  const genericServerError = useSelector(
+    (state) => state.errors.genericServerError
   );
 
   const jwt = localStorage.getItem('jwt');
@@ -199,7 +203,7 @@ const App = () => {
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
     localStorage.removeItem('news');
     dispatch(setNextThreeArticlesToThreeAction());
-    setServerError(false);
+    dispatch(setGenericServerErrorFalseAction());
     setKeyword(data.search);
 
     getNewsInfo({ search: data.search })
@@ -216,7 +220,7 @@ const App = () => {
       })
       .catch((err) => {
         console.log(err);
-        setServerError(true);
+        dispatch(setGenericServerErrorTrueAction());
       })
       .finally(() => {
         dispatch(setIsLoadingFalseAction());
@@ -441,14 +445,14 @@ const App = () => {
               {newsArticles.length === 0 &&
                 !isLoading &&
                 showArticles &&
-                !serverError && (
+                !genericServerError && (
                   <NothingFound
                     title={'Nothing found'}
                     text={'Sorry, but nothing matched your search terms.'}
                     nothingFoundIcom={nothingFoundIcom}
                   />
                 )}
-              {serverError && (
+              {genericServerError && (
                 <NothingFound
                   title={'Server error'}
                   text={
