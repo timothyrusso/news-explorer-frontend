@@ -5,6 +5,7 @@ import {
   ALL_ARTICLES_ACTION_TYPES,
   NEXT_THREE_ARTICLES_ACTION_TYPES,
   SAVED_ARTICLES_ACTION_TYPES,
+  TEMPORARY_SAVED_ARTICLE_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
 
@@ -58,8 +59,23 @@ type SetSavedArticlesAction = {
   payload: Article[];
 };
 
-type RemoveSavedArticlesAction = {
-  type: typeof SAVED_ARTICLES_ACTION_TYPES.REMOVE_SAVED_ARTICLES;
+type RemoveSingleSavedArticleAction = {
+  type: typeof SAVED_ARTICLES_ACTION_TYPES.REMOVE_SINGLE_ARTICLE;
+  payload: string;
+};
+
+type RemoveAllSavedArticlesAction = {
+  type: typeof SAVED_ARTICLES_ACTION_TYPES.REMOVE_ALL_SAVED_ARTICLES;
+  payload: [];
+};
+
+type SetTemporarySavedArticleAction = {
+  type: typeof TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.SET_TEMPORARY_SAVED_ARTICLE;
+  payload: Article[];
+};
+
+type RemoveTemporarySavedArticleAction = {
+  type: typeof TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.REMOVE_TEMPORARY_SAVED_ARTICLE;
   payload: [];
 };
 
@@ -74,7 +90,10 @@ export type ArticleActionTypes =
   | SetNextThreeArticlesToThreeAction
   | SetNextThreeArticlesToPayloadAction
   | SetSavedArticlesAction
-  | RemoveSavedArticlesAction;
+  | RemoveSingleSavedArticleAction
+  | RemoveAllSavedArticlesAction
+  | SetTemporarySavedArticleAction
+  | RemoveTemporarySavedArticleAction;
 
 export const fetchArticlesAction = (
   articles: Article[]
@@ -138,7 +157,28 @@ export const setSavedArticlesAction = (
   payload: state,
 });
 
-export const removeSavedArticlesAction = (): RemoveSavedArticlesAction => ({
-  type: SAVED_ARTICLES_ACTION_TYPES.REMOVE_SAVED_ARTICLES,
-  payload: [],
+export const removeSingleSavedArticleAction = (
+  state: string
+): RemoveSingleSavedArticleAction => ({
+  type: SAVED_ARTICLES_ACTION_TYPES.REMOVE_SINGLE_ARTICLE,
+  payload: state,
 });
+
+export const removeAllSavedArticlesAction =
+  (): RemoveAllSavedArticlesAction => ({
+    type: SAVED_ARTICLES_ACTION_TYPES.REMOVE_ALL_SAVED_ARTICLES,
+    payload: [],
+  });
+
+export const setTemporarySavedArticleAction = (
+  state: Article[]
+): SetTemporarySavedArticleAction => ({
+  type: TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.SET_TEMPORARY_SAVED_ARTICLE,
+  payload: state,
+});
+
+export const removeTemporarySavedArticleAction =
+  (): RemoveTemporarySavedArticleAction => ({
+    type: TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.REMOVE_TEMPORARY_SAVED_ARTICLE,
+    payload: [],
+  });

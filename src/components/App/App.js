@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NothingFound from '../NothingFound/NothingFound';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -51,7 +51,10 @@ import {
   setNextThreeArticlesToThreeAction,
   setNextThreeArticlesToPayloadAction,
   setSavedArticlesAction,
-  removeSavedArticlesAction,
+  removeSingleSavedArticleAction,
+  removeAllSavedArticlesAction,
+  setTemporarySavedArticleAction,
+  removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -84,8 +87,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [cardToSave, setCardToSave] = useState([]); // Temporary saved card for unlogged user
-
   const location = useLocation();
   const history = useNavigate();
   const dispatch = useDispatch();
@@ -125,6 +126,9 @@ const App = () => {
   const searchKeyword = useSelector((state) => state.user.searchKeyword);
   const searchKeywordsList = useSelector(
     (state) => state.user.searchKeywordsList
+  );
+  const temporarySavedArticle = useSelector(
+    (state) => state.article.temporarySavedArticle
   );
 
   const jwt = localStorage.getItem('jwt');
@@ -189,7 +193,7 @@ const App = () => {
     history('/');
     localStorage.removeItem('jwt');
     dispatch(logoutUserAction({}));
-    dispatch(removeSavedArticlesAction());
+    dispatch(removeAllSavedArticlesAction());
   };
 
   const toggleNav = () => {
@@ -271,8 +275,8 @@ const App = () => {
         }
       })
       .then(() => {
-        if (cardToSave.length !== 0) {
-          handleBookmarkClick(cardToSave);
+        if (temporarySavedArticle.length !== 0) {
+          handleBookmarkClick(temporarySavedArticle);
         }
       })
       .catch((err) => {
@@ -281,7 +285,7 @@ const App = () => {
         console.log(err);
       })
       .finally(() => {
-        setCardToSave([]);
+        dispatch(removeTemporarySavedArticleAction());
       });
   };
 
@@ -320,13 +324,7 @@ const App = () => {
 
   const handleDeleteArticles = (article) => {
     deleteArticles({ articleId: article._id })
-      .then(() => {
-        dispatch(
-          setSavedArticlesAction((state) =>
-            state.filter((item) => item._id !== article._id)
-          )
-        );
-      })
+      .then(() => dispatch(removeSingleSavedArticleAction(article._id)))
       .catch((err) => {
         console.log(err);
       });
@@ -341,7 +339,7 @@ const App = () => {
   };
 
   const saveUnauthorizedUserCard = (card) => {
-    setCardToSave(card);
+    dispatch(setTemporarySavedArticleAction(card));
   };
 
   const checkSavedArticle = (article) => {

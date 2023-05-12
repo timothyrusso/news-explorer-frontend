@@ -11,3 +11,15 @@ export type Article = {
   publishedAt: string;
   content: string;
 };
+
+export type SavedArticle = {
+  _id: string;
+  keyword: string;
+  title: string;
+  text: string;
+  date: string;
+  source: string;
+  link: string;
+  image: string;
+  __v: number;
+};

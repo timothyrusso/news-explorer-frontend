@@ -1,4 +1,4 @@
-import { Article } from './article.type';
+import { Article, SavedArticle } from './article.type';
 import { ArticleActionTypes } from './article.actions';
 import {
   ARTICLE_ACTION_TYPES,
@@ -7,6 +7,7 @@ import {
   ALL_ARTICLES_ACTION_TYPES,
   NEXT_THREE_ARTICLES_ACTION_TYPES,
   SAVED_ARTICLES_ACTION_TYPES,
+  TEMPORARY_SAVED_ARTICLE_ACTION_TYPES,
 } from './article.action.types';
 
 export type userState = {
@@ -15,7 +16,8 @@ export type userState = {
   showArticles: boolean;
   allArticles: Article[];
   nextThreeArticles: number;
-  savedArticles: Article[] | [];
+  savedArticles: SavedArticle[] | [];
+  temporarySavedArticle: Article[] | [];
 };
 
 const INITIAL_STATE: userState = {
@@ -25,6 +27,7 @@ const INITIAL_STATE: userState = {
   allArticles: [],
   nextThreeArticles: 3,
   savedArticles: [],
+  temporarySavedArticle: [],
 };
 
 export const articleReducer = (
@@ -82,10 +85,27 @@ export const articleReducer = (
         ...state,
         savedArticles: action.payload,
       };
-    case SAVED_ARTICLES_ACTION_TYPES.REMOVE_SAVED_ARTICLES:
+    case SAVED_ARTICLES_ACTION_TYPES.REMOVE_SINGLE_ARTICLE:
+      return {
+        ...state,
+        savedArticles: state.savedArticles.filter(
+          (article: SavedArticle) => article._id !== action.payload
+        ),
+      };
+    case SAVED_ARTICLES_ACTION_TYPES.REMOVE_ALL_SAVED_ARTICLES:
       return {
         ...state,
         savedArticles: action.payload,
+      };
+    case TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.SET_TEMPORARY_SAVED_ARTICLE:
+      return {
+        ...state,
+        temporarySavedArticle: action.payload,
+      };
+    case TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.REMOVE_TEMPORARY_SAVED_ARTICLE:
+      return {
+        ...state,
+        temporarySavedArticle: action.payload,
       };
     default:
       return state;
