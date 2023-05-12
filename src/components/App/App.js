@@ -48,6 +48,8 @@ import {
   fetchAllArticlesAction,
   setNextThreeArticlesToThreeAction,
   setNextThreeArticlesToPayloadAction,
+  setSavedArticlesAction,
+  removeSavedArticlesAction,
 } from '../../store/article/article.actions';
 import {
   setIsSigninPopupOpenAction,
@@ -80,10 +82,9 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [cards, setCards] = useState([]); // Saved articles from the user
   const [keyword, setKeyword] = useState('');
   const [keywordsList, setKeywordsList] = useState([]);
-  const [cardToSave, setCardToSave] = useState([]);
+  const [cardToSave, setCardToSave] = useState([]); // Temporary saved card for unlogged user
 
   const location = useLocation();
   const history = useNavigate();
@@ -120,6 +121,7 @@ const App = () => {
   const popupServerErrorMessage = useSelector(
     (state) => state.errors.popupServerErrorMessage
   );
+  const savedArticles = useSelector((state) => state.article.savedArticles);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -183,7 +185,7 @@ const App = () => {
     history('/');
     localStorage.removeItem('jwt');
     dispatch(logoutUserAction({}));
-    setCards([]);
+    dispatch(removeSavedArticlesAction());
   };
 
   const toggleNav = () => {
@@ -305,7 +307,7 @@ const App = () => {
       image: article.urlToImage,
     })
       .then((newArticle) => {
-        setCards([newArticle, ...cards]);
+        dispatch(setSavedArticlesAction([newArticle, ...savedArticles]));
       })
       .catch((err) => {
         console.log(err);
@@ -315,7 +317,11 @@ const App = () => {
   const handleDeleteArticles = (article) => {
     deleteArticles({ articleId: article._id })
       .then(() => {
-        setCards((state) => state.filter((item) => item._id !== article._id));
+        dispatch(
+          setSavedArticlesAction((state) =>
+            state.filter((item) => item._id !== article._id)
+          )
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -335,12 +341,14 @@ const App = () => {
   };
 
   const checkSavedArticle = (article) => {
-    const savedArticle = cards.find((data) => data.link === article.url);
+    const savedArticle = savedArticles.find(
+      (data) => data.link === article.url
+    );
     return savedArticle;
   };
 
   const checkKeywords = () => {
-    const keywords = cards.map((x) => x.keyword);
+    const keywords = savedArticles.map((x) => x.keyword);
     const count = {};
 
     for (let index = 0; index < keywords.length; index++) {
@@ -393,7 +401,7 @@ const App = () => {
         });
       getArticles()
         .then((data) => {
-          setCards(data);
+          dispatch(setSavedArticlesAction(data));
         })
         .catch((err) => {
           console.log(err);
@@ -407,7 +415,7 @@ const App = () => {
 
   useEffect(() => {
     checkKeywords(); // eslint-disable-next-line
-  }, [cards]);
+  }, [savedArticles]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -507,9 +515,12 @@ const App = () => {
           element={
             <ProtectedRoute loggedIn={jwt} path={'/'}>
               <>
-                <SavedNewsHeader cards={cards} keywordsList={keywordsList} />
+                <SavedNewsHeader
+                  savedArticles={savedArticles}
+                  keywordsList={keywordsList}
+                />
                 <SavedNews
-                  cards={cards}
+                  savedArticles={savedArticles}
                   isSavedArticle={isSavedArticle}
                   handleDeleteArticles={handleDeleteArticles}
                   checkSavedArticle={checkSavedArticle}

@@ -2,7 +2,7 @@ import './SavedNews.css';
 import NewsCard from '../NewsCard/NewsCard';
 
 const SavedNews = ({
-  cards,
+  savedArticles,
   isSavedArticle,
   handleDeleteArticles,
   checkSavedArticle,
@@ -11,7 +11,7 @@ const SavedNews = ({
   return (
     <section className="saved-news">
       <ul className="search-result-grid">
-        {cards.map((card) => (
+        {savedArticles.map((card) => (
           <NewsCard
             key={card._id}
             card={card}

@@ -4,6 +4,7 @@ import {
   SHOW_ARTICLE_ACTION_TYPES,
   ALL_ARTICLES_ACTION_TYPES,
   NEXT_THREE_ARTICLES_ACTION_TYPES,
+  SAVED_ARTICLES_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
 
@@ -52,6 +53,16 @@ type SetNextThreeArticlesToPayloadAction = {
   payload: number;
 };
 
+type SetSavedArticlesAction = {
+  type: typeof SAVED_ARTICLES_ACTION_TYPES.SET_SAVED_ARTICLES;
+  payload: Article[];
+};
+
+type RemoveSavedArticlesAction = {
+  type: typeof SAVED_ARTICLES_ACTION_TYPES.REMOVE_SAVED_ARTICLES;
+  payload: [];
+};
+
 export type ArticleActionTypes =
   | FetchArticleAction
   | SetShowMoreArticlesAction
@@ -61,7 +72,9 @@ export type ArticleActionTypes =
   | SetShowArticleFalseAction
   | FetchAllArticlesAction
   | SetNextThreeArticlesToThreeAction
-  | SetNextThreeArticlesToPayloadAction;
+  | SetNextThreeArticlesToPayloadAction
+  | SetSavedArticlesAction
+  | RemoveSavedArticlesAction;
 
 export const fetchArticlesAction = (
   articles: Article[]
@@ -116,4 +129,16 @@ export const setNextThreeArticlesToPayloadAction = (
 ): SetNextThreeArticlesToPayloadAction => ({
   type: NEXT_THREE_ARTICLES_ACTION_TYPES.SET_NEXT_THREE_ARTICLES_TO_PAYLOAD,
   payload: state,
+});
+
+export const setSavedArticlesAction = (
+  state: Article[]
+): SetSavedArticlesAction => ({
+  type: SAVED_ARTICLES_ACTION_TYPES.SET_SAVED_ARTICLES,
+  payload: state,
+});
+
+export const removeSavedArticlesAction = (): RemoveSavedArticlesAction => ({
+  type: SAVED_ARTICLES_ACTION_TYPES.REMOVE_SAVED_ARTICLES,
+  payload: [],
 });

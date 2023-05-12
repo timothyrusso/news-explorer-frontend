@@ -1,14 +1,14 @@
 import './SavedNewsHeader.css';
 import { useSelector } from 'react-redux';
 
-const SavedNewsHeader = ({ cards, keywordsList }) => {
+const SavedNewsHeader = ({ savedArticles, keywordsList }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
     <header className="saved-news-header">
       <p className="saved-news-header__intro">Saved articles</p>
       <h1 className="saved-news-header__title">
-        {currentUser.name}, you have {cards.length} saved articles
+        {currentUser.name}, you have {savedArticles.length} saved articles
       </h1>
       {keywordsList.length >= 1 && (
         <p className="saved-news-header__keywords">
