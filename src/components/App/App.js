@@ -37,6 +37,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
   logoutUserAction,
+  setSearchKeywordAction,
 } from '../../store/user/user.actions';
 import {
   fetchArticlesAction,
@@ -82,7 +83,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [keyword, setKeyword] = useState('');
   const [keywordsList, setKeywordsList] = useState([]);
   const [cardToSave, setCardToSave] = useState([]); // Temporary saved card for unlogged user
 
@@ -122,6 +122,7 @@ const App = () => {
     (state) => state.errors.popupServerErrorMessage
   );
   const savedArticles = useSelector((state) => state.article.savedArticles);
+  const searchKeyword = useSelector((state) => state.user.searchKeyword);
 
   const jwt = localStorage.getItem('jwt');
 
@@ -209,7 +210,7 @@ const App = () => {
     localStorage.removeItem('news');
     dispatch(setNextThreeArticlesToThreeAction());
     dispatch(setGenericServerErrorFalseAction());
-    setKeyword(data.search);
+    dispatch(setSearchKeywordAction(data.search));
 
     getNewsInfo({ search: data.search })
       .then((data) => {
@@ -298,7 +299,7 @@ const App = () => {
 
   const handleSaveArticles = (article) => {
     saveArticles({
-      keyword,
+      searchKeyword,
       title: article.title,
       text: article.content,
       date: article.publishedAt,
