@@ -3,17 +3,19 @@ import { UserActionTypes } from './user.actions';
 import {
   USER_ACTION_TYPES,
   SEARCH_KEYWORD_ACTION_TYPES,
+  SEARCH_KEYWORDS_LIST_ACTION_TYPES,
 } from './user.action.types';
-import { SAVED_ARTICLES_ACTION_TYPES } from '../article/article.action.types';
 
 export type userState = {
   currentUser: User | {};
   searchKeyword: string;
+  searchKeywordsList: string[];
 };
 
 const INITIAL_STATE: userState = {
   currentUser: {},
   searchKeyword: '',
+  searchKeywordsList: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, action: UserActionTypes) => {
@@ -32,6 +34,11 @@ export const userReducer = (state = INITIAL_STATE, action: UserActionTypes) => {
       return {
         ...state,
         searchKeyword: action.payload,
+      };
+    case SEARCH_KEYWORDS_LIST_ACTION_TYPES.SET_SEARCH_KEYWORDS_LIST:
+      return {
+        ...state,
+        searchKeywordsList: action.payload,
       };
     default:
       return state;

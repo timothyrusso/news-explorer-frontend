@@ -38,6 +38,7 @@ import {
   loginUserAction,
   logoutUserAction,
   setSearchKeywordAction,
+  setSearchKeywordsListAction,
 } from '../../store/user/user.actions';
 import {
   fetchArticlesAction,
@@ -83,7 +84,6 @@ import {
 } from '../../store/errors/errors.actions';
 
 const App = () => {
-  const [keywordsList, setKeywordsList] = useState([]);
   const [cardToSave, setCardToSave] = useState([]); // Temporary saved card for unlogged user
 
   const location = useLocation();
@@ -123,6 +123,9 @@ const App = () => {
   );
   const savedArticles = useSelector((state) => state.article.savedArticles);
   const searchKeyword = useSelector((state) => state.user.searchKeyword);
+  const searchKeywordsList = useSelector(
+    (state) => state.user.searchKeywordsList
+  );
 
   const jwt = localStorage.getItem('jwt');
 
@@ -299,7 +302,7 @@ const App = () => {
 
   const handleSaveArticles = (article) => {
     saveArticles({
-      searchKeyword,
+      keyword: searchKeyword,
       title: article.title,
       text: article.content,
       date: article.publishedAt,
@@ -365,7 +368,7 @@ const App = () => {
     const keywordsOrdered = Object.entries(count)
       .sort((a, b) => b[1] - a[1])
       .map((element) => element[0]);
-    setKeywordsList(keywordsOrdered);
+    dispatch(setSearchKeywordsListAction(keywordsOrdered));
   };
 
   const openPopupIfNotLoggedin = () => {
@@ -518,7 +521,7 @@ const App = () => {
               <>
                 <SavedNewsHeader
                   savedArticles={savedArticles}
-                  keywordsList={keywordsList}
+                  searchKeywordsList={searchKeywordsList}
                 />
                 <SavedNews
                   savedArticles={savedArticles}

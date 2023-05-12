@@ -1,6 +1,7 @@
 import {
   USER_ACTION_TYPES,
   SEARCH_KEYWORD_ACTION_TYPES,
+  SEARCH_KEYWORDS_LIST_ACTION_TYPES,
 } from './user.action.types';
 import { User } from './user.type';
 
@@ -19,10 +20,16 @@ type SetSearchKeywordAction = {
   payload: string;
 };
 
+type SetSearchKeywordsListAction = {
+  type: typeof SEARCH_KEYWORDS_LIST_ACTION_TYPES.SET_SEARCH_KEYWORDS_LIST;
+  payload: string[];
+};
+
 export type UserActionTypes =
   | LoginUserAction
   | LogoutUserAction
-  | SetSearchKeywordAction;
+  | SetSearchKeywordAction
+  | SetSearchKeywordsListAction;
 
 export const loginUserAction = (updatedUser: User): LoginUserAction => ({
   type: USER_ACTION_TYPES.LOGIN_USER,
@@ -38,5 +45,12 @@ export const setSearchKeywordAction = (
   state: string
 ): SetSearchKeywordAction => ({
   type: SEARCH_KEYWORD_ACTION_TYPES.SET_SEARCH_KEYWORD,
+  payload: state,
+});
+
+export const setSearchKeywordsListAction = (
+  state: string[]
+): SetSearchKeywordsListAction => ({
+  type: SEARCH_KEYWORDS_LIST_ACTION_TYPES.SET_SEARCH_KEYWORDS_LIST,
   payload: state,
 });

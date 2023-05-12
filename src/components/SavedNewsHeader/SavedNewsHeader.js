@@ -1,7 +1,7 @@
 import './SavedNewsHeader.css';
 import { useSelector } from 'react-redux';
 
-const SavedNewsHeader = ({ savedArticles, keywordsList }) => {
+const SavedNewsHeader = ({ savedArticles, searchKeywordsList }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   return (
@@ -10,15 +10,16 @@ const SavedNewsHeader = ({ savedArticles, keywordsList }) => {
       <h1 className="saved-news-header__title">
         {currentUser.name}, you have {savedArticles.length} saved articles
       </h1>
-      {keywordsList.length >= 1 && (
+      {searchKeywordsList.length >= 1 && (
         <p className="saved-news-header__keywords">
           By keywords:&nbsp;
           <span className="saved-news-header__keywords-bold">
-            {keywordsList.length >= 1 && keywordsList[0]}
-            {keywordsList.length >= 2 && `, ${keywordsList[1]}`}
-            {keywordsList.length === 3 && `, and ${keywordsList[2]}`}
-            {keywordsList.length > 3 &&
-              `, and ${keywordsList.length - 2} other`}
+            {searchKeywordsList.length >= 1 && searchKeywordsList[0]}
+            {searchKeywordsList.length >= 2 && `, ${searchKeywordsList[1]}`}
+            {searchKeywordsList.length === 3 &&
+              `, and ${searchKeywordsList[2]}`}
+            {searchKeywordsList.length > 3 &&
+              `, and ${searchKeywordsList.length - 2} other`}
           </span>
         </p>
       )}
