@@ -5,7 +5,6 @@ import PopupServerError from '../PopupServerError/PopupServerError';
 
 const Register = ({
   isOpen,
-  onClose,
   onSwitch,
   popupRedirectText,
   isLoadingText,
@@ -55,7 +54,6 @@ const Register = ({
         name="signup"
         title="Sign up"
         isOpen={isOpen}
-        onClose={onClose}
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
         buttonText={'Sign up'}

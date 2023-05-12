@@ -5,7 +5,6 @@ import PopupServerError from '../PopupServerError/PopupServerError';
 
 const Login = ({
   isOpen,
-  onClose,
   onSwitch,
   popupRedirectText,
   isLoadingText,
@@ -47,7 +46,6 @@ const Login = ({
         name="signin"
         title="Sign in"
         isOpen={isOpen}
-        onClose={onClose}
         onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
         buttonText={'Sign in'}

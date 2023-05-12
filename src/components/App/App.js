@@ -62,7 +62,6 @@ import {
   setIsSignupPopupOpenAction,
   setIsSignupPopupClosedAction,
   setInfoTooltipOpenAction,
-  setInfoTooltipClosedAction,
   setIsLoadingTrueAction,
   setIsLoadingFalseAction,
   setIsLoadingTextTrueAction,
@@ -85,6 +84,7 @@ import {
   setGenericServerErrorFalseAction,
   setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
+import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
 
 const App = () => {
   const location = useLocation();
@@ -131,17 +131,12 @@ const App = () => {
     (state) => state.article.temporarySavedArticle
   );
 
+  const { closeAllPopups } = useCloseAllPopups();
+
   const jwt = localStorage.getItem('jwt');
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
   let arrayForHoldingNews = [];
-
-  const closeAllPopups = () => {
-    dispatch(setIsSigninPopupClosedAction());
-    dispatch(setIsSignupPopupClosedAction());
-    dispatch(setInfoTooltipClosedAction());
-    dispatch(setPopupserverErrorMessageAction(''));
-  };
 
   const startLoadingText = () => {
     dispatch(setIsLoadingTextTrueAction());
@@ -246,7 +241,7 @@ const App = () => {
       .then((res) => {
         if (res.data._id) {
           console.log('res OK');
-          closeAllPopups(true);
+          closeAllPopups();
           dispatch(setInfoTooltipOpenAction());
         } else {
           console.log('Something went wrong.');
@@ -270,7 +265,7 @@ const App = () => {
       .then((data) => {
         if (data.token) {
           dispatch(setIsLoggedinTrueAction());
-          closeAllPopups(true);
+          closeAllPopups();
           dispatch(setIsLoadingTextFalseAction());
         }
       })
@@ -478,7 +473,6 @@ const App = () => {
               <Main />
               <Login
                 isOpen={isSigninPopupOpen}
-                onClose={closeAllPopups}
                 onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
@@ -492,7 +486,6 @@ const App = () => {
               />
               <Register
                 isOpen={isSignupPopupOpen}
-                onClose={closeAllPopups}
                 onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
@@ -506,7 +499,6 @@ const App = () => {
               />
               <InfoTooltip
                 isOpen={isInfoTooltipOpen}
-                onClose={closeAllPopups}
                 openSignin={handleSigninPopupClick}
               />
             </>

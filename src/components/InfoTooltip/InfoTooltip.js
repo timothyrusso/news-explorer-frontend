@@ -1,9 +1,9 @@
-import "./InfoTooltip.css";
-import Popup from "../Popup/Popup";
+import './InfoTooltip.css';
+import Popup from '../Popup/Popup';
 
-const InfoTooltip = ({ isOpen, onClose, openSignin }) => {
+const InfoTooltip = ({ isOpen, openSignin }) => {
   return (
-    <Popup isOpen={isOpen} onClose={onClose} infoTooltip={true}>
+    <Popup isOpen={isOpen} infoTooltip={true}>
       <div className="info-tooltip">
         <p className="info-tooltip__text">
           Registration successfully completed!

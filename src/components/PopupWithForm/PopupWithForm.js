@@ -1,13 +1,12 @@
-import Popup from "../Popup/Popup";
-import Form from "../Form/Form";
-import "./PopupWithForm.css";
-import FormRedirect from "../FormRedirect/FormRedirect";
+import Popup from '../Popup/Popup';
+import Form from '../Form/Form';
+import './PopupWithForm.css';
+import FormRedirect from '../FormRedirect/FormRedirect';
 
 const PopupWithForm = ({
   name,
   title,
   isOpen,
-  onClose,
   onSwitch,
   popupRedirectText,
   buttonText,
@@ -19,7 +18,7 @@ const PopupWithForm = ({
   children,
 }) => {
   return (
-    <Popup isOpen={isOpen} name={name} onClose={onClose}>
+    <Popup isOpen={isOpen} name={name}>
       <Form
         name={`myForm${name}`}
         onSubmit={onSubmit}
@@ -30,7 +29,7 @@ const PopupWithForm = ({
         <button
           type="submit"
           className={`submit-button popup__button ${
-            !formValidity ? "submit-button_disabled" : ""
+            !formValidity ? 'submit-button_disabled' : ''
           }`}
           disabled={!formValidity}
         >
