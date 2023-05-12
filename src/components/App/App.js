@@ -64,7 +64,6 @@ import {
   setInfoTooltipOpenAction,
   setIsLoadingTrueAction,
   setIsLoadingFalseAction,
-  setIsLoadingTextTrueAction,
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
   setIsLoggedinFalseAction,
@@ -137,10 +136,6 @@ const App = () => {
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
   let arrayForHoldingNews = [];
-
-  const startLoadingText = () => {
-    dispatch(setIsLoadingTextTrueAction());
-  };
 
   const startLoadingNews = () => {
     dispatch(setShowArticleFalseAction());
@@ -476,7 +471,6 @@ const App = () => {
                 onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                startLoadingText={startLoadingText}
                 formValidity={formValidity}
                 onFormUpdate={onFormUpdate}
                 errorMessage={errorMessage}
@@ -489,7 +483,6 @@ const App = () => {
                 onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                startLoadingText={startLoadingText}
                 formValidity={formValidity}
                 onFormUpdate={onFormUpdate}
                 errorMessage={errorMessage}

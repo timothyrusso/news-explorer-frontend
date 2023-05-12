@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
+import { useDispatch } from 'react-redux';
+import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
 
 const Login = ({
   isOpen,
   onSwitch,
   popupRedirectText,
   isLoadingText,
-  startLoadingText,
   formValidity,
   onFormUpdate,
   onInputUpdate,
@@ -18,6 +19,8 @@ const Login = ({
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (evt) => {
     onInputUpdate(evt);
@@ -30,7 +33,7 @@ const Login = ({
   };
 
   const handleSubmit = (evt) => {
-    startLoadingText();
+    dispatch(setIsLoadingTextTrueAction());
     evt.preventDefault();
     handleLoginSubmit(password, email);
   };

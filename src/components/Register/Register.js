@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
+import { useDispatch } from 'react-redux';
+import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
 
 const Register = ({
   isOpen,
   onSwitch,
   popupRedirectText,
   isLoadingText,
-  startLoadingText,
   formValidity,
   onFormUpdate,
   onInputUpdate,
@@ -19,6 +20,8 @@ const Register = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (evt) => {
     onInputUpdate(evt);
@@ -36,7 +39,7 @@ const Register = ({
   };
 
   const handleSubmit = (evt) => {
-    startLoadingText();
+    dispatch(setIsLoadingTextTrueAction());
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
     handleRegisterSubmit(email, password, username);
