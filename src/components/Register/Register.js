@@ -11,7 +11,6 @@ const Register = ({
   popupRedirectText,
   isLoadingText,
   formValidity,
-  onFormUpdate,
   onInputUpdate,
   errorMessage,
   handleRegisterSubmit,
@@ -64,7 +63,6 @@ const Register = ({
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
-        onFormUpdate={onFormUpdate}
       >
         <Input
           type={'email'}

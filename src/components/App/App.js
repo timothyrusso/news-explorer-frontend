@@ -84,6 +84,7 @@ import {
   setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
 import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
+import { arrayForHoldingNews } from '../../utils/constants';
 
 const App = () => {
   const location = useLocation();
@@ -135,18 +136,6 @@ const App = () => {
   const jwt = localStorage.getItem('jwt');
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
-  let arrayForHoldingNews = [];
-
-  const startLoadingNews = () => {
-    dispatch(setShowArticleFalseAction());
-    dispatch(setIsLoadingTrueAction());
-  };
-
-  const onFormUpdate = (data) => {
-    data
-      ? dispatch(setIsFormValidityTrueAction())
-      : dispatch(setIsFormValidityFalseAction());
-  };
 
   const checkValidity = (evt) => {
     const name = evt.target.name;
@@ -429,10 +418,7 @@ const App = () => {
           path="/"
           element={
             <>
-              <Header
-                startLoadingNews={startLoadingNews}
-                activateSearch={activateSearch}
-              />
+              <Header activateSearch={activateSearch} />
               {showArticles && newsArticles.length !== 0 && (
                 <NewsCardList
                   onSigninPopupClick={handleSigninPopupClick}
@@ -472,7 +458,6 @@ const App = () => {
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
                 formValidity={formValidity}
-                onFormUpdate={onFormUpdate}
                 errorMessage={errorMessage}
                 onInputUpdate={checkValidity}
                 handleLoginSubmit={handleLoginSubmit}
@@ -484,7 +469,6 @@ const App = () => {
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
                 formValidity={formValidity}
-                onFormUpdate={onFormUpdate}
                 errorMessage={errorMessage}
                 onInputUpdate={checkValidity}
                 handleRegisterSubmit={handleRegisterSubmit}

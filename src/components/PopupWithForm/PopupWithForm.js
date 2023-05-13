@@ -14,16 +14,11 @@ const PopupWithForm = ({
   loadingText,
   isLoadingText,
   formValidity,
-  onFormUpdate,
   children,
 }) => {
   return (
     <Popup isOpen={isOpen} name={name}>
-      <Form
-        name={`myForm${name}`}
-        onSubmit={onSubmit}
-        onFormUpdate={onFormUpdate}
-      >
+      <Form name={`myForm${name}`} onSubmit={onSubmit}>
         <h2 className="popup__title">{title}</h2>
         {children}
         <button

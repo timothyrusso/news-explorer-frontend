@@ -11,7 +11,6 @@ const Login = ({
   popupRedirectText,
   isLoadingText,
   formValidity,
-  onFormUpdate,
   onInputUpdate,
   errorMessage,
   handleLoginSubmit,
@@ -56,7 +55,6 @@ const Login = ({
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
         formValidity={formValidity}
-        onFormUpdate={onFormUpdate}
       >
         <Input
           type={'email'}

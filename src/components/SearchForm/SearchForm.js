@@ -1,9 +1,14 @@
-import { useState } from "react";
-import "./SearchForm.css";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setShowArticleFalseAction } from '../../store/article/article.actions';
+import { setIsLoadingTrueAction } from '../../store/toggles/toggles.actions';
+import './SearchForm.css';
 
-const SearchForm = ({ startLoadingNews, activateSearch }) => {
-  const [searchInput, setSearchInput] = useState("");
+const SearchForm = ({ activateSearch }) => {
+  const [searchInput, setSearchInput] = useState('');
   const [placeholder, setPlaceholder] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleSearchInputChange = (evt) => {
     setSearchInput(evt.target.value);
@@ -11,7 +16,8 @@ const SearchForm = ({ startLoadingNews, activateSearch }) => {
 
   const handleSubmit = (evt) => {
     if (searchInput) {
-      startLoadingNews();
+      dispatch(setShowArticleFalseAction());
+      dispatch(setIsLoadingTrueAction());
       evt.preventDefault();
       activateSearch({ search: searchInput });
       setPlaceholder(false);
@@ -26,11 +32,11 @@ const SearchForm = ({ startLoadingNews, activateSearch }) => {
       <input
         type="text"
         className={`search-form__input ${
-          placeholder ? "search-form__input_type_error" : ""
+          placeholder ? 'search-form__input_type_error' : ''
         }`}
         id="search-input"
         name="search"
-        placeholder={!placeholder ? "Enter topic" : "Please enter a keyword"}
+        placeholder={!placeholder ? 'Enter topic' : 'Please enter a keyword'}
         value={searchInput}
         onChange={handleSearchInputChange}
       ></input>
