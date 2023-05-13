@@ -4,6 +4,8 @@ import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
+import { useSelector } from 'react-redux';
+import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 
 const Register = ({
   isOpen,
@@ -11,8 +13,6 @@ const Register = ({
   popupRedirectText,
   isLoadingText,
   formValidity,
-  onInputUpdate,
-  errorMessage,
   handleRegisterSubmit,
   popupServerErrorMessage,
 }) => {
@@ -20,20 +20,24 @@ const Register = ({
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
+  const errorMessage = useSelector((state) => state.errors.errorMessage);
+
+  const { checkValidity } = useCheckValidityInput(errorMessage);
+
   const dispatch = useDispatch();
 
   const handleEmailChange = (evt) => {
-    onInputUpdate(evt);
+    checkValidity(evt);
     setEmail(evt.target.value);
   };
 
   const handlePasswordChange = (evt) => {
-    onInputUpdate(evt);
+    checkValidity(evt);
     setPassword(evt.target.value);
   };
 
   const handleUsernameChange = (evt) => {
-    onInputUpdate(evt);
+    checkValidity(evt);
     setUsername(evt.target.value);
   };
 

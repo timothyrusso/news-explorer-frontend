@@ -5,10 +5,11 @@ import {
   GENERIC_SERVER_ERROR_ACTION_TYPES,
   POPUP_SERVER_ERROR_MESSAGE_ACTION_TYPES,
 } from './errors.action.types';
+import { ErrorMessage } from './error.type';
 
 export type errorsState = {
   formValidity: boolean;
-  errorMessage: {};
+  errorMessage: ErrorMessage | {};
   genericServerError: boolean;
   popupServerErrorMessage: string;
 };

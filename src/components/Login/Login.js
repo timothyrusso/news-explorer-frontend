@@ -4,6 +4,8 @@ import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
+import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
+import { useSelector } from 'react-redux';
 
 const Login = ({
   isOpen,
@@ -11,23 +13,24 @@ const Login = ({
   popupRedirectText,
   isLoadingText,
   formValidity,
-  onInputUpdate,
-  errorMessage,
   handleLoginSubmit,
   popupServerErrorMessage,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const errorMessage = useSelector((state) => state.errors.errorMessage);
+
+  const { checkValidity } = useCheckValidityInput(errorMessage);
 
   const dispatch = useDispatch();
 
   const handleEmailChange = (evt) => {
-    onInputUpdate(evt);
+    checkValidity(evt);
     setEmail(evt.target.value);
   };
 
   const handlePasswordChange = (evt) => {
-    onInputUpdate(evt);
+    checkValidity(evt);
     setPassword(evt.target.value);
   };
 

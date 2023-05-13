@@ -46,7 +46,6 @@ import {
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
   setShowArticleTrueAction,
-  setShowArticleFalseAction,
   fetchAllArticlesAction,
   setNextThreeArticlesToThreeAction,
   setNextThreeArticlesToPayloadAction,
@@ -62,7 +61,6 @@ import {
   setIsSignupPopupOpenAction,
   setIsSignupPopupClosedAction,
   setInfoTooltipOpenAction,
-  setIsLoadingTrueAction,
   setIsLoadingFalseAction,
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
@@ -76,8 +74,6 @@ import {
 } from '../../store/toggles/toggles.actions';
 import {
   setIsFormValidityTrueAction,
-  setIsFormValidityFalseAction,
-  setErrorMessageAction,
   removeErrorMessageAction,
   setGenericServerErrorTrueAction,
   setGenericServerErrorFalseAction,
@@ -106,7 +102,6 @@ const App = () => {
   const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
   const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
   const formValidity = useSelector((state) => state.errors.formValidity);
-  const errorMessage = useSelector((state) => state.errors.errorMessage);
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
   const showArticles = useSelector((state) => state.article.showArticles);
   const popupRedirectText = useSelector(
@@ -136,16 +131,6 @@ const App = () => {
   const jwt = localStorage.getItem('jwt');
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
-
-  const checkValidity = (evt) => {
-    const name = evt.target.name;
-    dispatch(
-      setErrorMessageAction({
-        ...errorMessage,
-        [name]: evt.target.validationMessage,
-      })
-    );
-  };
 
   const handleSigninPopupClick = () => {
     dispatch(setIsFormValidityTrueAction());
@@ -458,8 +443,6 @@ const App = () => {
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
                 formValidity={formValidity}
-                errorMessage={errorMessage}
-                onInputUpdate={checkValidity}
                 handleLoginSubmit={handleLoginSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
@@ -468,9 +451,6 @@ const App = () => {
                 onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                formValidity={formValidity}
-                errorMessage={errorMessage}
-                onInputUpdate={checkValidity}
                 handleRegisterSubmit={handleRegisterSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
