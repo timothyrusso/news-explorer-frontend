@@ -19,5 +19,3 @@ export const RESOURCE_CREATED = 201;
 export const INTERNAL_SERVER_ERROR = 500;
 
 export const REQUEST_SUCCEDED = 200;
-
-export let arrayForHoldingNews = [];

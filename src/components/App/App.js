@@ -80,7 +80,6 @@ import {
   setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
 import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
-import { arrayForHoldingNews } from '../../utils/constants';
 
 const App = () => {
   const location = useLocation();
@@ -130,7 +129,7 @@ const App = () => {
 
   const jwt = localStorage.getItem('jwt');
 
-  const showMoreButtonLogic = nextThreeArticles < allArticles.length;
+  let arrayForHoldingNews = [];
 
   const handleSigninPopupClick = () => {
     dispatch(setIsFormValidityTrueAction());
@@ -410,7 +409,6 @@ const App = () => {
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
-                  showMoreButtonLogic={showMoreButtonLogic}
                   handleBookmarkClick={handleBookmarkClick}
                   checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}

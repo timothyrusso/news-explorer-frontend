@@ -1,12 +1,12 @@
-import "./NewsCardList.css";
-import NewsCard from "../NewsCard/NewsCard";
+import { useSelector } from 'react-redux';
+import './NewsCardList.css';
+import NewsCard from '../NewsCard/NewsCard';
 
 const NewsCardList = ({
   onSigninPopupClick,
   loggedIn,
   newsArticles,
   showMoreResults,
-  showMoreButtonLogic,
   handleBookmarkClick,
   checkSavedArticle,
   saveUnauthorizedUserCard,
@@ -14,6 +14,13 @@ const NewsCardList = ({
   const getRandomInt = () => {
     return Math.floor(Math.random() * 1000);
   };
+
+  const nextThreeArticles = useSelector(
+    (state) => state.article.nextThreeArticles
+  );
+  const allArticles = useSelector((state) => state.article.allArticles);
+
+  const showMoreButtonLogic = nextThreeArticles < allArticles.length;
 
   return (
     <section className="news-card-list">
