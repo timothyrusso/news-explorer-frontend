@@ -56,10 +56,6 @@ import {
   removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
-  setIsSigninPopupOpenAction,
-  setIsSigninPopupClosedAction,
-  setIsSignupPopupOpenAction,
-  setIsSignupPopupClosedAction,
   setInfoTooltipOpenAction,
   setIsLoadingFalseAction,
   setIsLoadingTextFalseAction,
@@ -69,16 +65,13 @@ import {
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarOppositeAction,
   setIsMobileNavbarFalseAction,
-  setPopupRedirectTextSigninAction,
-  setPopupRedirectTextSignupAction,
 } from '../../store/toggles/toggles.actions';
 import {
   setGenericServerErrorTrueAction,
   setGenericServerErrorFalseAction,
   setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
-import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
-import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
+import { usePopup } from '../../hooks/usePopup';
 
 const App = () => {
   const location = useLocation();
@@ -124,24 +117,11 @@ const App = () => {
     (state) => state.article.temporarySavedArticle
   );
 
-  const { closeAllPopups } = useCloseAllPopups();
-  const { handleSigninPopupClick } = useHandleSigninPopupClick();
+  const { closeAllPopups, handleSigninPopupClick } = usePopup();
 
   const jwt = localStorage.getItem('jwt');
 
   let arrayForHoldingNews = [];
-
-  const handleSwitchPopup = () => {
-    if (isSigninPopupOpen) {
-      dispatch(setIsSigninPopupClosedAction());
-      dispatch(setIsSignupPopupOpenAction());
-      dispatch(setPopupRedirectTextSigninAction('Sign in'));
-    } else if (isSignupPopupOpen) {
-      dispatch(setIsSignupPopupClosedAction());
-      dispatch(setIsSigninPopupOpenAction());
-      dispatch(setPopupRedirectTextSignupAction('Sign up'));
-    }
-  };
 
   const handleLogout = () => {
     dispatch(setIsLoggedinFalseAction());
@@ -427,7 +407,6 @@ const App = () => {
               <Main />
               <Login
                 isOpen={isSigninPopupOpen}
-                onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
                 formValidity={formValidity}
@@ -436,7 +415,6 @@ const App = () => {
               />
               <Register
                 isOpen={isSignupPopupOpen}
-                onSwitch={handleSwitchPopup}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
                 handleRegisterSubmit={handleRegisterSubmit}

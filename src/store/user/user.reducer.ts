@@ -6,13 +6,13 @@ import {
   SEARCH_KEYWORDS_LIST_ACTION_TYPES,
 } from './user.action.types';
 
-export type userState = {
+export type UserState = {
   currentUser: User | {};
   searchKeyword: string;
   searchKeywordsList: string[];
 };
 
-const INITIAL_STATE: userState = {
+const INITIAL_STATE: UserState = {
   currentUser: {},
   searchKeyword: '',
   searchKeywordsList: [],

@@ -7,14 +7,14 @@ import {
 } from './errors.action.types';
 import { ErrorMessage } from './error.type';
 
-export type errorsState = {
+export type ErrorsState = {
   formValidity: boolean;
   errorMessage: ErrorMessage | {};
   genericServerError: boolean;
   popupServerErrorMessage: string;
 };
 
-const INITIAL_STATE: errorsState = {
+const INITIAL_STATE: ErrorsState = {
   formValidity: true,
   errorMessage: {},
   genericServerError: false,

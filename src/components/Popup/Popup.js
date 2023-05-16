@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
+import { usePopup } from '../../hooks/usePopup';
 import './Popup.css';
 
 const Popup = ({ isOpen, name, infoTooltip, children }) => {
-  const { closeAllPopups } = useCloseAllPopups();
+  const { closeAllPopups } = usePopup();
   // here is `useEffect` for the `Escape` listener
   useEffect(() => {
     // with this we prevent adding the listener if the popup is not opened

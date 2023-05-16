@@ -11,7 +11,7 @@ import {
   POPUP_REDIRECT_TEXT_ACTION_TYPES,
 } from './toggles.action.types';
 
-export type togglesState = {
+export type TogglesState = {
   isSigninPopupOpen: boolean;
   isSignupPopupOpen: boolean;
   isInfoTooltipOpen: boolean;
@@ -23,7 +23,7 @@ export type togglesState = {
   popupRedirectText: string;
 };
 
-const INITIAL_STATE: togglesState = {
+const INITIAL_STATE: TogglesState = {
   isSigninPopupOpen: false,
   isSignupPopupOpen: false,
   isInfoTooltipOpen: false,

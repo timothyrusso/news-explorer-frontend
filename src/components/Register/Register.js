@@ -9,7 +9,6 @@ import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 
 const Register = ({
   isOpen,
-  onSwitch,
   popupRedirectText,
   isLoadingText,
   formValidity,
@@ -60,7 +59,6 @@ const Register = ({
         name="signup"
         title="Sign up"
         isOpen={isOpen}
-        onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
         buttonText={'Sign up'}
         loadingText={'Saving..'}

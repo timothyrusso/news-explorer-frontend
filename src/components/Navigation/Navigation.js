@@ -7,7 +7,7 @@ import logout from '../../images/logout.svg';
 import blackLogo from '../../images/NewsExplorerlogo-black.svg';
 import blackLogout from '../../images/logout-black.svg';
 import { useSelector } from 'react-redux';
-import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
+import { usePopup } from '../../hooks/usePopup';
 
 const Navigation = ({
   loggedIn,
@@ -21,7 +21,7 @@ const Navigation = ({
 
   const currentUser = useSelector((state) => state.user.currentUser);
 
-  const { handleSigninPopupClick } = useHandleSigninPopupClick();
+  const { handleSigninPopupClick } = usePopup();
 
   const location = useLocation();
 

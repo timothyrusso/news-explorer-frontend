@@ -10,7 +10,7 @@ import {
   TEMPORARY_SAVED_ARTICLE_ACTION_TYPES,
 } from './article.action.types';
 
-export type userState = {
+export type ArticleState = {
   articles: Article | {};
   isSavedArticle: boolean;
   showArticles: boolean;
@@ -20,7 +20,7 @@ export type userState = {
   temporarySavedArticle: Article[] | [];
 };
 
-const INITIAL_STATE: userState = {
+const INITIAL_STATE: ArticleState = {
   articles: {},
   isSavedArticle: false,
   showArticles: false,

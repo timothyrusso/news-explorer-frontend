@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 const Login = ({
   isOpen,
-  onSwitch,
   popupRedirectText,
   isLoadingText,
   formValidity,
@@ -51,7 +50,6 @@ const Login = ({
         name="signin"
         title="Sign in"
         isOpen={isOpen}
-        onSwitch={onSwitch}
         popupRedirectText={popupRedirectText}
         buttonText={'Sign in'}
         loadingText={'Loading..'}

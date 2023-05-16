@@ -1,7 +1,7 @@
 import './NewsCard.css';
 import alternativeBackground from '../../images/header_background.png';
 import { useState, useEffect } from 'react';
-import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
+import { usePopup } from '../../hooks/usePopup';
 
 const NewsCard = ({
   card,
@@ -14,7 +14,7 @@ const NewsCard = ({
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
-  const { handleSigninPopupClick } = useHandleSigninPopupClick();
+  const { handleSigninPopupClick } = usePopup();
 
   const saveCard = () => {
     handleBookmarkClick(card);

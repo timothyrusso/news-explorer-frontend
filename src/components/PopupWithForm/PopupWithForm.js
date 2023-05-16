@@ -7,7 +7,6 @@ const PopupWithForm = ({
   name,
   title,
   isOpen,
-  onSwitch,
   popupRedirectText,
   buttonText,
   onSubmit,
@@ -30,10 +29,7 @@ const PopupWithForm = ({
         >
           {isLoadingText ? loadingText : buttonText}
         </button>
-        <FormRedirect
-          onSwitch={onSwitch}
-          popupRedirectText={popupRedirectText}
-        />
+        <FormRedirect popupRedirectText={popupRedirectText} />
       </Form>
     </Popup>
   );

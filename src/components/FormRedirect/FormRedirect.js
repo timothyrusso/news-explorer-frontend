@@ -1,14 +1,17 @@
-import "./FormRedirect.css";
+import './FormRedirect.css';
+import { usePopup } from '../../hooks/usePopup';
 
-const FormRedirect = ({ onSwitch, popupRedirectText }) => {
+const FormRedirect = ({ popupRedirectText }) => {
+  const { handleSwitchPopup } = usePopup();
+
   return (
     <p className="form-redirect">
-      or{" "}
+      or{' '}
       <button
         aria-label="test"
         type="button"
         className="form-redirect_type_link"
-        onClick={onSwitch}
+        onClick={handleSwitchPopup}
       >
         {popupRedirectText}
       </button>
