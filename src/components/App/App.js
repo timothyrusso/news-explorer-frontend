@@ -73,13 +73,12 @@ import {
   setPopupRedirectTextSignupAction,
 } from '../../store/toggles/toggles.actions';
 import {
-  setIsFormValidityTrueAction,
-  removeErrorMessageAction,
   setGenericServerErrorTrueAction,
   setGenericServerErrorFalseAction,
   setPopupserverErrorMessageAction,
 } from '../../store/errors/errors.actions';
 import { useCloseAllPopups } from '../../hooks/useCloseallPopups';
+import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
 
 const App = () => {
   const location = useLocation();
@@ -126,18 +125,11 @@ const App = () => {
   );
 
   const { closeAllPopups } = useCloseAllPopups();
+  const { handleSigninPopupClick } = useHandleSigninPopupClick();
 
   const jwt = localStorage.getItem('jwt');
 
   let arrayForHoldingNews = [];
-
-  const handleSigninPopupClick = () => {
-    dispatch(setIsFormValidityTrueAction());
-    dispatch(removeErrorMessageAction());
-    closeAllPopups();
-    dispatch(setPopupRedirectTextSignupAction('Sign up'));
-    dispatch(setIsSigninPopupOpenAction());
-  };
 
   const handleSwitchPopup = () => {
     if (isSigninPopupOpen) {
@@ -389,7 +381,6 @@ const App = () => {
   return (
     <div className="content">
       <Navigation
-        onSigninPopupClick={handleSigninPopupClick}
         loggedIn={isLoggedIn}
         isBlackNavbar={isBlackNavbar}
         handleLogout={handleLogout}
@@ -405,7 +396,6 @@ const App = () => {
               <Header activateSearch={activateSearch} />
               {showArticles && newsArticles.length !== 0 && (
                 <NewsCardList
-                  onSigninPopupClick={handleSigninPopupClick}
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
                   showMoreResults={showMoreResults}
@@ -452,10 +442,7 @@ const App = () => {
                 handleRegisterSubmit={handleRegisterSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
-              <InfoTooltip
-                isOpen={isInfoTooltipOpen}
-                openSignin={handleSigninPopupClick}
-              />
+              <InfoTooltip isOpen={isInfoTooltipOpen} />
             </>
           }
         />

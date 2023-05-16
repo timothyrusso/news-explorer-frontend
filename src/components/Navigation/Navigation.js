@@ -7,9 +7,9 @@ import logout from '../../images/logout.svg';
 import blackLogo from '../../images/NewsExplorerlogo-black.svg';
 import blackLogout from '../../images/logout-black.svg';
 import { useSelector } from 'react-redux';
+import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
 
 const Navigation = ({
-  onSigninPopupClick,
   loggedIn,
   isBlackNavbar,
   handleLogout,
@@ -20,6 +20,8 @@ const Navigation = ({
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const currentUser = useSelector((state) => state.user.currentUser);
+
+  const { handleSigninPopupClick } = useHandleSigninPopupClick();
 
   const location = useLocation();
 
@@ -106,7 +108,7 @@ const Navigation = ({
               className={`navigation__button navigation__button_type_signin ${
                 loggedIn ? 'navigation__disabled' : ''
               }`}
-              onClick={onSigninPopupClick}
+              onClick={handleSigninPopupClick}
               style={buttonColor}
             >
               Sign in

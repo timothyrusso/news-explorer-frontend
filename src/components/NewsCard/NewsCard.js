@@ -1,10 +1,10 @@
 import './NewsCard.css';
 import alternativeBackground from '../../images/header_background.png';
 import { useState, useEffect } from 'react';
+import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
 
 const NewsCard = ({
   card,
-  onSigninPopupClick,
   loggedIn,
   isSavedArticle,
   handleBookmarkClick,
@@ -13,6 +13,8 @@ const NewsCard = ({
   saveUnauthorizedUserCard,
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
+
+  const { handleSigninPopupClick } = useHandleSigninPopupClick();
 
   const saveCard = () => {
     handleBookmarkClick(card);
@@ -24,7 +26,7 @@ const NewsCard = ({
 
   const handleCardSaveUnauthorizedUser = () => {
     saveUnauthorizedUserCard(card);
-    onSigninPopupClick();
+    handleSigninPopupClick();
   };
 
   const convertDate = (timeStr) => {

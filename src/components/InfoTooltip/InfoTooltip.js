@@ -1,7 +1,10 @@
 import './InfoTooltip.css';
 import Popup from '../Popup/Popup';
+import { useHandleSigninPopupClick } from '../../hooks/useHandleSigninPopupClick';
 
-const InfoTooltip = ({ isOpen, openSignin }) => {
+const InfoTooltip = ({ isOpen }) => {
+  const { handleSigninPopupClick } = useHandleSigninPopupClick();
+
   return (
     <Popup isOpen={isOpen} infoTooltip={true}>
       <div className="info-tooltip">
@@ -12,7 +15,7 @@ const InfoTooltip = ({ isOpen, openSignin }) => {
           aria-label="signin"
           type="button"
           className="info-tooltip__button"
-          onClick={openSignin}
+          onClick={handleSigninPopupClick}
         >
           Sign in
         </button>

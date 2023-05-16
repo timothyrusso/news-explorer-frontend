@@ -3,7 +3,6 @@ import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
 
 const NewsCardList = ({
-  onSigninPopupClick,
   loggedIn,
   newsArticles,
   showMoreResults,
@@ -30,7 +29,6 @@ const NewsCardList = ({
           <NewsCard
             key={card.url + getRandomInt()}
             card={card}
-            onSigninPopupClick={onSigninPopupClick}
             loggedIn={loggedIn}
             handleBookmarkClick={handleBookmarkClick}
             checkSavedArticle={checkSavedArticle}
