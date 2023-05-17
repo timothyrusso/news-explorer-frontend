@@ -2,6 +2,7 @@ import './Navigation.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import logo from '../../images/NewsExplorer.svg';
 import logout from '../../images/logout.svg';
 import blackLogo from '../../images/NewsExplorerlogo-black.svg';
@@ -9,15 +10,23 @@ import blackLogout from '../../images/logout-black.svg';
 import { useSelector } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleLogout } from '../../hooks/useHandleLogout';
+import { setIsMobileNavbarOppositeAction } from '../../store/toggles/toggles.actions';
 
-const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu, toggleNav }) => {
+const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const currentUser = useSelector((state) => state.user.currentUser);
+  const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleLogout } = useHandleLogout();
+
+  const dispatch = useDispatch();
+
+  const toggleNav = () => {
+    dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
+  };
 
   const location = useLocation();
 

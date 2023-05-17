@@ -54,7 +54,6 @@ import {
   setIsLoggedinTrueAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
-  setIsMobileNavbarOppositeAction,
   setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
 import {
@@ -112,10 +111,6 @@ const App = () => {
   const jwt = localStorage.getItem('jwt');
 
   let arrayForHoldingNews = [];
-
-  const toggleNav = () => {
-    dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
-  };
 
   const showMoreResults = () => {
     loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
@@ -346,7 +341,6 @@ const App = () => {
         loggedIn={isLoggedIn}
         isBlackNavbar={isBlackNavbar}
         toggleMenu={isMobileNavbar}
-        toggleNav={toggleNav}
       />
       <Routes>
         <Route
