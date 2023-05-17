@@ -8,20 +8,16 @@ import blackLogo from '../../images/NewsExplorerlogo-black.svg';
 import blackLogout from '../../images/logout-black.svg';
 import { useSelector } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
+import { useHandleLogout } from '../../hooks/useHandleLogout';
 
-const Navigation = ({
-  loggedIn,
-  isBlackNavbar,
-  handleLogout,
-  toggleMenu,
-  toggleNav,
-}) => {
+const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu, toggleNav }) => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const { handleSigninPopupClick } = usePopup();
+  const { handleLogout } = useHandleLogout();
 
   const location = useLocation();
 

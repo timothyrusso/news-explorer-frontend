@@ -12,13 +12,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
-import {
-  Route,
-  Routes,
-  useLocation,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -36,7 +30,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
-  logoutUserAction,
   setSearchKeywordAction,
   setSearchKeywordsListAction,
 } from '../../store/user/user.actions';
@@ -51,7 +44,6 @@ import {
   setNextThreeArticlesToPayloadAction,
   setSavedArticlesAction,
   removeSingleSavedArticleAction,
-  removeAllSavedArticlesAction,
   setTemporarySavedArticleAction,
   removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
@@ -60,7 +52,6 @@ import {
   setIsLoadingFalseAction,
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
-  setIsLoggedinFalseAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarOppositeAction,
@@ -75,7 +66,6 @@ import { usePopup } from '../../hooks/usePopup';
 
 const App = () => {
   const location = useLocation();
-  const history = useNavigate();
   const dispatch = useDispatch();
   const newsArticles = useSelector((state) => state.article.articles);
   const isSigninPopupOpen = useSelector(
@@ -122,14 +112,6 @@ const App = () => {
   const jwt = localStorage.getItem('jwt');
 
   let arrayForHoldingNews = [];
-
-  const handleLogout = () => {
-    dispatch(setIsLoggedinFalseAction());
-    history('/');
-    localStorage.removeItem('jwt');
-    dispatch(logoutUserAction({}));
-    dispatch(removeAllSavedArticlesAction());
-  };
 
   const toggleNav = () => {
     dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
@@ -363,7 +345,6 @@ const App = () => {
       <Navigation
         loggedIn={isLoggedIn}
         isBlackNavbar={isBlackNavbar}
-        handleLogout={handleLogout}
         toggleMenu={isMobileNavbar}
         toggleNav={toggleNav}
       />
