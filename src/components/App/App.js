@@ -35,13 +35,11 @@ import {
 } from '../../store/user/user.actions';
 import {
   fetchArticlesAction,
-  setShowMoreArticlesAction,
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
   setShowArticleTrueAction,
   fetchAllArticlesAction,
   setNextThreeArticlesToThreeAction,
-  setNextThreeArticlesToPayloadAction,
   setSavedArticlesAction,
   removeSingleSavedArticleAction,
   setTemporarySavedArticleAction,
@@ -87,10 +85,6 @@ const App = () => {
   const popupRedirectText = useSelector(
     (state) => state.toggles.popupRedirectText
   );
-  const allArticles = useSelector((state) => state.article.allArticles);
-  const nextThreeArticles = useSelector(
-    (state) => state.article.nextThreeArticles
-  );
   const genericServerError = useSelector(
     (state) => state.errors.genericServerError
   );
@@ -109,21 +103,6 @@ const App = () => {
   const { closeAllPopups, handleSigninPopupClick } = usePopup();
 
   const jwt = localStorage.getItem('jwt');
-
-  let arrayForHoldingNews = [];
-
-  const showMoreResults = () => {
-    loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
-    dispatch(
-      setNextThreeArticlesToPayloadAction(nextThreeArticles + newsPerPage)
-    );
-  };
-
-  const loopArticlesWithSlice = (start, end) => {
-    const slicedNews = allArticles.slice(start, end);
-    arrayForHoldingNews = [...newsArticles, ...slicedNews];
-    dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
-  };
 
   const activateSearch = (data, start = startpoint, end = newsPerPage) => {
     localStorage.removeItem('news');
@@ -353,7 +332,6 @@ const App = () => {
                 <NewsCardList
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
-                  showMoreResults={showMoreResults}
                   handleBookmarkClick={handleBookmarkClick}
                   checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}
