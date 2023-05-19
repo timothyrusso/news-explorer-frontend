@@ -4,16 +4,30 @@ import {
   fetchArticlesAction,
   fetchAllArticlesAction,
   setShowArticleTrueAction,
+  setNextThreeArticlesToThreeAction,
 } from '../store/article/article.actions';
-import { setGenericServerErrorTrueAction } from '../store/errors/errors.actions';
+import {
+  setGenericServerErrorTrueAction,
+  setGenericServerErrorFalseAction,
+} from '../store/errors/errors.actions';
 import { setIsLoadingFalseAction } from '../store/toggles/toggles.actions';
+import { setSearchKeywordAction } from '../store/user/user.actions';
 
 export type searchData = {
   search: string;
 };
 
-export const useNewsApi = (data: searchData, start: number, end: number) => {
+export const useActivateSearch = (
+  data: searchData,
+  start: number,
+  end: number
+) => {
   const dispatch = useDispatch();
+
+  localStorage.removeItem('news');
+  dispatch(setNextThreeArticlesToThreeAction());
+  dispatch(setGenericServerErrorFalseAction());
+  dispatch(setSearchKeywordAction(data.search));
 
   getNewsInfo({ search: data.search })
     .then((data) => {
@@ -33,6 +47,4 @@ export const useNewsApi = (data: searchData, start: number, end: number) => {
       dispatch(setIsLoadingFalseAction());
       dispatch(setShowArticleTrueAction());
     });
-
-  return { getNewsInfo };
 };
