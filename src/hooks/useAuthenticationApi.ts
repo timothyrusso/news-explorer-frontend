@@ -1,5 +1,21 @@
-export const useAuthenticationApi = () => {
-  const handleRegisterSubmit = (email, password, name) => {
+import { register } from '../utils/MainApi';
+import { useDispatch } from 'react-redux';
+import { usePopup } from './usePopup';
+import {
+  setInfoTooltipOpenAction,
+  setIsLoadingTextFalseAction,
+} from '../store/toggles/toggles.actions';
+import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions';
+
+export const useAuthenticationApi = (
+  email: string,
+  password: string,
+  name: string
+) => {
+  const dispatch = useDispatch();
+  const { closeAllPopups } = usePopup();
+
+  const handleRegisterSubmit = () => {
     register(email, password, name)
       .then((res) => {
         if (res.data._id) {
