@@ -16,8 +16,6 @@ import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { getNewsInfo } from '../../utils/api';
-import { newsPerPage, startpoint } from '../../utils/constants';
 import {
   authorize,
   checkToken,
@@ -29,34 +27,24 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
-  setSearchKeywordAction,
   setSearchKeywordsListAction,
 } from '../../store/user/user.actions';
 import {
-  fetchArticlesAction,
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
-  setShowArticleTrueAction,
-  fetchAllArticlesAction,
-  setNextThreeArticlesToThreeAction,
   setSavedArticlesAction,
   removeSingleSavedArticleAction,
   setTemporarySavedArticleAction,
   removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
-  setIsLoadingFalseAction,
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
-import {
-  setGenericServerErrorTrueAction,
-  setGenericServerErrorFalseAction,
-  setPopupserverErrorMessageAction,
-} from '../../store/errors/errors.actions';
+import { setPopupserverErrorMessageAction } from '../../store/errors/errors.actions';
 import { usePopup } from '../../hooks/usePopup';
 
 const App = () => {
@@ -100,34 +88,6 @@ const App = () => {
   const { closeAllPopups, handleSigninPopupClick } = usePopup();
 
   const jwt = localStorage.getItem('jwt');
-
-  const activateSearch = (data, start = startpoint, end = newsPerPage) => {
-    localStorage.removeItem('news');
-    dispatch(setNextThreeArticlesToThreeAction());
-    dispatch(setGenericServerErrorFalseAction());
-    dispatch(setSearchKeywordAction(data.search));
-
-    getNewsInfo({ search: data.search })
-      .then((data) => {
-        localStorage.setItem('news', JSON.stringify(data.articles));
-        dispatch(
-          fetchArticlesAction(
-            JSON.parse(localStorage.getItem('news')).slice(start, end)
-          )
-        );
-        dispatch(
-          fetchAllArticlesAction(JSON.parse(localStorage.getItem('news')))
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(setGenericServerErrorTrueAction());
-      })
-      .finally(() => {
-        dispatch(setIsLoadingFalseAction());
-        dispatch(setShowArticleTrueAction());
-      });
-  };
 
   const handleLoginSubmit = (password, email) => {
     if (!password || !email) {
@@ -304,7 +264,7 @@ const App = () => {
           path="/"
           element={
             <>
-              <Header activateSearch={activateSearch} />
+              <Header />
               {showArticles && newsArticles.length !== 0 && (
                 <NewsCardList
                   loggedIn={isLoggedIn}
