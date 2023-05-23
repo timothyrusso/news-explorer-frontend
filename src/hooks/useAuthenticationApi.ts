@@ -1,11 +1,14 @@
-import { register } from '../utils/MainApi';
-import { useDispatch } from 'react-redux';
+import { register, authorize } from '../utils/MainApi';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePopup } from './usePopup';
 import {
   setInfoTooltipOpenAction,
   setIsLoadingTextFalseAction,
+  setIsLoggedinTrueAction,
 } from '../store/toggles/toggles.actions';
 import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions';
+import { removeTemporarySavedArticleAction } from '../store/article/article.actions';
+import { RootState } from '../store/RootState';
 
 export const useAuthenticationApi = (
   email: string,
@@ -14,6 +17,10 @@ export const useAuthenticationApi = (
 ) => {
   const dispatch = useDispatch();
   const { closeAllPopups } = usePopup();
+
+  const temporarySavedArticle = useSelector(
+    (state: RootState) => state.article.temporarySavedArticle
+  );
 
   const handleRegisterSubmit = () => {
     register(email, password, username)
@@ -35,5 +42,33 @@ export const useAuthenticationApi = (
       });
   };
 
-  return { handleRegisterSubmit };
+  const handleLoginSubmit = () => {
+    if (!password || !email) {
+      console.log('Email or password are not correct');
+      return;
+    }
+    authorize(password, email)
+      .then((data) => {
+        if (data.token) {
+          dispatch(setIsLoggedinTrueAction());
+          closeAllPopups();
+          dispatch(setIsLoadingTextFalseAction());
+        }
+      })
+      .then(() => {
+        if (temporarySavedArticle.length !== 0) {
+          handleBookmarkClick(temporarySavedArticle);
+        }
+      })
+      .catch((err) => {
+        dispatch(setPopupserverErrorMessageAction(err.message));
+        dispatch(setIsLoadingTextFalseAction());
+        console.log(err);
+      })
+      .finally(() => {
+        dispatch(removeTemporarySavedArticleAction());
+      });
+  };
+
+  return { handleRegisterSubmit, handleLoginSubmit };
 };
