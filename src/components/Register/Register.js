@@ -6,13 +6,12 @@ import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
 import { useSelector } from 'react-redux';
 import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
+import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 
 const Register = ({
   isOpen,
   popupRedirectText,
   isLoadingText,
-  formValidity,
-  handleRegisterSubmit,
   popupServerErrorMessage,
 }) => {
   const [email, setEmail] = useState('');
@@ -22,6 +21,11 @@ const Register = ({
   const errorMessage = useSelector((state) => state.errors.errorMessage);
 
   const { checkValidity } = useCheckValidityInput(errorMessage);
+  const { handleRegisterSubmit } = useAuthenticationApi(
+    email,
+    password,
+    username
+  );
 
   const dispatch = useDispatch();
 
@@ -44,7 +48,7 @@ const Register = ({
     dispatch(setIsLoadingTextTrueAction());
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
-    handleRegisterSubmit(email, password, username);
+    handleRegisterSubmit();
   };
 
   React.useEffect(() => {
@@ -64,7 +68,6 @@ const Register = ({
         loadingText={'Saving..'}
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
-        formValidity={formValidity}
       >
         <Input
           type={'email'}

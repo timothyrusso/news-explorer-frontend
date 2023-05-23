@@ -1,5 +1,6 @@
 import Popup from '../Popup/Popup';
 import Form from '../Form/Form';
+import { useSelector } from 'react-redux';
 import './PopupWithForm.css';
 import FormRedirect from '../FormRedirect/FormRedirect';
 
@@ -12,9 +13,10 @@ const PopupWithForm = ({
   onSubmit,
   loadingText,
   isLoadingText,
-  formValidity,
   children,
 }) => {
+  const formValidity = useSelector((state) => state.errors.formValidity);
+
   return (
     <Popup isOpen={isOpen} name={name}>
       <Form name={`myForm${name}`} onSubmit={onSubmit}>

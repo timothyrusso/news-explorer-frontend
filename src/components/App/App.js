@@ -19,7 +19,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getNewsInfo } from '../../utils/api';
 import { newsPerPage, startpoint } from '../../utils/constants';
 import {
-  register,
   authorize,
   checkToken,
   getProfileInfo,
@@ -46,7 +45,6 @@ import {
   removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
-  setInfoTooltipOpenAction,
   setIsLoadingFalseAction,
   setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
@@ -79,7 +77,6 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
   const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
   const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
-  const formValidity = useSelector((state) => state.errors.formValidity);
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
   const showArticles = useSelector((state) => state.article.showArticles);
   const popupRedirectText = useSelector(
@@ -129,26 +126,6 @@ const App = () => {
       .finally(() => {
         dispatch(setIsLoadingFalseAction());
         dispatch(setShowArticleTrueAction());
-      });
-  };
-
-  const handleRegisterSubmit = (email, password, name) => {
-    register(email, password, name)
-      .then((res) => {
-        if (res.data._id) {
-          console.log('res OK');
-          closeAllPopups();
-          dispatch(setInfoTooltipOpenAction());
-        } else {
-          console.log('Something went wrong.');
-        }
-      })
-      .catch((err) => {
-        dispatch(setPopupserverErrorMessageAction(err.message));
-        console.log(err);
-      })
-      .finally(() => {
-        dispatch(setIsLoadingTextFalseAction());
       });
   };
 
@@ -362,7 +339,6 @@ const App = () => {
                 isOpen={isSigninPopupOpen}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                formValidity={formValidity}
                 handleLoginSubmit={handleLoginSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
@@ -370,7 +346,6 @@ const App = () => {
                 isOpen={isSignupPopupOpen}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                handleRegisterSubmit={handleRegisterSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
               <InfoTooltip isOpen={isInfoTooltipOpen} />

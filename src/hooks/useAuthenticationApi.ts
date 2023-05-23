@@ -10,13 +10,13 @@ import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions
 export const useAuthenticationApi = (
   email: string,
   password: string,
-  name: string
+  username: string
 ) => {
   const dispatch = useDispatch();
   const { closeAllPopups } = usePopup();
 
   const handleRegisterSubmit = () => {
-    register(email, password, name)
+    register(email, password, username)
       .then((res) => {
         if (res.data._id) {
           console.log('res OK');

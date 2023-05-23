@@ -11,7 +11,6 @@ const Login = ({
   isOpen,
   popupRedirectText,
   isLoadingText,
-  formValidity,
   handleLoginSubmit,
   popupServerErrorMessage,
 }) => {
@@ -55,7 +54,6 @@ const Login = ({
         loadingText={'Loading..'}
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
-        formValidity={formValidity}
       >
         <Input
           type={'email'}
