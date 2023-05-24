@@ -9,11 +9,13 @@ import {
 import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions';
 import { removeTemporarySavedArticleAction } from '../store/article/article.actions';
 import { RootState } from '../store/RootState';
+import { Article } from '../store/article/article.type';
 
 export const useAuthenticationApi = (
   email: string,
   password: string,
-  username: string
+  username: string,
+  handleBookmarkClick: (article: Article[]) => void
 ) => {
   const dispatch = useDispatch();
   const { closeAllPopups } = usePopup();
