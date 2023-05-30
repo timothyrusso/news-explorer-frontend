@@ -9,16 +9,16 @@ import {
 import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions';
 import { removeTemporarySavedArticleAction } from '../store/article/article.actions';
 import { RootState } from '../store/RootState';
-import { Article } from '../store/article/article.type';
+import { useHandleBookmarkClick } from './useHandleBookmarkClick';
 
 export const useAuthenticationApi = (
   email: string,
   password: string,
-  username: string,
-  handleBookmarkClick: (article: Article[]) => void
+  username: string
 ) => {
   const dispatch = useDispatch();
   const { closeAllPopups } = usePopup();
+  const { handleBookmarkClick } = useHandleBookmarkClick();
 
   const temporarySavedArticle = useSelector(
     (state: RootState) => state.article.temporarySavedArticle
@@ -59,7 +59,9 @@ export const useAuthenticationApi = (
       })
       .then(() => {
         if (temporarySavedArticle.length !== 0) {
-          handleBookmarkClick(temporarySavedArticle);
+          temporarySavedArticle.forEach((article) => {
+            handleBookmarkClick(article);
+          });
         }
       })
       .catch((err) => {
