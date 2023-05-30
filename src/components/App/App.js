@@ -17,7 +17,6 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {
-  authorize,
   checkToken,
   getProfileInfo,
   getArticles,
@@ -35,16 +34,13 @@ import {
   setSavedArticlesAction,
   removeSingleSavedArticleAction,
   setTemporarySavedArticleAction,
-  removeTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
-  setIsLoadingTextFalseAction,
   setIsLoggedinTrueAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
-import { setPopupserverErrorMessageAction } from '../../store/errors/errors.actions';
 import { usePopup } from '../../hooks/usePopup';
 
 const App = () => {
@@ -81,41 +77,10 @@ const App = () => {
   const searchKeywordsList = useSelector(
     (state) => state.user.searchKeywordsList
   );
-  const temporarySavedArticle = useSelector(
-    (state) => state.article.temporarySavedArticle
-  );
 
-  const { closeAllPopups, handleSigninPopupClick } = usePopup();
+  const { handleSigninPopupClick } = usePopup();
 
   const jwt = localStorage.getItem('jwt');
-
-  const handleLoginSubmit = (password, email) => {
-    if (!password || !email) {
-      console.log('Email or password are not correct');
-      return;
-    }
-    authorize(password, email)
-      .then((data) => {
-        if (data.token) {
-          dispatch(setIsLoggedinTrueAction());
-          closeAllPopups();
-          dispatch(setIsLoadingTextFalseAction());
-        }
-      })
-      .then(() => {
-        if (temporarySavedArticle.length !== 0) {
-          handleBookmarkClick(temporarySavedArticle);
-        }
-      })
-      .catch((err) => {
-        dispatch(setPopupserverErrorMessageAction(err.message));
-        dispatch(setIsLoadingTextFalseAction());
-        console.log(err);
-      })
-      .finally(() => {
-        dispatch(removeTemporarySavedArticleAction());
-      });
-  };
 
   const handleTokenCheck = () => {
     if (localStorage.getItem('jwt')) {
@@ -299,7 +264,6 @@ const App = () => {
                 isOpen={isSigninPopupOpen}
                 popupRedirectText={popupRedirectText}
                 isLoadingText={isLoadingText}
-                handleLoginSubmit={handleLoginSubmit}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
               <Register

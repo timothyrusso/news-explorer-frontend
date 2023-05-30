@@ -17,7 +17,7 @@ export type ArticleState = {
   allArticles: Article[];
   nextThreeArticles: number;
   savedArticles: SavedArticle[] | [];
-  temporarySavedArticle: Article[] | [];
+  temporarySavedArticle: Article | {};
 };
 
 const INITIAL_STATE: ArticleState = {
@@ -27,7 +27,7 @@ const INITIAL_STATE: ArticleState = {
   allArticles: [],
   nextThreeArticles: 3,
   savedArticles: [],
-  temporarySavedArticle: [],
+  temporarySavedArticle: {},
 };
 
 export const articleReducer = (

@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
 import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useSelector } from 'react-redux';
+import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 
 const Login = ({
   isOpen,
   popupRedirectText,
   isLoadingText,
-  handleLoginSubmit,
   popupServerErrorMessage,
 }) => {
   const [email, setEmail] = useState('');
@@ -19,6 +19,8 @@ const Login = ({
   const errorMessage = useSelector((state) => state.errors.errorMessage);
 
   const { checkValidity } = useCheckValidityInput(errorMessage);
+
+  const { handleLoginSubmit } = useAuthenticationApi(email, password);
 
   const dispatch = useDispatch();
 
@@ -35,7 +37,7 @@ const Login = ({
   const handleSubmit = (evt) => {
     dispatch(setIsLoadingTextTrueAction());
     evt.preventDefault();
-    handleLoginSubmit(password, email);
+    handleLoginSubmit();
   };
 
   React.useEffect(() => {

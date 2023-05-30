@@ -58,10 +58,8 @@ export const useAuthenticationApi = (
         }
       })
       .then(() => {
-        if (temporarySavedArticle.length !== 0) {
-          temporarySavedArticle.forEach((article) => {
-            handleBookmarkClick(article);
-          });
+        if (temporarySavedArticle) {
+          handleBookmarkClick(temporarySavedArticle);
         }
       })
       .catch((err) => {
