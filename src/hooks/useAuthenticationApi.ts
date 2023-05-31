@@ -58,7 +58,7 @@ export const useAuthenticationApi = (
         }
       })
       .then(() => {
-        if (temporarySavedArticle) {
+        if ('url' in temporarySavedArticle) {
           handleBookmarkClick(temporarySavedArticle);
         }
       })
