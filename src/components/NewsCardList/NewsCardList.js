@@ -11,7 +11,6 @@ import {
 const NewsCardList = ({
   loggedIn,
   newsArticles,
-  handleBookmarkClick,
   checkSavedArticle,
   saveUnauthorizedUserCard,
 }) => {
@@ -52,7 +51,6 @@ const NewsCardList = ({
             key={card.url + getRandomInt()}
             card={card}
             loggedIn={loggedIn}
-            handleBookmarkClick={handleBookmarkClick}
             checkSavedArticle={checkSavedArticle}
             saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />

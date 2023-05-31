@@ -20,7 +20,6 @@ import {
   checkToken,
   getProfileInfo,
   getArticles,
-  saveArticles,
   deleteArticles,
 } from '../../utils/MainApi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -73,7 +72,6 @@ const App = () => {
     (state) => state.errors.popupServerErrorMessage
   );
   const savedArticles = useSelector((state) => state.article.savedArticles);
-  const searchKeyword = useSelector((state) => state.user.searchKeyword);
   const searchKeywordsList = useSelector(
     (state) => state.user.searchKeywordsList
   );
@@ -97,38 +95,12 @@ const App = () => {
     }
   };
 
-  const handleSaveArticles = (article) => {
-    saveArticles({
-      keyword: searchKeyword,
-      title: article.title,
-      text: article.content,
-      date: article.publishedAt,
-      source: article.source.name,
-      link: article.url,
-      image: article.urlToImage,
-    })
-      .then((newArticle) => {
-        dispatch(setSavedArticlesAction([newArticle, ...savedArticles]));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handleDeleteArticles = (article) => {
     deleteArticles({ articleId: article._id })
       .then(() => dispatch(removeSingleSavedArticleAction(article._id)))
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const handleBookmarkClick = (article) => {
-    if (!checkSavedArticle(article)) {
-      handleSaveArticles(article);
-    } else {
-      handleDeleteArticles(checkSavedArticle(article));
-    }
   };
 
   const saveUnauthorizedUserCard = (card) => {
@@ -234,7 +206,6 @@ const App = () => {
                 <NewsCardList
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
-                  handleBookmarkClick={handleBookmarkClick}
                   checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
