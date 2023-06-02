@@ -9,14 +9,13 @@ const NewsCard = ({
   card,
   loggedIn,
   isSavedArticle,
-  checkSavedArticle,
   saveUnauthorizedUserCard,
 }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
-  const { handleDeleteArticles } = useArticleApi();
+  const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
 
   const saveCard = () => {
     handleBookmarkClick(card);

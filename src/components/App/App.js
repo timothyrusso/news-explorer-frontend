@@ -16,12 +16,7 @@ import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import {
-  checkToken,
-  getProfileInfo,
-  getArticles,
-  deleteArticles,
-} from '../../utils/MainApi';
+import { checkToken, getProfileInfo, getArticles } from '../../utils/MainApi';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
@@ -31,7 +26,6 @@ import {
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
   setSavedArticlesAction,
-  removeSingleSavedArticleAction,
   setTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
@@ -97,13 +91,6 @@ const App = () => {
 
   const saveUnauthorizedUserCard = (card) => {
     dispatch(setTemporarySavedArticleAction(card));
-  };
-
-  const checkSavedArticle = (article) => {
-    const savedArticle = savedArticles.find(
-      (data) => data.link === article.url
-    );
-    return savedArticle;
   };
 
   const checkKeywords = () => {
@@ -198,7 +185,6 @@ const App = () => {
                 <NewsCardList
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
-                  checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
               )}
@@ -251,7 +237,6 @@ const App = () => {
                 <SavedNews
                   savedArticles={savedArticles}
                   isSavedArticle={isSavedArticle}
-                  checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
               </>

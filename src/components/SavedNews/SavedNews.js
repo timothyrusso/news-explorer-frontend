@@ -4,7 +4,6 @@ import NewsCard from '../NewsCard/NewsCard';
 const SavedNews = ({
   savedArticles,
   isSavedArticle,
-  checkSavedArticle,
   saveUnauthorizedUserCard,
 }) => {
   return (
@@ -15,7 +14,6 @@ const SavedNews = ({
             key={card._id}
             card={card}
             isSavedArticle={isSavedArticle}
-            checkSavedArticle={checkSavedArticle}
             saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />
         ))}

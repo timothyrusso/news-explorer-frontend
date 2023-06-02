@@ -8,12 +8,7 @@ import {
   setShowMoreArticlesAction,
 } from '../../store/article/article.actions';
 
-const NewsCardList = ({
-  loggedIn,
-  newsArticles,
-  checkSavedArticle,
-  saveUnauthorizedUserCard,
-}) => {
+const NewsCardList = ({ loggedIn, newsArticles, saveUnauthorizedUserCard }) => {
   const getRandomInt = () => {
     return Math.floor(Math.random() * 1000);
   };
@@ -51,7 +46,6 @@ const NewsCardList = ({
             key={card.url + getRandomInt()}
             card={card}
             loggedIn={loggedIn}
-            checkSavedArticle={checkSavedArticle}
             saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />
         ))}
