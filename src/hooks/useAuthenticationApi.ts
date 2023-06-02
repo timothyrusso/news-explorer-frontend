@@ -10,6 +10,7 @@ import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions
 import { removeTemporarySavedArticleAction } from '../store/article/article.actions';
 import { RootState } from '../store/RootState';
 import { useHandleBookmarkClick } from './useHandleBookmarkClick';
+import { checkToken } from '../utils/MainApi';
 
 export const useAuthenticationApi = (
   email: string,
@@ -72,5 +73,20 @@ export const useAuthenticationApi = (
       });
   };
 
-  return { handleRegisterSubmit, handleLoginSubmit };
+  const handleTokenCheck = () => {
+    if (localStorage.getItem('jwt')) {
+      const jwt = localStorage.getItem('jwt');
+      checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            dispatch(setIsLoggedinTrueAction());
+          } else {
+            localStorage.removeItem('jwt');
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  return { handleRegisterSubmit, handleLoginSubmit, handleTokenCheck };
 };
