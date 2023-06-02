@@ -3,12 +3,12 @@ import alternativeBackground from '../../images/header_background.png';
 import { useState, useEffect } from 'react';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
+import { useArticleApi } from '../../hooks/useArticleApi';
 
 const NewsCard = ({
   card,
   loggedIn,
   isSavedArticle,
-  handleDeleteArticles,
   checkSavedArticle,
   saveUnauthorizedUserCard,
 }) => {
@@ -16,6 +16,7 @@ const NewsCard = ({
 
   const { handleSigninPopupClick } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
+  const { handleDeleteArticles } = useArticleApi();
 
   const saveCard = () => {
     handleBookmarkClick(card);

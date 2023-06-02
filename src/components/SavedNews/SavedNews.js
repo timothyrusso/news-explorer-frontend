@@ -4,7 +4,6 @@ import NewsCard from '../NewsCard/NewsCard';
 const SavedNews = ({
   savedArticles,
   isSavedArticle,
-  handleDeleteArticles,
   checkSavedArticle,
   saveUnauthorizedUserCard,
 }) => {
@@ -16,7 +15,6 @@ const SavedNews = ({
             key={card._id}
             card={card}
             isSavedArticle={isSavedArticle}
-            handleDeleteArticles={handleDeleteArticles}
             checkSavedArticle={checkSavedArticle}
             saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />

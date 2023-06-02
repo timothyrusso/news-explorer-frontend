@@ -95,14 +95,6 @@ const App = () => {
     }
   };
 
-  const handleDeleteArticles = (article) => {
-    deleteArticles({ articleId: article._id })
-      .then(() => dispatch(removeSingleSavedArticleAction(article._id)))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const saveUnauthorizedUserCard = (card) => {
     dispatch(setTemporarySavedArticleAction(card));
   };
@@ -259,7 +251,6 @@ const App = () => {
                 <SavedNews
                   savedArticles={savedArticles}
                   isSavedArticle={isSavedArticle}
-                  handleDeleteArticles={handleDeleteArticles}
                   checkSavedArticle={checkSavedArticle}
                   saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
