@@ -16,7 +16,7 @@ import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { checkToken, getProfileInfo, getArticles } from '../../utils/MainApi';
+import { getProfileInfo, getArticles } from '../../utils/MainApi';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   loginUserAction,
@@ -29,12 +29,12 @@ import {
   setTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
-  setIsLoggedinTrueAction,
   setIsBlackNavbarTrueAction,
   setIsBlackNavbarFalseAction,
   setIsMobileNavbarFalseAction,
 } from '../../store/toggles/toggles.actions';
 import { usePopup } from '../../hooks/usePopup';
+import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 
 const App = () => {
   const location = useLocation();
@@ -71,23 +71,9 @@ const App = () => {
   );
 
   const { handleSigninPopupClick } = usePopup();
+  const { handleTokenCheck } = useAuthenticationApi();
 
   const jwt = localStorage.getItem('jwt');
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-      checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            dispatch(setIsLoggedinTrueAction());
-          } else {
-            localStorage.removeItem('jwt');
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  };
 
   const saveUnauthorizedUserCard = (card) => {
     dispatch(setTemporarySavedArticleAction(card));
