@@ -51,5 +51,15 @@ export const usePopup = () => {
     }
   };
 
-  return { closeAllPopups, handleSigninPopupClick, handleSwitchPopup };
+  const openPopupIfNotLoggedin = () => {
+    const jwt = localStorage.getItem('jwt');
+    !jwt && handleSigninPopupClick();
+  };
+
+  return {
+    closeAllPopups,
+    handleSigninPopupClick,
+    handleSwitchPopup,
+    openPopupIfNotLoggedin,
+  };
 };
