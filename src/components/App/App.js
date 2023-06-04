@@ -70,7 +70,7 @@ const App = () => {
     (state) => state.user.searchKeywordsList
   );
 
-  const { handleSigninPopupClick } = usePopup();
+  const { openPopupIfNotLoggedin } = usePopup();
   const { handleTokenCheck } = useAuthenticationApi();
 
   const jwt = localStorage.getItem('jwt');
@@ -97,10 +97,6 @@ const App = () => {
       .sort((a, b) => b[1] - a[1])
       .map((element) => element[0]);
     dispatch(setSearchKeywordsListAction(keywordsOrdered));
-  };
-
-  const openPopupIfNotLoggedin = () => {
-    !jwt && handleSigninPopupClick();
   };
 
   useEffect(() => {
