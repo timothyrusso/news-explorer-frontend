@@ -1,21 +1,20 @@
 import './NewsCard.css';
 import alternativeBackground from '../../images/header_background.png';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
 import { useArticleApi } from '../../hooks/useArticleApi';
+import { setTemporarySavedArticleAction } from '../../store/article/article.actions';
 
-const NewsCard = ({
-  card,
-  loggedIn,
-  isSavedArticle,
-  saveUnauthorizedUserCard,
-}) => {
+const NewsCard = ({ card, loggedIn, isSavedArticle }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
   const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
+
+  const dispatch = useDispatch();
 
   const saveCard = () => {
     handleBookmarkClick(card);
@@ -26,7 +25,7 @@ const NewsCard = ({
   };
 
   const handleCardSaveUnauthorizedUser = () => {
-    saveUnauthorizedUserCard(card);
+    dispatch(setTemporarySavedArticleAction(card));
     handleSigninPopupClick();
   };
 

@@ -26,7 +26,6 @@ import {
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
   setSavedArticlesAction,
-  setTemporarySavedArticleAction,
 } from '../../store/article/article.actions';
 import {
   setIsBlackNavbarTrueAction,
@@ -74,10 +73,6 @@ const App = () => {
   const { handleTokenCheck } = useAuthenticationApi();
 
   const jwt = localStorage.getItem('jwt');
-
-  const saveUnauthorizedUserCard = (card) => {
-    dispatch(setTemporarySavedArticleAction(card));
-  };
 
   const checkKeywords = () => {
     const keywords = savedArticles.map((x) => x.keyword);
@@ -167,7 +162,6 @@ const App = () => {
                 <NewsCardList
                   loggedIn={isLoggedIn}
                   newsArticles={newsArticles}
-                  saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
               )}
               {newsArticles.length === 0 &&
@@ -219,7 +213,6 @@ const App = () => {
                 <SavedNews
                   savedArticles={savedArticles}
                   isSavedArticle={isSavedArticle}
-                  saveUnauthorizedUserCard={saveUnauthorizedUserCard}
                 />
               </>
             </ProtectedRoute>

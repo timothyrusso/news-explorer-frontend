@@ -1,11 +1,7 @@
 import './SavedNews.css';
 import NewsCard from '../NewsCard/NewsCard';
 
-const SavedNews = ({
-  savedArticles,
-  isSavedArticle,
-  saveUnauthorizedUserCard,
-}) => {
+const SavedNews = ({ savedArticles, isSavedArticle }) => {
   return (
     <section className="saved-news">
       <ul className="search-result-grid">
@@ -14,7 +10,6 @@ const SavedNews = ({
             key={card._id}
             card={card}
             isSavedArticle={isSavedArticle}
-            saveUnauthorizedUserCard={saveUnauthorizedUserCard}
           />
         ))}
       </ul>
