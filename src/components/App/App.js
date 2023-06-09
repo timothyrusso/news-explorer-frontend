@@ -1,5 +1,4 @@
 import './App.css';
-import nothingFoundIcom from '../../images/not-found.svg';
 import warningIcon from '../../images/warning.png';
 import Navigation from '../Navigation/Navigation';
 import Header from '../Header/Header';
@@ -131,12 +130,7 @@ const App = () => {
           element={
             <>
               <Header />
-              {showArticles && newsArticles.length !== 0 && (
-                <NewsCardList
-                  loggedIn={isLoggedIn}
-                  newsArticles={newsArticles}
-                />
-              )}
+              {showArticles && newsArticles.length !== 0 && <NewsCardList />}
               {newsArticles.length === 0 &&
                 !isLoading &&
                 showArticles &&
@@ -144,7 +138,6 @@ const App = () => {
                   <NothingFound
                     title={'Nothing found'}
                     text={'Sorry, but nothing matched your search terms.'}
-                    nothingFoundIcom={nothingFoundIcom}
                   />
                 )}
               {genericServerError && (

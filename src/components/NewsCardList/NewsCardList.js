@@ -8,7 +8,7 @@ import {
   setShowMoreArticlesAction,
 } from '../../store/article/article.actions';
 
-const NewsCardList = ({ loggedIn, newsArticles }) => {
+const NewsCardList = () => {
   const getRandomInt = () => {
     return Math.floor(Math.random() * 1000);
   };
@@ -19,6 +19,8 @@ const NewsCardList = ({ loggedIn, newsArticles }) => {
     (state) => state.article.nextThreeArticles
   );
   const allArticles = useSelector((state) => state.article.allArticles);
+  const loggedIn = useSelector((state) => state.toggles.isLoggedin);
+  const newsArticles = useSelector((state) => state.article.articles);
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
 
