@@ -1,7 +1,6 @@
 import './NothingFound.css';
-import nothingFoundIcon from '../../images/not-found.svg';
 
-const NothingFound = ({ title, text }) => {
+const NothingFound = ({ title, text, nothingFoundIcon }) => {
   return (
     <div className="nothing-found">
       <img

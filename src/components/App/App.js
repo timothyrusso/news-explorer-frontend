@@ -1,5 +1,6 @@
 import './App.css';
 import warningIcon from '../../images/warning.png';
+import nothingFoundIcon from '../../images/not-found.svg';
 import Navigation from '../Navigation/Navigation';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -138,6 +139,7 @@ const App = () => {
                   <NothingFound
                     title={'Nothing found'}
                     text={'Sorry, but nothing matched your search terms.'}
+                    nothingFoundIcon={nothingFoundIcon}
                   />
                 )}
               {genericServerError && (
@@ -146,7 +148,7 @@ const App = () => {
                   text={
                     'Sorry, something went wrong during the request. There may be a connection issue or the server may be down. Please try again later.'
                   }
-                  nothingFoundIcom={warningIcon}
+                  nothingFoundIcon={warningIcon}
                 />
               )}
               {isLoading && <Preloader />}
