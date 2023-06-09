@@ -49,8 +49,6 @@ const App = () => {
   const isLoading = useSelector((state) => state.toggles.isLoading);
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
-  const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
-  const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
   const showArticles = useSelector((state) => state.article.showArticles);
   const popupRedirectText = useSelector(
@@ -125,11 +123,7 @@ const App = () => {
 
   return (
     <div className="content">
-      <Navigation
-        loggedIn={isLoggedIn}
-        isBlackNavbar={isBlackNavbar}
-        toggleMenu={isMobileNavbar}
-      />
+      <Navigation />
       <Routes>
         <Route
           exact

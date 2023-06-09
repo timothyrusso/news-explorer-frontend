@@ -12,7 +12,7 @@ import { usePopup } from '../../hooks/usePopup';
 import { useHandleLogout } from '../../hooks/useHandleLogout';
 import { setIsMobileNavbarOppositeAction } from '../../store/toggles/toggles.actions';
 
-const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
+const Navigation = () => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -23,6 +23,10 @@ const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
   const { handleLogout } = useHandleLogout();
 
   const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
+  const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
+  const toggleMenu = useSelector((state) => state.toggles.isMobileNavbar);
 
   const toggleNav = () => {
     dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
@@ -95,7 +99,7 @@ const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
             <Link
               to={'/saved-news'}
               className={`navigation__link navigation__link_type_saved ${
-                !loggedIn ? 'navigation__disabled' : ''
+                !isLoggedIn ? 'navigation__disabled' : ''
               }
               ${
                 location.pathname === '/saved-news'
@@ -111,7 +115,7 @@ const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
               aria-label="signin"
               type="button"
               className={`navigation__button navigation__button_type_signin ${
-                loggedIn ? 'navigation__disabled' : ''
+                isLoggedIn ? 'navigation__disabled' : ''
               }`}
               onClick={handleSigninPopupClick}
               style={buttonColor}
@@ -122,7 +126,7 @@ const Navigation = ({ loggedIn, isBlackNavbar, toggleMenu }) => {
               aria-label="signout"
               type="button"
               className={`navigation__button navigation__button_type_logout ${
-                !loggedIn ? 'navigation__disabled' : ''
+                !isLoggedIn ? 'navigation__disabled' : ''
               }`}
               onClick={handleLogout}
               style={buttonColor}
