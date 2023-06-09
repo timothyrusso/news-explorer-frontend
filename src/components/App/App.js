@@ -18,10 +18,7 @@ import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getProfileInfo, getArticles } from '../../utils/MainApi';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  loginUserAction,
-  setSearchKeywordsListAction,
-} from '../../store/user/user.actions';
+import { loginUserAction } from '../../store/user/user.actions';
 import {
   setIsSavedArticleTrueAction,
   setIsSavedArticleFalseAction,
@@ -34,6 +31,7 @@ import {
 } from '../../store/toggles/toggles.actions';
 import { usePopup } from '../../hooks/usePopup';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
+import { useCheckKeywords } from '../../hooks/useCheckKeywords';
 
 const App = () => {
   const location = useLocation();
@@ -71,28 +69,9 @@ const App = () => {
 
   const { openPopupIfNotLoggedin } = usePopup();
   const { handleTokenCheck } = useAuthenticationApi();
+  const { checkKeywords } = useCheckKeywords();
 
   const jwt = localStorage.getItem('jwt');
-
-  const checkKeywords = () => {
-    const keywords = savedArticles.map((x) => x.keyword);
-    const count = {};
-
-    for (let index = 0; index < keywords.length; index++) {
-      const element = keywords[index];
-
-      if (count[element]) {
-        count[element] += 1;
-      } else {
-        count[element] = 1;
-      }
-    }
-
-    const keywordsOrdered = Object.entries(count)
-      .sort((a, b) => b[1] - a[1])
-      .map((element) => element[0]);
-    dispatch(setSearchKeywordsListAction(keywordsOrdered));
-  };
 
   useEffect(() => {
     switch (location.pathname) {
