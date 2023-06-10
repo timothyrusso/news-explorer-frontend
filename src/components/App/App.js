@@ -43,9 +43,6 @@ const App = () => {
   const isSignupPopupOpen = useSelector(
     (state) => state.toggles.isSignupPopupOpen
   );
-  const isInfoTooltipOpen = useSelector(
-    (state) => state.toggles.isInfoTooltipOpen
-  );
   const isLoading = useSelector((state) => state.toggles.isLoading);
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
@@ -161,7 +158,7 @@ const App = () => {
                 isLoadingText={isLoadingText}
                 popupServerErrorMessage={popupServerErrorMessage}
               />
-              <InfoTooltip isOpen={isInfoTooltipOpen} />
+              <InfoTooltip />
             </>
           }
         />
