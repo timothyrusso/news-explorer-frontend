@@ -8,15 +8,18 @@ import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useSelector } from 'react-redux';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 
-const Login = ({
-  isOpen,
-  popupRedirectText,
-  isLoadingText,
-  popupServerErrorMessage,
-}) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errorMessage = useSelector((state) => state.errors.errorMessage);
+  const isOpen = useSelector((state) => state.toggles.isSigninPopupOpen);
+  const popupRedirectText = useSelector(
+    (state) => state.toggles.popupRedirectText
+  );
+  const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
+  const popupServerErrorMessage = useSelector(
+    (state) => state.errors.popupServerErrorMessage
+  );
 
   const { checkValidity } = useCheckValidityInput(errorMessage);
 

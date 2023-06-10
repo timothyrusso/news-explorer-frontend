@@ -37,9 +37,6 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const newsArticles = useSelector((state) => state.article.articles);
-  const isSigninPopupOpen = useSelector(
-    (state) => state.toggles.isSigninPopupOpen
-  );
   const isSignupPopupOpen = useSelector(
     (state) => state.toggles.isSignupPopupOpen
   );
@@ -146,12 +143,7 @@ const App = () => {
               )}
               {isLoading && <Preloader />}
               <Main />
-              <Login
-                isOpen={isSigninPopupOpen}
-                popupRedirectText={popupRedirectText}
-                isLoadingText={isLoadingText}
-                popupServerErrorMessage={popupServerErrorMessage}
-              />
+              <Login />
               <Register
                 isOpen={isSignupPopupOpen}
                 popupRedirectText={popupRedirectText}
