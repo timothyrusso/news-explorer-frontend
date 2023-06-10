@@ -36,22 +36,13 @@ import { useCheckKeywords } from '../../hooks/useCheckKeywords';
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+
   const newsArticles = useSelector((state) => state.article.articles);
-  const isSignupPopupOpen = useSelector(
-    (state) => state.toggles.isSignupPopupOpen
-  );
   const isLoading = useSelector((state) => state.toggles.isLoading);
-  const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
   const showArticles = useSelector((state) => state.article.showArticles);
-  const popupRedirectText = useSelector(
-    (state) => state.toggles.popupRedirectText
-  );
   const genericServerError = useSelector(
     (state) => state.errors.genericServerError
-  );
-  const popupServerErrorMessage = useSelector(
-    (state) => state.errors.popupServerErrorMessage
   );
   const savedArticles = useSelector((state) => state.article.savedArticles);
 
@@ -144,12 +135,7 @@ const App = () => {
               {isLoading && <Preloader />}
               <Main />
               <Login />
-              <Register
-                isOpen={isSignupPopupOpen}
-                popupRedirectText={popupRedirectText}
-                isLoadingText={isLoadingText}
-                popupServerErrorMessage={popupServerErrorMessage}
-              />
+              <Register />
               <InfoTooltip />
             </>
           }
