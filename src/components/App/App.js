@@ -49,7 +49,6 @@ const App = () => {
   const isLoading = useSelector((state) => state.toggles.isLoading);
   const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
   const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
-  const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
   const showArticles = useSelector((state) => state.article.showArticles);
   const popupRedirectText = useSelector(
     (state) => state.toggles.popupRedirectText
@@ -172,10 +171,7 @@ const App = () => {
             <ProtectedRoute loggedIn={jwt} path={'/'}>
               <>
                 <SavedNewsHeader />
-                <SavedNews
-                  savedArticles={savedArticles}
-                  isSavedArticle={isSavedArticle}
-                />
+                <SavedNews />
               </>
             </ProtectedRoute>
           }

@@ -6,13 +6,16 @@ import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
 import { useArticleApi } from '../../hooks/useArticleApi';
 import { setTemporarySavedArticleAction } from '../../store/article/article.actions';
+import { useSelector } from 'react-redux';
 
-const NewsCard = ({ card, loggedIn, isSavedArticle }) => {
+const NewsCard = ({ card, loggedIn }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
   const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
+
+  const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
 
   const dispatch = useDispatch();
 

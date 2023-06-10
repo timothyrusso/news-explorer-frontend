@@ -1,16 +1,15 @@
-import './SavedNews.css';
 import NewsCard from '../NewsCard/NewsCard';
+import { useSelector } from 'react-redux';
+import './SavedNews.css';
 
-const SavedNews = ({ savedArticles, isSavedArticle }) => {
+const SavedNews = () => {
+  const savedArticles = useSelector((state) => state.article.savedArticles);
+
   return (
     <section className="saved-news">
       <ul className="search-result-grid">
         {savedArticles.map((card) => (
-          <NewsCard
-            key={card._id}
-            card={card}
-            isSavedArticle={isSavedArticle}
-          />
+          <NewsCard key={card._id} card={card} />
         ))}
       </ul>
     </section>
