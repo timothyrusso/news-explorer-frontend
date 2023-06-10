@@ -61,9 +61,6 @@ const App = () => {
     (state) => state.errors.popupServerErrorMessage
   );
   const savedArticles = useSelector((state) => state.article.savedArticles);
-  const searchKeywordsList = useSelector(
-    (state) => state.user.searchKeywordsList
-  );
 
   const { openPopupIfNotLoggedin } = usePopup();
   const { handleTokenCheck } = useAuthenticationApi();
@@ -174,10 +171,7 @@ const App = () => {
           element={
             <ProtectedRoute loggedIn={jwt} path={'/'}>
               <>
-                <SavedNewsHeader
-                  savedArticles={savedArticles}
-                  searchKeywordsList={searchKeywordsList}
-                />
+                <SavedNewsHeader />
                 <SavedNews
                   savedArticles={savedArticles}
                   isSavedArticle={isSavedArticle}
