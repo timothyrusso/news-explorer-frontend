@@ -32,19 +32,28 @@ import {
 import { usePopup } from '../../hooks/usePopup';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 import { useCheckKeywords } from '../../hooks/useCheckKeywords';
+import { RootState } from '../../store/RootState';
 
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const newsArticles = useSelector((state) => state.article.articles);
-  const isLoading = useSelector((state) => state.toggles.isLoading);
-  const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
-  const showArticles = useSelector((state) => state.article.showArticles);
-  const genericServerError = useSelector(
-    (state) => state.errors.genericServerError
+  const newsArticles = useSelector(
+    (state: RootState) => state.article.articles
   );
-  const savedArticles = useSelector((state) => state.article.savedArticles);
+  const isLoading = useSelector((state: RootState) => state.toggles.isLoading);
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.toggles.isLoggedin
+  );
+  const showArticles = useSelector(
+    (state: RootState) => state.article.showArticles
+  );
+  const genericServerError = useSelector(
+    (state: RootState) => state.errors.genericServerError
+  );
+  const savedArticles = useSelector(
+    (state: RootState) => state.article.savedArticles
+  );
 
   const { openPopupIfNotLoggedin } = usePopup();
   const { handleTokenCheck } = useAuthenticationApi();

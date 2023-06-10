@@ -13,9 +13,9 @@ import { useHandleBookmarkClick } from './useHandleBookmarkClick';
 import { checkToken } from '../utils/MainApi';
 
 export const useAuthenticationApi = (
-  email: string,
-  password: string,
-  username: string
+  email?: string,
+  password?: string,
+  username?: string
 ) => {
   const dispatch = useDispatch();
   const { closeAllPopups } = usePopup();
