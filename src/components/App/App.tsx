@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import warningIcon from '../../images/warning.png';
 import nothingFoundIcon from '../../images/not-found.svg';
@@ -116,7 +117,6 @@ const App = () => {
       <Navigation />
       <Routes>
         <Route
-          exact
           path="/"
           element={
             <>
