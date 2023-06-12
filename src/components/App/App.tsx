@@ -34,6 +34,7 @@ import { usePopup } from '../../hooks/usePopup';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 import { useCheckKeywords } from '../../hooks/useCheckKeywords';
 import { RootState } from '../../store/RootState';
+import { Article } from '../../store/article/article.type';
 
 const App = () => {
   const location = useLocation();
@@ -41,7 +42,7 @@ const App = () => {
 
   const newsArticles = useSelector(
     (state: RootState) => state.article.articles
-  );
+  ) as Article[];
   const isLoading = useSelector((state: RootState) => state.toggles.isLoading);
   const isLoggedIn = useSelector(
     (state: RootState) => state.toggles.isLoggedin
