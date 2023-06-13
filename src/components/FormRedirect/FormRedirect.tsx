@@ -1,7 +1,12 @@
-import './FormRedirect.css';
+import React, { FC } from 'react';
 import { usePopup } from '../../hooks/usePopup';
+import './FormRedirect.css';
 
-const FormRedirect = ({ popupRedirectText }) => {
+type FormRedirectProps = {
+  popupRedirectText: string;
+};
+
+const FormRedirect: FC<FormRedirectProps> = ({ popupRedirectText }) => {
   const { handleSwitchPopup } = usePopup();
 
   return (
