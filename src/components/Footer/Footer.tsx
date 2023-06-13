@@ -1,7 +1,8 @@
-import './Footer.css';
+import React from 'react';
 import linkedinIcon from '../../images/linkedin_icon.png';
 import githubIcon from '../../images/github.svg';
 import { Link } from 'react-router-dom';
+import './Footer.css';
 
 const Footer = () => {
   const date = new Date();
