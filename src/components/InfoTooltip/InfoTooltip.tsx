@@ -1,11 +1,15 @@
-import './InfoTooltip.css';
+import React from 'react';
 import Popup from '../Popup/Popup';
 import { usePopup } from '../../hooks/usePopup';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store/RootState';
+import './InfoTooltip.css';
 
 const InfoTooltip = () => {
   const { handleSigninPopupClick } = usePopup();
-  const isOpen = useSelector((state) => state.toggles.isInfoTooltipOpen);
+  const isOpen = useSelector(
+    (state: RootState) => state.toggles.isInfoTooltipOpen
+  );
 
   return (
     <Popup isOpen={isOpen} infoTooltip={true}>
