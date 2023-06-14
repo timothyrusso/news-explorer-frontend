@@ -1,3 +1,4 @@
+import React from 'react';
 import './Header.css';
 import SearchForm from '../SearchForm/SearchForm';
 
