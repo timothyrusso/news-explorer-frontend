@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   setIsFormValidityTrueAction,
@@ -6,8 +6,14 @@ import {
 } from '../../store/errors/errors.actions';
 import './Form.css';
 
-const Form = ({ name, onSubmit, children }) => {
-  const formRef = useRef();
+type FormProps = {
+  name: string;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  children: React.ReactNode;
+};
+
+const Form: FC<FormProps> = ({ name, onSubmit, children }) => {
+  const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch();
 
   const onFormUpdate = (data) => {
@@ -17,7 +23,7 @@ const Form = ({ name, onSubmit, children }) => {
   };
 
   const handleFormValidity = () => {
-    const formValidityBoolean = formRef.current.checkValidity();
+    const formValidityBoolean = formRef.current?.checkValidity();
     onFormUpdate(formValidityBoolean);
   };
 
