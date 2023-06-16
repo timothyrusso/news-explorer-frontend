@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import './NewsCardList.css';
@@ -7,6 +8,7 @@ import {
   setNextThreeArticlesToPayloadAction,
   setShowMoreArticlesAction,
 } from '../../store/article/article.actions';
+import { RootState } from '../../store/RootState';
 
 const NewsCardList = () => {
   const getRandomInt = () => {
@@ -16,11 +18,15 @@ const NewsCardList = () => {
   const dispatch = useDispatch();
 
   const nextThreeArticles = useSelector(
-    (state) => state.article.nextThreeArticles
+    (state: RootState) => state.article.nextThreeArticles
   );
-  const allArticles = useSelector((state) => state.article.allArticles);
-  const loggedIn = useSelector((state) => state.toggles.isLoggedin);
-  const newsArticles = useSelector((state) => state.article.articles);
+  const allArticles = useSelector(
+    (state: RootState) => state.article.allArticles
+  );
+  const loggedIn = useSelector((state: RootState) => state.toggles.isLoggedin);
+  const newsArticles = useSelector(
+    (state: RootState) => state.article.articles
+  );
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
 
