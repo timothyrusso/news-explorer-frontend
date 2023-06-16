@@ -16,7 +16,7 @@ const Form: FC<FormProps> = ({ name, onSubmit, children }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch();
 
-  const onFormUpdate = (data) => {
+  const onFormUpdate = (data: boolean) => {
     data
       ? dispatch(setIsFormValidityTrueAction())
       : dispatch(setIsFormValidityFalseAction());
@@ -24,7 +24,9 @@ const Form: FC<FormProps> = ({ name, onSubmit, children }) => {
 
   const handleFormValidity = () => {
     const formValidityBoolean = formRef.current?.checkValidity();
-    onFormUpdate(formValidityBoolean);
+    if (formValidityBoolean) {
+      onFormUpdate(formValidityBoolean);
+    }
   };
 
   return (
