@@ -9,6 +9,7 @@ import {
   setShowMoreArticlesAction,
 } from '../../store/article/article.actions';
 import { RootState } from '../../store/RootState';
+import { Article } from '../../store/article/article.type';
 
 const NewsCardList = () => {
   const getRandomInt = () => {
@@ -26,7 +27,7 @@ const NewsCardList = () => {
   const loggedIn = useSelector((state: RootState) => state.toggles.isLoggedin);
   const newsArticles = useSelector(
     (state: RootState) => state.article.articles
-  );
+  ) as Article[];
 
   const showMoreButtonLogic = nextThreeArticles < allArticles.length;
 
@@ -39,9 +40,9 @@ const NewsCardList = () => {
     );
   };
 
-  const loopArticlesWithSlice = (start, end) => {
+  const loopArticlesWithSlice = (start: number, end: number) => {
     const slicedNews = allArticles.slice(start, end);
-    arrayForHoldingNews = [...newsArticles, ...slicedNews];
+    arrayForHoldingNews = [...(newsArticles as Article[]), ...slicedNews];
     dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
   };
 
@@ -49,7 +50,7 @@ const NewsCardList = () => {
     <section className="news-card-list">
       <h2 className="news-card-list__title">Search results</h2>
       <ul className="search-result-grid">
-        {newsArticles.map((card) => (
+        {newsArticles.map((card: Article) => (
           <NewsCard
             key={card.url + getRandomInt()}
             card={card}
