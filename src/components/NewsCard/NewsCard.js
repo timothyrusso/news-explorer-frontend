@@ -8,7 +8,7 @@ import { useArticleApi } from '../../hooks/useArticleApi';
 import { setTemporarySavedArticleAction } from '../../store/article/article.actions';
 import { useSelector } from 'react-redux';
 
-const NewsCard = ({ card, loggedIn }) => {
+const NewsCard = ({ card }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const { handleSigninPopupClick } = usePopup();
@@ -16,6 +16,7 @@ const NewsCard = ({ card, loggedIn }) => {
   const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
 
   const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
+  const loggedIn = useSelector((state) => state.toggles.isLoggedin);
 
   const dispatch = useDispatch();
 

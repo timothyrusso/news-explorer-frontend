@@ -24,7 +24,6 @@ const NewsCardList = () => {
   const allArticles = useSelector(
     (state: RootState) => state.article.allArticles
   );
-  const loggedIn = useSelector((state: RootState) => state.toggles.isLoggedin);
   const newsArticles = useSelector(
     (state: RootState) => state.article.articles
   ) as Article[];
@@ -51,11 +50,7 @@ const NewsCardList = () => {
       <h2 className="news-card-list__title">Search results</h2>
       <ul className="search-result-grid">
         {newsArticles.map((card: Article) => (
-          <NewsCard
-            key={card.url + getRandomInt()}
-            card={card}
-            loggedIn={loggedIn}
-          />
+          <NewsCard key={card.url + getRandomInt()} card={card} />
         ))}
       </ul>
       {showMoreButtonLogic && (
