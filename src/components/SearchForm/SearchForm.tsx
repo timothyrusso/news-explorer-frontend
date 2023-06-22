@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setShowArticleFalseAction } from '../../store/article/article.actions';
 import { setIsLoadingTrueAction } from '../../store/toggles/toggles.actions';
@@ -24,7 +24,9 @@ const SearchForm = () => {
 
   const dispatch = useDispatch();
 
-  const handleSearchInputChange = (evt) => {
+  const handleSearchInputChange = (
+    evt: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSearchInput(evt.target.value);
   };
 
@@ -37,14 +39,13 @@ const SearchForm = () => {
     getNewsInfo({ search: data.search })
       .then((data) => {
         localStorage.setItem('news', JSON.stringify(data.articles));
-        dispatch(
-          fetchArticlesAction(
-            JSON.parse(localStorage.getItem('news')).slice(start, end)
-          )
-        );
-        dispatch(
-          fetchAllArticlesAction(JSON.parse(localStorage.getItem('news')))
-        );
+        const newsFromStorage = localStorage.getItem('news');
+        if (newsFromStorage !== null) {
+          dispatch(
+            fetchArticlesAction(JSON.parse(newsFromStorage).slice(start, end))
+          );
+          dispatch(fetchAllArticlesAction(JSON.parse(newsFromStorage)));
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +57,7 @@ const SearchForm = () => {
       });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     if (searchInput) {
       dispatch(setShowArticleFalseAction());
       dispatch(setIsLoadingTrueAction());
