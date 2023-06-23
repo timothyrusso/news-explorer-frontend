@@ -30,7 +30,11 @@ const SearchForm = () => {
     setSearchInput(evt.target.value);
   };
 
-  const activateSearch = (data, start = startpoint, end = newsPerPage) => {
+  const activateSearch = (
+    data: { search: string },
+    start = startpoint,
+    end = newsPerPage
+  ) => {
     localStorage.removeItem('news');
     dispatch(setNextThreeArticlesToThreeAction());
     dispatch(setGenericServerErrorFalseAction());
