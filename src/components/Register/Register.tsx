@@ -7,20 +7,27 @@ import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions'
 import { useSelector } from 'react-redux';
 import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
+import { RootState } from '../../store/RootState';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const errorMessage = useSelector((state) => state.errors.errorMessage);
-  const isOpen = useSelector((state) => state.toggles.isSignupPopupOpen);
-  const popupRedirectText = useSelector(
-    (state) => state.toggles.popupRedirectText
+  const errorMessage = useSelector(
+    (state: RootState) => state.errors.errorMessage
   );
-  const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
+  const isOpen = useSelector(
+    (state: RootState) => state.toggles.isSignupPopupOpen
+  );
+  const popupRedirectText = useSelector(
+    (state: RootState) => state.toggles.popupRedirectText
+  );
+  const isLoadingText = useSelector(
+    (state: RootState) => state.toggles.isLoadingText
+  );
   const popupServerErrorMessage = useSelector(
-    (state) => state.errors.popupServerErrorMessage
+    (state: RootState) => state.errors.popupServerErrorMessage
   );
 
   const { checkValidity } = useCheckValidityInput(errorMessage);
@@ -32,22 +39,22 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
-  const handleEmailChange = (evt) => {
+  const handleEmailChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     checkValidity(evt);
     setEmail(evt.target.value);
   };
 
-  const handlePasswordChange = (evt) => {
+  const handlePasswordChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     checkValidity(evt);
     setPassword(evt.target.value);
   };
 
-  const handleUsernameChange = (evt) => {
+  const handleUsernameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     checkValidity(evt);
     setUsername(evt.target.value);
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setIsLoadingTextTrueAction());
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
@@ -78,6 +85,8 @@ const Register = () => {
           name={'email'}
           fieldName={'field_email'}
           placeholder={'Enter email'}
+          minLength={'5'}
+          maxLength={'254'}
           value={email}
           onChange={handleEmailChange}
           errorMessage={errorMessage}
