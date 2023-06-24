@@ -1,6 +1,17 @@
+import React, { FC } from 'react';
 import './NothingFound.css';
 
-const NothingFound = ({ title, text, nothingFoundIcon }) => {
+type NothingFoundProps = {
+  title: string;
+  text: string;
+  nothingFoundIcon: string;
+};
+
+const NothingFound: FC<NothingFoundProps> = ({
+  title,
+  text,
+  nothingFoundIcon,
+}) => {
   return (
     <div className="nothing-found">
       <img
