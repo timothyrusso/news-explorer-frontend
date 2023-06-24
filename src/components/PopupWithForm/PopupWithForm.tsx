@@ -1,10 +1,24 @@
+import React, { FC, ReactNode } from 'react';
 import Popup from '../Popup/Popup';
 import Form from '../Form/Form';
 import { useSelector } from 'react-redux';
-import './PopupWithForm.css';
 import FormRedirect from '../FormRedirect/FormRedirect';
+import { RootState } from '../../store/RootState';
+import './PopupWithForm.css';
 
-const PopupWithForm = ({
+type PopupWithFormProps = {
+  name: string;
+  title: string;
+  isOpen: boolean;
+  popupRedirectText: string;
+  buttonText: string;
+  onSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
+  loadingText: string;
+  isLoadingText: boolean;
+  children: ReactNode;
+};
+
+const PopupWithForm: FC<PopupWithFormProps> = ({
   name,
   title,
   isOpen,
@@ -15,10 +29,15 @@ const PopupWithForm = ({
   isLoadingText,
   children,
 }) => {
-  const formValidity = useSelector((state) => state.errors.formValidity);
+  const formValidity = useSelector(
+    (state: RootState) => state.errors.formValidity
+  );
+  const infoTooltip = useSelector(
+    (state: RootState) => state.toggles.isInfoTooltipOpen
+  );
 
   return (
-    <Popup isOpen={isOpen} name={name}>
+    <Popup isOpen={isOpen} name={name} infoTooltip={infoTooltip}>
       <Form name={`myForm${name}`} onSubmit={onSubmit}>
         <h2 className="popup__title">{title}</h2>
         {children}

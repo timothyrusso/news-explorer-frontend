@@ -54,7 +54,7 @@ const Register = () => {
     setUsername(evt.target.value);
   };
 
-  const handleSubmit = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     dispatch(setIsLoadingTextTrueAction());
     // Prevent the browser from navigating to the form address
     evt.preventDefault();
