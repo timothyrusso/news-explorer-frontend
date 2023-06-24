@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
   children: ReactNode;
-  loggedIn?: boolean;
+  loggedIn: string | null;
   path: string;
 };
 
