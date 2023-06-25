@@ -1,4 +1,4 @@
-import './NewsCard.css';
+import React, { FC } from 'react';
 import alternativeBackground from '../../images/header_background.png';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,33 +7,43 @@ import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
 import { useArticleApi } from '../../hooks/useArticleApi';
 import { setTemporarySavedArticleAction } from '../../store/article/article.actions';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store/RootState';
+import { Article } from '../../store/article/article.type';
+import { SavedArticle } from '../../store/article/article.type';
+import './NewsCard.css';
 
-const NewsCard = ({ card }) => {
+type NewsCardProps = {
+  card: SavedArticle | Article | Article[];
+};
+
+const NewsCard: FC<NewsCardProps> = ({ card }) => {
   const [bookmarkStatus, setBookmarkStatus] = useState(false);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
   const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
 
-  const isSavedArticle = useSelector((state) => state.article.isSavedArticle);
-  const loggedIn = useSelector((state) => state.toggles.isLoggedin);
+  const isSavedArticle = useSelector(
+    (state: RootState) => state.article.isSavedArticle
+  );
+  const loggedIn = useSelector((state: RootState) => state.toggles.isLoggedin);
 
   const dispatch = useDispatch();
 
   const saveCard = () => {
-    handleBookmarkClick(card);
+    if ('url' in card) handleBookmarkClick(card);
   };
 
   const deleteCard = () => {
-    handleDeleteArticles(card);
+    if ('_id' in card) handleDeleteArticles(card);
   };
 
   const handleCardSaveUnauthorizedUser = () => {
-    dispatch(setTemporarySavedArticleAction(card));
+    if ('url' in card) dispatch(setTemporarySavedArticleAction(card));
     handleSigninPopupClick();
   };
 
-  const convertDate = (timeStr) => {
+  const convertDate = (timeStr: string) => {
     var date = new Date(timeStr);
     var day = date.getDate();
     var year = date.getFullYear();
@@ -102,6 +112,7 @@ const NewsCard = ({ card }) => {
               backgroundUrl != null ? backgroundUrl : alternativeBackground
             })`,
           }}
+          // @ts-ignore
           href={!isSavedArticle ? card.url : card.link}
         ></div>
       </a>
