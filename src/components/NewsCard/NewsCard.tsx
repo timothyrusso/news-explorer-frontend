@@ -176,7 +176,7 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
           <p className="card__source">
             {!isSavedArticle && typeof card.source !== 'string'
               ? card.source.name
-              : card.source}
+              : card.source.toString()}
           </p>
         </a>
       </div>
