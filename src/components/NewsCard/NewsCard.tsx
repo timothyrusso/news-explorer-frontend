@@ -13,7 +13,7 @@ import { SavedArticle } from '../../store/article/article.type';
 import './NewsCard.css';
 
 type NewsCardProps = {
-  card: SavedArticle | Article | Article[];
+  card: SavedArticle | Article;
 };
 
 const NewsCard: FC<NewsCardProps> = ({ card }) => {
@@ -39,7 +39,7 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
   };
 
   const handleCardSaveUnauthorizedUser = () => {
-    if ('url' in card) dispatch(setTemporarySavedArticleAction(card));
+    if ('url' in card) dispatch(setTemporarySavedArticleAction([card]));
     handleSigninPopupClick();
   };
 
@@ -57,12 +57,19 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
     return dateStr;
   };
 
-  const data = convertDate(!isSavedArticle ? card.publishedAt : card.date);
+  const data = convertDate(
+    !isSavedArticle && 'publishedAt' in card
+      ? card.publishedAt
+      : (card as SavedArticle).date
+  );
 
-  const backgroundUrl = !isSavedArticle ? card.urlToImage : card.image;
+  const backgroundUrl =
+    !isSavedArticle && 'urlToImage' in card
+      ? card.urlToImage
+      : (card as SavedArticle).image;
 
   useEffect(() => {
-    if (checkSavedArticle(card)) {
+    if ('url' in card && checkSavedArticle(card)) {
       setBookmarkStatus(true);
     } else {
       setBookmarkStatus(false);
@@ -73,7 +80,9 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
     <li className="card">
       {isSavedArticle && (
         <>
-          <div className="card__keyword">{card.keyword}</div>
+          <div className="card__keyword">
+            {'keyword' in card && card.keyword}
+          </div>
           <button
             aria-label="Delete"
             type="button"
@@ -101,7 +110,11 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
         </>
       )}
       <a
-        href={!isSavedArticle ? card.url : card.link}
+        href={
+          !isSavedArticle && 'url' in card
+            ? card.url
+            : (card as SavedArticle).link
+        }
         target="_blank"
         rel="noreferrer"
       >
@@ -113,13 +126,21 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
             })`,
           }}
           // @ts-ignore
-          href={!isSavedArticle ? card.url : card.link}
+          href={
+            !isSavedArticle && 'url' in card
+              ? card.url
+              : (card as SavedArticle).link
+          }
         ></div>
       </a>
       <div className="card__content">
         <time className="card__date">{data}</time>
         <a
-          href={!isSavedArticle ? card.url : card.link}
+          href={
+            !isSavedArticle && 'url' in card
+              ? card.url
+              : (card as SavedArticle).link
+          }
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
@@ -127,23 +148,35 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
           <h3 className="card__title">{card.title}</h3>
         </a>
         <a
-          href={!isSavedArticle ? card.url : card.link}
+          href={
+            !isSavedArticle && 'url' in card
+              ? card.url
+              : (card as SavedArticle).link
+          }
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
         >
           <p className="card__text">
-            {!isSavedArticle ? card.content : card.text}
+            {!isSavedArticle && 'content' in card
+              ? card.content
+              : (card as SavedArticle).text}
           </p>
         </a>
         <a
-          href={!isSavedArticle ? card.url : card.link}
+          href={
+            !isSavedArticle && 'url' in card
+              ? card.url
+              : (card as SavedArticle).link
+          }
           target="_blank"
           rel="noreferrer"
           className="card__link-wrapper"
         >
           <p className="card__source">
-            {!isSavedArticle ? card.source.name : card.source}
+            {!isSavedArticle && typeof card.source !== 'string'
+              ? card.source.name
+              : card.source}
           </p>
         </a>
       </div>
