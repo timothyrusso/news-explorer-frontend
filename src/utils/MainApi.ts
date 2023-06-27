@@ -17,7 +17,7 @@ type saveArticlesProps = {
   image: string;
 };
 
-export const BASE_URL = 'https://news-explorer-cc5g.onrender.com/';
+export const BASE_URL = 'https://news-explorer-cc5g.onrender.com';
 
 const checkResponse = (res: Response) => {
   if (res.ok) {
