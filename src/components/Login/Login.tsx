@@ -7,18 +7,25 @@ import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions'
 import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useSelector } from 'react-redux';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
+import { RootState } from '../../store/RootState';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const errorMessage = useSelector((state) => state.errors.errorMessage);
-  const isOpen = useSelector((state) => state.toggles.isSigninPopupOpen);
-  const popupRedirectText = useSelector(
-    (state) => state.toggles.popupRedirectText
+  const errorMessage = useSelector(
+    (state: RootState) => state.errors.errorMessage
   );
-  const isLoadingText = useSelector((state) => state.toggles.isLoadingText);
+  const isOpen = useSelector(
+    (state: RootState) => state.toggles.isSigninPopupOpen
+  );
+  const popupRedirectText = useSelector(
+    (state: RootState) => state.toggles.popupRedirectText
+  );
+  const isLoadingText = useSelector(
+    (state: RootState) => state.toggles.isLoadingText
+  );
   const popupServerErrorMessage = useSelector(
-    (state) => state.errors.popupServerErrorMessage
+    (state: RootState) => state.errors.popupServerErrorMessage
   );
 
   const { checkValidity } = useCheckValidityInput(errorMessage);
@@ -27,17 +34,17 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const handleEmailChange = (evt) => {
+  const handleEmailChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     checkValidity(evt);
     setEmail(evt.target.value);
   };
 
-  const handlePasswordChange = (evt) => {
+  const handlePasswordChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     checkValidity(evt);
     setPassword(evt.target.value);
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     dispatch(setIsLoadingTextTrueAction());
     evt.preventDefault();
     handleLoginSubmit();
