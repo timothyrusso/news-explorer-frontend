@@ -1,6 +1,5 @@
-import './Navigation.css';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import logo from '../../images/NewsExplorer.svg';
@@ -11,22 +10,32 @@ import { useSelector } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleLogout } from '../../hooks/useHandleLogout';
 import { setIsMobileNavbarOppositeAction } from '../../store/toggles/toggles.actions';
+import { RootState } from '../../store/RootState';
+import './Navigation.css';
 
 const Navigation = () => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const isMobileNavbar = useSelector((state) => state.toggles.isMobileNavbar);
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
+  const isMobileNavbar = useSelector(
+    (state: RootState) => state.toggles.isMobileNavbar
+  );
 
   const { handleSigninPopupClick } = usePopup();
   const { handleLogout } = useHandleLogout();
 
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector((state) => state.toggles.isLoggedin);
-  const isBlackNavbar = useSelector((state) => state.toggles.isBlackNavbar);
-  const toggleMenu = useSelector((state) => state.toggles.isMobileNavbar);
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.toggles.isLoggedin
+  );
+  const isBlackNavbar = useSelector(
+    (state: RootState) => state.toggles.isBlackNavbar
+  );
+  const toggleMenu = useSelector(
+    (state: RootState) => state.toggles.isMobileNavbar
+  );
 
   const toggleNav = () => {
     dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));
@@ -131,7 +140,7 @@ const Navigation = () => {
               onClick={handleLogout}
               style={buttonColor}
             >
-              {currentUser.name}
+              {'__v' in currentUser && currentUser.name}
               <img
                 src={isBlackNavbar && !toggleMenu ? blackLogout : logout}
                 alt="Logout logo"
