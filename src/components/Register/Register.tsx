@@ -85,8 +85,8 @@ const Register = () => {
           name={'email'}
           fieldName={'field_email'}
           placeholder={'Enter email'}
-          minLength={'5'}
-          maxLength={'254'}
+          minLength={5}
+          maxLength={254}
           value={email}
           onChange={handleEmailChange}
           errorMessage={errorMessage}
@@ -98,8 +98,8 @@ const Register = () => {
           name={'password'}
           fieldName={'field_password'}
           placeholder={'Enter password'}
-          minLength={'8'}
-          maxLength={'20'}
+          minLength={8}
+          maxLength={20}
           value={password}
           onChange={handlePasswordChange}
           errorMessage={errorMessage}
@@ -111,8 +111,8 @@ const Register = () => {
           name={'username'}
           fieldName={'field_username'}
           placeholder={'Enter your username'}
-          minLength={'2'}
-          maxLength={'20'}
+          minLength={2}
+          maxLength={20}
           value={username}
           onChange={handleUsernameChange}
           errorMessage={errorMessage}
