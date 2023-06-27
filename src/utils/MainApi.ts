@@ -5,12 +5,22 @@ import {
   INTERNAL_SERVER_ERROR,
   REQUEST_SUCCEDED,
   UNAUTHORIZED,
-} from "./constants";
+} from './constants';
+
+type saveArticlesProps = {
+  keyword: string;
+  title: string;
+  text: string;
+  date: string;
+  source: string;
+  link: string;
+  image: string;
+};
 
 export const BASE_URL =
-  "https://api.newsexplorer-timothyrusso.students.nomoreparties.sbs";
+  'https://api.newsexplorer-timothyrusso.students.nomoreparties.sbs';
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   if (res.ok) {
     console.log(
       `URL: ${res.url}
@@ -26,18 +36,18 @@ Status code: ${res.status}`
 export const getProfileInfo = () => {
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
-      authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      'Content-Type': 'application/json',
     },
   }).then(checkResponse);
 };
 
-export const register = (email, password, name) => {
+export const register = (email?: string, password?: string, name?: string) => {
   return fetch(`${BASE_URL}/signup`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password, name }),
   }).then((res) => {
@@ -45,23 +55,23 @@ export const register = (email, password, name) => {
       return res.json();
     }
     if (res.status === CONFLICT) {
-      throw new Error("This email is not available");
+      throw new Error('This email is not available');
     }
     if (res.status === BAD_REQUEST) {
-      throw new Error("Some of the fields are invalid");
+      throw new Error('Some of the fields are invalid');
     }
     if (res.status === INTERNAL_SERVER_ERROR) {
-      throw new Error("Sorry, something went wrong during the request");
+      throw new Error('Sorry, something went wrong during the request');
     }
   });
 };
 
-export const authorize = (password, email) => {
+export const authorize = (password: string, email: string) => {
   return fetch(`${BASE_URL}/signin`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ password, email }),
   })
@@ -70,19 +80,19 @@ export const authorize = (password, email) => {
         return res.json();
       }
       if (res.status === UNAUTHORIZED) {
-        throw new Error("Email or password are incorrect");
+        throw new Error('Email or password are incorrect');
       }
       if (res.status === BAD_REQUEST) {
-        throw new Error("Some of the fields are invalid");
+        throw new Error('Some of the fields are invalid');
       }
       if (res.status === INTERNAL_SERVER_ERROR) {
-        throw new Error("Sorry, something went wrong during the request");
+        throw new Error('Sorry, something went wrong during the request');
       }
     })
     .then((data) => {
       if (data.token) {
-        localStorage.setItem("jwt", data.token);
-        localStorage.setItem("email", email);
+        localStorage.setItem('jwt', data.token);
+        localStorage.setItem('email', email);
         return data;
       } else {
         return;
@@ -90,12 +100,12 @@ export const authorize = (password, email) => {
     });
 };
 
-export const checkToken = (token) => {
+export const checkToken = (token: string | null) => {
   return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
   })
@@ -105,11 +115,11 @@ export const checkToken = (token) => {
 
 export const getArticles = () => {
   return fetch(`${BASE_URL}/articles`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   }).then(checkResponse);
 };
@@ -122,13 +132,13 @@ export const saveArticles = ({
   source,
   link,
   image,
-}) => {
+}: saveArticlesProps) => {
   return fetch(`${BASE_URL}/articles`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
     body: JSON.stringify({
       keyword,
@@ -142,13 +152,13 @@ export const saveArticles = ({
   }).then(checkResponse);
 };
 
-export const deleteArticles = ({ articleId }) => {
+export const deleteArticles = ({ articleId }: { articleId: string }) => {
   return fetch(`${BASE_URL}/articles/${articleId}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
   }).then(checkResponse);
 };
