@@ -1,5 +1,5 @@
 import { register, authorize } from '../utils/MainApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { usePopup } from './usePopup';
 import {
   setInfoTooltipOpenAction,
@@ -8,9 +8,9 @@ import {
 } from '../store/toggles/toggles.actions';
 import { setPopupserverErrorMessageAction } from '../store/errors/errors.actions';
 import { removeTemporarySavedArticleAction } from '../store/article/article.actions';
-import { RootState } from '../store/RootState';
 import { useHandleBookmarkClick } from './useHandleBookmarkClick';
 import { checkToken } from '../utils/MainApi';
+import { useAppSelector } from './useAppSelector';
 
 export const useAuthenticationApi = (
   email?: string,
@@ -21,8 +21,8 @@ export const useAuthenticationApi = (
   const { closeAllPopups } = usePopup();
   const { handleBookmarkClick } = useHandleBookmarkClick();
 
-  const temporarySavedArticle = useSelector(
-    (state: RootState) => state.article.temporarySavedArticle
+  const temporarySavedArticle = useAppSelector(
+    (state) => state.article.temporarySavedArticle
   );
 
   const handleRegisterSubmit = () => {

@@ -4,30 +4,23 @@ import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
-import { useSelector } from 'react-redux';
 import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
-import { RootState } from '../../store/RootState';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const errorMessage = useSelector(
-    (state: RootState) => state.errors.errorMessage
+  const errorMessage = useAppSelector((state) => state.errors.errorMessage);
+  const isOpen = useAppSelector((state) => state.toggles.isSignupPopupOpen);
+  const popupRedirectText = useAppSelector(
+    (state) => state.toggles.popupRedirectText
   );
-  const isOpen = useSelector(
-    (state: RootState) => state.toggles.isSignupPopupOpen
-  );
-  const popupRedirectText = useSelector(
-    (state: RootState) => state.toggles.popupRedirectText
-  );
-  const isLoadingText = useSelector(
-    (state: RootState) => state.toggles.isLoadingText
-  );
-  const popupServerErrorMessage = useSelector(
-    (state: RootState) => state.errors.popupServerErrorMessage
+  const isLoadingText = useAppSelector((state) => state.toggles.isLoadingText);
+  const popupServerErrorMessage = useAppSelector(
+    (state) => state.errors.popupServerErrorMessage
   );
 
   const { checkValidity } = useCheckValidityInput(errorMessage);

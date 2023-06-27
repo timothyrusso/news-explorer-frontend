@@ -1,15 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store/RootState';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import './SavedNewsHeader.css';
 
 const SavedNewsHeader = () => {
-  const currentUser = useSelector((state: RootState) => state.user.currentUser);
-  const savedArticles = useSelector(
-    (state: RootState) => state.article.savedArticles
-  );
-  const searchKeywordsList = useSelector(
-    (state: RootState) => state.user.searchKeywordsList
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const savedArticles = useAppSelector((state) => state.article.savedArticles);
+  const searchKeywordsList = useAppSelector(
+    (state) => state.user.searchKeywordsList
   );
 
   return (

@@ -1,22 +1,17 @@
 import { saveArticles, deleteArticles } from '../utils/MainApi';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import {
   setSavedArticlesAction,
   removeSingleSavedArticleAction,
 } from '../store/article/article.actions';
 import { Article, SavedArticle } from '../store/article/article.type';
-import { RootState } from '../store/RootState';
+import { useAppSelector } from './useAppSelector';
 
 export const useArticleApi = () => {
   const dispatch = useDispatch();
 
-  const searchKeyword = useSelector(
-    (state: RootState) => state.user.searchKeyword
-  );
-  const savedArticles = useSelector(
-    (state: RootState) => state.article.savedArticles
-  );
+  const searchKeyword = useAppSelector((state) => state.user.searchKeyword);
+  const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   const handleSaveArticles = (article: Article) => {
     saveArticles({

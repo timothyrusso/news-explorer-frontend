@@ -18,7 +18,7 @@ import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import SavedNews from '../SavedNews/SavedNews';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getProfileInfo, getArticles } from '../../utils/MainApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUserAction } from '../../store/user/user.actions';
 import {
   setIsSavedArticleTrueAction,
@@ -33,29 +33,23 @@ import {
 import { usePopup } from '../../hooks/usePopup';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 import { useCheckKeywords } from '../../hooks/useCheckKeywords';
-import { RootState } from '../../store/RootState';
 import { Article } from '../../store/article/article.type';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const newsArticles = useSelector(
-    (state: RootState) => state.article.articles
+  const newsArticles = useAppSelector(
+    (state) => state.article.articles
   ) as Article[];
-  const isLoading = useSelector((state: RootState) => state.toggles.isLoading);
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.toggles.isLoggedin
+  const isLoading = useAppSelector((state) => state.toggles.isLoading);
+  const isLoggedIn = useAppSelector((state) => state.toggles.isLoggedin);
+  const showArticles = useAppSelector((state) => state.article.showArticles);
+  const genericServerError = useAppSelector(
+    (state) => state.errors.genericServerError
   );
-  const showArticles = useSelector(
-    (state: RootState) => state.article.showArticles
-  );
-  const genericServerError = useSelector(
-    (state: RootState) => state.errors.genericServerError
-  );
-  const savedArticles = useSelector(
-    (state: RootState) => state.article.savedArticles
-  );
+  const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   const { openPopupIfNotLoggedin } = usePopup();
   const { handleTokenCheck } = useAuthenticationApi();
@@ -103,6 +97,7 @@ const App = () => {
 
   useEffect(() => {
     handleTokenCheck();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

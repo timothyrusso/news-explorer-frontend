@@ -6,36 +6,28 @@ import logo from '../../images/NewsExplorer.svg';
 import logout from '../../images/logout.svg';
 import blackLogo from '../../images/NewsExplorerlogo-black.svg';
 import blackLogout from '../../images/logout-black.svg';
-import { useSelector } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleLogout } from '../../hooks/useHandleLogout';
 import { setIsMobileNavbarOppositeAction } from '../../store/toggles/toggles.actions';
-import { RootState } from '../../store/RootState';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import './Navigation.css';
 
 const Navigation = () => {
   const [navbarColor, setNavbarColor] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const currentUser = useSelector((state: RootState) => state.user.currentUser);
-  const isMobileNavbar = useSelector(
-    (state: RootState) => state.toggles.isMobileNavbar
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const isMobileNavbar = useAppSelector(
+    (state) => state.toggles.isMobileNavbar
   );
+  const isLoggedIn = useAppSelector((state) => state.toggles.isLoggedin);
+  const isBlackNavbar = useAppSelector((state) => state.toggles.isBlackNavbar);
+  const toggleMenu = useAppSelector((state) => state.toggles.isMobileNavbar);
 
   const { handleSigninPopupClick } = usePopup();
   const { handleLogout } = useHandleLogout();
 
   const dispatch = useDispatch();
-
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.toggles.isLoggedin
-  );
-  const isBlackNavbar = useSelector(
-    (state: RootState) => state.toggles.isBlackNavbar
-  );
-  const toggleMenu = useSelector(
-    (state: RootState) => state.toggles.isMobileNavbar
-  );
 
   const toggleNav = () => {
     dispatch(setIsMobileNavbarOppositeAction(!isMobileNavbar));

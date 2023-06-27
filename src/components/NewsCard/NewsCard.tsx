@@ -6,10 +6,9 @@ import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
 import { useArticleApi } from '../../hooks/useArticleApi';
 import { setTemporarySavedArticleAction } from '../../store/article/article.actions';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/RootState';
 import { Article } from '../../store/article/article.type';
 import { SavedArticle } from '../../store/article/article.type';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import './NewsCard.css';
 
 type NewsCardProps = {
@@ -23,10 +22,10 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
   const { handleBookmarkClick } = useHandleBookmarkClick();
   const { handleDeleteArticles, checkSavedArticle } = useArticleApi();
 
-  const isSavedArticle = useSelector(
-    (state: RootState) => state.article.isSavedArticle
+  const isSavedArticle = useAppSelector(
+    (state) => state.article.isSavedArticle
   );
-  const loggedIn = useSelector((state: RootState) => state.toggles.isLoggedin);
+  const loggedIn = useAppSelector((state) => state.toggles.isLoggedin);
 
   const dispatch = useDispatch();
 

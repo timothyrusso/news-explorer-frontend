@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   setIsSigninPopupClosedAction,
   setIsSignupPopupClosedAction,
@@ -13,15 +13,15 @@ import {
   setIsFormValidityTrueAction,
   removeErrorMessageAction,
 } from '../store/errors/errors.actions';
-import { RootState } from '../store/RootState';
+import { useAppSelector } from './useAppSelector';
 
 export const usePopup = () => {
   const dispatch = useDispatch();
-  const isSigninPopupOpen = useSelector(
-    (state: RootState) => state.toggles.isSigninPopupOpen
+  const isSigninPopupOpen = useAppSelector(
+    (state) => state.toggles.isSigninPopupOpen
   );
-  const isSignupPopupOpen = useSelector(
-    (state: RootState) => state.toggles.isSignupPopupOpen
+  const isSignupPopupOpen = useAppSelector(
+    (state) => state.toggles.isSignupPopupOpen
   );
 
   const closeAllPopups = () => {

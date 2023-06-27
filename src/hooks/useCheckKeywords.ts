@@ -1,11 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/RootState';
+import { useDispatch } from 'react-redux';
 import { setSearchKeywordsListAction } from '../store/user/user.actions';
+import { useAppSelector } from './useAppSelector';
 
 export const useCheckKeywords = () => {
-  const savedArticles = useSelector(
-    (state: RootState) => state.article.savedArticles
-  );
+  const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   const dispatch = useDispatch();
 

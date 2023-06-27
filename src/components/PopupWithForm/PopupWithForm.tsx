@@ -1,9 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import Popup from '../Popup/Popup';
 import Form from '../Form/Form';
-import { useSelector } from 'react-redux';
 import FormRedirect from '../FormRedirect/FormRedirect';
-import { RootState } from '../../store/RootState';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import './PopupWithForm.css';
 
 type PopupWithFormProps = {
@@ -29,11 +28,9 @@ const PopupWithForm: FC<PopupWithFormProps> = ({
   isLoadingText,
   children,
 }) => {
-  const formValidity = useSelector(
-    (state: RootState) => state.errors.formValidity
-  );
-  const infoTooltip = useSelector(
-    (state: RootState) => state.toggles.isInfoTooltipOpen
+  const formValidity = useAppSelector((state) => state.errors.formValidity);
+  const infoTooltip = useAppSelector(
+    (state) => state.toggles.isInfoTooltipOpen
   );
 
   return (

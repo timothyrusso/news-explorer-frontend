@@ -1,14 +1,11 @@
 import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/RootState';
 import { SavedArticle } from '../../store/article/article.type';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import './SavedNews.css';
 
 const SavedNews = () => {
-  const savedArticles = useSelector(
-    (state: RootState) => state.article.savedArticles
-  );
+  const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   return (
     <section className="saved-news">
