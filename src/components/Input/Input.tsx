@@ -1,7 +1,22 @@
-import React from "react";
-import "./Input.css";
+import React, { FC } from 'react';
+import { ErrorMessage, isErrorMessage } from '../../store/errors/error.type';
+import './Input.css';
 
-const Input = ({
+type InputProps = {
+  type: string;
+  idName: string;
+  name: string;
+  fieldName: string;
+  placeholder: string;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+  minLength?: number;
+  maxLength?: number;
+  value: string;
+  errorMessage: ErrorMessage | {};
+  labelText: string;
+};
+
+const Input: FC<InputProps> = ({
   type,
   idName,
   name,
@@ -32,7 +47,7 @@ const Input = ({
         onChange={onChange}
       />
       <span id={`${idName}-error`} className="popup__input_type_error">
-        {errorMessage[name]}
+        {isErrorMessage(errorMessage) ? (errorMessage as any)[name] : ''}
       </span>
     </>
   );

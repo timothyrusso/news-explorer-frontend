@@ -84,8 +84,8 @@ const Login = () => {
           name={'password'}
           fieldName={'field_password'}
           placeholder={'Enter password'}
-          minLength={'8'}
-          maxLength={'20'}
+          minLength={8}
+          maxLength={20}
           value={password}
           onChange={handlePasswordChange}
           errorMessage={errorMessage}
