@@ -1,6 +1,6 @@
 import { apiKey, BASE_URL, pageSize } from './constants';
 
-const checkResponse = (res) => {
+const checkResponse = (res: Response) => {
   if (res.ok) {
     console.log(
       `URL: ${res.url}
@@ -13,7 +13,7 @@ Status code: ${res.status}`
   }
 };
 
-export const getNewsInfo = ({ search }) => {
+export const getNewsInfo = ({ search }: { search: string }) => {
   return fetch(
     `${BASE_URL}?q=${search}&sortBy=publishedAt&language=en&pageSize=${pageSize}&apiKey=${apiKey}`,
     {
