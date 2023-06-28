@@ -2,8 +2,8 @@
 
 This repository contains the front end part of "NewsExplorer" project that features user authorization, user registration and handles articles and users.
 
-- Endpoint of the API: https://api.newsexplorer-timothyrusso.students.nomoreparties.sbs/
-- Endpoint for the live project: https://newsexplorer-timothyrusso.students.nomoreparties.sbs/
+- Endpoint of the API: https://news-explorer-cc5g.onrender.com
+- Endpoint for the live project: https://newsexplorer23.netlify.app/
 
 ## Project main funtionalities
 
@@ -27,10 +27,6 @@ This application contains hover effects, links and transitions effects. Main fun
 ## Backend repository
 
 Link: https://github.com/timothyrusso/news-explorer-backend
-
-## Project architecture
-
-![Architecture](https://raw.githubusercontent.com/timothyrusso/news-explorer-frontend/main/src/images/architecture.png)
 
 ## Project preview
 
