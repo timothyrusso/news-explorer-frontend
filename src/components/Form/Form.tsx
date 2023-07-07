@@ -1,4 +1,4 @@
-import React, { useRef, FC } from 'react';
+import React, { useRef, FC, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   setIsFormValidityTrueAction,
@@ -8,7 +8,7 @@ import './Form.css';
 
 type FormProps = {
   name: string;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: React.ReactNode;
 };
 
@@ -22,7 +22,7 @@ const Form: FC<FormProps> = ({ name, onSubmit, children }) => {
       : dispatch(setIsFormValidityFalseAction());
   };
 
-  const handleFormValidity = () => {
+  const handleFormChange = () => {
     const formValidityBoolean = formRef.current?.checkValidity();
     if (formValidityBoolean) {
       onFormUpdate(formValidityBoolean);
@@ -36,7 +36,7 @@ const Form: FC<FormProps> = ({ name, onSubmit, children }) => {
       name={`myForm${name}`}
       onSubmit={onSubmit}
       ref={formRef}
-      onChange={handleFormValidity}
+      onChange={handleFormChange}
     >
       {children}
     </form>
