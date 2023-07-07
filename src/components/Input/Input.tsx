@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ErrorMessage, isErrorMessage } from '../../store/errors/error.type';
+import { ErrorMessage } from '../../store/errors/error.type';
 import './Input.css';
 
 type InputProps = {
@@ -47,7 +47,7 @@ const Input: FC<InputProps> = ({
         onChange={onChange}
       />
       <span id={`${idName}-error`} className="popup__input_type_error">
-        {isErrorMessage(errorMessage) ? (errorMessage as any)[name] : ''}
+        {(errorMessage as ErrorMessage)[name]}
       </span>
     </>
   );
