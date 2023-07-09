@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
-import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { useLoginForm } from '../../hooks/useLoginForm';
+import { useInputValidity } from '../../hooks/useInputValidity';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-
   const errorMessage = useAppSelector((state) => state.errors.errorMessage);
   const isOpen = useAppSelector((state) => state.toggles.isSignupPopupOpen);
   const popupRedirectText = useAppSelector(
@@ -23,7 +20,9 @@ const Register = () => {
     (state) => state.errors.popupServerErrorMessage
   );
 
-  const { checkValidity } = useCheckValidityInput(errorMessage);
+  const { email, setEmail, password, setPassword, username, setUsername } =
+    useLoginForm();
+  const { handleInputChange } = useInputValidity(errorMessage);
   const { handleRegisterSubmit } = useAuthenticationApi(
     email,
     password,
@@ -32,24 +31,8 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
-  const handleEmailChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    checkValidity(evt);
-    setEmail(evt.target.value);
-  };
-
-  const handlePasswordChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    checkValidity(evt);
-    setPassword(evt.target.value);
-  };
-
-  const handleUsernameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    checkValidity(evt);
-    setUsername(evt.target.value);
-  };
-
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     dispatch(setIsLoadingTextTrueAction());
-    // Prevent the browser from navigating to the form address
     evt.preventDefault();
     handleRegisterSubmit();
   };
@@ -58,7 +41,7 @@ const Register = () => {
     setEmail('');
     setPassword('');
     setUsername('');
-  }, [isOpen]);
+  }, [isOpen, setEmail, setPassword, setUsername]);
 
   return (
     <>
@@ -81,7 +64,7 @@ const Register = () => {
           minLength={5}
           maxLength={254}
           value={email}
-          onChange={handleEmailChange}
+          onChange={(evt) => handleInputChange(evt, setEmail)}
           errorMessage={errorMessage}
           labelText={'Email'}
         />
@@ -94,7 +77,7 @@ const Register = () => {
           minLength={8}
           maxLength={20}
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(evt) => handleInputChange(evt, setPassword)}
           errorMessage={errorMessage}
           labelText={'Password'}
         />
@@ -107,7 +90,7 @@ const Register = () => {
           minLength={2}
           maxLength={20}
           value={username}
-          onChange={handleUsernameChange}
+          onChange={(evt) => handleInputChange(evt, setUsername)}
           errorMessage={errorMessage}
           labelText={'Username'}
         />
