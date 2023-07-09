@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Input from '../Input/Input';
 import PopupServerError from '../PopupServerError/PopupServerError';
 import { useDispatch } from 'react-redux';
 import { setIsLoadingTextTrueAction } from '../../store/toggles/toggles.actions';
-import { useCheckValidityInput } from '../../hooks/useCheckInputValidity';
 import { useAuthenticationApi } from '../../hooks/useAuthenticationApi';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { useLoginForm } from '../../hooks/useLoginForm';
+import { useInputValidity } from '../../hooks/useInputValidity';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const errorMessage = useAppSelector((state) => state.errors.errorMessage);
   const isOpen = useAppSelector((state) => state.toggles.isSigninPopupOpen);
   const popupRedirectText = useAppSelector(
@@ -21,21 +20,11 @@ const Login = () => {
     (state) => state.errors.popupServerErrorMessage
   );
 
-  const { checkValidity } = useCheckValidityInput(errorMessage);
-
+  const { email, setEmail, password, setPassword } = useLoginForm();
   const { handleLoginSubmit } = useAuthenticationApi(email, password);
+  const { handleInputChange } = useInputValidity(errorMessage);
 
   const dispatch = useDispatch();
-
-  const handleEmailChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    checkValidity(evt);
-    setEmail(evt.target.value);
-  };
-
-  const handlePasswordChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    checkValidity(evt);
-    setPassword(evt.target.value);
-  };
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     dispatch(setIsLoadingTextTrueAction());
@@ -46,7 +35,7 @@ const Login = () => {
   React.useEffect(() => {
     setEmail('');
     setPassword('');
-  }, [isOpen]);
+  }, [isOpen, setEmail, setPassword]);
 
   return (
     <>
@@ -67,7 +56,7 @@ const Login = () => {
           fieldName={'field_email'}
           placeholder={'Enter email'}
           value={email}
-          onChange={handleEmailChange}
+          onChange={(evt) => handleInputChange(evt, setEmail)}
           errorMessage={errorMessage}
           labelText={'Email'}
         />
@@ -80,7 +69,7 @@ const Login = () => {
           minLength={8}
           maxLength={20}
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(evt) => handleInputChange(evt, setPassword)}
           errorMessage={errorMessage}
           labelText={'Password'}
         />
