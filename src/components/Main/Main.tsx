@@ -9,9 +9,9 @@ const Main = () => {
         <img
           src={aboutImage}
           className="about__image"
-          alt="A smartphone that is showing a dashboard"
+          alt="Timothy - a passionate software engineer"
         ></img>
-        <div className="about__wrapper">
+        <article className="about__wrapper">
           <h2 className="about__title">About the author</h2>
           <p className="about__description">
             Hey there, I'm Timothy. I'm a motivated and passionate software
@@ -25,7 +25,7 @@ const Main = () => {
             new technologies. Now coding is my passion and my professional
             career focus.
           </p>
-        </div>
+        </article>
       </section>
     </main>
   );
