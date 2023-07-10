@@ -1,5 +1,5 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import logo from '../../images/NewsExplorer.svg';
@@ -10,12 +10,11 @@ import { usePopup } from '../../hooks/usePopup';
 import { useHandleLogout } from '../../hooks/useHandleLogout';
 import { setIsMobileNavbarOppositeAction } from '../../store/toggles/toggles.actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { useScrollBehavior } from '../../hooks/useScrollBehavior';
+import { useWindowResize } from '../../hooks/useWindowResize';
 import './Navigation.css';
 
 const Navigation = () => {
-  const [navbarColor, setNavbarColor] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const isMobileNavbar = useAppSelector(
     (state) => state.toggles.isMobileNavbar
@@ -26,6 +25,8 @@ const Navigation = () => {
 
   const { handleSigninPopupClick } = usePopup();
   const { handleLogout } = useHandleLogout();
+  const { navbarColor } = useScrollBehavior();
+  const { screenWidth } = useWindowResize();
 
   const dispatch = useDispatch();
 
@@ -41,30 +42,6 @@ const Navigation = () => {
   const buttonColor = colorRuleDefiner
     ? { color: 'black', borderColor: 'black' }
     : { color: 'white', borderColor: 'white' };
-
-  //navbar scroll changeBackground function
-  const changeBackground = () => {
-    if (window.scrollY >= 66) {
-      setNavbarColor(true);
-    } else {
-      setNavbarColor(false);
-    }
-  };
-
-  useEffect(() => {
-    changeBackground();
-    // adding the event when scroll change background
-    window.addEventListener('scroll', changeBackground);
-    return () => window.removeEventListener('scroll', changeBackground);
-  }, []);
-
-  useEffect(() => {
-    const changeWidth = () => {
-      setScreenWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', changeWidth);
-    return () => window.removeEventListener('resize', changeWidth);
-  }, []);
 
   return (
     <section
