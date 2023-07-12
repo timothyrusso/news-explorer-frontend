@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-import alternativeBackground from '../../images/header_background.png';
-import { useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
@@ -9,6 +7,7 @@ import { setTemporarySavedArticleAction } from '../../store/article/article.acti
 import { Article } from '../../store/article/article.type';
 import { SavedArticle } from '../../store/article/article.type';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import alternativeBackground from '../../images/header_background.png';
 import './NewsCard.css';
 
 type NewsCardProps = {
