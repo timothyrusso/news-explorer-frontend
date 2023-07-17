@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import './NewsCardList.css';
 import NewsCard from '../NewsCard/NewsCard';
@@ -25,16 +25,19 @@ const NewsCardList = () => {
     (state) => state.article.articles
   ) as Article[];
 
-  const showMoreButtonLogic = nextThreeArticles < allArticles.length;
+  const showMoreButtonLogic = useMemo(
+    () => nextThreeArticles < allArticles.length,
+    [nextThreeArticles, allArticles.length]
+  );
 
   let arrayForHoldingNews = [];
 
-  const showMoreResults = () => {
+  const showMoreResults = useCallback(() => {
     loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
     dispatch(
       setNextThreeArticlesToPayloadAction(nextThreeArticles + newsPerPage)
     );
-  };
+  }, [nextThreeArticles, dispatch]);
 
   const loopArticlesWithSlice = (start: number, end: number) => {
     const slicedNews = allArticles.slice(start, end);
