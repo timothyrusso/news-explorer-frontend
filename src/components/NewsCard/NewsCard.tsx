@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { usePopup } from '../../hooks/usePopup';
 import { useHandleBookmarkClick } from '../../hooks/useHandleBookmarkClick';
@@ -55,16 +55,26 @@ const NewsCard: FC<NewsCardProps> = ({ card }) => {
     return dateStr;
   };
 
-  const data = convertDate(
-    !isSavedArticle && 'publishedAt' in card
-      ? card.publishedAt
-      : (card as SavedArticle).date
+  const isUrlInCard = 'urlToImage' in card;
+  const isPublishedDataInCard = 'publishedAt' in card;
+
+  const data = useMemo(
+    () =>
+      convertDate(
+        !isSavedArticle && isPublishedDataInCard
+          ? card.publishedAt
+          : (card as SavedArticle).date
+      ),
+    [isSavedArticle, isPublishedDataInCard, card]
   );
 
-  const backgroundUrl =
-    !isSavedArticle && 'urlToImage' in card
-      ? card.urlToImage
-      : (card as SavedArticle).image;
+  const backgroundUrl = useMemo(
+    () =>
+      !isSavedArticle && isUrlInCard
+        ? card.urlToImage
+        : (card as SavedArticle).image,
+    [isSavedArticle, isUrlInCard, card]
+  );
 
   useEffect(() => {
     if ('url' in card && checkSavedArticle(card)) {
