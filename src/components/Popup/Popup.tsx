@@ -47,13 +47,13 @@ const Popup: FC<PopupProps> = ({ isOpen, name, infoTooltip, children }) => {
         {children}
         {/* add the close button */}
         <button
-          aria-label="Close"
+          aria-label={`Close ${name} popup`}
           type="button"
           className={`close-button ${
             infoTooltip ? 'close-button_type_info' : ''
           }`}
           onClick={closeAllPopups}
-        ></button>
+        />
       </div>
     </div>
   );
