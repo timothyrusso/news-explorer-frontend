@@ -8,7 +8,11 @@ type PopupServerErrorProps = {
 const PopupServerError: FC<PopupServerErrorProps> = ({
   popupServerErrorMessage,
 }) => {
-  return <p className="popup-server-error">{popupServerErrorMessage}</p>;
+  return (
+    <p className="popup-server-error" aria-live="polite">
+      {popupServerErrorMessage}
+    </p>
+  );
 };
 
 export default PopupServerError;
