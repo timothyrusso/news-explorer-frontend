@@ -59,8 +59,13 @@ export const useAuthenticationApi = (
         }
       })
       .then(() => {
-        if ('url' in temporarySavedArticle) {
-          handleBookmarkClick(temporarySavedArticle);
+        if (
+          Array.isArray(temporarySavedArticle) &&
+          'url' in temporarySavedArticle[0]
+        ) {
+          temporarySavedArticle.forEach((article) =>
+            handleBookmarkClick(article)
+          );
         }
       })
       .catch((err) => {
