@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { removeSingleSavedArticleAction } from '../store/article/article.actions';
 import { Article, SavedArticle } from '../store/article/article.type';
 import { useAppSelector } from './useAppSelector';
-import { saveArticle } from '../store/article/article.actions';
-import { AppDispatch } from '../store/store';
+import { saveArticle } from '../store/thunk/thunk.action';
+import { AppDispatch } from '../store/thunk/thunk.type';
 
 export const useArticleApi = () => {
   const dispatch = useDispatch<AppDispatch>();
