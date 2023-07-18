@@ -44,6 +44,7 @@ const PopupWithForm: FC<PopupWithFormProps> = ({
             !formValidity ? 'submit-button_disabled' : ''
           }`}
           disabled={!formValidity}
+          aria-label={`Submit ${title}`}
         >
           {isLoadingText ? loadingText : buttonText}
         </button>
