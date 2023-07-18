@@ -8,6 +8,10 @@ import {
   TEMPORARY_SAVED_ARTICLE_ACTION_TYPES,
 } from './article.action.types';
 import { Article } from './article.type';
+import { RootState } from '../RootState';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { saveArticles, getArticles } from '../../utils/MainApi';
 
 type FetchArticleAction = {
   type: typeof ARTICLE_ACTION_TYPES.FETCH_ARTICLES;
@@ -182,3 +186,31 @@ export const removeTemporarySavedArticleAction =
     type: TEMPORARY_SAVED_ARTICLE_ACTION_TYPES.REMOVE_TEMPORARY_SAVED_ARTICLE,
     payload: [],
   });
+
+export const saveArticle = (
+  article: Article
+): ThunkAction<void, RootState, unknown, AnyAction> => {
+  return (dispatch, getState) => {
+    const searchKeyword = getState().user.searchKeyword;
+
+    saveArticles({
+      keyword: searchKeyword,
+      title: article.title,
+      text: article.content,
+      date: article.publishedAt,
+      source: article.source.name,
+      link: article.url,
+      image: article.urlToImage,
+    })
+      .then(() => {
+        getArticles()
+          .then((allSavedArticles) => {
+            dispatch(setSavedArticlesAction(allSavedArticles));
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};

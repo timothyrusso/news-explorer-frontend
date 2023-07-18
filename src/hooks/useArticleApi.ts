@@ -1,34 +1,18 @@
-import { saveArticles, deleteArticles } from '../utils/MainApi';
+import { deleteArticles } from '../utils/MainApi';
 import { useDispatch } from 'react-redux';
-import {
-  setSavedArticlesAction,
-  removeSingleSavedArticleAction,
-} from '../store/article/article.actions';
+import { removeSingleSavedArticleAction } from '../store/article/article.actions';
 import { Article, SavedArticle } from '../store/article/article.type';
 import { useAppSelector } from './useAppSelector';
+import { saveArticle } from '../store/article/article.actions';
+import { AppDispatch } from '../store/store';
 
 export const useArticleApi = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const searchKeyword = useAppSelector((state) => state.user.searchKeyword);
   const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   const handleSaveArticles = (article: Article) => {
-    saveArticles({
-      keyword: searchKeyword,
-      title: article.title,
-      text: article.content,
-      date: article.publishedAt,
-      source: article.source.name,
-      link: article.url,
-      image: article.urlToImage,
-    })
-      .then((newArticle) => {
-        dispatch(setSavedArticlesAction([newArticle, ...savedArticles]));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    dispatch(saveArticle(article));
   };
 
   const handleDeleteArticles = (article: SavedArticle) => {
