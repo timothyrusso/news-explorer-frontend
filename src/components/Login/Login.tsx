@@ -45,7 +45,7 @@ const Login = () => {
         isOpen={isOpen}
         popupRedirectText={popupRedirectText}
         buttonText={'Sign in'}
-        loadingText={'Loading..'}
+        loadingText={'Loading'}
         isLoadingText={isLoadingText}
         onSubmit={handleSubmit}
       >

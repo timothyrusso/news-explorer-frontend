@@ -42,7 +42,7 @@ const PopupWithForm: FC<PopupWithFormProps> = ({
           type="submit"
           className={`submit-button popup__button ${
             !formValidity ? 'submit-button_disabled' : ''
-          }`}
+          } ${isLoadingText ? 'submit-button_loading' : ''}`}
           disabled={!formValidity}
           aria-label={`Submit ${title}`}
         >
