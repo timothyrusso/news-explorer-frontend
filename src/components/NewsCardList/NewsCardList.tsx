@@ -35,6 +35,7 @@ const NewsCardList = () => {
   const showMoreResults = useCallback(() => {
     const loopArticlesWithSlice = (start: number, end: number) => {
       const slicedNews = allArticles.slice(start, end);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       arrayForHoldingNews = [...(newsArticles as Article[]), ...slicedNews];
       dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
     };
