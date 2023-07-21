@@ -32,18 +32,18 @@ const NewsCardList = () => {
 
   let arrayForHoldingNews = [];
 
-  const showMoreResults = useCallback(() => {
-    loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
-    dispatch(
-      setNextThreeArticlesToPayloadAction(nextThreeArticles + newsPerPage)
-    );
-  }, [nextThreeArticles, dispatch]);
-
   const loopArticlesWithSlice = (start: number, end: number) => {
     const slicedNews = allArticles.slice(start, end);
     arrayForHoldingNews = [...(newsArticles as Article[]), ...slicedNews];
     dispatch(setShowMoreArticlesAction(arrayForHoldingNews));
   };
+
+  const showMoreResults = useCallback(() => {
+    loopArticlesWithSlice(nextThreeArticles, nextThreeArticles + newsPerPage);
+    dispatch(
+      setNextThreeArticlesToPayloadAction(nextThreeArticles + newsPerPage)
+    );
+  }, [nextThreeArticles, dispatch, loopArticlesWithSlice]);
 
   return (
     <section className="news-card-list">
