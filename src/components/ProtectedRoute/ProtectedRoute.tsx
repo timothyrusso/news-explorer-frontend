@@ -3,17 +3,17 @@ import { Navigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
   children: ReactNode;
-  loggedIn: string | null;
+  authToken: string | null;
   path: string;
 };
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, ...props }) => {
+const ProtectedRoute: FC<ProtectedRouteProps> = ({
+  children,
+  authToken,
+  path,
+}): ReactElement | null => {
   return (children &&
-    (props.loggedIn ? (
-      children
-    ) : (
-      <Navigate to={props.path} />
-    ))) as ReactElement | null;
+    (authToken ? children : <Navigate to={path} />)) as ReactElement | null;
 };
 
 export default ProtectedRoute;

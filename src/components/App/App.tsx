@@ -148,7 +148,7 @@ const App = () => {
         <Route
           path="/saved-news"
           element={
-            <ProtectedRoute loggedIn={jwt} path={'/'}>
+            <ProtectedRoute authToken={jwt} path={'/'}>
               <>
                 <SavedNewsHeader />
                 <SavedNews />
