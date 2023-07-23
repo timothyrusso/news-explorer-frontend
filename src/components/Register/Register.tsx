@@ -9,6 +9,13 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { useLoginForm } from '../../hooks/useLoginForm';
 import { useInputValidity } from '../../hooks/useInputValidity';
 
+const EMAIL_MIN_LENGTH = 5;
+const EMAIL_MAX_LENGTH = 254;
+const PASSWORD_MIN_LENGTH = 8;
+const PASSWORD_MAX_LENGTH = 20;
+const USERNAME_MIN_LENGTH = 2;
+const USERNAME_MAX_LENGTH = 20;
+
 const Register = () => {
   const errorMessage = useAppSelector((state) => state.errors.errorMessage);
   const isOpen = useAppSelector((state) => state.toggles.isSignupPopupOpen);
@@ -61,8 +68,8 @@ const Register = () => {
           name={'email'}
           fieldName={'field_email'}
           placeholder={'Enter email'}
-          minLength={5}
-          maxLength={254}
+          minLength={EMAIL_MIN_LENGTH}
+          maxLength={EMAIL_MAX_LENGTH}
           value={email}
           onChange={(evt) => handleInputChange(evt, setEmail)}
           errorMessage={errorMessage}
@@ -74,8 +81,8 @@ const Register = () => {
           name={'password'}
           fieldName={'field_password'}
           placeholder={'Enter password'}
-          minLength={8}
-          maxLength={20}
+          minLength={PASSWORD_MIN_LENGTH}
+          maxLength={PASSWORD_MAX_LENGTH}
           value={password}
           onChange={(evt) => handleInputChange(evt, setPassword)}
           errorMessage={errorMessage}
@@ -87,8 +94,8 @@ const Register = () => {
           name={'username'}
           fieldName={'field_username'}
           placeholder={'Enter your username'}
-          minLength={2}
-          maxLength={20}
+          minLength={USERNAME_MIN_LENGTH}
+          maxLength={USERNAME_MAX_LENGTH}
           value={username}
           onChange={(evt) => handleInputChange(evt, setUsername)}
           errorMessage={errorMessage}
