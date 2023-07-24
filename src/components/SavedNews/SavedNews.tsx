@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { SavedArticle } from '../../store/article/article.type';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import './SavedNews.css';
 
-const SavedNews = () => {
+const SavedNews = (): ReactElement => {
   const savedArticles = useAppSelector((state) => state.article.savedArticles);
 
   return (
