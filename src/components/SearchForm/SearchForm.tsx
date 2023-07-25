@@ -20,7 +20,7 @@ import './SearchForm.css';
 
 const SearchForm = () => {
   const [searchInput, setSearchInput] = useState('');
-  const [placeholder, setPlaceholder] = useState(false);
+  const [isInputError, setInputError] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -67,10 +67,10 @@ const SearchForm = () => {
       dispatch(setIsLoadingTrueAction());
       evt.preventDefault();
       activateSearch({ search: searchInput });
-      setPlaceholder(false);
+      setInputError(false);
     } else {
       evt.preventDefault();
-      setPlaceholder(true);
+      setInputError(true);
     }
   };
 
@@ -79,11 +79,11 @@ const SearchForm = () => {
       <input
         type="text"
         className={`search-form__input ${
-          placeholder ? 'search-form__input_type_error' : ''
+          isInputError ? 'search-form__input_type_error' : ''
         }`}
         id="search-input"
         name="search"
-        placeholder={!placeholder ? 'Enter topic' : 'Please enter a keyword'}
+        placeholder={!isInputError ? 'Enter topic' : 'Please enter a keyword'}
         value={searchInput}
         onChange={handleSearchInputChange}
       ></input>
