@@ -2,11 +2,6 @@ import { apiKey, BASE_URL, pageSize } from './constants';
 
 const checkResponse = (res: Response) => {
   if (res.ok) {
-    console.log(
-      `URL: ${res.url}
-Status: ${res.statusText}
-Status code: ${res.status}`
-    );
     return res.json();
   } else {
     return Promise.reject(`Error: ${res.status}`);
