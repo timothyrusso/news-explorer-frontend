@@ -1,0 +1,417 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Should render the App component 1`] = `
+<DocumentFragment>
+  <div
+    class="content"
+  >
+    <section
+      class="navigation "
+    >
+      <nav
+        class="navigation__bar "
+      >
+        <a
+          class="logo"
+          href="/"
+        >
+          <img
+            alt="NewsExplorer logo"
+            src="test-file-stub"
+          />
+        </a>
+        <ul
+          class="navigation__links-wrapper"
+        >
+          <a
+            class="navigation__link               navigation__link_type_focus"
+            href="/"
+            style="color: white; border-color: white;"
+          >
+            Home
+          </a>
+          <a
+            class="navigation__link navigation__link_type_saved navigation__disabled
+              
+              "
+            href="/saved-news"
+            style="color: white; border-color: white;"
+          >
+            Saved articles
+          </a>
+          <button
+            aria-label="signin"
+            class="navigation__button navigation__button_type_signin "
+            style="color: white; border-color: white;"
+            type="button"
+          >
+            Sign in
+          </button>
+          <button
+            aria-label="signout"
+            class="navigation__button navigation__button_type_logout navigation__disabled"
+            style="color: white; border-color: white;"
+            type="button"
+          >
+            <img
+              alt="Logout logo"
+              class="navigation__logout-icon"
+              src="test-file-stub"
+            />
+          </button>
+        </ul>
+        <button
+          class="burgher-button
+          false
+          burgher-button_type_white"
+        />
+      </nav>
+    </section>
+    <header
+      class="header"
+    >
+      <h1
+        class="header__title"
+      >
+        What's going on in the world?
+      </h1>
+      <p
+        class="header__subtitle"
+      >
+        Find the latest news on any topic and save them in your personal account.
+      </p>
+      <form
+        class="search-form"
+      >
+        <input
+          class="search-form__input "
+          id="search-input"
+          name="search"
+          placeholder="Enter topic"
+          type="text"
+          value=""
+        />
+        <button
+          class="search-form__button"
+        >
+          Search
+        </button>
+      </form>
+    </header>
+    <main
+      class="main"
+    >
+      <section
+        class="about"
+      >
+        <img
+          alt="Timothy - a passionate software engineer"
+          class="about__image"
+          src="test-file-stub"
+        />
+        <article
+          class="about__wrapper"
+        >
+          <h2
+            class="about__title"
+          >
+            About the author
+          </h2>
+          <p
+            class="about__description"
+          >
+            Hey there, I'm Timothy. I'm a motivated and passionate software engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called Practicum.
+          </p>
+          <p
+            class="about__description"
+          >
+            I’m a curious person, I love to code and I like to experiment with new technologies. Now coding is my passion and my professional career focus.
+          </p>
+        </article>
+      </section>
+    </main>
+    <div
+      class="popup  popup_type_signin"
+    >
+      <div
+        class="popup__container"
+      >
+        <form
+          action="#"
+          class="popup__form"
+          name="myFormmyFormsignin"
+        >
+          <h2
+            class="popup__title"
+          >
+            Sign in
+          </h2>
+          <label
+            class="popup__input-label"
+            for="email-signin-input"
+          >
+            Email
+          </label>
+          <input
+            class="popup__input popup__input_field_email"
+            id="email-signin-input"
+            name="email"
+            placeholder="Enter email"
+            required=""
+            type="email"
+            value=""
+          />
+          <span
+            class="popup__input_type_error"
+            id="email-signin-input-error"
+          />
+          <label
+            class="popup__input-label"
+            for="password-signin-input"
+          >
+            Password
+          </label>
+          <input
+            class="popup__input popup__input_field_password"
+            id="password-signin-input"
+            maxlength="20"
+            minlength="8"
+            name="password"
+            placeholder="Enter password"
+            required=""
+            type="password"
+            value=""
+          />
+          <span
+            class="popup__input_type_error"
+            id="password-signin-input-error"
+          />
+          <p
+            aria-live="polite"
+            class="popup-server-error"
+          />
+          <button
+            aria-label="Submit Sign in"
+            class="submit-button popup__button  "
+            type="submit"
+          >
+            Sign in
+          </button>
+          <p
+            class="form-redirect"
+          >
+            or 
+            <button
+              aria-label="test"
+              class="form-redirect_type_link"
+              type="button"
+            />
+          </p>
+        </form>
+        <button
+          aria-label="Close signin popup"
+          class="close-button "
+          type="button"
+        />
+      </div>
+    </div>
+    <div
+      class="popup  popup_type_signup"
+    >
+      <div
+        class="popup__container"
+      >
+        <form
+          action="#"
+          class="popup__form"
+          name="myFormmyFormsignup"
+        >
+          <h2
+            class="popup__title"
+          >
+            Sign up
+          </h2>
+          <label
+            class="popup__input-label"
+            for="email-input"
+          >
+            Email
+          </label>
+          <input
+            class="popup__input popup__input_field_email"
+            id="email-input"
+            maxlength="254"
+            minlength="5"
+            name="email"
+            placeholder="Enter email"
+            required=""
+            type="email"
+            value=""
+          />
+          <span
+            class="popup__input_type_error"
+            id="email-input-error"
+          />
+          <label
+            class="popup__input-label"
+            for="password-input"
+          >
+            Password
+          </label>
+          <input
+            class="popup__input popup__input_field_password"
+            id="password-input"
+            maxlength="20"
+            minlength="8"
+            name="password"
+            placeholder="Enter password"
+            required=""
+            type="password"
+            value=""
+          />
+          <span
+            class="popup__input_type_error"
+            id="password-input-error"
+          />
+          <label
+            class="popup__input-label"
+            for="username-input"
+          >
+            Username
+          </label>
+          <input
+            class="popup__input popup__input_field_username"
+            id="username-input"
+            maxlength="20"
+            minlength="2"
+            name="username"
+            placeholder="Enter your username"
+            required=""
+            type="text"
+            value=""
+          />
+          <span
+            class="popup__input_type_error"
+            id="username-input-error"
+          />
+          <p
+            aria-live="polite"
+            class="popup-server-error"
+          />
+          <button
+            aria-label="Submit Sign up"
+            class="submit-button popup__button  "
+            type="submit"
+          >
+            Sign up
+          </button>
+          <p
+            class="form-redirect"
+          >
+            or 
+            <button
+              aria-label="test"
+              class="form-redirect_type_link"
+              type="button"
+            />
+          </p>
+        </form>
+        <button
+          aria-label="Close signup popup"
+          class="close-button "
+          type="button"
+        />
+      </div>
+    </div>
+    <div
+      class="popup  popup_type_undefined"
+    >
+      <div
+        class="popup__container"
+      >
+        <div
+          class="info-tooltip"
+        >
+          <p
+            class="info-tooltip__text"
+          >
+            Registration successfully completed!
+          </p>
+          <button
+            aria-label="signin"
+            class="info-tooltip__button"
+            type="button"
+          >
+            Sign in
+          </button>
+        </div>
+        <button
+          aria-label="Close undefined popup"
+          class="close-button close-button_type_info"
+          type="button"
+        />
+      </div>
+    </div>
+    <footer
+      class="footer"
+    >
+      <p
+        class="footer__copyright"
+      >
+        © 2023 NewsExplorer - Powered by 
+        <a
+          href="https://newsapi.org/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          News API
+        </a>
+      </p>
+      <nav
+        class="footer__wrapper"
+      >
+        <a
+          class="footer__link"
+          href="/"
+        >
+          Home
+        </a>
+        <a
+          class="footer__link footer__link_type_mobile"
+          href="https://timothyrusso.dev/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          Portfolio
+        </a>
+        <ul
+          class="footer__icon-wrapper"
+        >
+          <a
+            href="https://github.com/timothyrusso"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img
+              alt="GitHub logo"
+              class="footer__icon"
+              src="test-file-stub"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img
+              alt="LinkedIn Logo"
+              class="footer__icon"
+              src="test-file-stub"
+            />
+          </a>
+        </ul>
+      </nav>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
