@@ -9,4 +9,6 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
+  collectCoverage: true,
+  coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };
