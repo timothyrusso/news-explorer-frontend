@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component Should render the Footer component 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer"
+  >
+    <p
+      class="footer__copyright"
+    >
+      © 2023 NewsExplorer - Powered by 
+      <a
+        href="https://newsapi.org/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        News API
+      </a>
+    </p>
+    <nav
+      class="footer__wrapper"
+    >
+      <a
+        class="footer__link"
+        href="/"
+      >
+        Home
+      </a>
+      <a
+        class="footer__link footer__link_type_mobile"
+        href="https://timothyrusso.dev/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Portfolio
+      </a>
+      <ul
+        class="footer__icon-wrapper"
+      >
+        <a
+          href="https://github.com/timothyrusso"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="GitHub logo"
+            class="footer__icon"
+            src="test-file-stub"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/russotimothysoftwareengineer/"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img
+            alt="LinkedIn Logo"
+            class="footer__icon"
+            src="test-file-stub"
+          />
+        </a>
+      </ul>
+    </nav>
+  </footer>
+</DocumentFragment>
+`;
