@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component Should render the Footer component 1`] = `
+<DocumentFragment>
+  <form
+    action="#"
+    class="popup__form"
+    name="myFormmyForm"
+  >
+    <input
+      placeholder="Mock Input"
+      type="text"
+    />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</DocumentFragment>
+`;
