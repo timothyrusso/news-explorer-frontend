@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormRedirect component Should render the FormRedirect component 1`] = `
+<DocumentFragment>
+  <p
+    class="form-redirect"
+  >
+    or 
+    <button
+      aria-label="test"
+      class="form-redirect_type_link"
+      type="button"
+    >
+      Example text
+    </button>
+  </p>
+</DocumentFragment>
+`;
