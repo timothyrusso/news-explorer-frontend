@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoTooltip component Should render the InfoTooltip component 1`] = `
+<DocumentFragment>
+  <div
+    class="popup  popup_type_undefined"
+  >
+    <div
+      class="popup__container"
+    >
+      <div
+        class="info-tooltip"
+      >
+        <p
+          class="info-tooltip__text"
+        >
+          Registration successfully completed!
+        </p>
+        <button
+          aria-label="signin"
+          class="info-tooltip__button"
+          type="button"
+        >
+          Sign in
+        </button>
+      </div>
+      <button
+        aria-label="Close undefined popup"
+        class="close-button close-button_type_info"
+        type="button"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
