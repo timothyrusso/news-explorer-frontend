@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component Should render the Input component 1`] = `
+<DocumentFragment>
+  <label
+    class="popup__input-label"
+    for="testId"
+  >
+    Test Label
+  </label>
+  <input
+    class="popup__input popup__input_testField"
+    id="testId"
+    maxlength="20"
+    minlength="10"
+    name="testName"
+    placeholder="testPlaceholder"
+    required=""
+    type="text"
+    value="testValue"
+  />
+  <span
+    class="popup__input_type_error"
+    id="testId-error"
+  >
+    Error message for testing
+  </span>
+</DocumentFragment>
+`;
