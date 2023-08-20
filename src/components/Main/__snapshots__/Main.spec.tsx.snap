@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main component Should render the Main component 1`] = `
+<DocumentFragment>
+  <main
+    class="main"
+  >
+    <section
+      class="about"
+    >
+      <img
+        alt="Timothy - a passionate software engineer"
+        class="about__image"
+        src="test-file-stub"
+      />
+      <article
+        class="about__wrapper"
+      >
+        <h2
+          class="about__title"
+        >
+          About the author
+        </h2>
+        <p
+          class="about__description"
+        >
+          Hey there, I'm Timothy. I'm a motivated and passionate software engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called Practicum.
+        </p>
+        <p
+          class="about__description"
+        >
+          I’m a curious person, I love to code and I like to experiment with new technologies. Now coding is my passion and my professional career focus.
+        </p>
+      </article>
+    </section>
+  </main>
+</DocumentFragment>
+`;
