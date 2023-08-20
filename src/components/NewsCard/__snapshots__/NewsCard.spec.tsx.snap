@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsCard component Should render the NewsCard component 1`] = `
+<DocumentFragment>
+  <li
+    class="card"
+  >
+    <button
+      aria-label="Favourite"
+      class="card__favourite "
+      type="button"
+    />
+    <dialog
+      class="card__tooltip"
+    >
+      Sign in to save articles
+    </dialog>
+    <a
+      href="string"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <div
+        class="card__image"
+        href="string"
+        style="background-image: url(string);"
+      />
+    </a>
+    <div
+      class="card__content"
+    >
+      <time
+        class="card__date"
+      >
+        Invalid Date NaN, NaN
+      </time>
+      <a
+        class="card__link-wrapper"
+        href="string"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <h3
+          class="card__title"
+        >
+          string
+        </h3>
+      </a>
+      <a
+        class="card__link-wrapper"
+        href="string"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <p
+          class="card__text"
+        >
+          string
+        </p>
+      </a>
+      <a
+        class="card__link-wrapper"
+        href="string"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <p
+          class="card__source"
+        >
+          string
+        </p>
+      </a>
+    </div>
+  </li>
+</DocumentFragment>
+`;
