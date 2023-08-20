@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation component Should render the Navigation component 1`] = `
+<DocumentFragment>
+  <section
+    class="navigation "
+  >
+    <nav
+      class="navigation__bar "
+    >
+      <a
+        class="logo"
+        href="/"
+      >
+        <img
+          alt="NewsExplorer logo"
+          src="test-file-stub"
+        />
+      </a>
+      <ul
+        class="navigation__links-wrapper"
+      >
+        <a
+          class="navigation__link               navigation__link_type_focus"
+          href="/"
+          style="color: white; border-color: white;"
+        >
+          Home
+        </a>
+        <a
+          class="navigation__link navigation__link_type_saved navigation__disabled
+              
+              "
+          href="/saved-news"
+          style="color: white; border-color: white;"
+        >
+          Saved articles
+        </a>
+        <button
+          aria-label="signin"
+          class="navigation__button navigation__button_type_signin "
+          style="color: white; border-color: white;"
+          type="button"
+        >
+          Sign in
+        </button>
+        <button
+          aria-label="signout"
+          class="navigation__button navigation__button_type_logout navigation__disabled"
+          style="color: white; border-color: white;"
+          type="button"
+        >
+          <img
+            alt="Logout logo"
+            class="navigation__logout-icon"
+            src="test-file-stub"
+          />
+        </button>
+      </ul>
+      <button
+        class="burgher-button
+          false
+          burgher-button_type_white"
+      />
+    </nav>
+  </section>
+</DocumentFragment>
+`;
