@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopupWithForm component Should render the PopupWithForm component 1`] = `
+<DocumentFragment>
+  <div
+    class="popup popup_opened popup_type_signup"
+  >
+    <div
+      class="popup__container"
+    >
+      <form
+        action="#"
+        class="popup__form"
+        name="myFormmyFormsignup"
+      >
+        <h2
+          class="popup__title"
+        >
+          Sign up
+        </h2>
+        <label
+          class="popup__input-label"
+          for="email-input"
+        >
+          Email
+        </label>
+        <input
+          class="popup__input popup__input_field_email"
+          id="email-input"
+          maxlength="20"
+          minlength="5"
+          name="email"
+          placeholder="Enter email"
+          required=""
+          type="email"
+          value=""
+        />
+        <span
+          class="popup__input_type_error"
+          id="email-input-error"
+        />
+        <label
+          class="popup__input-label"
+          for="password-input"
+        >
+          Password
+        </label>
+        <input
+          class="popup__input popup__input_field_password"
+          id="password-input"
+          maxlength="20"
+          minlength="5"
+          name="password"
+          placeholder="Enter password"
+          required=""
+          type="password"
+          value=""
+        />
+        <span
+          class="popup__input_type_error"
+          id="password-input-error"
+        />
+        <label
+          class="popup__input-label"
+          for="username-input"
+        >
+          Username
+        </label>
+        <input
+          class="popup__input popup__input_field_username"
+          id="username-input"
+          maxlength="20"
+          minlength="5"
+          name="username"
+          placeholder="Enter your username"
+          required=""
+          type="text"
+          value=""
+        />
+        <span
+          class="popup__input_type_error"
+          id="username-input-error"
+        />
+        <p
+          aria-live="polite"
+          class="popup-server-error"
+        />
+        <button
+          aria-label="Submit Sign up"
+          class="submit-button popup__button  "
+          type="submit"
+        >
+          Sign up
+        </button>
+        <p
+          class="form-redirect"
+        >
+          or 
+          <button
+            aria-label="test"
+            class="form-redirect_type_link"
+            type="button"
+          >
+            popupRedirectText
+          </button>
+        </p>
+      </form>
+      <button
+        aria-label="Close signup popup"
+        class="close-button "
+        type="button"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
