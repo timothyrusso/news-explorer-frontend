@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SavedNewsHeader component Should render the SavedNewsHeader component 1`] = `
+<DocumentFragment>
+  <header
+    class="saved-news-header"
+  >
+    <p
+      class="saved-news-header__intro"
+    >
+      Saved articles
+    </p>
+    <h1
+      class="saved-news-header__title"
+    />
+  </header>
+</DocumentFragment>
+`;
