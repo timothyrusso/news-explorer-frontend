@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SavedNews component Should render the SavedNews component 1`] = `
+<DocumentFragment>
+  <section
+    class="saved-news"
+  >
+    <ul
+      class="search-result-grid"
+    />
+  </section>
+</DocumentFragment>
+`;
