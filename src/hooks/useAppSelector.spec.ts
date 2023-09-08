@@ -10,9 +10,9 @@ jest.mock('react-redux', () => ({
 
 describe('useAppSelector hook', () => {
   it('should select data from the store', () => {
-    (useSelector as jest.Mock).mockImplementation((callback) =>
-      callback(mockState)
-    );
+    jest
+      .mocked(useSelector)
+      .mockImplementation((callback) => callback(mockState));
 
     const { result } = renderHook(() => useAppSelector((state) => state));
 

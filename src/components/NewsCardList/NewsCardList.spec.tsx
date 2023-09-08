@@ -14,9 +14,9 @@ jest.mock('react-redux', () => ({
 
 describe('NewsCardList component', () => {
   beforeEach(() => {
-    (useSelector as jest.Mock).mockImplementation((selector) =>
-      selector(mockState)
-    );
+    jest
+      .mocked(useSelector)
+      .mockImplementation((selector) => selector(mockState));
   });
 
   it('Should render the NewsCardList component', () => {
