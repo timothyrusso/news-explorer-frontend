@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../../store/store';
 import NewsCardList from './NewsCardList';
-import { mockState } from './fixtures/mockStore';
+import { mockState } from '../../hooks/fixtures/mockStore';
 import { useSelector } from 'react-redux';
 
 jest.mock('react-redux', () => ({

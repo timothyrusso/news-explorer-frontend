@@ -1,4 +1,4 @@
-import { RootState } from '../../../store/RootState';
+import { RootState } from '../../store/RootState';
 
 const Article = {
   source: {
