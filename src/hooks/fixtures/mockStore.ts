@@ -1,6 +1,6 @@
 import { RootState } from '../../store/RootState';
 
-const Article = {
+export const Article = {
   source: {
     id: 1,
     name: 'string',
@@ -12,6 +12,18 @@ const Article = {
   urlToImage: 'string',
   publishedAt: 'string',
   content: 'string',
+};
+
+export const SavedArticle = {
+  _id: 'string',
+  keyword: 'string',
+  title: 'string',
+  text: 'string',
+  date: 'string',
+  source: 'string',
+  link: 'string',
+  image: 'string',
+  __v: 1,
 };
 
 export const mockState: RootState = {
