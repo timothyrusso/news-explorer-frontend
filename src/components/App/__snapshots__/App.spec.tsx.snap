@@ -120,7 +120,7 @@ exports[`App component Should render the App component 1`] = `
           <p
             class="about__description"
           >
-            Hey there, I'm Timothy. I'm a motivated and passionate software engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called Practicum.
+            Hey there, I'm Timothy. I'm a motivated and passionate software engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called TripleTen.
           </p>
           <p
             class="about__description"
