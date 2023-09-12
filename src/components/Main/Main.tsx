@@ -18,7 +18,7 @@ const Main = () => {
             engineer with a background in eCommerce, Quality Assurance,
             Application Delivery Management, Project Management and Trade
             Marketing. I have a bachelor's degree in Economics and Business
-            Management and I have done a coding bootcamp called Practicum.
+            Management and I have done a coding bootcamp called TripleTen.
           </p>
           <p className="about__description">
             I’m a curious person, I love to code and I like to experiment with
