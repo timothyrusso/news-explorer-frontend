@@ -72,9 +72,10 @@ describe('usePopup', () => {
 
   it('should open popup if not logged in', () => {
     localStorage.removeItem('jwt');
-    const { result } = renderHook(() => usePopup());
 
     const mockHandleSigninPopupClick = jest.fn();
+
+    const { result } = renderHook(() => usePopup());
     result.current.handleSigninPopupClick = mockHandleSigninPopupClick;
 
     act(() => {
