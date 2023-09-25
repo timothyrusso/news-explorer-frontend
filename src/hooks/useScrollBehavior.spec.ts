@@ -3,9 +3,25 @@ import { useScrollBehavior } from './useScrollBehavior';
 
 describe('useScrollBehavior', () => {
   // Mocking window.scrollY and window.addEventListener/window.removeEventListener
-  let originalScrollY;
-  let addEventListenerMock;
-  let removeEventListenerMock;
+  let originalScrollY: (PropertyDescriptor & ThisType<any>) | undefined;
+  let addEventListenerMock: jest.SpyInstance<
+    void,
+    [
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | AddEventListenerOptions | undefined
+    ],
+    any
+  >;
+  let removeEventListenerMock: jest.SpyInstance<
+    void,
+    [
+      type: string,
+      listener: EventListenerOrEventListenerObject,
+      options?: boolean | EventListenerOptions | undefined
+    ],
+    any
+  >;
 
   beforeEach(() => {
     originalScrollY = Object.getOwnPropertyDescriptor(window, 'scrollY');
@@ -16,7 +32,9 @@ describe('useScrollBehavior', () => {
   });
 
   afterEach(() => {
-    Object.defineProperty(window, 'scrollY', originalScrollY);
+    if (originalScrollY) {
+      Object.defineProperty(window, 'scrollY', originalScrollY);
+    }
     addEventListenerMock.mockRestore();
     removeEventListenerMock.mockRestore();
   });
@@ -31,8 +49,9 @@ describe('useScrollBehavior', () => {
     const { result } = renderHook(() => useScrollBehavior());
 
     act(() => {
-      const changeBackground = addEventListenerMock.mock.calls[0][1];
-      changeBackground();
+      const changeBackground = addEventListenerMock.mock
+        .calls[0][1] as EventListener;
+      changeBackground(new Event('scroll'));
     });
 
     expect(result.current.navbarColor).toBe(true);
