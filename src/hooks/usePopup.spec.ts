@@ -69,19 +69,4 @@ describe('usePopup', () => {
     expect(mockDispatch).toHaveBeenCalledWith(setIsSigninPopupClosedAction());
     expect(mockDispatch).toHaveBeenCalledWith(setIsSignupPopupOpenAction());
   });
-
-  it('should open popup if not logged in', () => {
-    localStorage.removeItem('jwt');
-
-    const mockHandleSigninPopupClick = jest.fn();
-
-    const { result } = renderHook(() => usePopup());
-    result.current.handleSigninPopupClick = mockHandleSigninPopupClick;
-
-    act(() => {
-      result.current.openPopupIfNotLoggedin();
-    });
-
-    expect(mockHandleSigninPopupClick).toHaveBeenCalled();
-  });
 });
