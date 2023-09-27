@@ -9,12 +9,12 @@ const Main = () => {
         <img
           src={aboutImage}
           className="about__image"
-          alt="Timothy - a passionate software engineer"
+          alt="Timothy - a passionate frontend engineer"
         ></img>
         <article className="about__wrapper">
           <h2 className="about__title">About the author</h2>
           <p className="about__description">
-            Hey there, I'm Timothy. I'm a motivated and passionate software
+            Hey there, I'm Timothy. I'm a motivated and passionate frontend
             engineer with a background in eCommerce, Quality Assurance,
             Application Delivery Management, Project Management and Trade
             Marketing. I have a bachelor's degree in Economics and Business
