@@ -105,25 +105,25 @@ exports[`App component Should render the App component 1`] = `
         class="about"
       >
         <img
-          alt="Timothy - a passionate software engineer"
+          alt="Timothy - a passionate frontend engineer"
           class="about__image"
           src="test-file-stub"
         />
         <article
-          class="about__wrapper"
+          class="description"
         >
           <h2
-            class="about__title"
+            class="description__title"
           >
             About the author
           </h2>
           <p
-            class="about__description"
+            class="description__text"
           >
-            Hey there, I'm Timothy. I'm a motivated and passionate software engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called TripleTen.
+            Hey there, I'm Timothy. I'm a motivated and passionate frontend engineer with a background in eCommerce, Quality Assurance, Application Delivery Management, Project Management and Trade Marketing. I have a bachelor's degree in Economics and Business Management and I have done a coding bootcamp called TripleTen.
           </p>
           <p
-            class="about__description"
+            class="description__text"
           >
             I’m a curious person, I love to code and I like to experiment with new technologies. Now coding is my passion and my professional career focus.
           </p>
