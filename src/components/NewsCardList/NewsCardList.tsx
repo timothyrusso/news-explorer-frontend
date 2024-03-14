@@ -11,10 +11,6 @@ import { Article } from '../../store/article/article.type';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
 const NewsCardList = () => {
-  const getRandomInt = () => {
-    return Math.floor(Math.random() * 1000);
-  };
-
   const dispatch = useDispatch();
 
   const nextThreeArticles = useAppSelector(
@@ -50,8 +46,8 @@ const NewsCardList = () => {
     <section className="news-card-list">
       <h2 className="news-card-list__title">Search results</h2>
       <ul className="search-result-grid">
-        {newsArticles.map((card: Article) => (
-          <NewsCard key={card.url + getRandomInt()} card={card} />
+        {newsArticles.map((card: Article, index: number) => (
+          <NewsCard key={card.url + index} card={card} />
         ))}
       </ul>
       {showMoreButtonLogic && (
