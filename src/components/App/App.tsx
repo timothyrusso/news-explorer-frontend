@@ -11,7 +11,6 @@ import Register from '../Register/Register';
 import NothingFound from '../NothingFound/NothingFound';
 import { useEffect, useLayoutEffect } from 'react';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import Preloader from '../Preloader/Preloader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
@@ -137,7 +136,6 @@ const App = () => {
                   nothingFoundIcon={warningIcon}
                 />
               )}
-              {isLoading && <Preloader />}
               <Main />
               <Login />
               <Register />

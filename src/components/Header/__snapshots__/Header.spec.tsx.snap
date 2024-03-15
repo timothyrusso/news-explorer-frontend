@@ -27,7 +27,7 @@ exports[`Header component Should render the Header component 1`] = `
         value=""
       />
       <button
-        class="search-form__button"
+        class="search-form__button "
       >
         Search
       </button>

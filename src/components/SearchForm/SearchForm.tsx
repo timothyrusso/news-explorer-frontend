@@ -17,6 +17,7 @@ import { setSearchKeywordAction } from '../../store/user/user.actions';
 import { setIsLoadingFalseAction } from '../../store/toggles/toggles.actions';
 import { getNewsInfo } from '../../utils/api';
 import './SearchForm.css';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const SearchForm = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -74,6 +75,8 @@ const SearchForm = () => {
     }
   };
 
+  const isLoading = useAppSelector((state) => state.toggles.isLoading);
+
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <input
@@ -87,7 +90,13 @@ const SearchForm = () => {
         value={searchInput}
         onChange={handleSearchInputChange}
       ></input>
-      <button className="search-form__button">Search</button>
+      <button
+        className={`search-form__button ${
+          isLoading ? 'search-form__button_loading' : ''
+        }`}
+      >
+        Search
+      </button>
     </form>
   );
 };

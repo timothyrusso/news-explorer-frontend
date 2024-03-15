@@ -8,7 +8,7 @@ exports[`Footer component Should render the Footer component 1`] = `
     <p
       class="footer__copyright"
     >
-      © 2023 NewsExplorer - Powered by 
+      © 2024 NewsExplorer - Powered by 
       <a
         href="https://newsapi.org/"
         rel="noreferrer"

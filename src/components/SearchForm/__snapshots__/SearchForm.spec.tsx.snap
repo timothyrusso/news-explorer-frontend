@@ -14,7 +14,7 @@ exports[`SearchForm component Should render the SearchForm component 1`] = `
       value=""
     />
     <button
-      class="search-form__button"
+      class="search-form__button "
     >
       Search
     </button>
